@@ -1,0 +1,60 @@
+
+
+
+
+
+
+<!-- afficher une pomme-->
+{% macro afficherApple() %}
+  <i class="fab fa-apple"></i>
+{% endmacro %}
+
+
+
+
+
+<!-- image bouton supression pour indices-->
+{% macro imgBoutonSuprInd(img, idIndice, paginationActu,idEnigme,previousPageListeEnigme) %}
+    <button  class="btn-circle btn-lg"> <a href="/SupprimeIndice?idIndice={{idIndice}}&page={{paginationActu}}&enigme={{idEnigme}}&paginationActuListe={{previousPageListeEnigme}}&paginationActu={{previous}}"</a> <!-- -->
+      <span class="{{img}}" ></span>
+    </button> 
+{% endmacro %}
+
+<!-- affichage de la liste des indices -->
+{% macro affIndPageAdmin(pageActuelle, indices,tailleListeInd,enigme,previousPageListeEnigme) %}
+  {% if pageActuelle== None%}<!-- Gère le cas où l'Url n'a pas encore de pageActuelle (car on vient juste d'arriver sur la liste)-->
+    {% set pageActuelle = 1 %}<!-- on set à 1 comme ça il affiche directement la page en suivant la suite de la macro (sinon ca n'affiche rien car None n'est pas un chiffre)-->
+  {%endif%}
+
+<div class="text-center">
+  <table class="table table-striped "><!-- classe avec style css rayé-->
+    <thead class="table-dark"><!-- en-tête noire-->
+      <tr><!-- définition titre colonnes-->
+        <th scope="col">#</th>
+        <th scope="col">indices</th>
+        <th scope="col">Supression</th>
+        <th scope="col">màj</th>
+      </tr>
+    </thead>
+    <tbody><!-- début de mon tableau-->
+
+    {% set pageActuelle = pageActuelle | int %}<!-- casting de string en int-->
+      {%  for n in range(0,tailleListeInd) %}<!-- Je lui dit d'iterer sur tt la liste des enigmes-->
+          {%if n<5*pageActuelle and n>=5*(pageActuelle-1) %} <!-- à l'etape d'avant il itere mais ici il fait un "filtre". il n'affichera les données que pour ceux dont le numero sont dans un interval en lien avec la pageActuelle. Ex: si page 1 : 0 à 5, si page 2 de 6 à 10,...-->            
+            {%if n>5*pageActuelle%}<!-- si n depasse la limite superieure du creneau actuel-->
+              {% set n = tailleListeInd%}<!-- on met "n" à la valeur de la taille de la liste. Comme ça il itere pas betement pr rien. Ce n'est pas du beau code mais avec python je n'ai pas réussi à faire passer un sous tableau (désolé)-->
+            {%endif%}  
+      <tr><!-- Affichage des données dans les colonnes du tableau-->
+        <th scope="row">{{loop.index}}</th><!-- numéro de la indice visuel (mais pas dans la DB)-->
+        <td>{{indices[n].indice }}</td><!-- affiche indicen n -->
+        <td>{{imgBoutonSuprInd("fas fa-window-close", indices[n].id,pageActuelle, enigme.id, previousPageListeEnigme)}}</td><!-- je passe l'id ds la db de la question qui doit etre effacé...comme ca avec la fct imgButtonsuppr je peux reconstituter un url-->
+        <td><a class="btn btn-primary" href="/majIndice?indice={{indices[n].indice}}&index={{indices[n].id}}&pagination={{pageActuelle}}&enigme={{enigme.id}}&paginationActuListe={{previousPageListeEnigme}}"  role="button">màj</a></td>
+        
+      </tr> 
+          {%endif%}
+      {% endfor %}
+    </tbody>
+    </table>
+</div>
+{% endmacro %}
+

@@ -1,0 +1,51 @@
+<!-- herite de main (de tout sauf les blocks (donc le menu)) -->
+{% extends "parentPage.html" %}
+
+<!-- Tout ce dont on a pas herité de main -->
+
+{% block content %}<!-- block de sous titre-->
+    Màj Indice
+{% endblock %}
+{% block body %}
+
+            <div><!-- si il y a une erreur déclenchée sur base des objets formulaires d'enigme-->
+            {%if formi.errors%}
+                {%for message in formi.indice.errors%} <!-- pour chaque message d'erreurs générés-->
+                    <div class="alert alert-danger" role="alert">{{message}} </div> <!-- on affiche le message prévu avec style-->   
+                {%endfor%}
+            {%endif%}
+            </div>
+    
+     <p><B>Mettez les champs à jour</B></p>
+    <form action="/majIndice?index={{index}}&pagination={{paginationActu}}&enigme={{enigme}}&paginationActuListe={{paginationActuListe}},&paginationActu={{previous}}" method="POST"> 
+        <div class="form-group"> <!-- formulaire-->
+            
+            {{ formi.csrf_token }}<!-- sécurité-->
+
+
+
+
+
+            
+            <div class="formi-row">{{ formi.indice.label }} {{ formi.indice(size=50, class='formi-control') }}</div><!--truc avec .label c'est pr dire qu'on met dans le form la valeur anciennement présente  pratique pour les modifications-->
+
+        </div>
+        
+        <div class="formi-row">{{ formi.submit (class='btn btn-primary'   )}}<!-- pour afficher le bouton-->
+         
+        <a class="btn btn-primary" href="/voirIndice?page={{paginationActu}}&enigme={{enigme}}&paginationActu={{previous}}&paginationActuListe={{paginationActuListe}}" role="button">Retour Indices</a> </div>
+       
+       
+    </form>
+    {%if formi.validate_on_submit() %}<!-- Affiche merci si nouvelle question validée-->
+        <div class="alert alert-success" role="alert">Merci pour ta contribution </div> 
+    {%endif%} 
+    
+
+
+   
+{% endblock %}
+
+
+
+

@@ -1,0 +1,82 @@
+body {
+    padding-top: 5rem;
+}
+
+.nav-item a {
+    color: rgb(209, 209, 209);
+}
+
+h1 { 
+    color: #e89a35;
+    font-size: 600%;
+    text-decoration: underline;
+}
+
+.btnbigBig
+{
+    display: block;
+    width: 100%;
+    border: none;
+    background-color: #04AA6D;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+}
+
+
+.nav-link active
+{
+    color: rgb(32, 243, 50);
+}
+
+h2 { 
+    color: #505050;
+    font-size: 150%;
+    border-width:2px;
+    border-style:dotted;
+    border-color:rgb(221, 10, 10);
+    padding: 10px 10px 10px 10px;
+}
+
+
+.hfaux/*J'ai custom un message d'alerte moi même*/
+{
+    background-color: rgb(247, 0, 0);
+    color: rgb(97, 15, 15);
+    max-block-size: 75%;
+    border-width:5px;
+    padding: 10px 10px 10px 10px;
+}
+
+.fab fa-apple
+{
+    font-size: xx-large;
+}
+
+/* personnalisation des caracteres du champs mdp*/
+.mdp-cache
+{
+    color: #e89a35;
+}
+
+/*personnalisation des titres de type h3*/ 
+h3
+{
+    color: cornflowerblue;
+    background-color: darkgray;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+
+}
+
+/* personnalisation des boutons haut bas*/
+.btn-circle, .btn-lg
+{
+
+    background-color: transparent;
+    border: 0px;/*sinon de base il y a une vilainre bordure*/
+
+}
+
+

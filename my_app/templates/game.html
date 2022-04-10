@@ -1,0 +1,53 @@
+<!-- herite de main (de tout sauf les blocks (donc le menu)) -->
+{% extends "parentPage.html" %}
+
+
+<!-- Tout ce dont on a pas herité de main -->
+
+{% block content %}<!-- block de sous titre-->
+    GAME 2
+{% endblock %}
+
+{% block body %}
+<body onload="collapseGame()">
+
+
+<div id="contenuGame">
+<div id="contenuGame1">
+
+
+
+
+
+        <button id="btnNewEnigme" type="button" class="btn btn-dark" onclick="afficherQuestion({{nbrEnigmes}}, 'True')" >Jouer une Nouvelle Enigme</button>
+        <br><br>
+        <h4 id="AffichageEnigmeId">  </h4><!--affichage de la question passée en parametre-->
+        
+
+        
+
+
+        
+        
+            <input id="RecupRepForm" type="text"  ><br><br>
+        
+
+     
+
+    
+    <button id="btnverif" type="button" class="btn btn-primary"onclick="verifReponse( )">repondre</button>
+    <br>
+    <br>
+
+    <button id="CompteurRouge"  class="btn btn-danger">0</button>
+    <button id="CompteurVert"  class="btn btn-success">0</button>
+    <br>
+    <br>
+    <h5 id="TitreComptCons">Réponses consécutives</h5>
+    <button id="CompteurConsecutif"  class="btn btn-dark">0</button>
+    
+</div>
+        <script src="{{ url_for('static',filename='js/fonctions_liste.js')}}"></script>
+</div>
+{% endblock %}
+

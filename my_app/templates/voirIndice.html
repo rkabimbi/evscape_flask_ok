@@ -1,0 +1,26 @@
+<!-- herite de main (de tout sauf les blocks (donc le menu)) -->
+{% extends "parentPage.html" %}
+
+<!-- Tout ce dont on a pas herité de main -->
+{% block content %}<!-- block de sous titre-->
+    LISTE INDICES DE L'ENIGME  : <p class="text-primary">{{enigme.question}} </p>
+{% endblock %}
+
+
+{% block body %}
+    {% if pageActuelle== None%}<!-- Gère le cas où l'Url est "/liste" (on a pas encore cliqué sur pagination) et que donc on a pas de numéro de page à récuperer dans l'url et que donc pageActuelle ==None-->
+    {% set pageActuelle = 1 %}<!-- on set à 1 comme ça il affiche directement la page en suivant la suite de la macro (sinon ca n'affiche rien car None n'est pas un chiffre)-->
+  {%endif%}
+            <p><B> La liste des indices :</B> </p>
+            <nav aria-label="Page de navigation"><!-- pagination-->
+                <ul class="pagination">
+                    {%for p in range(nbrPage) %}<!-- On itere sur le nbr de pages calculé dans routes.py et passé en parametre-->
+                        <li class="page-item"><a class="page-link" href="/voirIndice?page={{loop.index}}&enigme={{enigme.id}}&paginationActuListe={{previousPageListeEnigme}}">{{loop.index}}</a></li><!-- Affichage de la pagination. grâce à loop.index je recupere le tour d'iteration en-cours et je peux les mettre dans l'URL (ce qui me permettra de savoir dans quelle page je suis plus tard pour gerer l'affichage des enigmes par page) et les chiffres à mettre dans le menu de pagination. C'est grâce à ça qu'il sait le nbr de page qu'il y a et dans laquelle il est à tt moment. Ici par rapport à la liste d'enogme, je doit ajouter "nigme" pcq je l'utilise pr mettre mes indices en lien avec l'enigme-->      
+                    {%endfor%}
+                </ul>
+            </nav>
+            
+                {{macroUn.affIndPageAdmin(pageActuelle, indices, tailleListeInd,enigme,previousPageListeEnigme) }}<!-- macro qui permet de gerer l'affichage des enigmes en fonction de la pagination-->
+           
+        <div> <a class="btn btn-primary" href="/ListeEnigmes?page={{previous}}" role="button">Retour Enigmes</a>    <a class="btn btn-primary" href="/CreerIndice?paginationActu={{pageActuelle}}&enigme={{enigme.id}}&page={{previousPageListeEnigme}}&fpaginationActuelle={{paginationActu}}" role="button">Creer Indice</a>    </div>
+{% endblock %}

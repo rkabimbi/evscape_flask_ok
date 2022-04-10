@@ -1,0 +1,53 @@
+<!-- herite de main (de tout sauf les blocks (donc le menu)) -->
+{% extends "parentPage.html" %}
+
+<!-- Tout ce dont on a pas herité de main -->
+{% block content %}<!-- block de sous titre-->
+  INFOS
+{% endblock %}
+
+
+{% block body %}
+
+  <h3> Le concept </h3>
+
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec cursus velit sit amet erat ullamcorper, 
+  et tincidunt ex blandit. Sed eu pharetra erat, ac consectetur diam. Quisque bibendum velit dolor, non tincidunt metus ornare non. 
+  Donec vitae lorem at urna vestibulum luctus. Quisque euismod ultricies dictum. Proin fermentum felis turpis, quis vulputate lorem tristique at. 
+  Morbi massa leo, semper in justo at, accumsan pretium diam. Maecenas eget semper ipsum, vitae efficitur urna. Fusce at feugiat tortor.</p>
+
+  <!-- Commentaire d'un magazine de presse-->
+  <figure class="text-center">
+    <blockquote class="blockquote">
+      <p>Un jeu addictif qui ravira les petits et grands.</p>
+    </blockquote>
+    <figcaption class="blockquote-footer">
+      Greg <cite title="Source Title"> de Jeuxvideos Magazine </a> </cite>
+    </figcaption>
+  </figure>
+
+  <p>Nam maximus facilisis convallis. Ut in lobortis ex. Nulla nisl lacus, sollicitudin sit amet sollicitudin laoreet, bibendum vitae dolor. 
+  Sed quis interdum mi. Sed vestibulum lacus eu aliquam placerat. Morbi vel scelerisque arcu. Nulla nec felis fringilla, eleifend diam at, viverra lorem. 
+  Curabitur risus risus, molestie at velit ut, posuere ornare nunc.</p>
+
+  <h3> Guide d'utilisation </h3>
+
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec cursus velit sit amet erat ullamcorper, 
+  et tincidunt ex blandit. Sed eu pharetra erat, ac consectetur diam. Quisque bibendum velit dolor, non tincidunt metus ornare non. 
+  Donec vitae lorem at urna vestibulum luctus. Quisque euismod ultricies dictum. Proin fermentum felis turpis, quis vulputate lorem tristique at. 
+  Morbi massa leo, semper in justo at, accumsan pretium diam. Maecenas eget semper ipsum, vitae efficitur urna. Fusce at feugiat tortor.</p>
+
+  <p>Nam maximus facilisis convallis. Ut in lobortis ex. Nulla nisl lacus, sollicitudin sit amet sollicitudin laoreet, bibendum vitae dolor. 
+  Sed quis interdum mi. Sed vestibulum lacus eu aliquam placerat. Morbi vel scelerisque arcu. Nulla nec felis fringilla, eleifend diam at, viverra lorem. 
+  Curabitur risus risus, molestie at velit ut, posuere ornare nunc.</p>
+
+  <p>Donec sed tellus sed nulla tristique mollis. Ut ornare mattis dui, ut faucibus dolor dictum id. Nunc non euismod ligula, 
+  et ultricies tortor. Donec lacinia sapien non dolor venenatis lobortis. Aliquam erat volutpat. 
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla urna magna, suscipit vel arcu ac, iaculis maximus nulla. 
+  Aenean condimentum, ante vitae suscipit tincidunt, felis ligula porttitor turpis, id ultricies nunc lacus et nulla.</p>
+  <h3> Contact </h3>
+
+  Pour tout problème avec ce jeu merci de contacter : <a href="mailto:rudy@student.unamur.be"> Rudy </a>
+
+
+{% endblock %}

@@ -1,0 +1,33 @@
+<!-- herite de main (de tout sauf les blocks (donc le menu)) -->
+{% extends "parentPage.html" %}
+
+<!-- Tout ce dont on a pas herité de main -->
+{% block content %}<!-- block de sous titre-->
+    GESTION DES ENIGMES 
+{% endblock %}
+
+
+{% block body %}
+    <body onload="gestionListeEnigmes({{paginationActuelle}})">
+
+    <p> 
+        <B>La liste des enigmes :</B> 
+    </p>
+
+    
+    <div id="TableauEnigmesComplet">
+
+        
+           
+    </div> 
+
+
+
+
+
+    <!-- Bouton pour creer enigmes-->
+    
+   
+    <script src="{{ url_for('static',filename='js/fonctions_liste.js')}}"></script>
+
+{% endblock %}

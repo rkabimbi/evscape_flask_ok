@@ -1,0 +1,44 @@
+<!-- herite de main (de tout sauf les blocks (donc le menu)) -->
+{% extends "parentPage.html" %}
+
+<!-- Tout ce dont on a pas herité de main -->
+
+{% block content %}<!-- block de sous titre-->
+    PAGE LOGIN
+{% endblock %}
+
+{% block body %}
+
+    <center>
+    
+    <p><B>Encodez vos login/mdp</B></p>
+    <form action="/login" method="POST"> 
+        <div class="form-group"> <!-- formulaire-->
+            <p >{{ macroUn.afficherApple() }}</p>
+            {{ formulaire.csrf_token }}<!-- sécurité-->
+            <div class="formulaire-row">{{ formulaire.username.label }} 
+            <br>
+            {{ formulaire.username(size=20, class='formulaire-control') }}</div><!-- 200=taille champs reponse-->
+            
+            <div class="formulaire-row">{{ formulaire.password.label }} 
+            <br>
+            {{ formulaire.password(size=20, class='formulaire-control') }}</div>
+        </div>
+        
+        <div class="formulaire-row">{{ formulaire.submit (class='btn btn-primary')}}</div><!-- pour afficher le bouton-->
+           
+       
+    </form>
+    {{ macroUn.afficherApple() }}<!-- Utilisation de la macro d'afichage de la pomme-->
+    <p>Souhaitez vous vous inscrire ? </p> <a href="http://127.0.0.1:5000/Inscription">inscription</a>
+
+
+
+
+     </center>
+
+  
+
+    
+{% endblock %}
+
