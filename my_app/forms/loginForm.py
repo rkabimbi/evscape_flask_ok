@@ -10,8 +10,8 @@ from wtforms   import PasswordField
 
 #formulaire login
 class FormLogin( FlaskForm ):
-    username = StringField('Username:', validators=[InputRequired(), Length(min=5, max=20)])
-    password = PasswordField('Password:', validators=[Length(min=3, max=16)])
-    submit   = SubmitField('Soumettre')
+    username = StringField('Utilisateur:', validators=[InputRequired(), Length(min=5, max=20)])
+    password = PasswordField('Mot de passe:', validators=[Length(min=3, max=16)])
+    submit   = SubmitField('Connexion')
 
 

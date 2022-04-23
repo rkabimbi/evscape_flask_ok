@@ -35,7 +35,7 @@
                 
                 <div class="btnLogin"> 
                     <div class="formulaire-row ">{{ formulaire.submit (class='btn btn-warning')}}</div><!-- pour afficher le bouton-->
-                    <button type="button" class="btn btn-secondary"> Inscription</button>
+                    <button type="button" class="btn btn-secondary" onclick="chargementFormulaireInscription()"> Inscription</button>
                 </div>
                 
             
@@ -54,3 +54,6 @@
       
 {% endblock %}
 
+</div>
+    <script src="{{ url_for('static',filename='js/fonctions_user_login.js')}}"></script>
+</div>

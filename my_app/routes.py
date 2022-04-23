@@ -34,10 +34,15 @@ from datetime import date
 #from my_app.models.riddleJSN import EnigmesJsn
 
 
+"""
+Pour rappel le fonction de flask c'est qu'à chaque changement il reparcours tt le fichier je pense. Notament pour le login.
+Je pens donc que je dois laisser la racine à la page "home" et juste faire sur le chemin racine que si pas connecté il renvoi la page login!!!!
+comme ca quand mon formulaire de wtf est validé ca va repasser par la racine
+"""
 
 
 #gere la page d'acceuil
-@app.route("/hhjb", methods=['GET','POST'])
+@app.route("/", methods=['GET','POST'])
 #login_required #pour obliger que l'utilisateur soit# log
 def question(reponse=None):
     #nbrEnigmes=Enigmes.query.count()
