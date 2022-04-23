@@ -16,25 +16,25 @@
 
 {% block body %}
    
-<div class="composantLogin col-sm-12" > 
+<div class="composantLogin col-sm-12" id="composantLogin"> 
     <h1 class="titreComposantLogin"> EVSCAPE</h1>
     <div class="boxLoginForm"> 
         <center> 
-            <form action="/login" method="POST"> 
+            <form action="/" method="POST"> 
                 <div class="form-group"> <!-- formulaire-->
                     
-                    {{ formulaire.csrf_token }}<!-- sécurité-->
-                    <div class="formulaire-row">{{ formulaire.username.label }} 
+                    {{ formulaireLogin.csrf_token }}<!-- sécurité-->
+                    <div class="formulaire-row">{{ formulaireLogin.username.label }} 
                 
-                    {{ formulaire.username(size=20, class='formulaire-control', placeholder="Utilisateur") }}</div><!-- 200=taille champs reponse-->
+                    {{ formulaireLogin.username(size=20, class='formulaire-control', placeholder="Utilisateur") }}</div><!-- 200=taille champs reponse-->
                     
-                    <div class="formulaire-row">{{ formulaire.password.label }} 
+                    <div class="formulaire-row">{{ formulaireLogin.password.label }} 
                 
-                    {{ formulaire.password(size=20, class='formulaire-control', placeholder="Mot de Passe") }}</div>
+                    {{ formulaireLogin.password(size=20, class='formulaire-control', placeholder="Mot de Passe") }}</div>
                 </div>
                 
                 <div class="btnLogin"> 
-                    <div class="formulaire-row ">{{ formulaire.submit (class='btn btn-warning')}}</div><!-- pour afficher le bouton-->
+                    <div class="formulaire-row ">{{ formulaireLogin.submit (class='btn btn-warning')}}</div><!-- pour afficher le bouton-->
                     <button type="button" class="btn btn-secondary" onclick="chargementFormulaireInscription()"> Inscription</button>
                 </div>
                 
@@ -50,10 +50,89 @@
     
 </div>
 
+<div><!-- si il y a une erreur déclenchée sur base des objets formulaires d'inscription-->
+    {%if formulaireInscription.errors%}
+        {%for message in formulaireInscription.username.errors%} <!-- pour chaque message d'erreurs générés-->
+            <div class="alert alert-danger" role="alert">{{message}}  </div> <!-- on affiche le message prévu avec style-->   
+        {%endfor%}
+        {%for message in formulaireInscription.firstname.errors%} <!-- pour chaque message d'erreurs générés-->
+            <div class="alert alert-danger" role="alert">{{message}}  </div> <!-- on affiche le message prévu avec style-->   
+        {%endfor%}
+        {%for message in formulaireInscription.email.errors%} <!-- pour chaque message d'erreurs générés-->
+            <div class="alert alert-danger" role="alert">{{message}}  </div> <!-- on affiche le message prévu avec style-->   
+        {%endfor%}
+        
+        {%for message in formulaireInscription.lastname.errors%} <!-- pour chaque message d'erreurs générés-->
+            <div class="alert alert-danger" role="alert">{{message}}  </div> <!-- on affiche le message prévu avec style-->   
+        {%endfor%}
+        {%for message in formulaireInscription.password.errors%} <!-- pour chaque message d'erreurs générés-->
+            <div class="alert alert-danger" role="alert">{{message}}  </div> <!-- on affiche le message prévu avec style-->   
+        {%endfor%}
+        {%for message in formulaireInscription.passwordConfirmation.errors%} <!-- pour chaque message d'erreurs générés-->
+            <div class="alert alert-danger" role="alert">{{message}}  </div> <!-- on affiche le message prévu avec style-->   
+        {%endfor%}
+        
+    {%endif%}
+</div>
 
-      
-{% endblock %}
+
+
+
+<!-- L'idée est de mettre ici le composant d'inscription pour ne pas devoir tt taper à la main e njavascript-->
+
+<div id="composantCache" style="display: none;">
+
+    <div class="composantInscription col-sm-12" id="composantInscription"> 
+        <!-- Zone flash-->
+    
+        
+    
+        <div class="boxInscriptionForm"> 
+    
+            <h2>Créer un compte</h2>
+            <form action="/inscription" method="POST"> 
+                <div class="form-group"> <!-- formulaire-->
+                    
+                    {{ formulaireInscription.csrf_token }}<!-- sécurité-->
+                        
+                    <div class="formulaire-row">{{ formulaireInscription.username.label }} {{ formulaireInscription.username(size=20, class='formulaire-control') }}</div>
+                    
+                    <div class="formulaire-row">{{ formulaireInscription.firstname.label }} {{ formulaireInscription.firstname(size=30, class='formulaire-control') }}</div>
+                    
+                    <div class="formulaire-row">{{ formulaireInscription.lastname.label }} {{ formulaireInscription.lastname(size=30, class='formulaire-control') }}</div>
+    
+                    <div class="formulaire-row">{{ formulaireInscription.email.label }} {{ formulaireInscription.email(size=60, class='formulaire-control') }}</div>
+    
+                   
+    
+                    <div class="formulaire-row">{{ formulaireInscription.password.label }} {{ formulaireInscription.password(size=60, class='formulaire-control') }}</div>
+    
+                    <div class="formulaire-row">{{ formulaireInscription.passwordConfirmation.label }} {{ formulaireInscription.passwordConfirmation(size=60, class='formulaire-control') }}</div>
+    
+                   
+                </div>
+                <div class="form-row">{{ formulaireInscription.submit (class='btn btn-warning')}}</div><!-- pour afficher le bouton-->
+            
+            
+            </form>
+    
+        
+        </div>
+
+
+
+</div>
+
+
+
+
+
+
 
 </div>
     <script src="{{ url_for('static',filename='js/fonctions_user_login.js')}}"></script>
 </div>
+      
+{% endblock %}
+
+

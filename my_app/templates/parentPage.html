@@ -7,7 +7,7 @@
         {% import "macros/macroUn.html" as macroUn %}<!-- import de macro. Comme ça c'est dispo pour toutes les pages filles -->
     </head>
 
-    <body>
+    <body id="body">
         <!-- MENU -->
         <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
             <ul class="nav"><!-- ul : liste non ordonnée-->
@@ -15,16 +15,16 @@
                 <li class="nav-item"><a class="nav-link active " href="/aPropos">A propos</a></li>
                 {% if currentUser.is_authenticated%}<!-- Si utilisateur connecté alors il voit le menu suivant-->
                     <li class="nav-item"><a class="nav-link active" href="/flux">Flux</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="/mesJe"> Mes Jeux d'évasion</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/mesJe"> Mes Jeux d'Evasion</a></li>
                     <li class="nav-item"><a class="nav-link active" href="/votreAvis">Votre Avis</a></li>    
-                    <li class="nav-item"><a class="nav-link active" href="/Logout">Deconnecter </a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/Logout">Se déconnecter </a></li>
                 {%endif%}
             </ul>
         </nav>
        
 
 
-      
+
         <!-- affichage des erreurs flash-->
         <div class="container">
           <div class="p-4">
@@ -69,6 +69,7 @@
         <script src="/static/js/JQuery.js"></script> <!-- lien vers fichiers du javascript -->
         <script src="/static/js/bootstrap.min.js"></script>
         <script src="https://kit.fontawesome.com/3703f1d8e1.js" crossorigin="anonymous"></script><!-- Lien vers fontawsom-->
+ 
     </body>
 </html>
 

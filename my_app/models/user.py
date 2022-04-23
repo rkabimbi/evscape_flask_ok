@@ -17,11 +17,11 @@ class User(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethodes relativ
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True)
     password = db.Column(db.String(250), nullable=False)
-    dateCreation= db.Column(db.Date, nullable=True)
+    #dateCreation= db.Column(db.Date, nullable=True)
     #admin = db.Column(db.Boolean, nullable=False)
     firstname = db.Column(db.String(30), nullable=False)
     lastname = db.Column(db.String(30), nullable=False)
-    university = db.Column(db.String(30), nullable=False)
+    #university = db.Column(db.String(30), nullable=False)
 
     #score=db.Column(db.Integer,default=0)
     #r_enigme=db.relationship('Enigmes', backref=db.backref('auteur', lazy=True))#on dit que la relation c'est avec la classe Enigmes 
@@ -34,7 +34,7 @@ class User(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethodes relativ
         self.password = password
         self.firstname = firstname
         self.lastname = lastname
-        self.dateCreation= datetime.today 
+        #self.dateCreation= datetime.today 
 
 
 
@@ -42,7 +42,7 @@ class User(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethodes relativ
     
     
     def __repr__(self):#toString
-        return "( username = %s, firstname = %s , lastname=%s, pwd=%s,email=%s,dateCreation=%s)\n" % ( self.username, self.firstname,self.lastname,self.password,self.email,self.dateCreation)
+        return "( username = %s, firstname = %s , lastname=%s, pwd=%s,email=%s,dateCreation=%s)\n" % ( self.username, self.firstname,self.lastname,self.password,self.email)
 
 
 

@@ -1,0 +1,21 @@
+.composantFlux{
+
+    background-color: brown;
+    
+    flex-wrap: wrap ;
+    display : flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+
+}
+
+.carteJEEI{
+
+    
+    background-color: white;
+    height: 400px;
+    margin: 15px;
+    border-radius: 15px;
+    border-color: grey;
+}

@@ -1,0 +1,55 @@
+<head>
+    <link href="/static/css/flux.css" rel="stylesheet"><!-- idem-->
+    {% import "macros/macroUn.html" as macroUn %}<!-- import de macro. Comme ça c'est dispo pour toutes les pages filles -->
+</head>
+
+<!-- herite de main (de tout sauf les blocks (donc le menu)) -->
+{% extends "parentPage.html" %}
+
+<!-- Tout ce dont on a pas herité de main -->
+
+
+
+{% block body %}
+<body onload="changerImageFond()"> </body>
+<div class="composantFlux col-sm-12" > 
+ 
+
+    <div class="carteJEEI col-sm-12 col-md-6 col-xl-3 " id="carteJEEI">
+
+    </div>
+
+    <div class="carteJEEI col-sm-12 col-md-6 col-xl-3 ">
+
+    </div>
+
+    <div class="carteJEEI col-sm-12 col-md-6 col-xl-3 ">
+
+    </div>
+
+    <div class="carteJEEI col-sm-12 col-md-6 col-xl-3">
+
+    </div>
+
+    <div class="carteJEEI col-sm-12 col-md-6 col-xl-3 ">
+
+    </div>
+
+    <div class="carteJEEI col-sm-12 col-md-6 col-xl-3 ">
+
+    </div>
+
+    <div class="carteJEEI col-sm-12 col-md-6 col-xl-3 ">
+
+    </div>
+
+
+</div>
+
+</div>
+<script src="{{ url_for('static',filename='js/fonctions_flux.js')}}"></script>
+</div>
+  
+{% endblock %}
+
+
