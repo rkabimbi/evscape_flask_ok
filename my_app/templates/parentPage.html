@@ -1,36 +1,32 @@
 <html>
     <head>
-        <title>Clue - Acceuil</title>
+        <title>Evscape</title>
         <link href="/static/css/bootstrap.min.css" rel="stylesheet"><!-- "import" des feuilles de style (avec un lien relatif)-->
-        <link href="/static/css/style.css" rel="stylesheet"><!-- idem-->
+      
+        <link href="/static/css/parentPage.css" rel="stylesheet"><!-- idem-->
         {% import "macros/macroUn.html" as macroUn %}<!-- import de macro. Comme ça c'est dispo pour toutes les pages filles -->
     </head>
 
     <body>
-        <!-- nav = menu -->
+        <!-- MENU -->
         <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-        <ul class="nav"><!-- ul : liste non ordonnée-->
-            <a class="navbar-brand" href="/">Vicious Clues</a><!-- Un bouton "Logo"-->
-            <li class="nav-item"><a class="nav-link active" href="/ListeEnigmes"> Liste Enigmes</a></li>
-            <li class="nav-item"><a class="nav-link active" href="/Infos">Infos</a></li>
-            <li class="nav-item"><a class="nav-link active" href="/game1">Game</a></li>
-            {% if currentUser.is_authenticated%}
-
-                <li class="nav-item"><a class="nav-link active" href="/Logout">Deconnecter </a></li>
-          
-            {%endif%}
-        </ul>
+            <ul class="nav"><!-- ul : liste non ordonnée-->
+                <a class="navbar-brand" href="/">Evscape</a><!-- Un bouton "Logo"-->
+                <li class="nav-item"><a class="nav-link active " href="/aPropos">A propos</a></li>
+                {% if currentUser.is_authenticated%}<!-- Si utilisateur connecté alors il voit le menu suivant-->
+                    <li class="nav-item"><a class="nav-link active" href="/flux">Flux</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/mesJe"> Mes Jeux d'évasion</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/votreAvis">Votre Avis</a></li>    
+                    <li class="nav-item"><a class="nav-link active" href="/Logout">Deconnecter </a></li>
+                {%endif%}
+            </ul>
         </nav>
-        <center>
-        <div class="container"> 
-            <h1>VICIOUS CLUES</h1>
-            <h2>{% block content %} {% endblock %}</h2> <!-- block qui contiendra le Sous titre principal pour chaque page (partie libre)-->
-         </div>
-         </center>
+       
+
 
       
         <!-- affichage des erreurs flash-->
-        <div class="container">
+        <div class="containerGGGGGGG">
           <div class="p-4">
             {% if form is defined and form.errors is defined %}
               {% for field, errors in form.errors.items() %}
@@ -51,10 +47,17 @@
         </div>
 
 
-         <div class="container">
-            {% block body %} {% endblock %}<!-- block qui contiendr coeur de la page (partie libre))e-->
+         <div class="container"> <!-- pour bootstrap obligatoire d'avoir un container-->
+            <div class ="row"> <!-- pour dire que les pages seront gérées en "row" et que donc j'au plus qu'à spécifier les colonnes (espace en largeur) et dès que
+            ca depassera ca ira à la ligne de manière responsive sans que j'ai rien à fair -->
+               
+                {% block body %} 
+            
+                {% endblock %}<!-- block qui contiendr coeur de la page (partie libre))e-->
+            </div>
         </div>
-        <br>
+
+      
         <div class="footer">
             {% if currentUser.is_authenticated%}
            

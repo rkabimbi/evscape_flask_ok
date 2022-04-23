@@ -34,13 +34,6 @@ from datetime import date
 #from my_app.models.riddleJSN import EnigmesJsn
 
 
-####################################################################################################################
-####################################################################################################################
-#CODE AVANT AJAX
-####################################################################################################################
-####################################################################################################################
-
-
 
 
 #gere la page d'acceuil
@@ -55,6 +48,32 @@ def question(reponse=None):
 #####################################################
 #LOGIN
 #####################################################
+
+
+#gere le login
+@app.route("/", methods=['GET', 'POST'])
+def fonction_login():
+    if current_user.is_authenticated:#si authentifie
+        return redirect(url_for('question'))#alors tu peux aller à la page d'acceuil 
+    formulaireLogin = FormLogin()#creation d'un objet de type FormLogin (formulaire WTF)
+    if formulaireLogin.validate_on_submit():#si le formulaire a été submit**
+        user = User.query.filter_by(username=formulaireLogin.username.data).first()#j'instancie user avec l'objet dont je recupere l'usrname dans le formulaire 
+        if not user or not check_password_hash(user.password, formulaireLogin.password.data):#si la requete n'a rien renvoyé dans user (None)...càd il dit que pas d'utilisateur dans la db ou si code pas correct(code que je dois hasher vu qu'il est hashé dans la db)
+            flash('Cet utilisateur n\'existe pas ou MDP incorrect','danger')
+            return redirect(url_for('fonction_login')) 
+        #dans les autres cas on peut logguer le perso
+        login_user(user, remember=True) #remember ca sera utile pour ouvrir et fermer explorateur internet
+        flash('Connexion réussie','success')
+        return redirect(url_for('gestionEnigmes'))#alors tu peux aller à la page d'acceuil (c'est ce qui est demandé dans la spec (aller à la liste))
+    return render_template("user_login.html", formulaire = formulaireLogin, current_user=None,currentUser=current_user)
+
+#gere le logout
+@app.route('/Logout')
+def logout():
+    logout_user()
+    flash('Deconnexion réussie','success')
+    return redirect(url_for('fonction_login'))
+
 
 
 #gere les inscriptions
@@ -85,29 +104,7 @@ def register():
 
 
 
-#gere le login
-@app.route("/", methods=['GET', 'POST'])
-def fonction_login():
-    if current_user.is_authenticated:#si authentifie
-        return redirect(url_for('question'))#alors tu peux aller à la page d'acceuil 
-    formulaireLogin = FormLogin()#creation d'un objet de type FormLogin (formulaire WTF)
-    if formulaireLogin.validate_on_submit():#si le formulaire a été submit**
-        user = User.query.filter_by(username=formulaireLogin.username.data).first()#j'instancie user avec l'objet dont je recupere l'usrname dans le formulaire 
-        if not user or not check_password_hash(user.password, formulaireLogin.password.data):#si la requete n'a rien renvoyé dans user (None)...càd il dit que pas d'utilisateur dans la db ou si code pas correct(code que je dois hasher vu qu'il est hashé dans la db)
-            flash('Cet utilisateur n\'existe pas ou MDP incorrect','danger')
-            return redirect(url_for('fonction_login')) 
-        #dans les autres cas on peut logguer le perso
-        login_user(user, remember=True) #remember ca sera utile pour ouvrir et fermer explorateur internet
-        flash('Connexion réussie','success')
-        return redirect(url_for('gestionEnigmes'))#alors tu peux aller à la page d'acceuil (c'est ce qui est demandé dans la spec (aller à la liste))
-    return render_template("user_login.html", formulaire = formulaireLogin, current_user=None,currentUser=current_user)
 
-#gere le logout
-@app.route('/Logout')
-def logout():
-    logout_user()
-    flash('Deconnexion réussie','success')
-    return redirect(url_for('fonction_login'))
 
 
 

@@ -1,3 +1,12 @@
+
+    <head>
+  
+
+      
+        <link href="/static/css/user_login.css" rel="stylesheet"><!-- idem-->
+        {% import "macros/macroUn.html" as macroUn %}<!-- import de macro. Comme ça c'est dispo pour toutes les pages filles -->
+    </head>
+
 <!-- herite de main (de tout sauf les blocks (donc le menu)) -->
 {% extends "parentPage.html" %}
 
@@ -9,33 +18,49 @@
 
 {% block body %}
 
-    <center>
+
     
-    <p><B>Encodez vos login/mdp</B></p>
-    <form action="/login" method="POST"> 
-        <div class="form-group"> <!-- formulaire-->
-            <p >{{ macroUn.afficherApple() }}</p>
-            {{ formulaire.csrf_token }}<!-- sécurité-->
-            <div class="formulaire-row">{{ formulaire.username.label }} 
-            <br>
-            {{ formulaire.username(size=20, class='formulaire-control') }}</div><!-- 200=taille champs reponse-->
+<div class="composantLogin col-sm-12" > 
+    <div class="boxLoginForm"> 
+        <center> 
+            <form action="/login" method="POST"> 
+                <div class="form-group"> <!-- formulaire-->
+                    
+                    {{ formulaire.csrf_token }}<!-- sécurité-->
+                    <div class="formulaire-row">{{ formulaire.username.label }} 
+                
+                    {{ formulaire.username(size=20, class='formulaire-control', placeholder="Utilisateur") }}</div><!-- 200=taille champs reponse-->
+                    
+                    <div class="formulaire-row">{{ formulaire.password.label }} 
+                
+                    {{ formulaire.password(size=20, class='formulaire-control', placeholder="Mot de Passe") }}</div>
+                </div>
+                
+                <div class="btnLogin"> 
+                    <div class="formulaire-row ">{{ formulaire.submit (class='btn btn-warning')}}</div><!-- pour afficher le bouton-->
+                    <button type="button" class="btn btn-secondary"> Inscription</button>
+                </div>
+                
             
-            <div class="formulaire-row">{{ formulaire.password.label }} 
-            <br>
-            {{ formulaire.password(size=20, class='formulaire-control') }}</div>
-        </div>
-        
-        <div class="formulaire-row">{{ formulaire.submit (class='btn btn-primary')}}</div><!-- pour afficher le bouton-->
-           
-       
-    </form>
-    {{ macroUn.afficherApple() }}<!-- Utilisation de la macro d'afichage de la pomme-->
-    <p>Souhaitez vous vous inscrire ? </p> <a href="http://127.0.0.1:5000/Inscription">inscription</a>
+            </form>
+         </center>
+    
+  
+
+
+          <a class="lienHypertexte" href="http://127.0.0.1:5000/motDePasseOublie">Mot de passe oublié?</a>
+ 
+    
+</div>
+
+
+  
+   
 
 
 
 
-     </center>
+ 
 
   
 
