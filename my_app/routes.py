@@ -107,11 +107,6 @@ def fonction_inscription():
 
 
 
-@app.route("/flux", methods=['GET', 'POST'])
-@login_required
-def fonction_flux():
-
-    return render_template("flux.html",currentUser=current_user)
 
 
 

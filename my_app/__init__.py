@@ -36,3 +36,5 @@ login_manager.session_protection = 'strong'
 
 
 from my_app import routes
+from my_app import routes_flux
+from my_app import routes_mesJEEI

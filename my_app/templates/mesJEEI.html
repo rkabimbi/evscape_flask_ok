@@ -1,0 +1,50 @@
+<head>
+    <link href="/static/css/mesJEEI.css" rel="stylesheet"><!-- idem-->
+    {% import "macros/macro_MesJEEI.html" as macro_MesJEEI %}<!-- import de macro. Comme ça c'est dispo pour toutes les pages filles -->
+</head>
+
+<!-- herite de main (de tout sauf les blocks (donc le menu)) -->
+{% extends "parentPage.html" %}
+
+<!-- Tout ce dont on a pas herité de main -->
+
+
+
+{% block body %}
+<body onload="changerImageFond()"> </body>
+
+
+    
+    <row>
+        <div class="row composantMesJEEI" id="composantMesJEEI"> 
+
+
+           
+
+
+
+        </div>
+    </row>  
+
+    <row> 
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+    
+            <li class="page-item"><a class="page-link" onclick="fonction_Pagination(1,{{mesJEEI}})">1</a></li>
+            <li class="page-item"><a class="page-link" onclick="fonction_Pagination(2,{{mesJEEI}})">2</a></li>
+            <li class="page-item"><a class="page-link" onclick="fonction_Pagination(3,{{mesJEEI}})">3</a></li>
+        
+            </ul>
+        </nav>
+    </row>
+        
+
+
+    </div>
+     <script src="{{ url_for('static',filename='js/fonctions_MesJEEI.js')}}"></script>
+     <script src="{{ url_for('static',filename='js/fonctions_flux.js')}}"></script> <!-- Laisser ca partout - besoin pour mon hack de fond-->
+    </div>
+    
+{% endblock %}
+
+

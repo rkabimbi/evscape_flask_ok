@@ -1,0 +1,22 @@
+
+<!-- afficher une pomme-->
+{% macro afficherCarteMesJEEI(nom,auteur,nbrExperimentation,theme,id,img,position) %}
+<div class="card cardMesJEEI" id="macroTest" >
+    <img src={{img}} class="card-img-top imgCardMesJEEI"  alt="...">
+    <div class="card-body">
+      <h5 class="card-title"><B> {{nom}}</B></h5>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><B> Thème</B> :  {{theme}}</li>
+      <li class="list-group-item"><B> Statut</B> : Verouillé</li>
+      <li class="list-group-item"><B> Nbr Experimentations</B> : {{nbrExperimentation}}</li>
+    </ul>
+    <div class="card-body">
+        <a class="btn btn-outline-secondary" href="http://127.0.0.1:5000/SpecificationsJEEI?idJEEI={{id}}" role="button">Modifier</a>
+        <a class="btn btn-outline-warning" href="http://127.0.0.1:5000/ExperimentationJEEI?idJEEI={{id}}" role="button">Expérimentation</a>
+        <a class="btn btn-outline-success" href="http://127.0.0.1:5000/DataJEEI?idJEEI={{id}}" role="button">Data</a>
+        <a class="btn btn-outline-danger" href="http://127.0.0.1:5000/SupprimerMonJEEI?idJEEI={{id}}" role="button">Supprimer</a>
+    </div>
+  </div>  
+{% endmacro %}
