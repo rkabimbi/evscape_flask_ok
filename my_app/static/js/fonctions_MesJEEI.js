@@ -1,3 +1,4 @@
+/*
 function fonction_Pagination(numPagination,mesJEEI)
 {
     console.log("fonction_Pagination - page :"+numPagination)
@@ -23,15 +24,11 @@ function fonction_Pagination(numPagination,mesJEEI)
     //remplacer dans la page HTML avec les valeurs qu'il faut
         
         let codeHTML=""
-        /*
-            ATTENTION j'utilise positionDsJson à la place de l'ID du JEEI pcq on peut avoir un ID 552 qui est le 7 ème EG d'une personne et donc dans le JSON il occupe la position 7 et pas 552
-        */
+
         for(let positionDsJson=borneInfIntervalleListeJEEI;positionDsJson<=borneSupIntervalleListeJEEI;positionDsJson++)
         {
             //codeHTML=codeHTML+" {{ macro_MesJEEI.afficherCarteMesJEEI("+mesJEEI+" ,"+positionDsJson+"  ) }}"
-/*   
-            codeHTML=codeHTML+" {{ macro_MesJEEI.afficherCarteMesJEEI("+noms[positionDsJson]+" ,"+ auteurs[positionDsJson]+ ","+ nbrExperimentations[positionDsJson]+ ","+ themes[positionDsJson]+ ","+ id[positionDsJson]+ ","+ img[positionDsJson]+ ","+positionDsJson+"  ) }}"
-*/
+
 
             codeHTML=codeHTML+"<div class='card cardMesJEEI' >"
             codeHTML=codeHTML+"<img src=' "+img[positionDsJson]+"' class='card-img-top imgCardMesJEEI'  >"
@@ -56,3 +53,35 @@ function fonction_Pagination(numPagination,mesJEEI)
 
 
 }
+*/
+
+function fonction_pagination(pagination)
+{
+    console.log(pagination)
+
+    //il va envoyer une requête au serveur sur la routes : selectEnigme et va passer via un GET le numHasard et 
+     var xhttp = new XMLHttpRequest();//crée un objet de type XMLHttpRequest
+     let url = new URL('http://127.0.0.1:5000/mesJEEICartes?pagination='+ pagination);//configuration de l'url de la route à emprunter pour communiquer avec la DB. On assignera cette adresse à Xttp à la prochaine ligne de code  
+     xhttp.open("GET", url.toString(), true);
+     xhttp.send()
+     xhttp.onreadystatechange = function()
+     { 
+         if (this.readyState == 4 && this.status == 200) 
+         { 
+             
+             console.log("ok ")
+             fonction_affichageCartes(this.responseText)   
+         }
+     };
+}
+
+function fonction_affichageCartes(responseText)
+{
+    console.log("fonction_affichageCartes");
+    responseText=JSON.stringify(responseText)
+    
+    var fichJsonParse=JSON.parse(responseText);//parsing du fichier JSON envoyé par jsonify
+   // console.log(fichJsonParse)//affichage Liste Enigmes 
+}
+
+

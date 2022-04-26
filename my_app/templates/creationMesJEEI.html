@@ -14,30 +14,7 @@
 <body onload="changerImageFond()"> </body>
 
 
-    
-    <row>
-        <div class="row composantMesJEEI" id="composantMesJEEI"> 
-
-
-           
-            {{ macro_MesJEEI.afficherListeCartePager(pagination,listeMesJEEI) }}"
-
-
-        </div>
-    </row>  
-
-    <row> 
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-              
-                {%  for n in range(1,nbrPagesTotal+1) %} 
-                    <li class="page-item"><a class="page-link" onclick="fonction_pagination({{n}})">{{n}}</a></li>  
-                {% endfor %}
-            </ul>
-        </nav>
-    </row>
-        
-
+CREATION D'UN JEEI
 
     </div>
      <script src="{{ url_for('static',filename='js/fonctions_MesJEEI.js')}}"></script>

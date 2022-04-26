@@ -7,12 +7,13 @@ from flask_sqlalchemy import SQLAlchemy #import pour gestion DB
 #from flask_migrate import Migrate, MigrateCommand #pour maj la DB sans tt perdre (ajouter colonne et autres)
 from flask_login import LoginManager
 
-
+from flask_cors import CORS, cross_origin #important sans ca...il n'accepte pas les trucsAJAX!!! : https://flask-cors.readthedocs.io/en/latest/ 
 
 
 
 
 app = Flask (__name__)
+CORS(app)
 db=SQLAlchemy(app) #creation d'un objet de type SQLAlchemy
 app.config.from_object(BaseConfig)
 #migrate=Migrate(app,db)
