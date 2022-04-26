@@ -85,3 +85,20 @@ function fonction_affichageCartes(responseText)
 }
 
 
+function fonction_affichageMesJEEI(numPager, listeMesJEEI)
+{
+    
+    console.log("fonction_affichageMesJEEI")
+    let indexDBSol=(numPager-1)*4 //le premier index de DB qu'il va afficher (pour qu'on ajoute ensuite 1,2,3,4 et qu'on puisse donc afficher ceux qui se suivent dans la db)
+    console.log(indexDBSol)
+    
+    for(let i=0;i<4;i++)
+    {
+        console.log("element de base :")
+        console.log(document.getElementById("nomMesJEEI"+i).innerHTML)
+        console.log("element de remplacement")
+        console.log(listeMesJEEI.noms[(indexDBSol+i)])
+        document.getElementById("nomMesJEEI"+i).innerHTML=listeMesJEEI.noms[(indexDBSol+i)]
+    }
+}
+

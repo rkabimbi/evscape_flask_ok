@@ -56,6 +56,7 @@ def fonction_mesJEEI():
 
     if mesJEEI: #si mesJEEI n'est pas vide
         #trop complexe pour rien...je dois juste renvoyer les 4 premiers points barre
+        """ 
         if request.args.get("pagination"):
             pagination = int(request.args.get("pagination"))
             
@@ -64,13 +65,15 @@ def fonction_mesJEEI():
         print("pagination =",pagination)
         borneInf=(pagination-1)*4
         borneSup=pagination*4-1
-      
+          
     
         nbrPagesTotal=math.ceil(len(mesJEEI['noms'])/4)#necessaire pour definir la taille de pager
         listeMesJEEIAEnvoyer=function_extractionSousMatrice4Cartes(mesJEEI,borneInf,borneSup)
+        """
         print("Liste qui part1")
-        print(listeMesJEEIAEnvoyer)
-        return render_template("mesJEEI.html",currentUser=current_user,pagination=pagination,listeMesJEEI=listeMesJEEIAEnvoyer,nbrPagesTotal=nbrPagesTotal)
+        print(mesJEEI)
+        nbrPagesTotal=math.ceil(len(mesJEEI['noms'])/4)#necessaire pour definir la taille de pager
+        return render_template("mesJEEI.html",currentUser=current_user,listeMesJEEI=mesJEEI,nbrPagesTotal=nbrPagesTotal,pagination=1)
     else:
         #on renvoi vers la création de JEEI
         flash('Pas de Jeu d Evasion cree', 'warning')

@@ -1,25 +1,25 @@
 
-<!-- afficher une pomme-->
-{% macro afficherCarteMesJEEI(listeMesJEEI,n) %}
+<!-- indexJEEIDB = emplacement dans la DB du JEEI(different de son ID) / indexCarteAffichage = index des cartes affichée à l'ecran (de 1 à 4)-->
+{% macro afficherCarteMesJEEI(indexJEEIDB,listeMesJEEI,indexCarteAffichage) %}
 
 <div class="card cardMesJEEI" id="macroTest" >
-    <img src={{listeMesJEEI.img[n]}} class="card-img-top imgCardMesJEEI"  alt="...">
+    <img id={{"imgMesJEEI"+indexCarteAffichage}}  src={{listeMesJEEI.img[indexJEEIDB]}} class="card-img-top imgCardMesJEEI"  alt="...">
     <div class="card-body">
-      <h5 class="card-title"><B> {{listeMesJEEI.noms[n]}}</B></h5>
+      <h5 id={{"nomMesJEEI"+indexCarteAffichage}} class="card-title"><B> {{listeMesJEEI.noms[indexJEEIDB]}}</B></h5>
       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
     </div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item"><B> Thème</B> :  {{listeMesJEEI.themes[n]}}</li>
+      <li class="list-group-item"><B> Thème</B> :  {{listeMesJEEI.themes[indexJEEIDB]}}</li>
       <li class="list-group-item"><B> Statut</B> : Verouillé</li>
-      <li class="list-group-item"><B> Nbr Experimentations</B> : {{listeMesJEEI.nbrExperimentations[n]}}</li>
+      <li class="list-group-item"><B> Nbr Experimentations</B> : {{listeMesJEEI.nbrExperimentations[indexJEEIDB]}}</li>
     </ul>
     <div class="card-body">
-        <a class="btn btn-outline-secondary" href="http://127.0.0.1:5000/SpecificationsJEEI?idJEEI={{listeMesJEEI.id[n]}}" role="button">Modifier</a>
-        <a class="btn btn-outline-warning" href="http://127.0.0.1:5000/ExperimentationJEEI?idJEEI={{listeMesJEEI.id[n]}}" role="button">Expérimentation</a>
-        <a class="btn btn-outline-success" href="http://127.0.0.1:5000/DataJEEI?idJEEI={{listeMesJEEI.id[n]}}" role="button">Data</a>
-        <a class="btn btn-outline-danger" href="http://127.0.0.1:5000/SupprimerMonJEEI?idJEEI={{listeMesJEEI.id[n]}}" role="button">Supprimer</a>
+        <a class="btn btn-outline-secondary" href="http://127.0.0.1:5000/SpecificationsJEEI?idJEEI={{listeMesJEEI.id[indexJEEIDB]}}" role="button">Modifier</a>
+        <a class="btn btn-outline-warning" href="http://127.0.0.1:5000/ExperimentationJEEI?idJEEI={{listeMesJEEI.id[indexJEEIDB]}}" role="button">Expérimentation</a>
+        <a class="btn btn-outline-success" href="http://127.0.0.1:5000/DataJEEI?idJEEI={{listeMesJEEI.id[indexJEEIDB]}}" role="button">Data</a>
+        <a class="btn btn-outline-danger" href="http://127.0.0.1:5000/SupprimerMonJEEI?idJEEI={{listeMesJEEI.id[indexJEEIDB]}}" role="button">Supprimer</a>
     </div>
-  </div>  
+</div>  
 {% endmacro %}
 
 

@@ -19,8 +19,12 @@
         <div class="row composantMesJEEI" id="composantMesJEEI"> 
 
 
-           
-            {{ macro_MesJEEI.afficherListeCartePager(pagination,listeMesJEEI) }}"
+            <!-- (pagination-1)*4 c'est = au numero d'index dans la DB(emplacement >< id JEEI)-->
+            <!-- Index de carte doit être un string sinon impossible de concaterner apres pour creer des ID-->
+            {{ macro_MesJEEI.afficherCarteMesJEEI((pagination-1)*4,listeMesJEEI,"0") }}
+            {{ macro_MesJEEI.afficherCarteMesJEEI((pagination-1)*4+1,listeMesJEEI,"1") }}
+            {{ macro_MesJEEI.afficherCarteMesJEEI((pagination-1)*4+2,listeMesJEEI,"2") }}
+            {{ macro_MesJEEI.afficherCarteMesJEEI((pagination-1)*4+3,listeMesJEEI,"3") }}
 
 
         </div>
@@ -30,8 +34,8 @@
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
               
-                {%  for n in range(1,nbrPagesTotal+1) %} 
-                    <li class="page-item"><a class="page-link" onclick="fonction_pagination({{n}})">{{n}}</a></li>  
+                {%  for numPager in range(1,nbrPagesTotal+1) %} 
+                    <li class="page-item"><a class="page-link" onclick="fonction_affichageMesJEEI({{numPager}},{{listeMesJEEI}})">{{numPager}}</a></li>  
                 {% endfor %}
             </ul>
         </nav>
