@@ -44,93 +44,46 @@ from datetime import date
 @app.route("/mesJEEI", methods=['GET', 'POST'])
 @login_required
 def fonction_mesJEEI():
-    #en attendant la DB. A noter que je suis obligé de renvoyer tous les JEEI d'un coup pour que ca marche de l'autre côté
-    mesJEEI={  
-        "noms":["Descape1","Descape2","Descape3","Descape4","Descape5","Descape6","Descape7","Descape8","Descape9","Descape10"],
-        "auteurs":["Rudy","Rudy","Rudy","Rudy","Rudy","Rudy","Rudy","Rudy","Rudy","Rudy"],
-        "nbrExperimentations":[0,0,0,0,0,0,0,0,0,0],
-        "img":["static/img/imgLoginPage2.png", "static/img/imgLoginPage2.png","static/img/JEEITest1.jpeg","static/img/imgLoginPage2.png", "static/img/imgLoginPage2.png","static/img/JEEITest2.jpeg","static/img/JEEITest1.jpeg","static/img/imgLoginPage2.png", "static/img/imgLoginPage2.png","static/img/JEEITest2.jpeg"],
-        "themes":["Cryptographie","Algorithmie", "Cybersecurite","Cryptographie","Algorithmie", "Cybersecurite","Cryptographie","Algorithmie", "Cybersecurite","Cryptographie"],
-        "id":[502,785,893,1058,17,526,854,8962,2562,455]
-    }
+    #Step1 - Rechercher dans DB que tous les JEEI propres à l'utilisateurs connectés 
 
-    if mesJEEI: #si mesJEEI n'est pas vide
-        #trop complexe pour rien...je dois juste renvoyer les 4 premiers points barre
-        """ 
-        if request.args.get("pagination"):
-            pagination = int(request.args.get("pagination"))
-            
-        else:
-            pagination =1
-        print("pagination =",pagination)
-        borneInf=(pagination-1)*4
-        borneSup=pagination*4-1
-          
+    #...
+
+    #Step2 - Convertir ce que la DB renvoi en dictionnaire
+
+    #...
+    #ATTENTION lors de la conversion important de garder les noms utilisés ci-dessous en en-tête sinon ca va bugger
+
+    mesJEEI={  
+        "noms":["Descape1","Descape2","Descape3","Descape4","Descape5","Descape6","Descape7","Descape8","Descape9"],
+        "auteurs":["Rudy","Rudy","Rudy","Rudy","Rudy","Rudy","Rudy","Rudy","Rudy"],
+        "nbrExperimentations":[0,18,2,85,19,0,64,0,2121],
+        "img":["static/img/imgLoginPage2.png", "static/img/imgLoginPage2.png","static/img/JEEITest1.jpeg","static/img/imgLoginPage2.png", "static/img/imgLoginPage2.png","static/img/JEEITest2.jpeg","static/img/JEEITest1.jpeg","static/img/imgLoginPage2.png", "static/img/JEEITest1.jpeg"],
+        "themes":["Cryptographie","Algorithmie", "Cybersecurite","Cryptographie","Algorithmie", "Cybersecurite","Cryptographie","Algorithmie", "Cybersecurite"],
+        "id":[502,785,893,1058,17,526,854,8962,2562],
+        "statuts":["verrouille", "ouvert", "ouvert", "ouvert", "verouille","verrouille", "ouvert", "ouvert", "ouvert"]
+    }
     
-        nbrPagesTotal=math.ceil(len(mesJEEI['noms'])/4)#necessaire pour definir la taille de pager
-        listeMesJEEIAEnvoyer=function_extractionSousMatrice4Cartes(mesJEEI,borneInf,borneSup)
-        """
-        print("Liste qui part1")
+   
+    if mesJEEI: #si mesJEEI n'est pas vide
+        print("liste JEEI envoyée vers front")
         print(mesJEEI)
-        nbrPagesTotal=math.ceil(len(mesJEEI['noms'])/4)#necessaire pour definir la taille de pager
-        return render_template("mesJEEI.html",currentUser=current_user,listeMesJEEI=mesJEEI,nbrPagesTotal=nbrPagesTotal,pagination=1)
+        nbrJEEI=len(mesJEEI['noms'])
+        nbrPagesTotal=math.ceil(nbrJEEI/4)#necessaire pour definir la taille de pager
+        return render_template("mesJEEI.html",currentUser=current_user,listeMesJEEI=mesJEEI,nbrPagesTotal=nbrPagesTotal,pagination=1,nbrJEEI=nbrJEEI)
     else:
         #on renvoi vers la création de JEEI
-        flash('Pas de Jeu d Evasion cree', 'warning')
-        return redirect(url_for('creationMesJEEI'))
+        flash("Vous n\'avez pas encore de Jeu d\'évasion à votre actif. Merci d\'en créer un", 'warning')
+        return redirect(url_for('fonction_specificationMesJEEI'))
     
 
-def function_extractionSousMatrice4Cartes(mesJEEI,borneInf,borneSup):
-    #pas terrible car ici je fais en brut mais je sais que je voudrais tjrs en envoyer que 4 donc pas me compliquer
-    print("function_extractionSousMatrice4Cartes")
-    print(mesJEEI)
-    print(borneInf,borneSup+1)
-    liste4Cartes={"noms":[],"auteurs":[],"nbrExperimentations":[],"img":[],"themes":[],"id":[]}
-
-    for positionJEEI in range(borneInf,borneSup+1):#+1 car range c'est un < pas un <=
-        liste4Cartes["noms"].append(mesJEEI["noms"][positionJEEI])
-        liste4Cartes["auteurs"].append(mesJEEI["auteurs"][positionJEEI])
-        liste4Cartes["nbrExperimentations"].append(mesJEEI["nbrExperimentations"][positionJEEI])
-        liste4Cartes["img"].append(mesJEEI["img"][positionJEEI])
-        liste4Cartes["themes"].append(mesJEEI["themes"][positionJEEI])
-        liste4Cartes["id"].append(mesJEEI["id"][positionJEEI])
-        print(liste4Cartes)
-    return liste4Cartes
 
 
 
-@app.route("/creationMesJEEI", methods=['GET', 'POST'])
+@app.route("/specificationMesJEEI", methods=['GET', 'POST'])
 @login_required
-def fonction_creationMesJEEI():
-    print("creationMesJEEI")
-    return render_template(currentUser=current_user)
+def fonction_specificationMesJEEI():
+    print("specificationMesJEEI")
+    return render_template("specificationMesJEEI.html",currentUser=current_user)
 
 
 
-
-@app.route("/mesJEEICartes", methods=['GET', 'POST'])
-@login_required
-def fonction_mesJEEIcartes():
-    print("MesJEEICartes--------------------------------")
-    mesJEEI={  
-        "noms":["Descape1","Descape2","Descape3","Descape4","Descape5","Descape6","Descape7","Descape8","Descape9","Descape10"],
-        "auteurs":["Rudy","Rudy","Rudy","Rudy","Rudy","Rudy","Rudy","Rudy","Rudy","Rudy"],
-        "nbrExperimentations":[0,0,0,0,0,0,0,0,0,0],
-        "img":["static/img/imgLoginPage2.png", "static/img/imgLoginPage2.png","static/img/JEEITest1.jpeg","static/img/imgLoginPage2.png", "static/img/imgLoginPage2.png","static/img/JEEITest2.jpeg","static/img/JEEITest1.jpeg","static/img/imgLoginPage2.png", "static/img/imgLoginPage2.png","static/img/JEEITest2.jpeg"],
-        "themes":["Cryptographie","Algorithmie", "Cybersecurite","Cryptographie","Algorithmie", "Cybersecurite","Cryptographie","Algorithmie", "Cybersecurite","Cryptographie"],
-        "id":[502,785,893,1058,17,526,854,8962,2562,455]
-    }
-    if mesJEEI: #si mesJEEI n'est pas vide
-        if request.args.get("pagination"):
-            pagination = int(request.args.get("pagination"))
-            borneInf=(pagination-1)*4
-        else:
-            pagination =1
-        borneInf=(pagination-1)*4
-        borneSup=pagination*4-1
-        listeMesJEEIAEnvoyer=function_extractionSousMatrice4Cartes(mesJEEI,borneInf,borneSup)
-        print("Liste qui part2")
-        print(listeMesJEEIAEnvoyer)
-        listeJsonifiee= jsonify(listeMesJEEIRecue=listeMesJEEIAEnvoyer)
-        print(type(listeJsonifiee))
-        return listeJsonifiee

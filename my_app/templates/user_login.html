@@ -24,18 +24,33 @@
                     <div class="form-group"> <!-- formulaire-->
                         
                         {{ formulaireLogin.csrf_token }}<!-- sécurité-->
-                        <div class="formulaire-row">{{ formulaireLogin.username.label }} 
+                        <div class="formulaire-row">
+                            {{ formulaireLogin.username.label }} 
+                        </div>
                     
-                        {{ formulaireLogin.username(size=20, class='formulaire-control', placeholder="Utilisateur") }}</div><!-- 200=taille champs reponse-->
-                        
-                        <div class="formulaire-row">{{ formulaireLogin.password.label }} 
+                        <div> 
+                            {{ formulaireLogin.username(size=20, class='formulaire-control', placeholder="Utilisateur") }}
+                        </div><!-- 200=taille champs reponse-->
+                        <Br>
+                        <div class="formulaire-row">
+                            {{ formulaireLogin.password.label }} 
+                        </div>
                     
-                        {{ formulaireLogin.password(size=20, class='formulaire-control', placeholder="Mot de Passe") }}</div>
+                        <div>
+                            {{ formulaireLogin.password(size=20, class='formulaire-control', placeholder="Mot de Passe") }}
+                        </div>
                     </div>
                     
                     <div class="btnLogin"> 
-                        <div class="formulaire-row ">{{ formulaireLogin.submit (class='btn btn-warning')}}</div><!-- pour afficher le bouton-->
-                        <button type="button" class="btn btn-secondary" onclick="chargementFormulaireInscription()"> Inscription</button>
+                        <div class="formulaire-row ">
+                            {{ formulaireLogin.submit (class='btn btn-warning')}}
+                        </div><!-- pour afficher le bouton-->
+                        <div> 
+                            <button type="button" class="btn btn-secondary" onclick="chargementFormulaireInscription()">
+                                    Inscription
+                            </button>
+                        </div>
+                   
                     </div>
                     
                 
@@ -47,7 +62,7 @@
 
             <a class="lienHypertexte" href="http://127.0.0.1:5000/motDePasseOublie">Mot de passe oublié?</a>
     
-</div>     
+    </div>     
 </div>
 
 <div><!-- si il y a une erreur déclenchée sur base des objets formulaires d'inscription-->

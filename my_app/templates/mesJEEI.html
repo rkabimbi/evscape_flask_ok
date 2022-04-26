@@ -13,8 +13,12 @@
 {% block body %}
 <body onload="changerImageFond()"> </body>
 
-
-    
+    <row>
+        <div class="ajoutMonJEEI"> 
+            <a class="btn btn-warning" href="http://127.0.0.1:5000/specificationMesJEEI" role="button">Creer Nouveau Jeu d'Evasion </a>
+        </div>
+    </row>
+     <!-- Les cartes-->
     <row>
         <div class="row composantMesJEEI" id="composantMesJEEI"> 
 
@@ -30,12 +34,12 @@
         </div>
     </row>  
 
+    <!-- Pager-->
     <row> 
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
-              
                 {%  for numPager in range(1,nbrPagesTotal+1) %} 
-                    <li class="page-item"><a class="page-link" onclick="fonction_affichageMesJEEI({{numPager}},{{listeMesJEEI}})">{{numPager}}</a></li>  
+                    <li class="page-item"><a class="page-link" onclick="fonction_affichageMesJEEI({{numPager}},{{listeMesJEEI}},{{nbrPagesTotal}},{{nbrJEEI}})">{{numPager}}</a></li>  
                 {% endfor %}
             </ul>
         </nav>

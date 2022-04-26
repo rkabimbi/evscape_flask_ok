@@ -1,104 +1,49 @@
-/*
-function fonction_Pagination(numPagination,mesJEEI)
-{
-    console.log("fonction_Pagination - page :"+numPagination)
-    console.log(mesJEEI)
-    //destructuring du JSON
-        const{noms,auteurs,nbrExperimentations,themes,id,img}=mesJEEI
-        console.log("Données reçues mesJEEI")
-        console.log(noms)
-        console.log(auteurs)
-        console.log(nbrExperimentations)
-        console.log(themes)
-        console.log(id)
-        console.log(img)
-
-    
-    
-    //calcul des bornes
-        let borneInfIntervalleListeJEEI=(numPagination-1)*4
-        let borneSupIntervalleListeJEEI=numPagination*4-1
-
-        
-
-    //remplacer dans la page HTML avec les valeurs qu'il faut
-        
-        let codeHTML=""
-
-        for(let positionDsJson=borneInfIntervalleListeJEEI;positionDsJson<=borneSupIntervalleListeJEEI;positionDsJson++)
-        {
-            //codeHTML=codeHTML+" {{ macro_MesJEEI.afficherCarteMesJEEI("+mesJEEI+" ,"+positionDsJson+"  ) }}"
 
 
-            codeHTML=codeHTML+"<div class='card cardMesJEEI' >"
-            codeHTML=codeHTML+"<img src=' "+img[positionDsJson]+"' class='card-img-top imgCardMesJEEI'  >"
-            codeHTML=codeHTML+'<div class="card-body">'
-            codeHTML=codeHTML+'<h5 class="card-title"><B> '+noms[positionDsJson]+'</B></h5>'
-            codeHTML=codeHTML+'<p class="card-text">Some quick example text to build on the card title and make up the bulk of the cards content.</p>'
-            codeHTML=codeHTML+'</div> <ul class="list-group list-group-flush">'
-            codeHTML=codeHTML+'<li class="list-group-item"><B> Thème</B> :  '+themes[positionDsJson]+' </li>'
-            codeHTML=codeHTML+'<li class="list-group-item"><B> Statut</B> : Verouillé</li>'
-            codeHTML=codeHTML+'<li class="list-group-item"><B> Nbr Experimentations</B> :'+nbrExperimentations[positionDsJson]+'</li> </ul>'
-            codeHTML=codeHTML+' <div class="card-body"><a class="btn btn-outline-secondary" href="http://127.0.0.1:5000/SpecificationsJEEI?idJEEI='+id[positionDsJson]+'" role="button">Modifier</a>'
-            codeHTML=codeHTML+'<a class="btn btn-outline-warning" href="http://127.0.0.1:5000/ExperimentationJEEI?idJEEI='+id[positionDsJson]+'" role="button">Expérimentation</a>'
-            codeHTML=codeHTML+'<a class="btn btn-outline-success" href="http://127.0.0.1:5000/DataJEEI?idJEEI='+id[positionDsJson]+'" role="button">Data</a>'
-            codeHTML=codeHTML+'    <a class="btn btn-outline-danger" href="http://127.0.0.1:5000/SupprimerMonJEEI?idJEEI='+id[positionDsJson]+'" role="button">Supprimer</a>    </div> </div> '
-
-
-
-        }
-        
-        document.getElementById("composantMesJEEI").innerHTML=codeHTML
-
-
-
-}
-*/
-
-function fonction_pagination(pagination)
-{
-    console.log(pagination)
-
-    //il va envoyer une requête au serveur sur la routes : selectEnigme et va passer via un GET le numHasard et 
-     var xhttp = new XMLHttpRequest();//crée un objet de type XMLHttpRequest
-     let url = new URL('http://127.0.0.1:5000/mesJEEICartes?pagination='+ pagination);//configuration de l'url de la route à emprunter pour communiquer avec la DB. On assignera cette adresse à Xttp à la prochaine ligne de code  
-     xhttp.open("GET", url.toString(), true);
-     xhttp.send()
-     xhttp.onreadystatechange = function()
-     { 
-         if (this.readyState == 4 && this.status == 200) 
-         { 
-             
-             console.log("ok ")
-             fonction_affichageCartes(this.responseText)   
-         }
-     };
-}
-
-function fonction_affichageCartes(responseText)
-{
-    console.log("fonction_affichageCartes");
-    responseText=JSON.stringify(responseText)
-    
-    var fichJsonParse=JSON.parse(responseText);//parsing du fichier JSON envoyé par jsonify
-   // console.log(fichJsonParse)//affichage Liste Enigmes 
-}
-
-
-function fonction_affichageMesJEEI(numPager, listeMesJEEI)
+function fonction_affichageMesJEEI(numPager, listeMesJEEI,nbrPagesTotal,nbrJEEI)
 {
     
     console.log("fonction_affichageMesJEEI")
-    let indexDBSol=(numPager-1)*4 //le premier index de DB qu'il va afficher (pour qu'on ajoute ensuite 1,2,3,4 et qu'on puisse donc afficher ceux qui se suivent dans la db)
+    let indexDBSol=(numPager-1)*4 //le premier index de DB qu'il va afficher (pour qu'on ajoute ensuite 1,2,3,4 et qu'on puisse donc afficher ceux qui se suivent dans la db)...en gros c'est le plus bas de la liste de 4 JEEI qui seront affichés
     console.log(indexDBSol)
-    
-    for(let i=0;i<4;i++)
+    let nbrCarteAAfficher =4
+
+    //regler le probleme de la dernière page qui peut contenir moins de 4 elements
+    if(numPager==nbrPagesTotal)//si on est à la dernière page
     {
-        console.log("element de base :")
-        console.log(document.getElementById("nomMesJEEI"+i).innerHTML)
-        console.log("element de remplacement")
-        console.log(listeMesJEEI.noms[(indexDBSol+i)])
+        nbrCarteAAfficher=nbrJEEI%4 //nbr de JEEI modulo 4 donne le reste d'elements qu'il faut afficher
+    }    
+  
+    //on remplace les elements dynamique de chaque carte par les nouvelles valeurs en lien avec le pager
+    for(let i=0;i<nbrCarteAAfficher;i++)
+    {
+        console.log("page")
+        console.log(listeMesJEEI.img[(indexDBSol+i)])
+        document.getElementById("carteMesJEEI"+i).style.visibility = "visible";//si je mets pas ca. Quand on passe de la dernière à une page avant ca n'affiche plus tout car ca reste invisible
         document.getElementById("nomMesJEEI"+i).innerHTML=listeMesJEEI.noms[(indexDBSol+i)]
+        document.getElementById("imgMesJEEI"+i).innerHTML=listeMesJEEI.img[(indexDBSol+i)]
+        document.getElementById("themeMesJEEI"+i).innerHTML=listeMesJEEI.themes[(indexDBSol+i)]
+        document.getElementById("statutMesJEEI"+i).innerHTML=listeMesJEEI.statuts[(indexDBSol+i)]
+        document.getElementById("nbrExperimentationsMesJEEI"+i).innerHTML=listeMesJEEI.nbrExperimentations[(indexDBSol+i)]
     }
+    
+    //regler le probleme de la dernière page qui peut contenir moins de 4 elements (suite)
+    if(numPager==nbrPagesTotal)//si on est à la dernière page
+    {
+        for(let i=3;i>=nbrCarteAAfficher;i--)
+        {
+
+            document.getElementById("carteMesJEEI"+i).style.visibility = "hidden";
+        }
+    }
+    
+
+
+}
+
+//redirection vers la route de notre choix (j'ai du faire ca pour rendre ma carte cliquable)
+function redicrectionVers(adresseRedicrection)
+{
+    location.href = adresseRedicrection;
 }
 

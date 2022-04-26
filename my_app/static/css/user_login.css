@@ -22,7 +22,7 @@
     align-items: center;
 
     justify-content: center;
-    background-color: aqua;
+  
 
   
     
@@ -32,9 +32,12 @@
     flex-wrap: wrap ;
     display : flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    border-radius: 15px;
+    align-items:center;
+    justify-content: space-evenly;
+    
+    width: 250px;
+  
+   
 }
 
 .titreComposantLogin{
@@ -58,4 +61,7 @@
    
 
 }
+
+
+
 

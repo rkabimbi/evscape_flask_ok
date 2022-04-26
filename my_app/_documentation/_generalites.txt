@@ -1,0 +1,3 @@
+getElementById doit être utilisé juste calculer des choses dynamiquement en javascript et les afficher
+
+xttp m'en servir juste pour envoyer les modifications faites en front vers la DB et rien d'autres (pas pour reconstruire des pages)

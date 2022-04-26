@@ -1,0 +1,14 @@
+mesJEEI :
+
+//Routes
+
+Renvoi tous les JEEI de la DB relatif à l'utilisateur
+
+
+//mesJEEI.html 
+
+affiche de manière fixe 4 cartes via une macro qui est un html de carte type 
+
+En dessous on a la pager que quand on clique il lance une fonction javascript qui ca changer les elements 
+des cartes grace à getElementById 
+

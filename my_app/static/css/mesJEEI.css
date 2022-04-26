@@ -28,10 +28,44 @@
     margin: 15px;
     box-shadow: 1px 1px 12px rgb(171, 171, 171);
     padding: 5px;
+
+    border: 5px solid #ffffff;
+    border-radius: 12px;
+    
+    transition: transform .2s;/*temps transition de mon hoover*/
+
+    cursor: pointer;  /*afficher doigt*/  
  
 
 
 }
 
+.cardMesJEEI:hover{
+    -ms-transform: scale(1.05); /* IE 9 */
+    -webkit-transform: scale(1.05); /* Safari 3-8 */
+    transform: scale(1.05);
+    }
 
 
+.ajoutMonJEEI{
+    flex-wrap: wrap ;
+    display : flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 15px;
+
+}
+
+.boutonsCarte{
+    flex-wrap: wrap ;
+    display : flex;
+    flex-direction: row;
+    align-items:center;
+    justify-content: space-evenly;
+}
+
+
+.pagination{
+    padding: 25px;
+}
