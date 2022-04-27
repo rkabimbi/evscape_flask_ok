@@ -65,5 +65,10 @@
 
 
 .cadreSuperieurLogin{
-    
+    flex-wrap: wrap ;
+    display : flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* pour dire que la taille prend 100%du viewport*/
 }

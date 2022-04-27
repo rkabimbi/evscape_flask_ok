@@ -1,11 +1,7 @@
 body {
     
     padding: 0.5rem;
-    flex-wrap: wrap ;
-    display : flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    
     background: rgb(0, 0, 0);
     min-height: 100vh; /* pour dire que la taille prend 100%du viewport*/
     background-image:url('../img/imgLoginPage2.png') ;
@@ -27,5 +23,10 @@ body {
 
 .lienHypertexte{
     color: grey;
+}
+
+.flash{
+  
+    margin-top: 25px;
 }
 

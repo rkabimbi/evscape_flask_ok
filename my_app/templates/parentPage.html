@@ -10,7 +10,7 @@
 
     <body id="body">
         <!-- MENU -->
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top ">
             <ul class="nav"><!-- ul : liste non ordonnée-->
                 <a class="navbar-brand" href="/">Evscape</a><!-- Un bouton "Logo"-->
                 <li class="nav-item"><a class="nav-link active " href="/aPropos">A propos</a></li>
@@ -21,6 +21,7 @@
                     <li class="nav-item"><a class="nav-link active" href="/Logout">Se déconnecter </a></li>
                 {%endif%}
             </ul>
+            
         </nav>
        
 
@@ -28,23 +29,26 @@
 
         <!-- affichage des erreurs flash-->
         <div class="container">
-          <div class="p-4">
-            {% if form is defined and form.errors is defined %}
-              {% for field, errors in form.errors.items() %}
-                <div class="alert alert-danger">
-                    {{ form[field].label }} {{ ', '.join(errors) }}
+            <row>
+
+                <div class="p-4 flash">
+                    {% if form is defined and form.errors is defined %}
+                    {% for field, errors in form.errors.items() %}
+                        <div class="alert alert-danger">
+                            {{ form[field].label }} {{ ', '.join(errors) }}
+                        </div>
+                        {% endfor %}
+                    {%endif %}
+                    {% with messages = get_flashed_messages( with_categories=true) %}
+                        {% if messages %}
+                            {% for c, m in messages %}
+                                <div class="alert alert-{{ c }}">{{ m }}</div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                    
                 </div>
-                {% endfor %}
-            {%endif %}
-            {% with messages = get_flashed_messages( with_categories=true) %}
-                {% if messages %}
-                    {% for c, m in messages %}
-                        <div class="alert alert-{{ c }}">{{ m }}</div>
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
-            
-          </div>
+            </row>
         </div>
 
 
