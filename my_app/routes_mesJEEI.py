@@ -44,7 +44,8 @@ from datetime import date
 @app.route("/mesJEEI", methods=['GET', 'POST'])
 @login_required
 def fonction_mesJEEI():
-    #Step1 - Rechercher dans DB que tous les JEEI propres à l'utilisateurs connectés 
+    #Step1 - Rechercher dans DB que tous les JEEI propres à l'utilisateurs connectés. Quand on dit PROPRES càd ceux qu'il a crée ou ceux
+    # pour lesquels il a fait une experimentation!!! ATTENTION DONC
 
     #...
 

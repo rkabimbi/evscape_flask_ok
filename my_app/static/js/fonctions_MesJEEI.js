@@ -36,7 +36,7 @@ function fonction_affichageMesJEEI(numPager, listeMesJEEI,nbrPagesTotal,nbrJEEI)
             document.getElementById("carteMesJEEI"+i).style.visibility = "hidden";
         }
     }
-    
+    window.top.window.scrollTo(0,0)//permet de revenir en haut de la page (sinon ca reste bloqué sur le pager-->pas top)
 
 
 }

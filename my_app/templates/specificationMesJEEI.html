@@ -1,6 +1,7 @@
 <head>
-    <link href="/static/css/mesJEEI.css" rel="stylesheet"><!-- idem-->
-    {% import "macros/macro_MesJEEI.html" as macro_MesJEEI %}<!-- import de macro. Comme ça c'est dispo pour toutes les pages filles -->
+ 
+    <link href="/static/css/specificationMesJEEI.css" rel="stylesheet"><!-- idem-->
+    {% import "macros/macro_specificationMesJEEI.html" as macro_specificationMesJEEI %}<!-- import de macro. Comme ça c'est dispo pour toutes les pages filles -->
 </head>
 
 <!-- herite de main (de tout sauf les blocks (donc le menu)) -->
@@ -14,11 +15,31 @@
 <body onload="changerImageFond()"> </body>
 
 
-CREATION D'UN JEEI
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="#">Active</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link disabled">Disabled</a>
+        </li>
+    </ul>
+
+
+
+
+
+
 
     </div>
-     <script src="{{ url_for('static',filename='js/fonctions_MesJEEI.js')}}"></script>
+     <script src="{{ url_for('static',filename='js/fonctions_specificationMesJEEI.js')}}"></script>
      <script src="{{ url_for('static',filename='js/fonctions_flux.js')}}"></script> <!-- Laisser ca partout - besoin pour mon hack de fond-->
+     
     </div>
     
 {% endblock %}
