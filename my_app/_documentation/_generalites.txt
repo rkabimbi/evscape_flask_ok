@@ -1,3 +1,13 @@
 getElementById doit être utilisé juste calculer des choses dynamiquement en javascript et les afficher
 
 xttp m'en servir juste pour envoyer les modifications faites en front vers la DB et rien d'autres (pas pour reconstruire des pages)
+
+
+
+Pour DB
+
+Ne pas oublier d'importer du côté où il y a la FK le models de l'autre.
+Prendre en model la relation jeei.py et specification.py
+
+
+

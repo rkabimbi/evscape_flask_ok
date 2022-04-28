@@ -14,7 +14,6 @@ import math
 
 from my_app import db #import de la db
 
-from my_app.models.jeei_package.jeei import Jeei
 
 
 
@@ -35,6 +34,11 @@ from datetime import date
 
 #from my_app.models.riddleJSN import EnigmesJsn
 #db.drop_all()
+
+
+from my_app.models.jeei_package.jeei import Jeei
+
+from my_app.models.jeei_package.specification import Specification, Statut, Theme, PublicCible
 
 """
 Pour rappel le fonction de flask c'est qu'à chaque changement il reparcours tt le fichier je pense. Notament pour le login.
@@ -63,7 +67,12 @@ def function_lancementDBFictive():
     db.session.add(utilisateur)#sauve dans la DB
     db.session.commit()
 
-    jeei=Jeei(nom="Descape The Real Deal",img="static/img/imgLoginPage2.png")
+    specification= Specification(nbrJoueursMax=4,nbrJoueursMin=2,budget=500,dureeMinutes=150,statut=Statut.ENCOURS, publicCible=PublicCible.UNIVB,theme=Theme.MATH,scenario="scenario de test",chapitre="chapitre test")
+    db.session.add(specification)#sauve dans la DB
+    db.session.commit()
+
+
+    jeei=Jeei(nom="Descape The Real Deal",img="static/img/imgLoginPage2.png",descriptif="le meilleur EG de tous les temps",fk_SpecificationId=1)
     db.session.add(jeei)#sauve dans la DB
     db.session.commit()
 

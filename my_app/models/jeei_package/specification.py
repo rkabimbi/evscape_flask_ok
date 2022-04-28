@@ -1,3 +1,4 @@
+from collections import UserList
 from flask_login import UserMixin
 from my_app import login_manager
 from my_app import db #importe l'objet DB cree dans le init.py
@@ -8,34 +9,61 @@ from my_app import login_manager # A NE PAS OUBLIER
 from sqlalchemy import Table, Column, Integer, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
+import enum
+
+
+class PublicCible(enum.Enum):
+    UNIVB = "Baccalaureat"
+    UNIVM = "Master"
+    SECSUP = "Secondaire superieur"
+    SECINF = "Secondaire inférieur"
+    PRIM = "Primaire"
+
+class Theme(enum.Enum):
+    ALGO = "Algorithmie"
+    PROG = "Programmation"
+    SEC = 'CyberSecurité'
+    MATH = "Mathématique"
+    SE = "Ingenirie Logiciel"
+
+class Statut(enum.Enum):
+    ENCOURS = "En cours"
+    PRET ="Pret"
 
 
 #on crée une table d'Enigmes
-class User(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethodes relatives aux login et l'autre pour les DB
-    __tablename__ = 'User' #pour renomr la table "enigme""
+class Specification(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethodes relatives aux login et l'autre pour les DB
+    __tablename__ = 'Specification' #pour renomr la table "enigme""
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True)
-    password = db.Column(db.String(250), nullable=False)
-    dateCreation= db.Column(db.Date, nullable=True)
-    #admin = db.Column(db.Boolean, nullable=False)
-    firstname = db.Column(db.String(30), nullable=False)
-    lastname = db.Column(db.String(30), nullable=False)
- 
-  
+    nbrJoueursMin=db.Column(db.Integer,default=1)
+    nbrJoueursMax=db.Column(db.Integer,default=1)
+    budget=db.Column(db.Float,default=0)
+    dureeMinutes=db.Column(db.Integer,default=0)
+    scenario = db.Column(db.Text(),nullable=True)
+    publicCible =db.column(db.Enum(PublicCible))
+    theme =db.column(db.Enum(Theme))
+    chapitre = db.Column(db.String(120),nullable=True)
+    statut =db.column(db.Enum(Theme))
+    rel_Jeei = relationship("Jeei", backref='Specification', uselist=False)#backref = la manière dont c'est appelé dans l'autre table
+    
+
 
     #score=db.Column(db.Integer,default=0)
     #r_enigme=db.relationship('Enigmes', backref=db.backref('auteur', lazy=True))#on dit que la relation c'est avec la classe Enigmes 
     
     
-    def __init__(self, username, firstname, lastname,password,email):
+    def __init__(self, nbrJoueursMin,nbrJoueursMax,budget,dureeMinutes,scenario,publicCible,theme,chapitre,statut):
 
-        self.username = username
-        self.email = email
-        self.password = password
-        self.firstname = firstname
-        self.lastname = lastname
-        self.dateCreation= datetime.today() 
+        self.nbrJoueursMax=nbrJoueursMax
+        self.nbrJoueursMin=nbrJoueursMin
+        self.budget=budget
+        self.dureeMinutes=dureeMinutes
+        self.scenario=scenario
+        self.publicCible=publicCible
+        self.theme=theme
+        self.chapitre=chapitre
+        self.statut=statut
+        #self.key_Jeei=key_Jeei
     
 
 
@@ -44,15 +72,10 @@ class User(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethodes relativ
     
     
     def __repr__(self):#toString
-        return "( username = %s, firstname = %s , lastname=%s, pwd=%s,email=%s,dateCreation=%s)\n" % ( self.username, self.firstname,self.lastname,self.password,self.email,self.dateCreation)
+        return "( nbrJoueursMax = %s, nbrJouersMin = %s , dureeMinutes=%s, scenario=%s,theme=%s,statut=%s)\n" % ( self.nbrJoueursMax,self.nbrJoueursMin,self.dureeMinutes,self.scenario,self.theme,self.statut)
 
 
 
 
 db.create_all()#impératif!!!!
 
-
-# callback to reload the user object
-@login_manager.user_loader
-def load_user(userid):
-    return User.query.get(int(userid))

@@ -26,17 +26,14 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime, date
 
 from flask import json, jsonify
-
-from my_app.models.jeei_package.jeei import Jeei
-
-
-
 from datetime import date
+
 #from dateutil.relativedelta import *#pour calculer age
 
 #from my_app.models.riddleJSN import EnigmesJsn
 #db.drop_all()
-
+from my_app.models.jeei_package.jeei import Jeei
+from my_app.models.jeei_package.specification import Specification, Statut, Theme, PublicCible
 
 
 
@@ -44,10 +41,12 @@ from datetime import date
 @login_required
 def fonction_specificationMesJEEI():
     print("specificationMesJEEI")
-    """" 
+    
     #recuperation ID qui est communiqué depuis le HTML
+    print("id recuperé de HTML :", request.args.get("idJEEI") )
     idJEEIAmodifier = request.args.get("idJEEI")
     monJEEIAEnvoyer=None
+    specification=None
     if idJEEIAmodifier: #si un id est renseigné (ca veut dire qu'on a cliqué uncarte)
         #chercher dans DB
         user = User.query.filter_by(username=formLogin.username.data).first()
@@ -56,13 +55,16 @@ def fonction_specificationMesJEEI():
 
     else: #si pas d'id communiqué ca veut dire qu'on a cliqué le bouton jaune (creer un nouveau)
         #creer un nouveau JEEI dans la DB
-
+        monJEEIAEnvoyer = Jeei.query.filter_by().first()
+        #je vais chercher la spécification liée au JEEI
+        specification=Jeei.query.filter_by(id=monJEEIAEnvoyer.fk_SpecificationId).first()
         #màj monJEEIAENVOYER
     
-    """
-    jeei = Jeei.query.filter_by().first()
-    print(jeei)
-    return render_template("specificationMesJEEI.html",currentUser=current_user)
+
+    
+    print(monJEEIAEnvoyer)
+    print(specification)
+    return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEIAEnvoyer,specification=specification)
 
 
 
