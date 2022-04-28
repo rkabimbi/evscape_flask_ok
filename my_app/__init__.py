@@ -30,12 +30,8 @@ login_manager.login_message_category = "info"
 login_manager.login_message = "Vous ne pouvez pas acceder à cette page sans vous logguer. Veuillez taper un mdp/user correct" #si jamais on essaye d'acceder à une page direct ce message 'flash" apparaitra
 login_manager.session_protection = 'strong'
 
-
-
-
-
-
-
+#pour avoir plusieurs fichier routes!!!!
 from my_app import routes
 from my_app import routes_flux
 from my_app import routes_mesJEEI
+from my_app import routes_specificationMesJEEI

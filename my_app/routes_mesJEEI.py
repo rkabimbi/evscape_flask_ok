@@ -79,12 +79,3 @@ def fonction_mesJEEI():
 
 
 
-
-@app.route("/specificationMesJEEI", methods=['GET', 'POST'])
-@login_required
-def fonction_specificationMesJEEI():
-    print("specificationMesJEEI")
-    return render_template("specificationMesJEEI.html",currentUser=current_user)
-
-
-

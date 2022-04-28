@@ -14,6 +14,8 @@ import math
 
 from my_app import db #import de la db
 
+from my_app.models.jeei_package.jeei import Jeei
+
 
 
 from my_app.forms.loginForm import FormLogin
@@ -59,6 +61,10 @@ def function_lancementDBFictive():
     db.session.commit()
     utilisateur=User(username="BSpears",firstname="Britney",lastname="Spears",password=generate_password_hash("rootrootroot", "sha256"),email="brittney@yahoo.com")
     db.session.add(utilisateur)#sauve dans la DB
+    db.session.commit()
+
+    jeei=Jeei(nom="Descape The Real Deal",img="static/img/imgLoginPage2.png")
+    db.session.add(jeei)#sauve dans la DB
     db.session.commit()
 
 
