@@ -36,7 +36,7 @@
                 <div class="p-4 flash">
                     {% if form is defined and form.errors is defined %}
                     {% for field, errors in form.errors.items() %}
-                        <div class="alert alert-danger">
+                        <div class="alert alert-danger ">
                             {{ form[field].label }} {{ ', '.join(errors) }}
                         </div>
                         {% endfor %}

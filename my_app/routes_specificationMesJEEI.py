@@ -67,6 +67,8 @@ def fonction_specificationMesJEEI():
         db.session.add(monJEEIAEnvoyer)#sauve dans la DB
         db.session.commit()
         newJeeiId=Jeei.query.order_by(Jeei.id.desc()).first().id
+        flash("Votre Jeu d'Evasion a été crée [id :"+str(newJeeiId)+ "]. Bonne évaluation!!!", 'success')
+
 
         
     print(monJEEIAEnvoyer)
