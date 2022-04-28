@@ -9,7 +9,7 @@
       <img id={{"imgMesJEEI"+indexCarteAffichage}}  src={{listeMesJEEI.img[indexJEEIDB]}} class="card-img-top imgCardMesJEEI"  alt="...">
       <div class="card-body">
         <h5 id={{"nomMesJEEI"+indexCarteAffichage}} class="card-title"><B> {{listeMesJEEI.noms[indexJEEIDB]}}</B></h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <p id={{"descriptifMesJEEI"+indexCarteAffichage}} class="card-text">{{listeMesJEEI.descriptifs[indexJEEIDB]}}</p>
       </div>
       <ul class="list-group list-group-flush">
         <li id={{"themeMesJEEI"+indexCarteAffichage}} class="list-group-item"><B> Thème</B> :  {{listeMesJEEI.themes[indexJEEIDB]}}</li>

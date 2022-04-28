@@ -3,6 +3,8 @@ getElementById doit être utilisé juste calculer des choses dynamiquement en ja
 xttp m'en servir juste pour envoyer les modifications faites en front vers la DB et rien d'autres (pas pour reconstruire des pages)
 
 
+Quand je creer une nouvelle routes ne pas oublier d'aller l'ajouter dans __init__
+
 
 Pour DB
 

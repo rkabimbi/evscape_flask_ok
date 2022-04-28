@@ -35,7 +35,8 @@ from datetime import date
 #from my_app.models.riddleJSN import EnigmesJsn
 #db.drop_all()
 
-
+from my_app.models.jeei_package.jeei import Jeei
+from my_app.models.jeei_package.specification import Specification, Statut, Theme, PublicCible
 
 
 
@@ -44,6 +45,12 @@ from datetime import date
 @app.route("/mesJEEI", methods=['GET', 'POST'])
 @login_required
 def fonction_mesJEEI():
+
+    #Extraction des données (on gagne en manipulation et rapidité en chargeant tt d'abord)
+    mesJEEI=Jeei.query.all()
+    specifications= Specification.query.all()
+
+
     #Step1 - Rechercher dans DB que tous les JEEI propres à l'utilisateurs connectés. Quand on dit PROPRES càd ceux qu'il a crée ou ceux
     # pour lesquels il a fait une experimentation!!! ATTENTION DONC
 
@@ -54,16 +61,9 @@ def fonction_mesJEEI():
     #...
     #ATTENTION lors de la conversion important de garder les noms utilisés ci-dessous en en-tête sinon ca va bugger
 
-    mesJEEI={  
-        "noms":["Descape1","Descape2","Descape3","Descape4","Descape5","Descape6","Descape7","Descape8","Descape9"],
-        "auteurs":["Rudy","Rudy","Rudy","Rudy","Rudy","Rudy","Rudy","Rudy","Rudy"],
-        "nbrExperimentations":[0,18,2,85,19,0,64,0,2121],
-        "img":["static/img/imgLoginPage2.png", "static/img/imgLoginPage2.png","static/img/JEEITest1.jpeg","static/img/imgLoginPage2.png", "static/img/imgLoginPage2.png","static/img/JEEITest2.jpeg","static/img/JEEITest1.jpeg","static/img/imgLoginPage2.png", "static/img/JEEITest1.jpeg"],
-        "themes":["Cryptographie","Algorithmie", "Cybersecurite","Cryptographie","Algorithmie", "Cybersecurite","Cryptographie","Algorithmie", "Cybersecurite"],
-        "id":[502,785,893,1058,17,526,854,8962,2562],
-        "statuts":["verrouille", "ouvert", "ouvert", "ouvert", "verouille","verrouille", "ouvert", "ouvert", "ouvert"]
-    }
     
+    mesJEEI=fonction_conversionSQLDICT(mesJEEI,specifications)
+  
    
     if mesJEEI: #si mesJEEI n'est pas vide
         print("liste JEEI envoyée vers front")
@@ -79,3 +79,20 @@ def fonction_mesJEEI():
 
 
 
+def fonction_conversionSQLDICT(mesJEEI,specifications):
+    print(mesJEEI)
+    res ={"noms":[],"auteurs":[],"nbrExperimentations":[],"img":[],"themes":[],"id":[],"statuts":[],"descriptifs":[]}
+    i=0
+    for JEEI in mesJEEI:
+        i=i+1#à effacer...c'est juste pour les experiemntation le temps d'avoir une Db complete
+        res["noms"].append(JEEI.nom)
+        res["auteurs"].append("Rudy")
+        res["nbrExperimentations"].append(i+10)
+        #res["themes"].append((specifications[JEEI.fk_SpecificationId-1].theme).value)#-1 car la liste commence à zero et .value c'est pour recuperer le string de l'enum
+        res["id"].append(JEEI.id)
+        res["img"].append(JEEI.img)
+        res["descriptifs"].append(JEEI.descriptif)
+        #res["noms"].append((specifications[JEEI.fk_SpecificationId-1].statut).value)#-1 car la liste commence à zero
+    print(res)
+    return res
+        

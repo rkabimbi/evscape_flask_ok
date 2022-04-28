@@ -49,37 +49,6 @@ comme ca quand mon formulaire de wtf est validé ca va repasser par la racine
 
 
 
-#####################################################
-#REMPLIASSAGE DB (à effacer à la fin)
-#####################################################
-
-def function_lancementDBFictive():
-    db.drop_all()
-    db.create_all()
-
-    utilisateur=User(username="rootroot",firstname="Brandon",lastname="Walsh",password=generate_password_hash("rootrootroot", "sha256"),email="BrandoWalsh@BeverlyHills90210.com")
-    db.session.add(utilisateur)#sauve dans la DB
-    db.session.commit()
-    utilisateur=User(username="prudence",firstname="Nick",lastname="Carter",password=generate_password_hash("rootrootroot", "sha256"),email="NickCarter@BackstreeBoys.com")
-    db.session.add(utilisateur)#sauve dans la DB
-    db.session.commit()
-    utilisateur=User(username="BSpears",firstname="Britney",lastname="Spears",password=generate_password_hash("rootrootroot", "sha256"),email="brittney@yahoo.com")
-    db.session.add(utilisateur)#sauve dans la DB
-    db.session.commit()
-
-    specification= Specification(nbrJoueursMax=4,nbrJoueursMin=2,budget=500,dureeMinutes=150,statut=Statut.ENCOURS, publicCible=PublicCible.UNIVB,theme=Theme.MATH,scenario="scenario de test",chapitre="chapitre test")
-    db.session.add(specification)#sauve dans la DB
-    db.session.commit()
-
-
-    jeei=Jeei(nom="Descape The Real Deal",img="static/img/imgLoginPage2.png",descriptif="le meilleur EG de tous les temps",fk_SpecificationId=1)
-    db.session.add(jeei)#sauve dans la DB
-    db.session.commit()
-
-
-#lancement de la fonction
-function_lancementDBFictive()
-
 
 
 ######################################################

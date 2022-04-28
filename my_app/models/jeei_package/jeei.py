@@ -35,7 +35,7 @@ class Jeei(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethodes relativ
     
     
     def __repr__(self):#toString
-        return "( id = %s, nom = %s , img=%s, descriptif=%s,dateCreation=%s,fk_specification=%s)\n" % ( self.id, self.nom,self.img,self.descriptif,self.dateCreation,self.fk_SpecificationId)
+        return "( id = %s, nom = %s , img=%s, descriptif=%s,dateCreation=%s,fk_SpecificationId=%s)\n" % ( self.id, self.nom,self.img,self.descriptif,self.dateCreation,self.fk_SpecificationId)
 
 
 

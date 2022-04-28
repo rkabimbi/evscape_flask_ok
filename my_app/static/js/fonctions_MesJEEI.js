@@ -24,6 +24,7 @@ function fonction_affichageMesJEEI(numPager, listeMesJEEI,nbrPagesTotal,nbrJEEI)
         document.getElementById("imgMesJEEI"+i).innerHTML=listeMesJEEI.img[(indexDBSol+i)]
         document.getElementById("themeMesJEEI"+i).innerHTML=listeMesJEEI.themes[(indexDBSol+i)]
         document.getElementById("statutMesJEEI"+i).innerHTML=listeMesJEEI.statuts[(indexDBSol+i)]
+        document.getElementById("descriptifMesJEEI"+i).innerHTML=listeMesJEEI.descriptifs[(indexDBSol+i)]
         document.getElementById("nbrExperimentationsMesJEEI"+i).innerHTML=listeMesJEEI.nbrExperimentations[(indexDBSol+i)]
     }
     
