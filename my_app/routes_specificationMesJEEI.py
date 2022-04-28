@@ -47,21 +47,28 @@ def fonction_specificationMesJEEI():
     idJEEIAmodifier = request.args.get("idJEEI")
     monJEEIAEnvoyer=None
     specification=None
-    if idJEEIAmodifier: #si un id est renseigné (ca veut dire qu'on a cliqué uncarte)
+    if idJEEIAmodifier: #si un id est renseigné (ca veut dire qu'on a cliqué uncarte et donc on doit aller chercher le JEEI en question)
         #chercher dans DB
-        user = User.query.filter_by(username=formLogin.username.data).first()
-
-        #màj monJEEIAENVOYER   
-
-    else: #si pas d'id communiqué ca veut dire qu'on a cliqué le bouton jaune (creer un nouveau)
-        #creer un nouveau JEEI dans la DB
-        monJEEIAEnvoyer = Jeei.query.filter_by().first()
+        monJEEIAEnvoyer = Jeei.query.filter_by(id=idJEEIAmodifier).first()
         #je vais chercher la spécification liée au JEEI
         specification=Jeei.query.filter_by(id=monJEEIAEnvoyer.fk_SpecificationId).first()
-        #màj monJEEIAENVOYER
-    
+ 
 
-    
+    else: #si pas d'id communiqué ca veut dire qu'on a cliqué le bouton jaune (creer un nouveau)
+        #creer un nouveau Specification  qui soit vierge
+        specification= Specification(None,None,None,None,None,None,None,None,None)
+        db.session.add(specification)#sauve dans la DB
+        db.session.commit()
+        #je recupere le numero d'id de la spécification que je viens de créer
+        newSpecificationId=Specification.query.order_by(Specification.id.desc()).first().id
+        print("dernier eleent =",newSpecificationId)
+        #je creer un JEEI et renseigne à quel specification il est lié (celle que je viens de creer)
+        monJEEIAEnvoyer=Jeei(None,None,None,fk_SpecificationId=newSpecificationId)
+        db.session.add(monJEEIAEnvoyer)#sauve dans la DB
+        db.session.commit()
+        newJeeiId=Jeei.query.order_by(Jeei.id.desc()).first().id
+
+        
     print(monJEEIAEnvoyer)
     print(specification)
     return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEIAEnvoyer,specification=specification)

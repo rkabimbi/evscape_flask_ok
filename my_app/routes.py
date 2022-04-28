@@ -40,18 +40,8 @@ from my_app.models.jeei_package.jeei import Jeei
 
 from my_app.models.jeei_package.specification import Specification, Statut, Theme, PublicCible
 
-"""
-Pour rappel le fonction de flask c'est qu'à chaque changement il reparcours tt le fichier je pense. Notament pour le login.
-Je pens donc que je dois laisser la racine à la page "home" et juste faire sur le chemin racine que si pas connecté il renvoi la page login!!!!
-comme ca quand mon formulaire de wtf est validé ca va repasser par la racine
-"""
 
 
-
-
-
-
-######################################################
 
 #gere le login
 @app.route("/", methods=['GET', 'POST'])

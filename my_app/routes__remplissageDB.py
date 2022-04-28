@@ -68,22 +68,25 @@ def function_lancementDBFictive():
     db.session.commit()
 
     #CREA De JEEI
-    specification= Specification(nbrJoueursMax=4,nbrJoueursMin=2,budget=500,dureeMinutes=150,statut=Statut.ENCOURS, publicCible=PublicCible.UNIVB,theme=Theme.MATH,scenario="scenario de test",chapitre="chapitre test")
+    specification= Specification(nbrJoueursMax=4,nbrJoueursMin=2,budget=500,dureeMinutes=150, publicCible=PublicCible.MASTER,theme=Theme.MATHEMATIQUE,scenario="scenario de test",chapitre="chapitre test",statut=Statut.ENCOURS)
     db.session.add(specification)#sauve dans la DB
     db.session.commit()
-    specification= Specification(nbrJoueursMax=3,nbrJoueursMin=2,budget=58500,dureeMinutes=120,statut=Statut.ENCOURS, publicCible=PublicCible.PRIM,theme=Theme.SEC,scenario="scenario de test1",chapitre="chiffrement de cesar")
+    specification= Specification(nbrJoueursMax=3,nbrJoueursMin=2,budget=58500,dureeMinutes=120, publicCible=PublicCible.PRIMAIRE,theme=Theme.SECURITEIT,scenario="scenario de test1",chapitre="chiffrement de cesar",statut=Statut.ENCOURS)
     db.session.add(specification)#sauve dans la DB
     db.session.commit()
-    specification= Specification(nbrJoueursMax=8,nbrJoueursMin=1,budget=1500,dureeMinutes=60,statut=Statut.ENCOURS, publicCible=PublicCible.UNIVM,theme=Theme.SE,scenario="scenario de test2",chapitre="Modelisation")
+    specification= Specification(nbrJoueursMax=8,nbrJoueursMin=1,budget=1500,dureeMinutes=60,statut=Statut.PRET, publicCible=PublicCible.SECONDAIRE,theme=Theme.INGENIRIELOGICIEL,scenario="scenario de test2",chapitre="Modelisation")
+
     db.session.add(specification)#sauve dans la DB
     db.session.commit()
-    specification= Specification(nbrJoueursMax=4,nbrJoueursMin=2,budget=50850,dureeMinutes=100,statut=Statut.ENCOURS, publicCible=PublicCible.UNIVB,theme=Theme.ALGO,scenario="scenario de test3",chapitre="preuve")
+    specification= Specification(nbrJoueursMax=4,nbrJoueursMin=2,budget=50850,dureeMinutes=100, publicCible=PublicCible.MASTER,theme=Theme.ALGORITHMIE,scenario="scenario de test3",chapitre="preuve",statut=Statut.ENCOURS)
     db.session.add(specification)#sauve dans la DB
     db.session.commit()
-    specification= Specification(nbrJoueursMax=4,nbrJoueursMin=2,budget=500,dureeMinutes=150,statut=Statut.ENCOURS, publicCible=PublicCible.UNIVB,theme=Theme.MATH,scenario="scenario de test",chapitre="chapitre test")
+    specification= Specification(nbrJoueursMax=4,nbrJoueursMin=2,budget=500,dureeMinutes=150,statut=Statut.PRET, publicCible=PublicCible.BACCALAUREAT,theme=Theme.PROGRAMMATION,scenario="scenario de test",chapitre="chapitre test")
+
     db.session.add(specification)#sauve dans la DB
     db.session.commit()
-    specification= Specification(nbrJoueursMax=18,nbrJoueursMin=2,budget=25800,dureeMinutes=150,statut=Statut.ENCOURS, publicCible=PublicCible.SECINF,theme=Theme.MATH,scenario="scenario de test",chapitre="ce que tu veux")
+    specification= Specification(nbrJoueursMax=18,nbrJoueursMin=2,budget=25800,dureeMinutes=150, publicCible=PublicCible.BACCALAUREAT,theme=Theme.ALGORITHMIE,scenario="scenario de test",chapitre="ce que tu veux",statut=Statut.ENCOURS)
+
     db.session.add(specification)#sauve dans la DB
     db.session.commit()
 

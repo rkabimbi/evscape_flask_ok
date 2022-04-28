@@ -8,7 +8,7 @@ from my_app import login_manager # A NE PAS OUBLIER
 from sqlalchemy import Table, Column, Integer, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
-from my_app.models.jeei_package.specification import Specification, Statut, Theme, PublicCible
+from my_app.models.jeei_package.specification import Specification, Theme, PublicCible, Statut
 
 
 #on crée une table d'Enigmes
@@ -20,7 +20,7 @@ class Jeei(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethodes relativ
     descriptif = db.Column(db.String(140),  nullable=True)
 
     dateCreation= db.Column(db.Date, nullable=False)
-    fk_SpecificationId = db.Column(db.Integer, db.ForeignKey('Specification.id'),nullable=True)#db.foreignkey : c'est l'id de l'autre table et le nom de la table correspond à la back ref
+    fk_SpecificationId = db.Column(db.Integer, db.ForeignKey('Specification.id'),nullable=False)#db.foreignkey : c'est l'id de l'autre table et le nom de la table correspond à la back ref
 
   
     

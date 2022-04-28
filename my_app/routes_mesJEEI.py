@@ -80,19 +80,18 @@ def fonction_mesJEEI():
 
 
 def fonction_conversionSQLDICT(mesJEEI,specifications):
-    print(mesJEEI)
     res ={"noms":[],"auteurs":[],"nbrExperimentations":[],"img":[],"themes":[],"id":[],"statuts":[],"descriptifs":[]}
-    i=0
+
     for JEEI in mesJEEI:
-        i=i+1#à effacer...c'est juste pour les experiemntation le temps d'avoir une Db complete
         res["noms"].append(JEEI.nom)
         res["auteurs"].append("Rudy")
-        res["nbrExperimentations"].append(i+10)
-        #res["themes"].append((specifications[JEEI.fk_SpecificationId-1].theme).value)#-1 car la liste commence à zero et .value c'est pour recuperer le string de l'enum
+        res["nbrExperimentations"].append(10) # en attendant d'avoir les tables qu'il faut
+        res["themes"].append(specifications[JEEI.fk_SpecificationId-1].theme.value)#-1 car la liste commence à zero et .value c'est pour recuperer le string de l'enum
+        print(specifications[JEEI.fk_SpecificationId-1].theme)  
         res["id"].append(JEEI.id)
         res["img"].append(JEEI.img)
         res["descriptifs"].append(JEEI.descriptif)
-        #res["noms"].append((specifications[JEEI.fk_SpecificationId-1].statut).value)#-1 car la liste commence à zero
-    print(res)
+        res["statuts"].append(specifications[JEEI.fk_SpecificationId-1].statut.value)#-1 car la liste commence à zero
+  
     return res
         
