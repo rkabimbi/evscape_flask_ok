@@ -5,8 +5,15 @@
     
 }
 
-.nav-link:hover {
+.nvSousPage:hover {
     cursor:pointer;
     background-color:rgb(231, 231, 231);
+
+
+}
+
+.nvSousPage{
+    margin-right: 15px;
+    padding-right: 15px;
 
 }

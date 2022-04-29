@@ -42,11 +42,11 @@ function fonction_activationBouton(boutonAColorer)
     codeHtml =  document.getElementById(boutonAColorer).innerHTML
     
     //on désactive tous les autres
-    document.getElementById("navLinkListeExperimentations").innerHTML='<a  class="nav-link" onclick="fonction_ListeExperimentations()">Liste Experimentations</a>'
-    document.getElementById("navLinkTest").innerHTML='<a  class="nav-link" onclick="fonction_Test()">Test</a>'
-    document.getElementById("navLinkResultats").innerHTML='<a  class="nav-link" onclick="fonction_Resultats()">Resultats</a>'
-    document.getElementById("navLinkDocumentation").innerHTML='<a  class="nav-link" onclick="fonction_Documentation()">Documentation</a>'
-    document.getElementById("navLinkPresentation").innerHTML='<a  class="nav-link" onclick="fonction_Presentation()">Présentation</a>'
+    document.getElementById("navLinkListeExperimentations").innerHTML='<a  class="nav-link nvSousPage" onclick="fonction_ListeExperimentations()">Liste Experimentations</a>'
+    document.getElementById("navLinkTest").innerHTML='<a  class="nav-link nvSousPage" onclick="fonction_Test()">Test</a>'
+    document.getElementById("navLinkResultats").innerHTML='<a  class="nav-link nvSousPage" onclick="fonction_Resultats()">Resultats</a>'
+    document.getElementById("navLinkDocumentation").innerHTML='<a  class="nav-link nvSousPage" onclick="fonction_Documentation()">Documentation</a>'
+    document.getElementById("navLinkPresentation").innerHTML='<a  class="nav-link nvSousPage" onclick="fonction_Presentation()">Présentation</a>'
     
 
 
@@ -58,19 +58,19 @@ function fonction_activationBouton(boutonAColorer)
     }
     else if (boutonAColorer=="navLinkTest")
     {
-        document.getElementById("navLinkTest").innerHTML='<a  class="nav-link active" onclick="fonction_Test()">Test</a>'
+        document.getElementById("navLinkTest").innerHTML='<a  class="nav-link nvSousPage active" onclick="fonction_Test()">Test</a>'
     }
     else if(boutonAColorer=="navLinkResultats")
     {
-        document.getElementById("navLinkResultats").innerHTML='<a  class="nav-link active" onclick="fonction_Resultats()">Resultats</a>'
+        document.getElementById("navLinkResultats").innerHTML='<a  class="nav-link nvSousPage active" onclick="fonction_Resultats()">Resultats</a>'
     }
     else if(boutonAColorer=="navLinkDocumentation")
     {
-        document.getElementById("navLinkDocumentation").innerHTML='<a  class="nav-link active" onclick="fonction_Documentation()">Documentation</a>'
+        document.getElementById("navLinkDocumentation").innerHTML='<a  class="nav-link nvSousPage active" onclick="fonction_Documentation()">Documentation</a>'
     }
     else if(boutonAColorer=="navLinkPresentation")
     {
-        document.getElementById("navLinkPresentation").innerHTML='<a  class="nav-link active" onclick="fonction_Presentation()">Présentation</a>'
+        document.getElementById("navLinkPresentation").innerHTML='<a  class="nav-link nvSousPage active" onclick="fonction_Presentation()">Présentation</a>'
     }
    
 }
