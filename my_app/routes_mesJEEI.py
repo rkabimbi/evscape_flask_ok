@@ -86,12 +86,14 @@ def fonction_conversionSQLDICT(mesJEEI,specifications):
         res["noms"].append(JEEI.nom)
         res["auteurs"].append("Rudy")
         res["nbrExperimentations"].append(10) # en attendant d'avoir les tables qu'il faut
-        res["themes"].append(specifications[JEEI.fk_SpecificationId-1].theme.value)#-1 car la liste commence à zero et .value c'est pour recuperer le string de l'enum
+        if specifications[JEEI.fk_SpecificationId-1].theme!=None:#si y a pas de value selectionnée par l'utilisateur et qu'on a donc un JEEI sans thème alors ici quand il va faire la fonction .value ca va bugguer
+            res["themes"].append(specifications[JEEI.fk_SpecificationId-1].theme.value)#-1 car la liste commence à zero et .value c'est pour recuperer le string de l'enum
         print(specifications[JEEI.fk_SpecificationId-1].theme)  
         res["id"].append(JEEI.id)
         res["img"].append(JEEI.img)
         res["descriptifs"].append(JEEI.descriptif)
-        res["statuts"].append(specifications[JEEI.fk_SpecificationId-1].statut.value)#-1 car la liste commence à zero
+        if specifications[JEEI.fk_SpecificationId-1].statut!=None:#voir remarque au niveau de "theme"
+            res["statuts"].append(specifications[JEEI.fk_SpecificationId-1].statut.value)#-1 car la liste commence à zero
   
     return res
         
