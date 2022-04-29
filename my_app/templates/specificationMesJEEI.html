@@ -18,21 +18,21 @@
     
 <row>
 <ul class="nav nav-pills">
-    <li class="nav-item">
-      <a class="nav-link active" aria-current="page" href="#">Présentation</a>
+    <li id="navLinkPresentation" class="nav-item">
+      <a  class="nav-link active" aria-current="page" onclick="fonction_Presentation()">Présentation</a>
     </li>
    
-    <li class="nav-item">
-      <a class="nav-link" href="#">Documentation technique</a>
+    <li id="navLinkDocumentation" class="nav-item" >
+      <a  class="nav-link" onclick="fonction_Documentation()">Documentation</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Test</a>
+    <li id="navLinkTest" class="nav-item">
+      <a class="nav-link" onclick="fonction_Test()">Test</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Résultats</a>
+    <li id="navLinkResultats" class="nav-item">
+      <a class="nav-link" onclick="fonction_Resultats()">Résultats</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Liste Experimentations</a>
+    <li id="navLinkListeExperimentations" class="nav-item">
+      <a class="nav-link" onclick="fonction_ListeExperimentations()">Liste Experimentations</a>
     </li>
     <li class="nav-item">
       <a class="nav-link disabled">Disabled</a>
@@ -40,22 +40,8 @@
 </ul>
 </row>
 <row>
-    <div>
-        Remettre les memes boutons que sur la carte : experiementation , effacer (sauf data vu qu'il y a un onglet data)
-         ...on  mettra les data dans la sous page data ...plus facile...c'est aussi là que si qq clique sur l'EG dans le flux il pourra venir voir les resultats individuels. Ca m'evitera de devoir coder trop de page differente.
-        Le resultats en sous page = resultat compilé
-        Les resultats individuels c'est dans la liste des exeperimentations
-
-        Dans test on aura 10 slots pour poser des questions et en dessous de chacune d'elle 4 slots de réponses...ils ont juste à remplirr...easy
-
-        Documentation technique les gens peuvent venir poster des 3 types de documents :
-        - enigmes
-        - indices
-        - préparation technique de la salle 
-        - la structure du jeu (enchainement des enigmes )
-        [ici je ne fais pas de formulaire]
-
-        Niveau Presentation le nom du chercheur qui cree est d'office ecrit et il peut rajouter à la mano d'autres qui ont travaillé avec lui (pas commencer à faire un truc ou je peux faire des recherches de gens...oublie c'est pr un second tour)
+    <div class="sousPageVisible">
+       
     </div>
 </row>
 

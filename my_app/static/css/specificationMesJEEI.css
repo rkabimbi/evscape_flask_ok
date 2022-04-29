@@ -5,3 +5,8 @@
     
 }
 
+.nav-link:hover {
+    cursor:pointer;
+    background-color:rgb(231, 231, 231);
+
+}
