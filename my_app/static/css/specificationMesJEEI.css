@@ -3,11 +3,16 @@
 .nav-pills > li > a.active {
     background-color: #facd19 !important;
     
+
+    
 }
+
+
 
 .nvSousPage:hover {
     cursor:pointer;
     background-color:rgb(231, 231, 231);
+    
 
 
 }
@@ -15,5 +20,22 @@
 .nvSousPage{
     margin-right: 15px;
     padding-right: 15px;
+    font-weight:500;
+    color: rgb(194, 192, 192);
+    
+    
 
+}
+
+
+.formulaireSpecificationMesJEEI{
+    padding-top: 25px;
+    margin-left: 25px;
+    margin-right: 25px;
+
+}
+
+
+input[type="text"]:disabled{
+    background-color:rgb(221, 221, 221);
 }

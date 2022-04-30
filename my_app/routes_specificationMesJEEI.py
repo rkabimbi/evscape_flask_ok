@@ -73,7 +73,26 @@ def fonction_specificationMesJEEI():
         
     print(monJEEIAEnvoyer)
     print(specification)
-    return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEIAEnvoyer,specification=specification)
+    return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEIAEnvoyer,specificationJEEIRecupere=specification)
 
 
 
+@app.route("/sauvegardeTableJeei", methods=['GET', 'POST'])
+@login_required
+def fonction_sauvegardeTableJeei():
+    champs = request.args.get("champs")
+    valeur= request.args.get("valeur")
+    idJEEI= request.args.get("idJEEI")
+
+    monJEEI = Jeei.query.filter_by(id=idJEEI).first()
+    if champs=="nom":
+        monJEEI.nom=valeur
+        db.session.commit()
+    elif champs=="descriptif":
+        monJEEI.descriptif=valeur
+        db.session.commit()
+    
+    
+    #pour confirme que tout s'est bien passe côté front
+    reponse= jsonify(reponse="ok")
+    return reponse

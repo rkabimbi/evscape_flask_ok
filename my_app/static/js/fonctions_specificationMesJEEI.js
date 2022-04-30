@@ -89,14 +89,19 @@ function fonction_activationBouton(boutonAColorer)
 }
 
 
+
 //variables globales pour pouvoir reset ensuite facilement (sinon pas possible de recuperer aprys un style.display="none")
 //en plus comme ça il garde les données du formulaire
-
-    displayDocumentation=document.getElementById("idContenuSousPageDocumentation").style.display
-    displayTest=document.getElementById("idContenuSousPageTest").style.display
-    displayResultats=document.getElementById("idContenuSousPageResultats").style.display
-    displayListeExperimentations=document.getElementById("idContenuSousPageListeExperimentations").style.display
-    displayPresentation= document.getElementById("idContenuSousPagePresentation").style.display
+displayDocumentation=document.getElementById("idContenuSousPageDocumentation").style.display
+displayTest=document.getElementById("idContenuSousPageTest").style.display
+displayResultats=document.getElementById("idContenuSousPageResultats").style.display
+displayListeExperimentations=document.getElementById("idContenuSousPageListeExperimentations").style.display
+displayPresentation= document.getElementById("idContenuSousPagePresentation").style.display
+//comme ca il cache directement tt...sinon il affiche tt et c'est seulement quand je clique le menu qu'il cache ce qu'il faut
+document.getElementById("idContenuSousPageDocumentation").style.display="none"
+document.getElementById("idContenuSousPageTest").style.display="none"
+document.getElementById("idContenuSousPageResultats").style.display="none"
+document.getElementById("idContenuSousPageListeExperimentations").style.display="none"
 
 
 
@@ -149,3 +154,47 @@ function fonction_selectionContenuSousPage(idSousPage)
 
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//chargé de renvoyer vers le BackEnd les données sauvées relatives à la table Jeei
+function fonction_sauvegardeTableJeei(idChamps,idJEEI)
+{
+    console.log("fonction_sauvegarde")
+    console.log("champs :"+idChamps) //obligé de travailler avec l'idDuCamps pour pouvoir aller chercher la valeur à la ligne suivante
+    valeur=document.getElementById(idChamps).value
+    console.log("valeur :"+valeur)
+    console.log("ID "+idJEEI)
+
+    if(idChamps=="idNomMonJEEI")
+    {
+        champs="nom"
+    }
+    else if(idChamps=="idDescriptifMonJEEI")
+    {
+        champs="descriptif"
+    }
+
+
+       
+    var xhttp = new XMLHttpRequest( );
+    let url = new URL('http://127.0.0.1:5000/sauvegardeTableJeei?champs='+ champs+'&valeur='+valeur+'&idJEEI='+idJEEI  );  
+    xhttp.open("GET", url.toString(), true);
+    xhttp.send()
+    xhttp.onreadystatechange = function()
+    { 
+        if (this.readyState == 4 && this.status == 200) 
+        {
+            reponseBackEnd(this.responseText)   
+        }
+    };
+}
+
+function reponseBackEnd(responseText)
+{
+    console.log("reponseBackEnd")
+    var fichJsonParse=JSON.parse(responseText);//parsing du fichier JSON envoyé par jsonify
+    console.log(fichJsonParse)//
+
+    flash_succes='<div class="alert alert-success" role="alert">Sauvé dans la DB </div>' 
+    document.getElementById("idFlash").innerHTML=flash_succes
+}

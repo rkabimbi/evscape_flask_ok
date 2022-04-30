@@ -1,3 +1,4 @@
+from email.policy import default
 from flask_login import UserMixin
 from my_app import login_manager
 from my_app import db #importe l'objet DB cree dans le init.py
@@ -15,9 +16,9 @@ from my_app.models.jeei_package.specification import Specification, Theme, Publi
 class Jeei(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethodes relatives aux login et l'autre pour les DB
     __tablename__ = 'Jeei' #pour renomr la table "enigme""
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
-    nom = db.Column(db.String(80),  nullable=True)#nullable pour qu'il puisse creer à vide et completer ensuite
-    img = db.Column(db.String(120), nullable=True)
-    descriptif = db.Column(db.String(140),  nullable=True)
+    nom = db.Column(db.String(80),  nullable=True,default=' ')#nullable pour qu'il puisse creer à vide + Je mets le points pcq sinon dans ele HTML ca pose probleme pr afficher les cartes avec du NONe
+    img = db.Column(db.String(120), nullable=True, default=' ')# Je mets le points pcq sinon dans ele HTML ca pose probleme pr afficher les cartes avec du NONe
+    descriptif = db.Column(db.String(140),  nullable=True, default=' ')# Je mets le points pcq sinon dans ele HTML ca pose probleme pr afficher les cartes avec du NONe
 
     dateCreation= db.Column(db.Date, nullable=False)
     fk_SpecificationId = db.Column(db.Integer, db.ForeignKey('Specification.id'),nullable=False)#db.foreignkey : c'est l'id de l'autre table et le nom de la table correspond à la back ref

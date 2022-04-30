@@ -18,3 +18,15 @@ Attention pour printer comme un string il faut leur ajouter .name
 
 
 
+
+getElementbyID.innerHTML sert à recuper le code HTML 
+
+getElementbyId().value sert à recuperer la valeur dans le champs <div> valeur ici </div>
+
+
+un message flash python n'intervient que si il y a rechargement de la page (donc passage via la route/backend)
+
+Attention que les placeholder...meme si je mets des variables JINJA...je dois mettre des " "
+
+
+

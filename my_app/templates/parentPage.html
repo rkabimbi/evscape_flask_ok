@@ -33,7 +33,7 @@
         <div class="container">
             <row>
 
-                <div class="p-4 flash">
+                <div class="p-4 flash" id="idFlash">
                     {% if form is defined and form.errors is defined %}
                     {% for field, errors in form.errors.items() %}
                         <div class="alert alert-danger ">
