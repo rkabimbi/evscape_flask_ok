@@ -1,4 +1,7 @@
 
+
+
+
 function fonction_Presentation()
 {
     console.log("fonction_Presentation")
@@ -46,6 +49,14 @@ function fonction_ListeExperimentations()
     fonction_selectionContenuSousPage('idContenuSousPageListeExperimentations')
 }
 
+function fonction_Equipe()
+{
+    console.log("fonction_Equipe")
+    fonction_activationBouton("navLinkEquipe")
+    //selection de ce qu'on doit afficher
+    fonction_selectionContenuSousPage('idContenuSousPageEquipe')
+}
+
 
 
 
@@ -60,6 +71,7 @@ function fonction_activationBouton(boutonAColorer)
     document.getElementById("navLinkResultats").innerHTML='<a  class="nav-link nvSousPage" onclick="fonction_Resultats()">Resultats</a>'
     document.getElementById("navLinkDocumentation").innerHTML='<a  class="nav-link nvSousPage" onclick="fonction_Documentation()">Documentation</a>'
     document.getElementById("navLinkPresentation").innerHTML='<a  class="nav-link nvSousPage" onclick="fonction_Presentation()">Présentation</a>'
+    document.getElementById("navLinkEquipe").innerHTML='<a  class="nav-link nvSousPage" onclick="fonction_Equipe()">Equipe</a>'
     
 
 
@@ -85,6 +97,10 @@ function fonction_activationBouton(boutonAColorer)
     {
         document.getElementById("navLinkPresentation").innerHTML='<a  class="nav-link nvSousPage active" onclick="fonction_Presentation()">Présentation</a>'
     }
+    else if(boutonAColorer=="navLinkEquipe")
+    {
+        document.getElementById("navLinkEquipe").innerHTML='<a  class="nav-link nvSousPage active" onclick="fonction_Equipe()">Equipe</a>'
+    }
    
 }
 
@@ -97,11 +113,13 @@ displayTest=document.getElementById("idContenuSousPageTest").style.display
 displayResultats=document.getElementById("idContenuSousPageResultats").style.display
 displayListeExperimentations=document.getElementById("idContenuSousPageListeExperimentations").style.display
 displayPresentation= document.getElementById("idContenuSousPagePresentation").style.display
+displayPresentation= document.getElementById("idContenuSousPageEquipe").style.display
 //comme ca il cache directement tt...sinon il affiche tt et c'est seulement quand je clique le menu qu'il cache ce qu'il faut
 document.getElementById("idContenuSousPageDocumentation").style.display="none"
 document.getElementById("idContenuSousPageTest").style.display="none"
 document.getElementById("idContenuSousPageResultats").style.display="none"
 document.getElementById("idContenuSousPageListeExperimentations").style.display="none"
+document.getElementById("idContenuSousPageEquipe").style.display="none"
 
 
 
@@ -116,6 +134,7 @@ function fonction_selectionContenuSousPage(idSousPage)
             document.getElementById("idContenuSousPageTest").style.display="none"
             document.getElementById("idContenuSousPageResultats").style.display="none"
             document.getElementById("idContenuSousPageListeExperimentations").style.display="none"
+            document.getElementById("idContenuSousPageEquipe").style.display="none"
             document.getElementById(idSousPage).style.display=displayPresentation
             break;
 
@@ -124,6 +143,7 @@ function fonction_selectionContenuSousPage(idSousPage)
             document.getElementById("idContenuSousPageTest").style.display="none"
             document.getElementById("idContenuSousPageResultats").style.display="none"
             document.getElementById("idContenuSousPageListeExperimentations").style.display="none"
+            document.getElementById("idContenuSousPageEquipe").style.display="none"
             document.getElementById(idSousPage).style.display=displayDocumentation
             break;
 
@@ -132,6 +152,7 @@ function fonction_selectionContenuSousPage(idSousPage)
             document.getElementById("idContenuSousPagePresentation").style.display="none"
             document.getElementById("idContenuSousPageResultats").style.display="none"
             document.getElementById("idContenuSousPageListeExperimentations").style.display="none"
+            document.getElementById("idContenuSousPageEquipe").style.display="none"
             document.getElementById(idSousPage).style.display=displayTest
             break;
 
@@ -140,6 +161,7 @@ function fonction_selectionContenuSousPage(idSousPage)
             document.getElementById("idContenuSousPageTest").style.display="none"
             document.getElementById("idContenuSousPagePresentation").style.display="none"
             document.getElementById("idContenuSousPageListeExperimentations").style.display="none"
+            document.getElementById("idContenuSousPageEquipe").style.display="none"
             document.getElementById(idSousPage).style.display=displayResultats
             break;
 
@@ -148,6 +170,15 @@ function fonction_selectionContenuSousPage(idSousPage)
             document.getElementById("idContenuSousPageTest").style.display="none"
             document.getElementById("idContenuSousPageResultats").style.display="none"
             document.getElementById("idContenuSousPagePresentation").style.display="none"
+            document.getElementById("idContenuSousPageEquipe").style.display="none"
+            document.getElementById(idSousPage).style.display=displayListeExperimentations
+            break;
+        case 'idContenuSousPageEquipe':
+            document.getElementById("idContenuSousPageDocumentation").style.display="none"
+            document.getElementById("idContenuSousPageTest").style.display="none"
+            document.getElementById("idContenuSousPageResultats").style.display="none"
+            document.getElementById("idContenuSousPagePresentation").style.display="none"
+            document.getElementById("idContenuSousPageListeExperimentations").style.display="none"
             document.getElementById(idSousPage).style.display=displayListeExperimentations
             break;
     }
@@ -164,7 +195,7 @@ function fonction_sauvegardeTableJeei(idChamps,idJEEI)
     valeur=document.getElementById(idChamps).value
     console.log("valeur :"+valeur)
     console.log("ID "+idJEEI)
-
+    
     if(idChamps=="idNomMonJEEI")
     {
         champs="nom"
@@ -172,6 +203,12 @@ function fonction_sauvegardeTableJeei(idChamps,idJEEI)
     else if(idChamps=="idDescriptifMonJEEI")
     {
         champs="descriptif"
+    }
+    else if(idChamps=="idImageMonJEEI")
+    {
+        champs="img"
+        valeur= "static/img/img"+idJEEI+".jpeg" //adresse où trouver l'image
+        console.log("adresse image : "+valeur)
     }
 
 
@@ -184,17 +221,22 @@ function fonction_sauvegardeTableJeei(idChamps,idJEEI)
     { 
         if (this.readyState == 4 && this.status == 200) 
         {
-            reponseBackEnd(this.responseText)   
+            reponseBackEnd(this.responseText, champs)   
         }
     };
 }
 
-function reponseBackEnd(responseText)
+function reponseBackEnd(responseText, champs)
 {
     console.log("reponseBackEnd")
     var fichJsonParse=JSON.parse(responseText);//parsing du fichier JSON envoyé par jsonify
-    console.log(fichJsonParse)//
+    console.log(fichJsonParse, champs)//
+    
 
-    flash_succes='<div class="alert alert-success" role="alert">Sauvé dans la DB </div>' 
-    document.getElementById("idFlash").innerHTML=flash_succes
+    affichageValidationSauvegarde='<h3>  <span style="color:white"class="badge bg-success">V</span></h3>' 
+    document.getElementById("affichageValidationSauvegarde"+champs).innerHTML=affichageValidationSauvegarde
+   
+    
+  
+    
 }

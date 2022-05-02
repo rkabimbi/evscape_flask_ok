@@ -18,8 +18,8 @@
 }
 
 .nvSousPage{
-    margin-right: 15px;
-    padding-right: 15px;
+    margin-right: 25px;
+    padding-right: 25px;
     font-weight:500;
     color: rgb(194, 192, 192);
     
@@ -39,3 +39,4 @@
 input[type="text"]:disabled{
     background-color:rgb(221, 221, 221);
 }
+

@@ -91,6 +91,10 @@ def fonction_sauvegardeTableJeei():
     elif champs=="descriptif":
         monJEEI.descriptif=valeur
         db.session.commit()
+    elif champs=="img":
+        print(valeur)
+        monJEEI.img=valeur
+        db.session.commit()
     
     
     #pour confirme que tout s'est bien passe côté front
