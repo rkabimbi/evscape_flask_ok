@@ -192,7 +192,7 @@ function fonction_sauvegardeTableJeei(idChamps,idJEEI)
 {
     console.log("fonction_sauvegarde")
     console.log("champs :"+idChamps) //obligé de travailler avec l'idDuCamps pour pouvoir aller chercher la valeur à la ligne suivante
-    valeur=document.getElementById(idChamps).value
+    let valeur=document.getElementById(idChamps).value
     console.log("valeur :"+valeur)
     console.log("ID "+idJEEI)
     
@@ -204,12 +204,7 @@ function fonction_sauvegardeTableJeei(idChamps,idJEEI)
     {
         champs="descriptif"
     }
-    else if(idChamps=="idImageMonJEEI")
-    {
-        champs="img"
-        valeur= "static/img/img"+idJEEI+".jpeg" //adresse où trouver l'image
-        console.log("adresse image : "+valeur)
-    }
+
 
 
        
@@ -230,7 +225,7 @@ function reponseBackEnd(responseText, champs)
 {
     console.log("reponseBackEnd")
     var fichJsonParse=JSON.parse(responseText);//parsing du fichier JSON envoyé par jsonify
-    console.log(fichJsonParse, champs)//
+    console.log(fichJsonParse.reponse, champs)//
     
 
     affichageValidationSauvegarde='<h3>  <span style="color:white"class="badge bg-success">V</span></h3>' 

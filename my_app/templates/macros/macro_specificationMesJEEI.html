@@ -3,6 +3,28 @@
 
 {% macro afficheContenuPresentation(monJEEI) %}
 
+
+
+<div > 
+  <div class="input-group col-sm-10">
+    <img class="imgMonJEEI" src="{{monJEEI.img}}"   >
+  </div>
+
+  <div class="input-group col-sm-10 headerPhotoMonJEEI">
+          <!--action = nom de la route où ca nous mene -->
+          <form action="uploadPhoto?idJEEI={{monJEEI.id}}" method="post" enctype=multipart/form-data>
+           
+          <input type="file" name="file" >
+          <input type="submit" value="Chargez" class="btn btn-secondary  file-upload-btn" style="cursor :pointer" onclick="fonction_sauvegardeTableJeei('idImageMonJEEI',{{monJEEI.id}})">
+        </form>
+
+  </div>
+</div>
+
+
+
+
+
 <div id="idFormulaireContenuPresentation" class="formulaireSpecificationMesJEEI">
     <div class="row mb-3">
       <label for="idMonJEEI" class="col-sm-2 col-form-label">ID</label>
@@ -40,21 +62,19 @@
     </div>
 
 
-    <div class="row mb-3">
-      <label class="col-sm-2 form-label" for="imageMonJEEI">Image </label>
-        <div class=" col-sm-8 form-outline">
 
 
-            <input class="form-control" type="file" id="idImageMonJEEI" accept=".jpeg" onchange="fonction_sauvegardeTableJeei('idImageMonJEEI',{{monJEEI.id}})" >
-          
 
-        </div>
-      <div class="col-sm-2 " id='affichageValidationSauvegardeimg'>
-        
-      </div>
-    </div>
  
- 
+
+
+
+
+
+
+
+
+
 </div>
 
 

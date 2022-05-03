@@ -12,7 +12,7 @@ from jinja2 import Environment, PackageLoader
 from jinja2 import environment
 from random import randint
 import math
-
+import os
 from my_app import db #import de la db
 
 from my_app.models.user import User
@@ -34,8 +34,9 @@ from datetime import date
 #db.drop_all()
 from my_app.models.jeei_package.jeei import Jeei
 from my_app.models.jeei_package.specification import Specification, Statut, Theme, PublicCible
-
-
+from my_app.models.upload_file import allowed_file
+from werkzeug.utils import secure_filename
+from flask import send_from_directory
 
 @app.route("/specificationMesJEEI", methods=['GET', 'POST'])
 @login_required
@@ -91,12 +92,42 @@ def fonction_sauvegardeTableJeei():
     elif champs=="descriptif":
         monJEEI.descriptif=valeur
         db.session.commit()
-    elif champs=="img":
-        print(valeur)
-        monJEEI.img=valeur
-        db.session.commit()
+    
     
     
     #pour confirme que tout s'est bien passe côté front
     reponse= jsonify(reponse="ok")
+  
     return reponse
+
+
+
+
+@app.route('/uploadPhoto', methods=['GET', 'POST'])#Get et post est important pour tester avec quelle méthode on est arrivé 
+#(pour eviter que des gens tapent l'url à la main. S'ils le font on est en mode GET et alors on prévoit dans la méthode qu'on tient pas compte du truc (on recharge la page))
+def upload_file( ):
+
+    idJEEI= request.args.get("idJEEI")
+    monJEEI = Jeei.query.filter_by(id=idJEEI).first()
+    if 'file' not in request.files:#si pas de fichier
+            flash('Pas de fichier', 'danger')#flash c'est qqch que flask sait intepreter et donc on peut faire des messages d'erreur
+            return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEI)
+    file = request.files['file'] #si on est ici c'est qu'il y a un fichier
+    if file.filename == '':#si non du fichier est vide
+            flash('Pas de fichier selectionné', 'danger')
+            return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEI)
+
+    
+    if file and allowed_file(file.filename):#si on a un fichier et que le format est permis
+        filename = secure_filename(file.filename)#methode qui evite des attaques où charges des fichiers systeme (elle rajoute des donées au nom)
+        print(filename)
+        print(monJEEI)
+        monJEEI.img="static/img/img"+str(monJEEI.id)+".jpeg" #on sauve l'adresse dans l'attribut image
+        db.session.commit()
+        nomPhoto="img"+str(monJEEI.id)+".jpeg"
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], nomPhoto))#on sauve le fichier
+
+        print(redirect(request.base_url))
+
+        return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEI)
+    

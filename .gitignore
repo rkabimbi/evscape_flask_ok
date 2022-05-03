@@ -2,3 +2,4 @@
 /__pycache__
 /db
 /my_app/__pycache__
+*.sh
