@@ -48,6 +48,7 @@ class Specification(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethode
     theme =db.Column(db.Enum(Theme),nullable=True, default=Theme.ADEFINIR)
     chapitre = db.Column(db.String(120),nullable=True,default='')
     statut =db.Column(db.Enum(Statut),nullable=True, default=Statut.ENCOURS)
+    documentation = db.Column(db.String(120), nullable=True, default=' ')#adresse locale vers la doc
     rel_Jeei = relationship("Jeei", backref='Specification', uselist=False)#backref = la manière dont c'est appelé dans l'autre table
     
 
@@ -56,7 +57,7 @@ class Specification(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethode
     #r_enigme=db.relationship('Enigmes', backref=db.backref('auteur', lazy=True))#on dit que la relation c'est avec la classe Enigmes 
     
     
-    def __init__(self, nbrJoueursMin,nbrJoueursMax,budget,dureeMinutes,scenario,publicCible,theme,chapitre,statut):
+    def __init__(self, nbrJoueursMin,nbrJoueursMax,budget,dureeMinutes,scenario,publicCible,theme,chapitre,statut,documentation):
 
         self.nbrJoueursMax=nbrJoueursMax
         self.nbrJoueursMin=nbrJoueursMin
@@ -67,6 +68,7 @@ class Specification(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethode
         self.theme=theme
         self.chapitre=chapitre
         self.statut=statut
+        self.documentation=documentation
         #self.key_Jeei=key_Jeei
     
 
@@ -76,7 +78,7 @@ class Specification(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethode
     
     
     def __repr__(self):#toString
-        return "( nbrJoueursMax = %s, nbrJouersMin = %s , dureeMinutes=%s, scenario=%s,theme=%s,statut=%s)\n" % ( self.nbrJoueursMax,self.nbrJoueursMin,self.dureeMinutes,self.scenario,self.theme,self.statut)
+        return "( nbrJoueursMax = %s, nbrJouersMin = %s , dureeMinutes=%s, scenario=%s,theme=%s,statut=%s,documentation=%s)\n" % ( self.nbrJoueursMax,self.nbrJoueursMin,self.dureeMinutes,self.scenario,self.theme,self.statut,self.documentation)
 
 
 

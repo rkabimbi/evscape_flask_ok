@@ -15,7 +15,7 @@
           <form action="uploadPhoto?idJEEI={{monJEEI.id}}" method="post" enctype=multipart/form-data>
            
           <input type="file" name="file" >
-          <input type="submit" value="Chargez" class="btn btn-secondary  file-upload-btn" style="cursor :pointer" onclick="fonction_sauvegardeTableJeei('idImageMonJEEI',{{monJEEI.id}})">
+          <input type="submit" value="Chargez" class="btn btn-secondary  file-upload-btn" style="cursor :pointer" > 
         </form>
 
   </div>
@@ -63,8 +63,27 @@
 
 
 
+</div>
 
 
+{% endmacro %}
+
+
+{% macro afficheContenuDocumentation(specification,monJEEI) %}
+
+
+
+<div id="idFormulaireContenuDocumentation" class="formulaireSpecificationMesJEEI">
+  <div class="row mb-3">
+    <label for="nbrJoueursMinMonJEEI" class="col-sm-2 col-form-label">Nombre Joueurs(min)</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" id="idNbrJoueursMinMonJEEI" value="{{specification.nbrJoueursMin}}"  onchange="fonction_sauvegardeTableJeei('idNbrJoueursMinMonJEEI',{{monJEEI.id}})">
+    </div>
+    <div class="col-sm-2 " id='affichageValidationSauvegardenbrJoueursMinMonJEEI'>
+        
+    </div>
+  </div>
+  
  
 
 
@@ -73,25 +92,34 @@
 
 
 
+  <!-- Fichier upload-->
+  <div class="row mb-3">
+    <label class="col-sm-2 form-label" for="documentationPdfMonJEEI">Documentation</label>
+    <!--action = nom de la route où ca nous mene -->
+    <form action="uploadFilePdf?idJEEI={{monJEEI.id}}" method="post" enctype=multipart/form-data>
+      
+      <input type="file" name="file" label="documentation" >
+      <input type="submit" value="Chargez" class="btn btn-secondary  file-upload-btn" style="cursor :pointer" > 
+    </form>
+    <div class="col-sm-2 " id='affichageValidationSauvegardedocumentationPdf'>
+    </div>
+  </div>
+  <div class="input-group col-sm-10 chargementSpecificationPdf">
+ 
+  </div>
+
 
 
 </div>
 
 
-{% endmacro %}
 
 
-{% macro afficheContenuDocumentation(specification) %}
 
-<div class="input-group col-sm-10 chargementSpecificationPdf">
-  <!--action = nom de la route où ca nous mene -->
-  <form action="uploadFilePdf" method="post" enctype=multipart/form-data>
-  <label for="file">documentation </label>
-  <input type="file" name="file" label="documentation" >
-  <input type="submit" value="Chargez" class="btn btn-secondary  file-upload-btn" style="cursor :pointer" onclick="fonction_sauvegardeTableJeei('idImageMonJEEI',0)">
-</form>
 
-</div>
+
+
+
 {% endmacro %}
 
 

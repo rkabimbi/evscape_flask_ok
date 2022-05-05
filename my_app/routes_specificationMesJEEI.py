@@ -57,7 +57,7 @@ def fonction_specificationMesJEEI():
 
     else: #si pas d'id communiqué ca veut dire qu'on a cliqué le bouton jaune (creer un nouveau)
         #creer un nouveau Specification  qui soit vierge
-        specification= Specification(None,None,None,None,None,None,None,None,None)
+        specification= Specification(None,None,None,None,None,None,None,None,None,None)
         db.session.add(specification)#sauve dans la DB
         db.session.commit()
         #je recupere le numero d'id de la spécification que je viens de créer
@@ -86,14 +86,24 @@ def fonction_sauvegardeTableJeei():
     idJEEI= request.args.get("idJEEI")
 
     monJEEI = Jeei.query.filter_by(id=idJEEI).first()
+    print("monJEEI : ", monJEEI)
+    idSpecification=Jeei.query.filter_by(id=idJEEI).first().fk_SpecificationId
+    print("idSpecification :",idSpecification)
+    specification=Specification.query.filter_by(id=idSpecification).first()
+    print("specification",specification)
+
     if champs=="nom":
         monJEEI.nom=valeur
         db.session.commit()
     elif champs=="descriptif":
         monJEEI.descriptif=valeur
         db.session.commit()
-    elif champs=="img":
-        monJEEI.img="static/img/"+valeur+".jpeg"
+    #elif champs=="img":
+        #monJEEI.img="static/img/"+valeur+".jpeg"
+        #db.session.commit()
+    elif champs=="nbrJoueursMin":
+        print("case nbr joueurs min" )
+        specification.nbrJoueursMin= int(valeur)
         db.session.commit()
     
     
@@ -140,4 +150,31 @@ def upload_filePdf( ):
     print("upload_FilePdf")
     idJEEI= request.args.get("idJEEI")
     monJEEI = Jeei.query.filter_by(id=idJEEI).first()
-    return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEI)
+    idSpecificationMonJEEI = Jeei.query.filter_by(id=idJEEI).first().fk_SpecificationId
+    print("spec :",idSpecificationMonJEEI)
+    specificationMonJEEI= Specification.query.filter_by(id=idSpecificationMonJEEI).first()
+    print(specificationMonJEEI)
+
+    #j'ai reussi à recup la spec mnt faut que jl'envoi dans le front...à mon avis du coup.. je dois faire ca pour toute les routes qui rendes specificationMesJEEI.html...à voir
+
+    if 'file' not in request.files:#si pas de fichier
+            #flash('Pas de fichier', 'danger')#flash c'est qqch que flask sait intepreter et donc on peut faire des messages d'erreur
+            return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEI)
+    file = request.files['file'] #si on est ici c'est qu'il y a un fichier
+    if file.filename == '':#si non du fichier est vide
+            #flash('Pas de fichier selectionné', 'danger')
+            return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEI)
+
+    
+    if file and allowed_file(file.filename):#si on a un fichier et que le format est permis
+        filename = secure_filename(file.filename)#methode qui evite des attaques où charges des fichiers systeme (elle rajoute des donées au nom)
+        print(filename)
+        print(monJEEI)
+        specificationMonJEEI.documentation="static/documentation/doc"+str(monJEEI.id)+".pdf" #on sauve l'adresse dans l'attribut image
+        db.session.commit()
+        nomFichier="doc"+str(monJEEI.id)+".pdf"
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], nomFichier))#on sauve le fichier
+
+        print(redirect(request.base_url))
+
+    return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEI,specificationJEEIRecupere=specificationMonJEEI)

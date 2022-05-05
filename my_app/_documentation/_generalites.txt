@@ -30,3 +30,7 @@ Attention que les placeholder...meme si je mets des variables JINJA...je dois me
 
 
 
+Json < 
+
+le probleme que j'ai eu c'est que j'avais changé le constructeur de la DB et meme si la fonction n'avait rien à voir avec ce que je faisais et qu'il ne me 'lindiquait pas...il me disait que erreur...
+Je m'en suis apercu en essayent de creer un new JEEI et en remplissant...là il a été explicite
