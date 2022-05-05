@@ -204,6 +204,11 @@ function fonction_sauvegardeTableJeei(idChamps,idJEEI)
     {
         champs="descriptif"
     }
+    else if(idChamps=='idImageMonJEEI')
+    {
+        champs="img"
+        valeur="img"+str(idJEEI)
+    }
 
 
 
@@ -223,13 +228,17 @@ function fonction_sauvegardeTableJeei(idChamps,idJEEI)
 
 function reponseBackEnd(responseText, champs)
 {
-    console.log("reponseBackEnd")
-    var fichJsonParse=JSON.parse(responseText);//parsing du fichier JSON envoyé par jsonify
-    console.log(fichJsonParse.reponse, champs)//
+    if(champs!='img')//pour l'instant pas besoin de validateur pour ce champs là car on le voit à l'ecran
+    {
+        console.log("reponseBackEnd")
+        var fichJsonParse=JSON.parse(responseText);//parsing du fichier JSON envoyé par jsonify
+        console.log(fichJsonParse.reponse, champs)//
+        
     
+        affichageValidationSauvegarde='<h3>  <span style="color:white"class="badge bg-success">V</span></h3>' 
+        document.getElementById("affichageValidationSauvegarde"+champs).innerHTML=affichageValidationSauvegarde
+    }
 
-    affichageValidationSauvegarde='<h3>  <span style="color:white"class="badge bg-success">V</span></h3>' 
-    document.getElementById("affichageValidationSauvegarde"+champs).innerHTML=affichageValidationSauvegarde
    
     
   

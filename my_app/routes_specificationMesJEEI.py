@@ -92,6 +92,9 @@ def fonction_sauvegardeTableJeei():
     elif champs=="descriptif":
         monJEEI.descriptif=valeur
         db.session.commit()
+    elif champs=="img":
+        monJEEI.img="static/img/"+valeur+".jpeg"
+        db.session.commit()
     
     
     
@@ -110,11 +113,11 @@ def upload_file( ):
     idJEEI= request.args.get("idJEEI")
     monJEEI = Jeei.query.filter_by(id=idJEEI).first()
     if 'file' not in request.files:#si pas de fichier
-            flash('Pas de fichier', 'danger')#flash c'est qqch que flask sait intepreter et donc on peut faire des messages d'erreur
+            #flash('Pas de fichier', 'danger')#flash c'est qqch que flask sait intepreter et donc on peut faire des messages d'erreur
             return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEI)
     file = request.files['file'] #si on est ici c'est qu'il y a un fichier
     if file.filename == '':#si non du fichier est vide
-            flash('Pas de fichier selectionné', 'danger')
+            #flash('Pas de fichier selectionné', 'danger')
             return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEI)
 
     
@@ -130,4 +133,11 @@ def upload_file( ):
         print(redirect(request.base_url))
 
         return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEI)
-    
+
+@app.route('/uploadFilePdf', methods=['GET', 'POST'])#Get et post est important pour tester avec quelle méthode on est arrivé 
+#(pour eviter que des gens tapent l'url à la main. S'ils le font on est en mode GET et alors on prévoit dans la méthode qu'on tient pas compte du truc (on recharge la page))
+def upload_filePdf( ):
+    print("upload_FilePdf")
+    idJEEI= request.args.get("idJEEI")
+    monJEEI = Jeei.query.filter_by(id=idJEEI).first()
+    return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEI)
