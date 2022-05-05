@@ -103,9 +103,12 @@ def fonction_sauvegardeTableJeei():
         #db.session.commit()
     elif champs=="nbrJoueursMin":
         print("case nbr joueurs min" )
-        specification.nbrJoueursMin= int(valeur)
+        specification.nbrJoueursMin= valeur
         db.session.commit()
-    
+    elif champs=="nbrJoueursMax":
+        print("case nbr joueurs max" )
+        specification.nbrJoueursMax= valeur
+        db.session.commit()
     
     
     #pour confirme que tout s'est bien passe côté front
@@ -159,18 +162,21 @@ def upload_filePdf( ):
 
     if 'file' not in request.files:#si pas de fichier
             #flash('Pas de fichier', 'danger')#flash c'est qqch que flask sait intepreter et donc on peut faire des messages d'erreur
+            print("erreur - pas de fichier")
             return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEI)
     file = request.files['file'] #si on est ici c'est qu'il y a un fichier
     if file.filename == '':#si non du fichier est vide
             #flash('Pas de fichier selectionné', 'danger')
+            print("erreur - pas de fichier selectionné")
             return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEI)
 
-    
+
     if file and allowed_file(file.filename):#si on a un fichier et que le format est permis
         filename = secure_filename(file.filename)#methode qui evite des attaques où charges des fichiers systeme (elle rajoute des donées au nom)
+
         print(filename)
         print(monJEEI)
-        specificationMonJEEI.documentation="static/documentation/doc"+str(monJEEI.id)+".pdf" #on sauve l'adresse dans l'attribut image
+        specificationMonJEEI.documentation="static/img/doc"+str(monJEEI.id)+".pdf" #on sauve l'adresse dans l'attribut image
         db.session.commit()
         nomFichier="doc"+str(monJEEI.id)+".pdf"
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], nomFichier))#on sauve le fichier

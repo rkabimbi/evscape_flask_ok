@@ -217,6 +217,11 @@ function fonction_sauvegardeTableJeei(idChamps,idJEEI)
        champs="nbrJoueursMin"
        //valeur=String(valeur)
    }
+   else if(idChamps=="idNbrJoueursMaxMonJEEI")
+   {
+       champs="nbrJoueursMax"
+       //valeur=String(valeur)
+   }
  
 
 

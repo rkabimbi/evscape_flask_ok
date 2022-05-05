@@ -9,7 +9,7 @@ class BaseConfig(object):
     SECRET_KEY = binascii.hexlify(os.urandom(24))  
     DEBUG=True
     ENV="development"
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///'+os.path.join(basedir,'db','viciousClues.db')#basedir pour dire on part du truc de base et ensuite il trouvera le fichier db qui s'appelle enigmes.db dans le dossier "db"
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///'+os.path.join(basedir,'db','EvscapeDB.db')#basedir pour dire on part du truc de base et ensuite il trouvera le fichier db qui s'appelle enigmes.db dans le dossier "db"
     
     SQLALCHEMY_TRACK_MODIFICATIONS = False#pour voir si sql doit guetter les changement
     TEMPLATES_AUTO_RELOAD = True #si je change du html et ce que ca doit etre relaodé (oui c'est bcp plus pratique)

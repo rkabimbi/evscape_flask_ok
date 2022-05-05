@@ -76,10 +76,18 @@
 <div id="idFormulaireContenuDocumentation" class="formulaireSpecificationMesJEEI">
   <div class="row mb-3">
     <label for="nbrJoueursMinMonJEEI" class="col-sm-2 col-form-label">Nombre Joueurs(min)</label>
-    <div class="col-sm-8">
-      <input type="text" class="form-control" id="idNbrJoueursMinMonJEEI" value="{{specification.nbrJoueursMin}}"  onchange="fonction_sauvegardeTableJeei('idNbrJoueursMinMonJEEI',{{monJEEI.id}})">
+    <div class="col-sm-3">
+      <input type="number" class="form-control" id="idNbrJoueursMinMonJEEI" placeholder="{{specification.nbrJoueursMin}}" onchange="fonction_sauvegardeTableJeei('idNbrJoueursMinMonJEEI',{{monJEEI.id}})">
     </div>
-    <div class="col-sm-2 " id='affichageValidationSauvegardenbrJoueursMinMonJEEI'>
+    <div class="col-sm-1 " id='affichageValidationSauvegardenbrJoueursMin'>
+        
+    </div>
+
+    <label for="nbrJoueursMaxMonJEEI" class="col-sm-2 col-form-label">Nombre Joueurs(max)</label>
+    <div class="col-sm-3">
+      <input type="number" class="form-control" id="idNbrJoueursMaxMonJEEI" placeholder="{{specification.nbrJoueursMax}}" onchange="fonction_sauvegardeTableJeei('idNbrJoueursMaxMonJEEI',{{monJEEI.id}})">
+    </div>
+    <div class="col-sm-1 " id='affichageValidationSauvegardenbrJoueursMax'>
         
     </div>
   </div>
@@ -100,13 +108,15 @@
       
       <input type="file" name="file" label="documentation" >
       <input type="submit" value="Chargez" class="btn btn-secondary  file-upload-btn" style="cursor :pointer" > 
+      {%if specification.documentation is defined %}
+        <button type="button" class="btn btn-warning">Consultez</button>
+      {%endif%}
+ 
     </form>
     <div class="col-sm-2 " id='affichageValidationSauvegardedocumentationPdf'>
     </div>
   </div>
-  <div class="input-group col-sm-10 chargementSpecificationPdf">
- 
-  </div>
+  
 
 
 
