@@ -10,7 +10,7 @@
     <img class="imgMonJEEI" src="{{monJEEI.img}}"   >
   </div>
 
-  <div class="input-group col-sm-10 headerPhotoMonJEEI">
+  <div class="input-group col-sm-10 headerPhotoMonJEEI" style="color:grey">
           <!--action = nom de la route où ca nous mene -->
           <form action="uploadPhoto?idJEEI={{monJEEI.id}}" method="post" enctype=multipart/form-data>
            
@@ -27,22 +27,22 @@
 
 <div id="idFormulaireContenuPresentation" class="formulaireSpecificationMesJEEI">
     <div class="row mb-3">
-      <label for="idMonJEEI" class="col-sm-2 col-form-label">ID</label>
+      <label for="idMonJEEI" class="col-sm-2 col-form-label" >ID</label>
       <div class="col-sm-8">
-        <input type="text" class="form-control" id="idIDMonJEEI" disabled placeholder={{monJEEI.id}}>
+        <input type="text" class="form-control" id="idIDMonJEEI" disabled placeholder={{monJEEI.id}} style="color:grey">
       </div>
     </div>
     <div class="row mb-3">
-        <label for="dateCreationMonJEEI" class="col-sm-2 col-form-label">Création</label>
+        <label for="dateCreationMonJEEI" class="col-sm-2 col-form-label" >Création</label>
         <div class="col-sm-8">
-          <input type="text" class="form-control" id="idDateCreationMonJEEI" disabled placeholder={{monJEEI.dateCreation}}>
+          <input type="text" class="form-control" id="idDateCreationMonJEEI" disabled placeholder={{monJEEI.dateCreation}} style="color:grey">
         </div>
         
       </div>
     <div class="row mb-3">
-        <label for="nomMonJEEI" class="col-sm-2 col-form-label">Nom</label>
+        <label for="nomMonJEEI" class="col-sm-2 col-form-label" >Nom</label>
         <div class="col-sm-8">
-          <input type="text" class="form-control" id="idNomMonJEEI"  value="{{monJEEI.nom}}"  onchange="fonction_sauvegardeTableJeei('idNomMonJEEI',{{monJEEI.id}})"  > 
+          <input type="text" class="form-control" id="idNomMonJEEI"  value="{{monJEEI.nom}}"  onchange="fonction_sauvegardeTableJeei('idNomMonJEEI',{{monJEEI.id}})" style="color:grey" > 
         </div>
         <div class="col-sm-2 " id='affichageValidationSauvegardenom'>
           
@@ -50,10 +50,10 @@
       </div>
  
     <div class="row mb-3">
-        <label class="col-sm-2 form-label" for="descriptifMonJEEI">Descriptif </label>
+        <label class="col-sm-2 form-label" for="descriptifMonJEEI" >Descriptif </label>
         <div class=" col-sm-8 form-outline">
             <textarea class="form-control" id="idDescriptifMonJEEI" maxlength='140'rows="4" 
-              onchange='fonction_sauvegardeTableJeei("idDescriptifMonJEEI",{{monJEEI.id}})'> {{monJEEI.descriptif}}</textarea> 
+              onchange='fonction_sauvegardeTableJeei("idDescriptifMonJEEI",{{monJEEI.id}})'style="color:grey"> {{monJEEI.descriptif}}</textarea> 
         </div>
         <div class="col-sm-2 " id='affichageValidationSauvegardedescriptif'>
           
@@ -75,17 +75,17 @@
 
 <div id="idFormulaireContenuDocumentation" class="formulaireSpecificationMesJEEI">
   <div class="row mb-3">
-    <label for="nbrJoueursMinMonJEEI" class="col-sm-2 col-form-label">Nombre Joueurs(min)</label>
+    <label for="nbrJoueursMinMonJEEI" class="col-sm-2 col-form-label" >Nbr Joueurs(min)</label>
     <div class="col-sm-2">
-      <input type="number" class="form-control" id="idNbrJoueursMinMonJEEI" value="{{specification.nbrJoueursMin}}" onchange="fonction_sauvegardeTableJeei('idNbrJoueursMinMonJEEI',{{monJEEI.id}})">
+      <input type="number" class="form-control" id="idNbrJoueursMinMonJEEI" value="{{specification.nbrJoueursMin}}" onchange="fonction_sauvegardeTableJeei('idNbrJoueursMinMonJEEI',{{monJEEI.id}})" style="color:grey">
     </div>
     <div class="col-sm-2 " id='affichageValidationSauvegardenbrJoueursMin'>
         
     </div>
 
-    <label for="nbrJoueursMaxMonJEEI" class="col-sm-2 col-form-label">Nombre Joueurs(max)</label>
+    <label for="nbrJoueursMaxMonJEEI" class="col-sm-2 col-form-label" >Nbr Joueurs(max)</label>
     <div class="col-sm-2">
-      <input type="number" class="form-control" id="idNbrJoueursMaxMonJEEI" value="{{specification.nbrJoueursMax}}" onchange="fonction_sauvegardeTableJeei('idNbrJoueursMaxMonJEEI',{{monJEEI.id}})">
+      <input type="number" class="form-control" id="idNbrJoueursMaxMonJEEI" value="{{specification.nbrJoueursMax}}" onchange="fonction_sauvegardeTableJeei('idNbrJoueursMaxMonJEEI',{{monJEEI.id}})" style="color:grey">
     </div>
     <div class="col-sm-2 " id='affichageValidationSauvegardenbrJoueursMax'>
         
@@ -95,18 +95,18 @@
    
 
   <div class="row mb-3">
-    <label for="budgetMonJEEI" class="col-sm-2 col-form-label">Budget(Eur.)</label>
+    <label for="budgetMonJEEI" class="col-sm-2 col-form-label" >Budget(Eur.)</label>
     <div class="col-sm-2">
-      <input type="number" class="form-control" id="idBudgetMonJEEI" value="{{specification.budget}}"onchange="fonction_sauvegardeTableJeei('idBudgetMonJEEI',{{monJEEI.id}})">
+      <input type="number" class="form-control" id="idBudgetMonJEEI" value="{{specification.budget}}"onchange="fonction_sauvegardeTableJeei('idBudgetMonJEEI',{{monJEEI.id}})" style="color:grey">
     </div>
     <div class="col-sm-2 " id='affichageValidationSauvegardebudget'>
         
     </div>
 
-    <label for="dureeMinutesMonJEEI" class="col-sm-2 col-form-label">Durée(minutes)</label>
+    <label for="dureeMinutesMonJEEI" class="col-sm-2 col-form-label" >Durée(minutes)</label>
     <div class="col-sm-2">
      
-      <input type="number" class="form-control" id="idDureeMinutesMonJEEI" value="{{specification.dureeMinutes}}" onchange="fonction_sauvegardeTableJeei('idDureeMinutesMonJEEI',{{monJEEI.id}})">
+      <input type="number" class="form-control" id="idDureeMinutesMonJEEI" value="{{specification.dureeMinutes}}" onchange="fonction_sauvegardeTableJeei('idDureeMinutesMonJEEI',{{monJEEI.id}})" style="color:grey">
     </div>
  
     <div class="col-sm-2 " id='affichageValidationSauvegardedureeMinutes'>
@@ -115,10 +115,10 @@
   </div>
 
   <div class="row mb-3">
-    <label class="col-sm-2 form-label" for="scenarioMonJEEI">Scenario </label>
+    <label class="col-sm-2 form-label" for="scenarioMonJEEI" >Scenario </label>
     <div class=" col-sm-8 form-outline">
         <textarea class="form-control" id="idScenarioMonJEEI" maxlength='140'rows="4" 
-          onchange='fonction_sauvegardeTableJeei("idScenarioMonJEEI",{{monJEEI.id}})'> {{specification.scenario}}</textarea> 
+          onchange='fonction_sauvegardeTableJeei("idScenarioMonJEEI",{{monJEEI.id}})'style="color:grey"> {{specification.scenario}}</textarea> 
     </div>
     <div class="col-sm-1 " id='affichageValidationSauvegardescenario'>
       
@@ -127,13 +127,13 @@
   </div>
 
   <div class="row mb-3">
-    <label for="publicCibleMonJEEI" class="col-sm-2 col-form-label">Public</label>
+    <label for="publicCibleMonJEEI" class="col-sm-2 col-form-label" >Public</label>
     <div class="col-sm-2">
       
-      <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="idPublicCibleMonJEEI" onchange='fonction_sauvegardeTableJeei("idPublicCibleMonJEEI",{{monJEEI.id}})' selected="{{specification.publicCible.name}}">
+      <select class="form-select form-select-lg mb-3 " aria-label=".form-select-lg example" id="idPublicCibleMonJEEI" onchange='fonction_sauvegardeTableJeei("idPublicCibleMonJEEI",{{monJEEI.id}})' selected="{{specification.publicCible.name}}" style="color:grey">
         <!-- si specification.publicCibleName (ce qui vient dela DB) == publicName (nom du champs) alors tu dis que c'est le "selected"-->
         {% for public in publicCible %}
-          <option value="{{ public.name }}" {% if public.name==specification.publicCible.name %} selected="selected"{% endif %} >{{ public.name }}</option> 
+          <option  style="color:grey" value="{{ public.name }}" {% if public.name==specification.publicCible.name %} selected="selected"{% endif %} >{{ public.name }}</option> 
         {% endfor %}
       </select>
 
@@ -142,9 +142,14 @@
         
     </div>
 
-    <label for="themeMonJEEI" class="col-sm-2 col-form-label">Thème</label>
+    <label for="themeMonJEEI" class="col-sm-2 col-form-label" >Thème</label>
     <div class="col-sm-2">
-     
+      <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="idThemeMonJEEI" onchange='fonction_sauvegardeTableJeei("idThemeMonJEEI",{{monJEEI.id}})' selected="{{specification.theme.name}}" >
+        <!-- si specification.publicCibleName (ce qui vient dela DB) == publicName (nom du champs) alors tu dis que c'est le "selected"-->
+        {% for tm in theme %}
+          <option style="color:grey" value="{{ tm.name }}" {% if tm.name==specification.theme.name %} selected="selected"{% endif %} >{{ tm.name }}</option> 
+        {% endfor %}
+      </select>
       
       
     </div>
@@ -160,9 +165,9 @@
 
   <div class="row mb-3">
 
-    <label for="chapitreMonJEEI" class="col-sm-2 col-form-label">Chapitre</label>
+    <label for="chapitreMonJEEI" class="col-sm-2 col-form-label" >Chapitre</label>
         <div class="col-sm-8">
-          <input type="text" class="form-control" id="idChapitreMonJEEI"  value="{{specification.chapitre}}"  onchange="fonction_sauvegardeTableJeei('idChapitreMonJEEI',{{monJEEI.id}})"  > 
+          <input type="text" class="form-control" id="idChapitreMonJEEI"  value="{{specification.chapitre}}"  onchange="fonction_sauvegardeTableJeei('idChapitreMonJEEI',{{monJEEI.id}})" style="color:grey" > 
         </div>
         <div class="col-sm-2 " id='affichageValidationSauvegardechapitre'>
           
@@ -180,11 +185,11 @@
 
   <!-- Fichier upload-->
   <div class="row mb-3">
-    <label class="col-sm-2 form-label" for="documentationPdfMonJEEI">Documentation</label>
+    <label class="col-sm-2 form-label" for="documentationPdfMonJEEI" >Documentation</label>
     <!--action = nom de la route où ca nous mene -->
     <form action="uploadFilePdf?idJEEI={{monJEEI.id}}" method="post" enctype=multipart/form-data>
       
-      <input type="file" name="file" label="documentation" >
+      <input type="file" name="file" label="documentation" style="color:grey">
       <input type="submit" value="Chargez" class="btn btn-secondary  file-upload-btn" style="cursor :pointer" > 
       {%if specification.documentation is defined %}
         <button type="button" class="btn btn-warning">Consultez</button>
