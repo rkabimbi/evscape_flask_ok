@@ -192,6 +192,7 @@ function fonction_sauvegardeTableJeei(idChamps,idJEEI)
 {
     console.log("fonction_sauvegarde")
     console.log("champs :"+idChamps) //obligé de travailler avec l'idDuCamps pour pouvoir aller chercher la valeur à la ligne suivante
+
     let valeur=document.getElementById(idChamps).value
     console.log("valeur :"+valeur)
     console.log("ID "+idJEEI)
@@ -220,6 +221,36 @@ function fonction_sauvegardeTableJeei(idChamps,idJEEI)
    else if(idChamps=="idNbrJoueursMaxMonJEEI")
    {
        champs="nbrJoueursMax"
+       //valeur=String(valeur)
+   }
+   else if(idChamps=="idBudgetMonJEEI")
+   {
+       champs="budget"
+       //valeur=String(valeur)
+   }
+   else if(idChamps=="idDureeMinutesMonJEEI")
+   {
+       champs="dureeMinutes"
+       //valeur=String(valeur)
+   }
+   else if(idChamps=="idScenarioMonJEEI")
+   {
+       champs="scenario"
+       //valeur=String(valeur)
+   }
+   else if(idChamps=="idChapitreMonJEEI")
+   {
+       champs="chapitre"
+       //valeur=String(valeur)
+   }
+   else if(idChamps=="idThemeMonJEEI")
+   {
+       champs="theme"
+       //valeur=String(valeur)
+   }
+   else if(idChamps=="idPublicCibleMonJEEI")
+   {
+       champs="publicCible"
        //valeur=String(valeur)
    }
  

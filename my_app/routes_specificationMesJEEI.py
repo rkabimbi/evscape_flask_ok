@@ -52,7 +52,7 @@ def fonction_specificationMesJEEI():
         #chercher dans DB
         monJEEIAEnvoyer = Jeei.query.filter_by(id=idJEEIAmodifier).first()
         #je vais chercher la spécification liée au JEEI
-        specification=Jeei.query.filter_by(id=monJEEIAEnvoyer.fk_SpecificationId).first()
+        specification=Specification.query.filter_by(id=monJEEIAEnvoyer.fk_SpecificationId).first()
  
 
     else: #si pas d'id communiqué ca veut dire qu'on a cliqué le bouton jaune (creer un nouveau)
@@ -74,7 +74,7 @@ def fonction_specificationMesJEEI():
         
     print(monJEEIAEnvoyer)
     print(specification)
-    return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEIAEnvoyer,specificationJEEIRecupere=specification)
+    return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEIAEnvoyer,specificationJEEIRecupere=specification,theme=Theme,publicCible=PublicCible)
 
 
 
@@ -109,7 +109,30 @@ def fonction_sauvegardeTableJeei():
         print("case nbr joueurs max" )
         specification.nbrJoueursMax= valeur
         db.session.commit()
-    
+    elif champs=="budget":
+        print("case budget" )
+        specification.budget= valeur
+        db.session.commit()
+    elif champs=="dureeMinutes":
+        print("case dureeMinutes" )
+        specification.dureeMinutes= valeur
+        db.session.commit()
+    elif champs=="scenario":
+        print("case scenario" )
+        specification.scenario= valeur
+        db.session.commit()
+    elif champs=="chapitre":
+        print("case chapitre" )
+        specification.chapitre= valeur
+        db.session.commit()
+    elif champs=="publicCible":
+        print("case publicCible" )
+        specification.publicCible= valeur
+        db.session.commit()
+    elif champs=="theme":
+        print("case theme" )
+        specification.theme= valeur
+        db.session.commit()
     
     #pour confirme que tout s'est bien passe côté front
     reponse= jsonify(reponse="ok")
@@ -145,7 +168,7 @@ def upload_file( ):
 
         print(redirect(request.base_url))
 
-        return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEI)
+        return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEI,theme=Theme,public=PublicCible)
 
 @app.route('/uploadFilePdf', methods=['GET', 'POST'])#Get et post est important pour tester avec quelle méthode on est arrivé 
 #(pour eviter que des gens tapent l'url à la main. S'ils le font on est en mode GET et alors on prévoit dans la méthode qu'on tient pas compte du truc (on recharge la page))
@@ -183,4 +206,4 @@ def upload_filePdf( ):
 
         print(redirect(request.base_url))
 
-    return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEI,specificationJEEIRecupere=specificationMonJEEI)
+    return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEI,specificationJEEIRecupere=specificationMonJEEI,theme=Theme,public=PublicCible)

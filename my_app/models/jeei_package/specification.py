@@ -19,7 +19,7 @@ class Statut(enum.Enum):
 class PublicCible(enum.Enum):
     BACCALAUREAT = "Baccalaureat"
     MASTER = "Master"
-    SECONDAIRE = "Seoncdaire"
+    SECONDAIRE = "Secondaire"
     PRIMAIRE = "Primaire"
     ADEFINIR = "A Définir" #je fais ca pour mettre des valeurs par defaut sinon à l'afffichage ca bug car il sait pas afficher certain "none"
 
