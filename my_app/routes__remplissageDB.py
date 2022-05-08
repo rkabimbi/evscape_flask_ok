@@ -2,6 +2,7 @@
 #mes imports
 ##########################################################
 
+from cgi import test
 from my_app import app
 from flask import Flask, redirect
 from flask import request
@@ -39,6 +40,8 @@ from datetime import date
 from my_app.models.jeei_package.jeei import Jeei
 
 from my_app.models.jeei_package.specification import Specification, Statut, Theme, PublicCible
+from my_app.models.jeei_package.questionApprentissage import QuestionApprentissage
+
 
 """
 Pour rappel le fonction de flask c'est qu'à chaque changement il reparcours tt le fichier je pense. Notament pour le login.
@@ -66,6 +69,13 @@ def function_lancementDBFictive():
     utilisateur=User(username="BSpears",firstname="Britney",lastname="Spears",password=generate_password_hash("rootrootroot", "sha256"),email="brittney@yahoo.com")
     db.session.add(utilisateur)#sauve dans la DB
     db.session.commit()
+
+
+
+
+
+
+
 
     #CREA De JEEI
     specification= Specification(nbrJoueursMax=4,nbrJoueursMin=2,budget=500,dureeMinutes=150, publicCible=PublicCible.MASTER,theme=Theme.MATHEMATIQUE,scenario="scenario de test",chapitre="chapitre test",statut=Statut.ENCOURS,documentation='')
@@ -115,6 +125,19 @@ def function_lancementDBFictive():
     db.session.add(jeei)#sauve dans la DB
     db.session.commit()
 
+
+
+    #crea questionApprentissage
+
+    
+    for i in range(1,6):
+    
+        for q in range(1,11):
+            question = QuestionApprentissage(question="Question"+str(q)+"Spec"+str(i),solutionCorrecte="Reponse"+str(q)+"Spec"+str(i), solutionIncorrecte1="responseA", solutionIncorrecte2="reponseB",solutionIncorrecte3="reponseC",explicatif="tu aurais dû mieux faire",fk_SpecificationID=i)
+            db.session.add(question)
+            db.session.commit()
+
+        
 
 #lancement de la fonction
 function_lancementDBFictive()

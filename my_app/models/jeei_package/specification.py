@@ -12,6 +12,11 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 import enum
 
+
+
+
+
+
 class Statut(enum.Enum):
     ENCOURS="En-cours"
     PRET="Prêt"
@@ -35,7 +40,7 @@ class Theme(enum.Enum):
 
 
 
-#on crée une table d'Enigmes
+#on crée une table 
 class Specification(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethodes relatives aux login et l'autre pour les DB
     __tablename__ = 'Specification' #pour renomr la table "enigme""
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
@@ -50,11 +55,15 @@ class Specification(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethode
     statut =db.Column(db.Enum(Statut),nullable=True, default=Statut.ENCOURS)
     documentation = db.Column(db.String(120), nullable=True, default=' ')#adresse locale vers la doc
     rel_Jeei = relationship("Jeei", backref='Specification', uselist=False)#backref = la manière dont c'est appelé dans l'autre table
+
+    rel_QuestionApprentissage = relationship("QuestionApprentissage", backref='Specification', uselist=False)
+
+   
+
+
     
 
 
-    #score=db.Column(db.Integer,default=0)
-    #r_enigme=db.relationship('Enigmes', backref=db.backref('auteur', lazy=True))#on dit que la relation c'est avec la classe Enigmes 
     
     
     def __init__(self, nbrJoueursMin,nbrJoueursMax,budget,dureeMinutes,scenario,publicCible,theme,chapitre,statut,documentation):
@@ -69,6 +78,8 @@ class Specification(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethode
         self.chapitre=chapitre
         self.statut=statut
         self.documentation=documentation
+
+
         #self.key_Jeei=key_Jeei
     
 

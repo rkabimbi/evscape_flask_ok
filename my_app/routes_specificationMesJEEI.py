@@ -37,6 +37,7 @@ from my_app.models.jeei_package.specification import Specification, Statut, Them
 from my_app.models.upload_file import allowed_file
 from werkzeug.utils import secure_filename
 from flask import send_from_directory
+from my_app.models.jeei_package.questionApprentissage import QuestionApprentissage
 
 @app.route("/specificationMesJEEI", methods=['GET', 'POST'])
 @login_required
@@ -53,6 +54,10 @@ def fonction_specificationMesJEEI():
         monJEEIAEnvoyer = Jeei.query.filter_by(id=idJEEIAmodifier).first()
         #je vais chercher la spécification liée au JEEI
         specification=Specification.query.filter_by(id=monJEEIAEnvoyer.fk_SpecificationId).first()
+        #je vais chercher les question liées à la spécification
+        questions=QuestionApprentissage.query.filter_by(fk_SpecificationId=specification.id).all()
+        print("questions")
+        print(questions)
  
 
     else: #si pas d'id communiqué ca veut dire qu'on a cliqué le bouton jaune (creer un nouveau)
@@ -67,6 +72,11 @@ def fonction_specificationMesJEEI():
         monJEEIAEnvoyer=Jeei(None,None,None,fk_SpecificationId=newSpecificationId)
         db.session.add(monJEEIAEnvoyer)#sauve dans la DB
         db.session.commit()
+        #je crée 10 test vides
+        for q in range(1,11):
+            question = QuestionApprentissage(question="Question"+str(q),solutionCorrecte="Reponse"+str(q), solutionIncorrecte1="", solutionIncorrecte2="",solutionIncorrecte3="",explicatif="",fk_SpecificationID=newSpecificationId)
+            db.session.add(question)
+            db.session.commit()
         newJeeiId=Jeei.query.order_by(Jeei.id.desc()).first().id
         flash("Votre Jeu d'Evasion a été crée [id :"+str(newJeeiId)+ "]. Bonne évaluation!!!", 'success')
 
@@ -74,7 +84,7 @@ def fonction_specificationMesJEEI():
         
     print(monJEEIAEnvoyer)
     print(specification)
-    return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEIAEnvoyer,specificationJEEIRecupere=specification,theme=Theme,publicCible=PublicCible)
+    return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEIAEnvoyer,specificationJEEIRecupere=specification,theme=Theme,publicCible=PublicCible,questions=questions)
 
 
 
@@ -148,13 +158,15 @@ def upload_file( ):
 
     idJEEI= request.args.get("idJEEI")
     monJEEI = Jeei.query.filter_by(id=idJEEI).first()
+    specification=Specification.query.filter_by(id=monJEEI.fk_SpecificationId).first()
+    questions= QuestionApprentissage.query.filter_by(fk_SpecificationId=specification.id).all()
     if 'file' not in request.files:#si pas de fichier
             #flash('Pas de fichier', 'danger')#flash c'est qqch que flask sait intepreter et donc on peut faire des messages d'erreur
-            return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEI)
+            return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEI,theme=Theme,public=PublicCible,questions=questions,specificationJEEIRecupere=specification)
     file = request.files['file'] #si on est ici c'est qu'il y a un fichier
     if file.filename == '':#si non du fichier est vide
             #flash('Pas de fichier selectionné', 'danger')
-            return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEI)
+            return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEI,theme=Theme,public=PublicCible,questions=questions,specificationJEEIRecupere=specification)
 
     
     if file and allowed_file(file.filename):#si on a un fichier et que le format est permis
@@ -168,7 +180,7 @@ def upload_file( ):
 
         print(redirect(request.base_url))
 
-        return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEI,theme=Theme,public=PublicCible)
+        return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEI,theme=Theme,public=PublicCible,questions=questions,specificationJEEIRecupere=specification)
 
 @app.route('/uploadFilePdf', methods=['GET', 'POST'])#Get et post est important pour tester avec quelle méthode on est arrivé 
 #(pour eviter que des gens tapent l'url à la main. S'ils le font on est en mode GET et alors on prévoit dans la méthode qu'on tient pas compte du truc (on recharge la page))
@@ -180,18 +192,19 @@ def upload_filePdf( ):
     print("spec :",idSpecificationMonJEEI)
     specificationMonJEEI= Specification.query.filter_by(id=idSpecificationMonJEEI).first()
     print(specificationMonJEEI)
+    questions= QuestionApprentissage.query.filter_by(fk_SpecificationId=specificationMonJEEI.id).all()
 
     #j'ai reussi à recup la spec mnt faut que jl'envoi dans le front...à mon avis du coup.. je dois faire ca pour toute les routes qui rendes specificationMesJEEI.html...à voir
 
     if 'file' not in request.files:#si pas de fichier
             #flash('Pas de fichier', 'danger')#flash c'est qqch que flask sait intepreter et donc on peut faire des messages d'erreur
             print("erreur - pas de fichier")
-            return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEI)
+            return render_template("specificationMesJEEI.html",currentUser=current_user,theme=Theme,public=PublicCible,monJEEIRecupere=monJEEI,questions=questions,specificationJEEIRecupere=specificationMonJEEI)
     file = request.files['file'] #si on est ici c'est qu'il y a un fichier
     if file.filename == '':#si non du fichier est vide
             #flash('Pas de fichier selectionné', 'danger')
             print("erreur - pas de fichier selectionné")
-            return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEI)
+            return render_template("specificationMesJEEI.html",currentUser=current_user,theme=Theme,public=PublicCible,monJEEIRecupere=monJEEI,questions=questions,specificationJEEIRecupere=specificationMonJEEI)
 
 
     if file and allowed_file(file.filename):#si on a un fichier et que le format est permis
@@ -206,4 +219,4 @@ def upload_filePdf( ):
 
         print(redirect(request.base_url))
 
-    return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEI,specificationJEEIRecupere=specificationMonJEEI,theme=Theme,public=PublicCible)
+    return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEI,specificationJEEIRecupere=specificationMonJEEI,theme=Theme,public=PublicCible,questions=questions)

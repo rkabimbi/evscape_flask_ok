@@ -1,0 +1,2 @@
+ATTENTION que tte les routes qui render specification.html doivent impérativeent avoir en arguments les meems datas sinon y aura des problemes d'affichage des données car il aura plus accès à tt ce dont il a besoin.
+Achaque fois que je met un argu sur le render d'une de ces routes -->ajouter l'argument partout (et avant cela aller chercher la valeur offcourse :D)

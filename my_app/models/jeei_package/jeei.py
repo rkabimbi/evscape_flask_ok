@@ -12,7 +12,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from my_app.models.jeei_package.specification import Specification, Theme, PublicCible, Statut
 
 
-#on crée une table d'Enigmes
+#on crée une table 
 class Jeei(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethodes relatives aux login et l'autre pour les DB
     __tablename__ = 'Jeei' #pour renomr la table "enigme""
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
