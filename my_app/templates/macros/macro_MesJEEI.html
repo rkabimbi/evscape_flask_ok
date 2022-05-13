@@ -4,7 +4,7 @@
 
 {% macro afficherCarteMesJEEI(indexJEEIDB,listeMesJEEI,indexCarteAffichage) %}
 
-  <div id={{"carteMesJEEI"+indexCarteAffichage}} class="cardMesJEEI" id="macroTest" onclick="redicrectionVers('/specificationMesJEEI?idJEEI={{listeMesJEEI.id[indexJEEIDB]}}')"><!-- le Onclick c'est pour rendre ma carte cliquable-->
+  <div id={{"carteMesJEEI"+indexCarteAffichage}} class="cardMesJEEI" id="macroTest" onclick="redirectionVers('{{indexCarteAffichage}}')"><!-- le Onclick c'est pour rendre ma carte cliquable-->
       
       <img id={{"imgMesJEEI"+indexCarteAffichage}}  src={{listeMesJEEI.img[indexJEEIDB]}} class="card-img-top imgCardMesJEEI"  alt="...">
       <div class="card-body">

@@ -1,8 +1,9 @@
 
-
+var numPagerGlobal //[hack]
 function fonction_affichageMesJEEI(numPager, listeMesJEEI,nbrPagesTotal,nbrJEEI)
 {
     
+    numPagerGlobal=numPager //informer JS du pager Actuel [hack]
     console.log("fonction_affichageMesJEEI")
     let indexDBSol=(numPager-1)*4 //le premier index de DB qu'il va afficher (pour qu'on ajoute ensuite 1,2,3,4 et qu'on puisse donc afficher ceux qui se suivent dans la db)...en gros c'est le plus bas de la liste de 4 JEEI qui seront affichés
     console.log(indexDBSol)
@@ -42,9 +43,28 @@ function fonction_affichageMesJEEI(numPager, listeMesJEEI,nbrPagesTotal,nbrJEEI)
 
 }
 
-//redirection vers la route de notre choix (j'ai du faire ca pour rendre ma carte cliquable)
-function redicrectionVers(adresseRedicrection)
+//redirection vers la route de notre choix (j'ai du faire ca pour gerer onclick et rendre ma carte cliquable)
+function redirectionVers(numCarte)
 {
-    location.href = adresseRedicrection;
+    if(numPagerGlobal==null)//dans le cas où on arrive sur la page et qu'on a pas encore cliqué sur le pager [hck]
+    {
+        console.log("DANS NAN")
+        numPagerGlobal=1
+    }
+
+        
+        console.log("redirectionvers")
+        numPagerGlobal=parseInt(numPagerGlobal)
+        numCarte=parseInt(numCarte)
+        let idJEEI=(numPagerGlobal-1)*4+numCarte+1
+        //idJEEI=idJEEI.toString()
+        console.log(idJEEI)
+        adresseRedicrection = '/specificationMesJEEI?idJEEI='+idJEEI 
+        console.log(adresseRedicrection)
+        
+        location.href = adresseRedicrection;
+
+
 }
+
 

@@ -78,6 +78,7 @@ def fonction_specificationMesJEEI():
             db.session.add(question)
             db.session.commit()
         newJeeiId=Jeei.query.order_by(Jeei.id.desc()).first().id
+        questions = QuestionApprentissage.query.filter_by(fk_SpecificationId=newSpecificationId).all()
         flash("Votre Jeu d'Evasion a été crée [id :"+str(newJeeiId)+ "]. Bonne évaluation!!!", 'success')
 
 
