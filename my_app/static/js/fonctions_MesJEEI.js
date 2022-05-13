@@ -22,7 +22,7 @@ function fonction_affichageMesJEEI(numPager, listeMesJEEI,nbrPagesTotal,nbrJEEI)
         console.log(listeMesJEEI.img[(indexDBSol+i)])
         document.getElementById("carteMesJEEI"+i).style.visibility = "visible";//si je mets pas ca. Quand on passe de la dernière à une page avant ca n'affiche plus tout car ca reste invisible
         document.getElementById("nomMesJEEI"+i).innerHTML=listeMesJEEI.noms[(indexDBSol+i)]
-        document.getElementById("imgMesJEEI"+i).innerHTML=listeMesJEEI.img[(indexDBSol+i)]
+        document.getElementById("imgMesJEEI"+i).innerHTML='<img   src='+listeMesJEEI.img[(indexDBSol+i)]+' class="card-img-top imgCardMesJEEI"  alt="...">'
         document.getElementById("themeMesJEEI"+i).innerHTML=listeMesJEEI.themes[(indexDBSol+i)]
         document.getElementById("statutMesJEEI"+i).innerHTML=listeMesJEEI.statuts[(indexDBSol+i)]
         document.getElementById("descriptifMesJEEI"+i).innerHTML=listeMesJEEI.descriptifs[(indexDBSol+i)]
