@@ -47,7 +47,7 @@ from my_app.models.jeei_package.specification import Specification, Statut, Them
 @app.route("/", methods=['GET', 'POST'])
 def fonction_login():
     if current_user.is_authenticated:#si authentifie
-        return redirect(url_for('fonction_flux'))#alors tu peux aller à la page d'acceuil 
+        return redirect(url_for('fonction_mesJEEI'))#alors tu peux aller à la page d'acceuil 
     formLogin = FormLogin()#creation d'un objet de type FormLogin (formulaire WTF)
     if formLogin.validate_on_submit():#si le formulaire a été submit**
         user = User.query.filter_by(username=formLogin.username.data).first()#j'instancie user avec l'objet dont je recupere l'usrname dans le formulaire 
@@ -58,7 +58,7 @@ def fonction_login():
         #dans les autres cas on peut logguer le perso
         login_user(user, remember=True) #remember ca sera utile pour ouvrir et fermer explorateur internet
         flash('Connexion réussie','success')
-        return redirect(url_for('fonction_flux'))#alors tu peux aller à la page d'acceuil (c'est ce qui est demandé dans la spec (aller à la liste))
+        return redirect(url_for('fonction_mesJEEI'))#alors tu peux aller à la page d'acceuil (c'est ce qui est demandé dans la spec (aller à la liste))
     formInscr = FormRegister()# c'est un hack sinon ca marche pas le truc facon SPA(DONC NE PAS RETIRER!!!JAMAIS)
     return render_template("user_login.html", formulaireLogin = formLogin,currentUser=current_user, formulaireInscription=formInscr)
 
@@ -99,6 +99,14 @@ def fonction_inscription():
         db.session.commit()
         flash('Enregistrement de profil bien opéré','success')
     return redirect(url_for('fonction_login'))   
+
+
+
+
+
+@app.route("/aPropos", methods=['GET', 'POST'])
+def fonction_aPropos():
+     return render_template("aPropos.html",currentUser=current_user)
 
 
 

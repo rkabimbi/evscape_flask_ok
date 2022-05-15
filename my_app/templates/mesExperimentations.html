@@ -1,0 +1,29 @@
+<head>
+    <link href="/static/css/mesExperimentations.css" rel="stylesheet"><!-- idem-->
+    {% import "macros/macro_MesExperimentations.html" as macro_MesExperimentations %}<!-- import de macro. Comme ça c'est dispo pour toutes les pages filles -->
+</head>
+
+<!-- herite de main (de tout sauf les blocks (donc le menu)) -->
+{% extends "parentPage.html" %}
+
+<!-- Tout ce dont on a pas herité de main -->
+
+
+
+{% block body %}
+<body onload="changerImageFond()"> </body>
+
+    Juste la liste des experimentations qu'on a crée apd de la liste des JEEI ou la specification!!!
+    et alors on peut reprendre ici...mais ici on en crée pas*****
+
+    Pas me casser la tete come pour la liste...juste faire des cartes et les faire dérouler dans un scroller (voir le test pour le scroller)
+    
+
+    </div>
+     <script src="{{ url_for('static',filename='js/fonctions_MesExperimentations.js')}}"></script>
+     <script src="{{ url_for('static',filename='js/fonctions_flux.js')}}"></script> <!-- Laisser ca partout - besoin pour mon hack de fond-->
+    </div>
+    
+{% endblock %}
+
+
