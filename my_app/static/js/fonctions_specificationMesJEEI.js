@@ -295,3 +295,56 @@ function reponseBackEnd(responseText, champs)
   
     
 }
+
+
+
+
+function fonction_sauvegardeSpecificationTest(champs,idChamps,idTest)
+{
+    console.log("fonction_sauvegardeSpecificationTest")
+    console.log("champs :"+idChamps) //obligé de travailler avec l'idDuCamps pour pouvoir aller chercher la valeur à la ligne suivante
+
+    let valeur=document.getElementById(idChamps+idTest).value
+    console.log("valeur :"+valeur)
+    console.log("ID "+idTest)
+    
+
+
+    var xhttp = new XMLHttpRequest( );
+    let url = new URL('http://127.0.0.1:5000/sauvegardeSpecificationTest?champs='+ champs+'&valeur='+valeur+'&idTest='+idTest  );  
+    xhttp.open("GET", url.toString(), true);
+    xhttp.send()
+    xhttp.onreadystatechange = function()
+    { 
+        if (this.readyState == 4 && this.status == 200) 
+        {
+            reponseBackEndTest(this.responseText, champs,idTest)   
+        }
+    };
+
+}
+
+function reponseBackEndTest(responseText, champs,idTest)
+{
+    //if(champs!='img')//pour l'instant pas besoin de validateur pour ce champs là car on le voit à l'ecran
+    
+    {
+        console.log("reponseBackEndTest")
+        console.log(responseText)
+        //console.log(champs)
+        //console.log(responseText)
+       
+        var fichJsonParse=JSON.parse(responseText);//parsing du fichier JSON envoyé par jsonify
+        //console.log(fichJsonParse.reponse, champs)//
+        
+    
+        affichageValidationSauvegarde='<h3>  <span style="color:white"class="badge bg-success">V</span></h3>' 
+        document.getElementById('validationTest'+champs+idTest).innerHTML=affichageValidationSauvegarde
+        
+    }
+
+   
+    
+  
+    
+}

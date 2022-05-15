@@ -217,66 +217,101 @@
 
 
 
-{% macro afficheContenuTest() %}
+{% macro afficheContenuTest(questions) %}
+<div class="scroller">
+  {% for i in range(10) %}
+    <form id="idFormulaireContenuTest" class="formulaireContenuTestMesJEEI ">
+      
+      <h4 > Question {{i+1}}</h4>
+      <div class="row mb-3">
+        
+          <label for="testQuestionMonJEEI" class="col-sm-2 col-form-label" >Question</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id={{"idTestQuestionMonJEEI"~ questions[i].id}}  value="{{questions[i].question}}"   style="color:grey" onchange="fonction_sauvegardeSpecificationTest('question',
+            'idTestQuestionMonJEEI',{{questions[i].id}})" > 
+          </div>
+          <div class="col-sm-2 " id={{'validationTestquestion'~ questions[i].id}}>
+              
+          </div>
+        
+      </div>
 
-<form id="idFormulaireContenuTest" class="formulaireSpecificationMesJEEI">
-    <div class="row mb-3">
-      <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
-      <div class="col-sm-10">
-        <input type="email" class="form-control" id="inputEmail3">
-      </div>
-    </div>
-    <div class="row mb-3">
-      <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
-      <div class="col-sm-10">
-        <input type="password" class="form-control" id="inputPassword3">
-      </div>
-    </div>
-    <fieldset class="row mb-3">
-      <legend class="col-form-label col-sm-2 pt-0">Radios</legend>
-      <div class="col-sm-10">
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-          <label class="form-check-label" for="gridRadios1">
-            First radio
-          </label>
+
+      <div class="row mb-3">
+
+        <label for="testSolutionCorrecteMonJEEI" class="col-sm-2 col-form-label" >Solution</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" id={{"idTestSolutionCorrecteMonJEEI"~ questions[i].id }} value="{{questions[i].solutionCorrecte}}"   style="color:grey" onchange="fonction_sauvegardeSpecificationTest('solution','idTestSolutionCorrecteMonJEEI',{{questions[i].id}})"> 
         </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-          <label class="form-check-label" for="gridRadios2">
-            Second radio
-          </label>
-        </div>
-        <div class="form-check disabled">
-          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" disabled>
-          <label class="form-check-label" for="gridRadios3">
-            Third disabled radio
-          </label>
+        <div class="col-sm-2 " id={{'validationTestsolution'~questions[i].id }}>
+            
         </div>
       </div>
-    </fieldset>
-    <div class="row mb-3">
-      <div class="col-sm-10 offset-sm-2">
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="gridCheck1">
-          <label class="form-check-label" for="gridCheck1">
-            Example checkbox
-          </label>
+
+
+
+      <div class="row mb-3">
+
+        <label for="testExplicatifMonJEEI" class="col-sm-2 col-form-label" >Explicatif</label>
+        <div class="col-sm-8">
+        
+          <textarea class="form-control" id="idExplicatifMonJEEI" maxlength='140'rows="4" style="color:grey"> {{questions[0].explicatif}}</textarea> 
+        </div>
+        <div class="col-sm-2 " id='affichageValidationSauvegardesolutionIncorrecte3'>
+            
         </div>
       </div>
-    </div>
-    <div class="row mb-3">
-      <div class="col-sm-10 offset-sm-2">
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="gridCheck1">
-          <label class="form-check-label" for="gridCheck1">
-            Example checkbox
-          </label>
+
+     
+
+
+
+
+      <div class="row mb-3">
+
+        <label for="testSolutionIncorrecte1MonJEEI" class="col-sm-2 col-form-label" >Proposition 1</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" id="idSolutionIncorrecte1MonJEEI"  value="{{questions[0].solutionIncorrecte1}}"   style="color:grey" > 
+        </div>
+        <div class="col-sm-2 " id='affichageValidationSauvegardesolutionIncorrecte1'>
+            
         </div>
       </div>
-    </div>
-    <button type="submit" class="btn btn-primary">Sign in</button>
-  </form>
+
+      <div class="row mb-3">
+
+        <label for="testSolutionIncorrecte2MonJEEI" class="col-sm-2 col-form-label" >Proposition 2</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" id="idSolutionIncorrecte2MonJEEI"  value="{{questions[0].solutionIncorrecte2}}"   style="color:grey" > 
+        </div>
+        <div class="col-sm-2 " id='affichageValidationSauvegardesolutionIncorrecte2'>
+            
+        </div>
+      </div>
+
+      <div class="row mb-3">
+
+        <label for="testSolutionIncorrecte3MonJEEI" class="col-sm-2 col-form-label" >Proposition 3</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" id="idSolutionIncorrecte3MonJEEI"  value="{{questions[0].solutionIncorrecte3}}"   style="color:grey" > 
+        </div>
+        <div class="col-sm-2 " id='affichageValidationSauvegardesolutionIncorrecte3'>
+            
+        </div>
+      </div>
+      
+
+    </form>
+    {% endfor %}
+
+
+
+
+
+
+
+</div>
+
 
 {% endmacro %}
 

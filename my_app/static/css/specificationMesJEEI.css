@@ -77,3 +77,13 @@ input[type="text"]:disabled{
 
 
 }
+
+
+.scroller {
+ 
+    height: 500px;
+    overflow-y: scroll;
+    scrollbar-color: rebeccapurple green;
+    
+  }
+  

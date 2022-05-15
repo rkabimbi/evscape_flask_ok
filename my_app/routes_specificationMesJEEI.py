@@ -79,6 +79,7 @@ def fonction_specificationMesJEEI():
             db.session.commit()
         newJeeiId=Jeei.query.order_by(Jeei.id.desc()).first().id
         questions = QuestionApprentissage.query.filter_by(fk_SpecificationId=newSpecificationId).all()
+        print(questions)
         flash("Votre Jeu d'Evasion a été crée [id :"+str(newJeeiId)+ "]. Bonne évaluation!!!", 'success')
 
 
@@ -221,3 +222,32 @@ def upload_filePdf( ):
         print(redirect(request.base_url))
 
     return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEI,specificationJEEIRecupere=specificationMonJEEI,theme=Theme,public=PublicCible,questions=questions)
+
+
+
+@app.route("/sauvegardeSpecificationTest", methods=['GET', 'POST'])
+@login_required
+def fonction_sauvegardeSpecificationTest():
+    champs = request.args.get("champs")
+    valeur= request.args.get("valeur")
+    idTest= request.args.get("idTest")
+
+
+    question=QuestionApprentissage.query.filter_by(id=idTest).first()
+    print("question",question)
+    print(champs)
+    print(valeur)
+    print(idTest)
+
+    if champs=="question":
+        question.question=valeur
+        db.session.commit()
+    if champs=="solution":
+        question.solutionCorrecte=valeur
+        db.session.commit()
+
+    print("question",question)
+    #pour confirme que tout s'est bien passe côté front
+    reponse= jsonify(reponse="ok")
+  
+    return reponse
