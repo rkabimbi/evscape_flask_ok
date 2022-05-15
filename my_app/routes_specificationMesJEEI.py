@@ -245,6 +245,18 @@ def fonction_sauvegardeSpecificationTest():
     if champs=="solution":
         question.solutionCorrecte=valeur
         db.session.commit()
+    if champs=="explicatif":
+        question.explicatif=valeur
+        db.session.commit()
+    if champs=="solutionIncorrecte1":
+        question.solutionIncorrecte1=valeur
+        db.session.commit()
+    if champs=="solutionIncorrecte2":
+        question.solutionIncorrecte2=valeur
+        db.session.commit()
+    if champs=="solutionIncorrecte3":
+        question.solutionIncorrecte3=valeur
+        db.session.commit()
 
     print("question",question)
     #pour confirme que tout s'est bien passe côté front

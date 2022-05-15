@@ -130,7 +130,7 @@ def function_lancementDBFictive():
     #crea questionApprentissage
 
     
-    for i in range(1,6):
+    for i in range(1,7):
     
         for q in range(1,11):
             question = QuestionApprentissage(question="Question"+str(q)+"Spec"+str(i),solutionCorrecte="Reponse"+str(q)+"Spec"+str(i), solutionIncorrecte1="responseA", solutionIncorrecte2="reponseB",solutionIncorrecte3="reponseC",explicatif="tu aurais dû mieux faire",fk_SpecificationID=i)
