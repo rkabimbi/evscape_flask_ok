@@ -38,6 +38,7 @@ from my_app.models.upload_file import allowed_file
 from werkzeug.utils import secure_filename
 from flask import send_from_directory
 from my_app.models.jeei_package.questionApprentissage import QuestionApprentissage
+from my_app.models.jeei_package.jointureJeeiUser import JointureJeeiUser
 
 @app.route("/specificationMesJEEI", methods=['GET', 'POST'])
 @login_required
@@ -49,6 +50,8 @@ def fonction_specificationMesJEEI():
     idJEEIAmodifier = request.args.get("idJEEI")
     monJEEIAEnvoyer=None
     specification=None
+    membres=[]
+    
     if idJEEIAmodifier: #si un id est renseigné (ca veut dire qu'on a cliqué uncarte et donc on doit aller chercher le JEEI en question)
         #chercher dans DB
         monJEEIAEnvoyer = Jeei.query.filter_by(id=idJEEIAmodifier).first()
@@ -56,9 +59,18 @@ def fonction_specificationMesJEEI():
         specification=Specification.query.filter_by(id=monJEEIAEnvoyer.fk_SpecificationId).first()
         #je vais chercher les question liées à la spécification
         questions=QuestionApprentissage.query.filter_by(fk_SpecificationId=specification.id).all()
-        print("questions")
-        print(questions)
- 
+
+        equipe=JointureJeeiUser.query.filter_by(fk_JeeiId=monJEEIAEnvoyer.id).all()
+        
+        for membre in equipe:
+            membreEquipe =User.query.filter_by(id=membre.fk_UserId).first()
+            membres.append(membreEquipe)
+        print("Tableaux membres----------------------")
+        print(membres)
+
+        
+      
+
 
     else: #si pas d'id communiqué ca veut dire qu'on a cliqué le bouton jaune (creer un nouveau)
         #creer un nouveau Specification  qui soit vierge
@@ -79,6 +91,11 @@ def fonction_specificationMesJEEI():
             db.session.commit()
         newJeeiId=Jeei.query.order_by(Jeei.id.desc()).first().id
         questions = QuestionApprentissage.query.filter_by(fk_SpecificationId=newSpecificationId).all()
+        #lier l'utilisateur courant (createur) à ce JEEI via table de jointure
+        jointureJeeiUser=JointureJeeiUser( fk_UserId=current_user.id , fk_JeeiId=monJEEIAEnvoyer.id)
+        db.session.add(jointureJeeiUser)
+        db.session.commit()
+        membres.append(current_user)
         print(questions)
         flash("Votre Jeu d'Evasion a été crée [id :"+str(newJeeiId)+ "]. Bonne évaluation!!!", 'success')
 
@@ -86,7 +103,7 @@ def fonction_specificationMesJEEI():
         
     print(monJEEIAEnvoyer)
     print(specification)
-    return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEIAEnvoyer,specificationJEEIRecupere=specification,theme=Theme,publicCible=PublicCible,questions=questions)
+    return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEIAEnvoyer,specificationJEEIRecupere=specification,theme=Theme,publicCible=PublicCible,questions=questions,membres=membres)
 
 
 

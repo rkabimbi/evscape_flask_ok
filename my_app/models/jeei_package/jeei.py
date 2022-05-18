@@ -10,7 +10,7 @@ from sqlalchemy import Table, Column, Integer, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 from my_app.models.jeei_package.specification import Specification, Theme, PublicCible, Statut
-
+#from my_app.models.jeei_package.jointureJeeiUser import JointureJeeiUser
 
 #on crée une table 
 class Jeei(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethodes relatives aux login et l'autre pour les DB
@@ -22,19 +22,25 @@ class Jeei(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethodes relativ
 
     dateCreation= db.Column(db.Date, nullable=False)
     fk_SpecificationId = db.Column(db.Integer, db.ForeignKey('Specification.id'),nullable=False)#db.foreignkey : c'est l'id de l'autre table et le nom de la table correspond à la back ref
-    fk_UserId = db.Column(db.Integer, db.ForeignKey('User.id'),nullable=True)
+    rel_JointureJeeiUser = relationship("JointureJeeiUser", backref='Jeei', uselist=False)
 
   
     
     
-    def __init__(self, nom,img,descriptif,fk_SpecificationId,fk_UserId):
+    def __init__(self, nom,img,descriptif,fk_SpecificationId):
 
         self.nom = nom
         self.img = img
         self.descriptif = descriptif
         self.dateCreation= datetime.today() 
         self.fk_SpecificationId=fk_SpecificationId
-        self.fk_UserId=fk_UserId
+
+        #creation table jointure directement (il va assigner la personne qui le crée comme membre d'equipe)
+        #creation de jointure entre JEEI et User
+        #jointureJeeiUser=JointureJeeiUser(fk_JeeiId=self.id,fk_UserId=createurId)
+        #db.session.add(jointureJeeiUser)#sauve dans la DB
+        #db.session.commit()
+      
     
     
     def __repr__(self):#toString

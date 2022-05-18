@@ -41,6 +41,7 @@ from my_app.models.jeei_package.jeei import Jeei
 
 from my_app.models.jeei_package.specification import Specification, Statut, Theme, PublicCible
 from my_app.models.jeei_package.questionApprentissage import QuestionApprentissage
+from my_app.models.jeei_package.jointureJeeiUser import JointureJeeiUser
 
 
 """
@@ -101,27 +102,27 @@ def function_lancementDBFictive():
     db.session.commit()
 
 
-    jeei=Jeei(nom="DesKape",img="static/img/img1.png",descriptif="Retrouvez les copies d'examen",fk_SpecificationId=1,fk_UserId=1)
+    jeei=Jeei(nom="DesKape",img="static/img/img1.png",descriptif="Retrouvez les copies d'examen",fk_SpecificationId=1)
     db.session.add(jeei)#sauve dans la DB
     db.session.commit()
 
-    jeei=Jeei(nom="Unbox",img="static/img/img2.png",descriptif="Les poupées russes vous feront perdre la tête",fk_SpecificationId=2,fk_UserId=2)
+    jeei=Jeei(nom="Unbox",img="static/img/img2.png",descriptif="Les poupées russes vous feront perdre la tête",fk_SpecificationId=2)
     db.session.add(jeei)#sauve dans la DB
     db.session.commit()
 
-    jeei=Jeei(nom="The green house",img="static/img/img3.png",descriptif="Un jeu qui vous en fera voir de toutes les couleursimg",fk_SpecificationId=3,fk_UserId=1)
+    jeei=Jeei(nom="The green house",img="static/img/img3.png",descriptif="Un jeu qui vous en fera voir de toutes les couleursimg",fk_SpecificationId=3)
     db.session.add(jeei)#sauve dans la DB
     db.session.commit()
 
-    jeei=Jeei(nom="Algorithmo Express",img="static/img/img4.png",descriptif="Entrez dans les méandres de la récursivité",fk_SpecificationId=4,fk_UserId=1)
+    jeei=Jeei(nom="Algorithmo Express",img="static/img/img4.png",descriptif="Entrez dans les méandres de la récursivité",fk_SpecificationId=4)
     db.session.add(jeei)#sauve dans la DB
     db.session.commit()
 
-    jeei=Jeei(nom="The Stranger Things",img="static/img/img5.png",descriptif="Inspirez de la série TV",fk_SpecificationId=5,fk_UserId=2)
+    jeei=Jeei(nom="The Stranger Things",img="static/img/img5.png",descriptif="Inspirez de la série TV",fk_SpecificationId=5)
     db.session.add(jeei)#sauve dans la DB
     db.session.commit()
 
-    jeei=Jeei(nom="Descape Basics",img="static/img/img6.png",descriptif="Un jeu simple mais éfficace",fk_SpecificationId=6,fk_UserId=2)
+    jeei=Jeei(nom="Descape Basics",img="static/img/img6.png",descriptif="Un jeu simple mais éfficace",fk_SpecificationId=6)
     db.session.add(jeei)#sauve dans la DB
     db.session.commit()
 
@@ -137,7 +138,45 @@ def function_lancementDBFictive():
             db.session.add(question)
             db.session.commit()
 
-        
+ 
+    #creation de jointure entre JEEI et User
+    jointureJeeiUser=JointureJeeiUser(fk_JeeiId=1,fk_UserId=2)
+    db.session.add(jointureJeeiUser)#sauve dans la DB
+    db.session.commit()
+
+    #creation de jointure entre JEEI et User
+    jointureJeeiUser=JointureJeeiUser(fk_JeeiId=3,fk_UserId=3)
+    db.session.add(jointureJeeiUser)#sauve dans la DB
+    db.session.commit()
+
+       #creation de jointure entre JEEI et User
+    jointureJeeiUser=JointureJeeiUser(fk_JeeiId=6,fk_UserId=1)
+    db.session.add(jointureJeeiUser)#sauve dans la DB
+    db.session.commit()
+
+           #creation de jointure entre JEEI et User
+    jointureJeeiUser=JointureJeeiUser(fk_JeeiId=6,fk_UserId=2)
+    db.session.add(jointureJeeiUser)#sauve dans la DB
+    db.session.commit()
+
+          #creation de jointure entre JEEI et User
+    jointureJeeiUser=JointureJeeiUser(fk_JeeiId=2,fk_UserId=2)
+    db.session.add(jointureJeeiUser)#sauve dans la DB
+    db.session.commit()
+
+          #creation de jointure entre JEEI et User
+    jointureJeeiUser=JointureJeeiUser(fk_JeeiId=4,fk_UserId=3)
+    db.session.add(jointureJeeiUser)#sauve dans la DB
+    db.session.commit()
+
+          #creation de jointure entre JEEI et User
+    jointureJeeiUser=JointureJeeiUser(fk_JeeiId=5,fk_UserId=3)
+    db.session.add(jointureJeeiUser)#sauve dans la DB
+    db.session.commit()
+
+
+
+
 
 #lancement de la fonction
 function_lancementDBFictive()

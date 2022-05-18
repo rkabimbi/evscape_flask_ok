@@ -2,6 +2,7 @@
 #mes imports
 ##########################################################
 
+from ntpath import join
 from turtle import pos
 from my_app import app
 from flask import Flask, redirect
@@ -37,6 +38,7 @@ from datetime import date
 
 from my_app.models.jeei_package.jeei import Jeei
 from my_app.models.jeei_package.specification import Specification, Statut, Theme, PublicCible
+from my_app.models.jeei_package.jointureJeeiUser import JointureJeeiUser
 
 
 
@@ -85,8 +87,8 @@ def fonction_conversionSQLDICT(mesJEEI,specifications):
 
     for JEEI in mesJEEI:
         res["noms"].append(JEEI.nom)
-        idCreateur=JEEI.fk_UserId
-        createur=User.query.filter_by(id=idCreateur).first()
+        jointureJeeiUser=JointureJeeiUser.query.filter_by(fk_JeeiId=JEEI.id).first()#car le premier dans la jointure est d'office le createur car crée au moment
+        createur=User.query.filter_by(id=jointureJeeiUser.fk_UserId).first()
         createur=createur.lastname+", "+createur.firstname
         res["auteurs"].append(createur)
         res["nbrExperimentations"].append(10) # en attendant d'avoir les tables qu'il faut

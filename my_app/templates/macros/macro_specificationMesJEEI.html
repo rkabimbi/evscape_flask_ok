@@ -334,7 +334,7 @@ FAIRE JUSTE UN TABLEAUX CLASSIQU avec les informations qui résume bien l'experi
 {% endmacro %}
 
 
-{% macro afficheContenuEquipe() %}
+{% macro afficheContenuEquipe(membres) %}
 
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalCenter">
@@ -373,18 +373,45 @@ FAIRE JUSTE UN TABLEAUX CLASSIQU avec les informations qui résume bien l'experi
   </div>
 </div>
 
+<!-- Affichage des membres deja present-->
+<div class="row listeEquipe" >
 
-<row >
-  <div class="col-sm-4" style="background-color: aqua;" >
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis veritatis obcaecati amet at quas aperiam? Veniam, corrupti. Iusto illo earum asperiores! Est inventore facilis architecto facere ut, omnis amet iusto!
-  </div>
+  
+  {{afficheCarteMembreEquipe(membres)}}
 
-  <div class="col-sm-4" style="background-color: aqua;" >
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio eum fugit facere labore, omnis possimus! Dolor aspernatur nesciunt, doloribus quas rerum magni, quod sapiente excepturi itaque in odio, ipsam sed.
-  </div>
-</row>
+
+</div>
 
 
 
+
+{% endmacro %}
+
+
+{% macro afficheCarteMembreEquipe(membres) %}
+
+{% for membre in membres %}
+
+<div class="col-sm-5 carteMembreEquipe"  >
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">
+      <B> Nom</B> :{{membre.lastname}}
+    </li>
+    <li class="list-group-item">
+      <B> Prénom</B> : {{membre.firstname}}
+    </li>
+    <li class="list-group-item">
+     <B>Université  </B>: {{membre.universite}}
+    </li>
+    <li class="list-group-item">
+      <B> email </B>: {{membre.email}}
+    </li>
+  </ul>
+
+
+
+</div>
+
+{% endfor %}
 
 {% endmacro %}
