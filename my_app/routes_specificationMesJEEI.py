@@ -81,7 +81,7 @@ def fonction_specificationMesJEEI():
         newSpecificationId=Specification.query.order_by(Specification.id.desc()).first().id
         print("dernier eleent =",newSpecificationId)
         #je creer un JEEI et renseigne à quel specification il est lié (celle que je viens de creer)
-        monJEEIAEnvoyer=Jeei(None,None,None,fk_SpecificationId=newSpecificationId,fk_UserId=current_user.id)
+        monJEEIAEnvoyer=Jeei(None,None,None,fk_SpecificationId=newSpecificationId)
         db.session.add(monJEEIAEnvoyer)#sauve dans la DB
         db.session.commit()
         #je crée 10 test vides
