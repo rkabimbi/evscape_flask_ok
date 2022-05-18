@@ -21,6 +21,9 @@ class User(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethodes relativ
     #admin = db.Column(db.Boolean, nullable=False)
     firstname = db.Column(db.String(30), nullable=False)
     lastname = db.Column(db.String(30), nullable=False)
+    titre = db.Column(db.String(30), nullable=True)
+    universite = db.Column(db.String(30), nullable=True)
+    rel_Jeei = relationship("Jeei", backref='User', uselist=False)
  
   
 
@@ -28,7 +31,7 @@ class User(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethodes relativ
     #r_enigme=db.relationship('Enigmes', backref=db.backref('auteur', lazy=True))#on dit que la relation c'est avec la classe Enigmes 
     
     
-    def __init__(self, username, firstname, lastname,password,email):
+    def __init__(self, username, firstname, lastname,password,email,titre,universite):
 
         self.username = username
         self.email = email
@@ -36,6 +39,8 @@ class User(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethodes relativ
         self.firstname = firstname
         self.lastname = lastname
         self.dateCreation= datetime.today() 
+        self.titre = titre
+        self.universite=universite
     
 
 

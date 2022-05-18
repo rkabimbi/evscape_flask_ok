@@ -21,12 +21,13 @@ function fonction_affichageMesJEEI(numPager, listeMesJEEI,nbrPagesTotal,nbrJEEI)
         console.log("page")
         console.log(listeMesJEEI.img[(indexDBSol+i)])
         document.getElementById("carteMesJEEI"+i).style.visibility = "visible";//si je mets pas ca. Quand on passe de la dernière à une page avant ca n'affiche plus tout car ca reste invisible
+        document.getElementById("concepteurMesJEEI"+i).innerHTML="<B> Concepteur</B> : "+listeMesJEEI.auteurs[(indexDBSol+i)]
         document.getElementById("nomMesJEEI"+i).innerHTML=listeMesJEEI.noms[(indexDBSol+i)]
         document.getElementById("imgMesJEEI"+i).innerHTML='<img   src='+listeMesJEEI.img[(indexDBSol+i)]+' class="card-img-top imgCardMesJEEI"  alt="...">'
-        document.getElementById("themeMesJEEI"+i).innerHTML=listeMesJEEI.themes[(indexDBSol+i)]
-        document.getElementById("statutMesJEEI"+i).innerHTML=listeMesJEEI.statuts[(indexDBSol+i)]
+        document.getElementById("themeMesJEEI"+i).innerHTML="<B> Thème</B> : "+listeMesJEEI.themes[(indexDBSol+i)]
+        document.getElementById("statutMesJEEI"+i).innerHTML="<B> Score Global</B> :"+listeMesJEEI.statuts[(indexDBSol+i)]
         document.getElementById("descriptifMesJEEI"+i).innerHTML=listeMesJEEI.descriptifs[(indexDBSol+i)]
-        document.getElementById("nbrExperimentationsMesJEEI"+i).innerHTML=listeMesJEEI.nbrExperimentations[(indexDBSol+i)]
+        document.getElementById("nbrExperimentationsMesJEEI"+i).innerHTML="<B> Nbr Experimentations</B> :"+listeMesJEEI.nbrExperimentations[(indexDBSol+i)]
     }
     
     //regler le probleme de la dernière page qui peut contenir moins de 4 elements (suite)

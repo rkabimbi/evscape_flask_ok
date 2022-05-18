@@ -9,11 +9,13 @@
       <div id={{"imgMesJEEI"+indexCarteAffichage}} style="height: 10rem;" > 
         <img   src={{listeMesJEEI.img[indexJEEIDB]}} class="card-img-top imgCardMesJEEI"  alt="..." >
       </div>
+      
       <div class="card-body">
         <h5 id={{"nomMesJEEI"+indexCarteAffichage}} class="card-title"><B> {{listeMesJEEI.noms[indexJEEIDB]}}</B></h5>
         <p id={{"descriptifMesJEEI"+indexCarteAffichage}} class="card-text">{{listeMesJEEI.descriptifs[indexJEEIDB]}}</p>
       </div>
       <ul class="list-group list-group-flush">
+        <li id={{"concepteurMesJEEI"+indexCarteAffichage}} class="list-group-item"><B> Concepteur</B> :  {{listeMesJEEI.auteurs[indexJEEIDB]}}</li>
         <li id={{"themeMesJEEI"+indexCarteAffichage}} class="list-group-item"><B> Thème</B> :  {{listeMesJEEI.themes[indexJEEIDB]}}</li>
         <li id={{"statutMesJEEI"+indexCarteAffichage}} class="list-group-item"><B> Score Global</B> : 83 </li>
         <li id={{"nbrExperimentationsMesJEEI"+indexCarteAffichage}} class="list-group-item"><B> Nbr Experimentations</B> : {{listeMesJEEI.nbrExperimentations[indexJEEIDB]}}</li>

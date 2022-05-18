@@ -60,13 +60,13 @@ def function_lancementDBFictive():
     db.drop_all()
     db.create_all()
 
-    utilisateur=User(username="rootroot",firstname="Brandon",lastname="Walsh",password=generate_password_hash("rootrootroot", "sha256"),email="BrandoWalsh@BeverlyHills90210.com")
+    utilisateur=User(username="rootroot",firstname="Rudy",lastname="KABIMBI",password=generate_password_hash("rootrootroot", "sha256"),email="rudykabimbi@evscApp.edu",titre="chercheur",universite="Unamur")
     db.session.add(utilisateur)#sauve dans la DB
     db.session.commit()
-    utilisateur=User(username="prudence",firstname="Nick",lastname="Carter",password=generate_password_hash("rootrootroot", "sha256"),email="NickCarter@BackstreeBoys.com")
+    utilisateur=User(username="gyernaux",firstname="Gonzague",lastname="Yernaux",password=generate_password_hash("rootrootroot", "sha256"),email="gonzagueyernaux@evscApp.edu",titre="assistant",universite="Unamur")
     db.session.add(utilisateur)#sauve dans la DB
     db.session.commit()
-    utilisateur=User(username="BSpears",firstname="Britney",lastname="Spears",password=generate_password_hash("rootrootroot", "sha256"),email="brittney@yahoo.com")
+    utilisateur=User(username="bvandezande",firstname="Bart",lastname="Vandezande",password=generate_password_hash("rootrootroot", "sha256"),email="bvandz@kul.com",titre="assistant",universite="KUL")
     db.session.add(utilisateur)#sauve dans la DB
     db.session.commit()
 
@@ -78,50 +78,50 @@ def function_lancementDBFictive():
 
 
     #CREA De JEEI
-    specification= Specification(nbrJoueursMax=4,nbrJoueursMin=2,budget=500,dureeMinutes=150, publicCible=PublicCible.MASTER,theme=Theme.MATHEMATIQUE,scenario="scenario de test",chapitre="chapitre test",statut=Statut.ENCOURS,documentation='')
+    specification= Specification(nbrJoueursMax=4,nbrJoueursMin=2,budget=500,dureeMinutes=150, publicCible=PublicCible.MASTER,theme=Theme.MATHEMATIQUE,scenario="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pellentesque mollis nisi ut maximus. Duis convallis volutpat erat, vel quis.",chapitre="Logique propositionelle",statut=Statut.ENCOURS,documentation='')
     db.session.add(specification)#sauve dans la DB
     db.session.commit()
-    specification= Specification(nbrJoueursMax=3,nbrJoueursMin=2,budget=58500,dureeMinutes=120, publicCible=PublicCible.PRIMAIRE,theme=Theme.SECURITEIT,scenario="scenario de test1",chapitre="chiffrement de cesar",statut=Statut.ENCOURS,documentation='')
+    specification= Specification(nbrJoueursMax=3,nbrJoueursMin=2,budget=5500,dureeMinutes=120, publicCible=PublicCible.PRIMAIRE,theme=Theme.SECURITEIT,scenario="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pellentesque mollis nisi ut maximus. Duis convallis volutpat erat, vel quis.",chapitre="chiffrement de cesar",statut=Statut.ENCOURS,documentation='')
     db.session.add(specification)#sauve dans la DB
     db.session.commit()
-    specification= Specification(nbrJoueursMax=8,nbrJoueursMin=1,budget=1500,dureeMinutes=60,statut=Statut.PRET, publicCible=PublicCible.SECONDAIRE,theme=Theme.INGENIRIELOGICIEL,scenario="scenario de test2",chapitre="Modelisation",documentation='')
+    specification= Specification(nbrJoueursMax=8,nbrJoueursMin=1,budget=1500,dureeMinutes=60,statut=Statut.PRET, publicCible=PublicCible.SECONDAIRE,theme=Theme.INGENIRIELOGICIEL,scenario="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pellentesque mollis nisi ut maximus. Duis convallis volutpat erat, vel quis.",chapitre="Diagramme de classe",documentation='')
 
     db.session.add(specification)#sauve dans la DB
     db.session.commit()
-    specification= Specification(nbrJoueursMax=4,nbrJoueursMin=2,budget=50850,dureeMinutes=100, publicCible=PublicCible.MASTER,theme=Theme.ALGORITHMIE,scenario="scenario de test3",chapitre="preuve",statut=Statut.ENCOURS,documentation='')
+    specification= Specification(nbrJoueursMax=4,nbrJoueursMin=2,budget=850,dureeMinutes=100, publicCible=PublicCible.MASTER,theme=Theme.ALGORITHMIE,scenario="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pellentesque mollis nisi ut maximus. Duis convallis volutpat erat, vel quis.",chapitre="Recursivité",statut=Statut.ENCOURS,documentation='')
     db.session.add(specification)#sauve dans la DB
     db.session.commit()
-    specification= Specification(nbrJoueursMax=4,nbrJoueursMin=2,budget=500,dureeMinutes=150,statut=Statut.PRET, publicCible=PublicCible.BACCALAUREAT,theme=Theme.PROGRAMMATION,scenario="scenario de test",chapitre="chapitre test",documentation='')
-
-    db.session.add(specification)#sauve dans la DB
-    db.session.commit()
-    specification= Specification(nbrJoueursMax=18,nbrJoueursMin=2,budget=25800,dureeMinutes=150, publicCible=PublicCible.BACCALAUREAT,theme=Theme.ALGORITHMIE,scenario="scenario de test",chapitre="ce que tu veux",statut=Statut.ENCOURS,documentation='')
+    specification= Specification(nbrJoueursMax=4,nbrJoueursMin=2,budget=500,dureeMinutes=150,statut=Statut.PRET, publicCible=PublicCible.BACCALAUREAT,theme=Theme.PROGRAMMATION,scenario="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pellentesque mollis nisi ut maximus. Duis convallis volutpat erat, vel quis.",chapitre="Orienté objet",documentation='')
 
     db.session.add(specification)#sauve dans la DB
     db.session.commit()
+    specification= Specification(nbrJoueursMax=18,nbrJoueursMin=2,budget=2800,dureeMinutes=150, publicCible=PublicCible.BACCALAUREAT,theme=Theme.ALGORITHMIE,scenario="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pellentesque mollis nisi ut maximus. Duis convallis volutpat erat, vel quis.",chapitre="Complexité",statut=Statut.ENCOURS,documentation='')
+
+    db.session.add(specification)#sauve dans la DB
+    db.session.commit()
 
 
-    jeei=Jeei(nom="Descape The Real Deal",img="static/img/imgLoginPage2.png",descriptif="le meilleur EG de tous les temps",fk_SpecificationId=1)
+    jeei=Jeei(nom="DesKape",img="static/img/img1.png",descriptif="Retrouvez les copies d'examen",fk_SpecificationId=1,fk_UserId=1)
     db.session.add(jeei)#sauve dans la DB
     db.session.commit()
 
-    jeei=Jeei(nom="Unbox",img="static/img/JEEITest1.jpeg",descriptif="le meilleur EG de tous les temps1",fk_SpecificationId=2)
+    jeei=Jeei(nom="Unbox",img="static/img/img2.png",descriptif="Les poupées russes vous feront perdre la tête",fk_SpecificationId=2,fk_UserId=2)
     db.session.add(jeei)#sauve dans la DB
     db.session.commit()
 
-    jeei=Jeei(nom="Welcome to the hood",img="static/img/JEEITest2.jpeg",descriptif="le meilleur EG de tous les temps1",fk_SpecificationId=3)
+    jeei=Jeei(nom="The green house",img="static/img/img3.png",descriptif="Un jeu qui vous en fera voir de toutes les couleursimg",fk_SpecificationId=3,fk_UserId=1)
     db.session.add(jeei)#sauve dans la DB
     db.session.commit()
 
-    jeei=Jeei(nom="Castramix",img="static/img/JEEITest1.jpeg",descriptif="le meilleur EG de tous les temps3",fk_SpecificationId=4)
+    jeei=Jeei(nom="Algorithmo Express",img="static/img/img4.png",descriptif="Entrez dans les méandres de la récursivité",fk_SpecificationId=4,fk_UserId=1)
     db.session.add(jeei)#sauve dans la DB
     db.session.commit()
 
-    jeei=Jeei(nom="The Stranger Thhings",img="static/img/imgLoginPage2.png",descriptif="le meilleur EG de tous les temps4",fk_SpecificationId=5)
+    jeei=Jeei(nom="The Stranger Things",img="static/img/img5.png",descriptif="Inspirez de la série TV",fk_SpecificationId=5,fk_UserId=2)
     db.session.add(jeei)#sauve dans la DB
     db.session.commit()
 
-    jeei=Jeei(nom="Descape Basics",img="static/img/JEEITest1.jpeg",descriptif="le meilleur EG de tous les temps5",fk_SpecificationId=6)
+    jeei=Jeei(nom="Descape Basics",img="static/img/img6.png",descriptif="Un jeu simple mais éfficace",fk_SpecificationId=6,fk_UserId=2)
     db.session.add(jeei)#sauve dans la DB
     db.session.commit()
 

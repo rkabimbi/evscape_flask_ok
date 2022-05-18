@@ -22,17 +22,19 @@ class Jeei(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethodes relativ
 
     dateCreation= db.Column(db.Date, nullable=False)
     fk_SpecificationId = db.Column(db.Integer, db.ForeignKey('Specification.id'),nullable=False)#db.foreignkey : c'est l'id de l'autre table et le nom de la table correspond à la back ref
+    fk_UserId = db.Column(db.Integer, db.ForeignKey('User.id'),nullable=True)
 
   
     
     
-    def __init__(self, nom,img,descriptif,fk_SpecificationId):
+    def __init__(self, nom,img,descriptif,fk_SpecificationId,fk_UserId):
 
         self.nom = nom
         self.img = img
         self.descriptif = descriptif
         self.dateCreation= datetime.today() 
         self.fk_SpecificationId=fk_SpecificationId
+        self.fk_UserId=fk_UserId
     
     
     def __repr__(self):#toString

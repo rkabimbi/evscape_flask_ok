@@ -49,6 +49,7 @@ def fonction_mesJEEI():
     #Extraction des données (on gagne en manipulation et rapidité en chargeant tt d'abord)
     mesJEEI=Jeei.query.all()
     specifications= Specification.query.all()
+    #users= User.query.all()
 
 
     #Step1 - Rechercher dans DB que tous les JEEI propres à l'utilisateurs connectés. Quand on dit PROPRES càd ceux qu'il a crée ou ceux
@@ -84,7 +85,10 @@ def fonction_conversionSQLDICT(mesJEEI,specifications):
 
     for JEEI in mesJEEI:
         res["noms"].append(JEEI.nom)
-        res["auteurs"].append("Rudy")
+        idCreateur=JEEI.fk_UserId
+        createur=User.query.filter_by(id=idCreateur).first()
+        createur=createur.lastname+", "+createur.firstname
+        res["auteurs"].append(createur)
         res["nbrExperimentations"].append(10) # en attendant d'avoir les tables qu'il faut
         if specifications[JEEI.fk_SpecificationId-1].theme!=None:#si y a pas de value selectionnée par l'utilisateur et qu'on a donc un JEEI sans thème alors ici quand il va faire la fonction .value ca va bugguer
             res["themes"].append(specifications[JEEI.fk_SpecificationId-1].theme.value)#-1 car la liste commence à zero et .value c'est pour recuperer le string de l'enum

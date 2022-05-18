@@ -185,7 +185,7 @@
 
   <!-- Fichier upload-->
   <div class="row mb-3">
-    <label class="col-sm-2 form-label" for="documentationPdfMonJEEI" >Documentation</label>
+    <label class="col-sm-2 form-label" for="documentationPdfMonJEEI" >Documentation </label>
     <!--action = nom de la route où ca nous mene -->
     <form action="uploadFilePdf?idJEEI={{monJEEI.id}}" method="post" enctype=multipart/form-data>
       
@@ -336,53 +336,55 @@ FAIRE JUSTE UN TABLEAUX CLASSIQU avec les informations qui résume bien l'experi
 
 {% macro afficheContenuEquipe() %}
 
-<form id="idFormulaireContenuListeExperimentations" class="formulaireSpecificationMesJEEI">
-    <div class="row mb-3">
-      <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
-      <div class="col-sm-10">
-        <input type="email" class="form-control" id="inputEmail3">
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalCenter">
+  Ajouter membre
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Ajout de membre</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <label for="nomMembreEquipe" class="col-sm-2 col-form-label" >Nom</label>
+        <input type="text" class="form-control" id="nomMembreEquipe"  value=""   style="color:grey" >
+
+        <label for="prenomMembreEquipe" class="col-sm-2 col-form-label" >Prénom</label>
+        <input type="text" class="form-control" id="prenomMembreEquipe"  value=""   style="color:grey" >
+
+        <label for="emailMembreEquipe" class="col-sm-2 col-form-label" >email</label>
+        <input type="text" class="form-control" id="emailMembreEquipe"  value=""   style="color:grey" >
+
+        <label for="universiteMembreEquipe" class="col-sm-2 col-form-label" >Universite</label>
+        <input type="text" class="form-control" id="universiteMembreEquipe"  value=""   style="color:grey" >
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        <button type="button" class="btn btn-warning">Sauver</button>
       </div>
     </div>
-    <div class="row mb-3">
-      <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
-      <div class="col-sm-10">
-        <input type="password" class="form-control" id="inputPassword3">
-      </div>
-    </div>
-    <fieldset class="row mb-3">
-      <legend class="col-form-label col-sm-2 pt-0">Radios</legend>
-      <div class="col-sm-10">
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-          <label class="form-check-label" for="gridRadios1">
-            First radio
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-          <label class="form-check-label" for="gridRadios2">
-            Second radio
-          </label>
-        </div>
-        <div class="form-check disabled">
-          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" disabled>
-          <label class="form-check-label" for="gridRadios3">
-            Third disabled radio
-          </label>
-        </div>
-      </div>
-    </fieldset>
-    <div class="row mb-3">
-      <div class="col-sm-10 offset-sm-2">
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="gridCheck1">
-          <label class="form-check-label" for="gridCheck1">
-            Example checkbox
-          </label>
-        </div>
-      </div>
-    </div>
-    <button type="submit" class="btn btn-primary">Sign in</button>
-  </form>
+  </div>
+</div>
+
+
+<row >
+  <div class="col-sm-4" style="background-color: aqua;" >
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis veritatis obcaecati amet at quas aperiam? Veniam, corrupti. Iusto illo earum asperiores! Est inventore facilis architecto facere ut, omnis amet iusto!
+  </div>
+
+  <div class="col-sm-4" style="background-color: aqua;" >
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio eum fugit facere labore, omnis possimus! Dolor aspernatur nesciunt, doloribus quas rerum magni, quod sapiente excepturi itaque in odio, ipsam sed.
+  </div>
+</row>
+
+
+
 
 {% endmacro %}

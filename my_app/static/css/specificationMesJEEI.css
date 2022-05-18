@@ -86,4 +86,18 @@ input[type="text"]:disabled{
     scrollbar-color: rebeccapurple green;
     
   }
+
+  .centree{
+      /*
+      flex-wrap: wrap ;
+      display : flex;
+      flex-direction: column;
+      */
+      margin-top: 10px;
+
+      /*
+        align-items: center;
+        justify-content: space-between;
+      */
+  }
   

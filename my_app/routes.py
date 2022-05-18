@@ -82,6 +82,8 @@ def fonction_inscription():
         
         firstname = formInscr.firstname.data 
         lastname = formInscr.lastname.data
+        universite=formInscr.universite.data
+        titre=formInscr.titre.data
         
         if User.query.filter_by(email=email).first():#verifier que l'email existe pas deja. Si je ne fais pas ça il va créer l'objet MAIS vu que dans la classe User j'ai bien mis que c'était unique ca va tt faire planter :D
             flash('Cette adresse email a déjà été utilisée', 'danger')
@@ -93,7 +95,7 @@ def fonction_inscription():
             return redirect(url_for('fonction_inscription'))   #il retourne à register (et donc ne crée pas dans la db)
         password = generate_password_hash(password, "sha256")#si pas de probleme avec email ou username alors il crypte le code"""
         
-        new_user = User(username=username,firstname=firstname, lastname=lastname,password=password,email=email)#crée l'utilisateur (je n'utilise pas de constructeur . je trouce cela plus clair comme ceci
+        new_user = User(username=username,firstname=firstname, lastname=lastname,password=password,email=email,titre=titre,universite=universite)#crée l'utilisateur (je n'utilise pas de constructeur . je trouce cela plus clair comme ceci
         print('utilisateur sauvé!!!!!!!')
         db.session.add(new_user)#sauve dans la DB
         db.session.commit()

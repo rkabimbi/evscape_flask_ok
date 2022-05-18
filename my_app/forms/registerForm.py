@@ -24,6 +24,8 @@ class FormRegister( FlaskForm ):
     password = PasswordField('Mot de passe:', validators=[Length(min=3, max=30,message='Votre mdp doit avoir une longueur de  %(min)d à %(max)d caractères')])
     passwordConfirmation = PasswordField('Confirmation Mot de passe:', validators=[Length(min=3, max=30), EqualTo('password',message='Veuillez verifier votre password car visiblement différent de celui tapé précédemment') ])
     #admin=BooleanField('Admin',default=1)
+    titre = StringField('Titre:', validators=[InputRequired(), Length(min=2, max=30,message='Votre titre doit avoir une longueur de  %(min)d à %(max)d caractères')])
+    universite = StringField('Universite:', validators=[InputRequired(), Length(min=2, max=30,message='Votre université doit avoir une longueur de  %(min)d à %(max)d caractères')])
 
     submit   = SubmitField('Enregistrer')
 

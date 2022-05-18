@@ -88,6 +88,13 @@
         {%for message in formulaireInscription.passwordConfirmation.errors%} <!-- pour chaque message d'erreurs générés-->
             <div class="alert alert-danger" role="alert">{{message}}  </div> <!-- on affiche le message prévu avec style-->   
         {%endfor%}
+        {%for message in formulaireInscription.titre.errors%} <!-- pour chaque message d'erreurs générés-->
+            <div class="alert alert-danger" role="alert">{{message}}  </div> <!-- on affiche le message prévu avec style-->   
+        {%endfor%}
+        {%for message in formulaireInscription.universite.errors%} <!-- pour chaque message d'erreurs générés-->
+            <div class="alert alert-danger" role="alert">{{message}}  </div> <!-- on affiche le message prévu avec style-->   
+         {%endfor%}
+        
         
     {%endif%}
 </div>
@@ -117,6 +124,10 @@
                     <div class="formulaire-row">{{ formulaireInscription.firstname.label }} {{ formulaireInscription.firstname(size=30, class='formulaire-control') }}</div>
                     
                     <div class="formulaire-row">{{ formulaireInscription.lastname.label }} {{ formulaireInscription.lastname(size=30, class='formulaire-control') }}</div>
+
+                    <div class="formulaire-row">{{ formulaireInscription.titre.label }} {{ formulaireInscription.titre(size=30, class='formulaire-control') }}</div>
+
+                    <div class="formulaire-row">{{ formulaireInscription.universite.label }} {{ formulaireInscription.universite(size=30, class='formulaire-control') }}</div>
     
                     <div class="formulaire-row">{{ formulaireInscription.email.label }} {{ formulaireInscription.email(size=60, class='formulaire-control') }}</div>
     

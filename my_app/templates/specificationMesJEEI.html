@@ -37,6 +37,9 @@
       <li id="navLinkEquipe" class="nav-item">
         <a class="nav-link nvSousPage" onclick="fonction_Equipe()">Equipe</a>
       </li>
+      <li>
+        <a class="btn btn-success" href="http://127.0.0.1:5000/ValiderMonJEEI?idJEEI={{monJEEIRecupere.id}}" role="button">Valider</a>
+      </li>
       
   </ul>
   
@@ -67,15 +70,15 @@
     </div>
     <div id="idContenuSousPageResultats">
       {{macro_specificationMesJEEI.afficheContenuResultats()}}
-      resultats
+      
     </div>
     <div id="idContenuSousPageListeExperimentations">
       {{macro_specificationMesJEEI.afficheContenuListeExperimentations()}}
-      Liste experiementation
+     
     </div>
     <div id="idContenuSousPageEquipe">
       {{macro_specificationMesJEEI.afficheContenuEquipe()}}
-      Equipe
+     
     </div>
 </row>
 
@@ -88,11 +91,10 @@
   <div class="btnGroupMesJEEIPresentation">
 
    
-      Faire un truc où c'est seulement si le JEEI est validé que les trois autres voutons apparaissent
  
    
   
-      <a class="btn btn-success" href="http://127.0.0.1:5000/ValiderMonJEEI?idJEEI={{monJEEIRecupere.id}}" role="button">Valider</a>
+
 
   </div>
 <row>
