@@ -1,7 +1,7 @@
 
 
 
-{% macro afficheContenuPresentation(monJEEI) %}
+{% macro afficheContenuPresentation(monJEEI,currentUser) %}
 
 
 
@@ -44,14 +44,11 @@
         <div class="col-sm-8">
           <input type="text" class="form-control" id="idNomMonJEEI"  value="{{monJEEI.nom}}"  onchange="fonction_sauvegardeTableJeei('idNomMonJEEI',{{monJEEI.id}})" style="color:grey" 
           {# if  est pour le cas où le jeei est valide alors on disabled#}
-          {% if monJEEI.estValide  %}
+          {% if monJEEI.estValide or currentUser.id is not sameas monJEEI.auteurID   %}
             disabled
           {% endif %}
           
-          {% if currentUser.id == monJEEI.auteurID %} 
-            disabled
-          {%endif%}
-       
+          
           
           > 
         </div>
@@ -85,7 +82,7 @@
 {% endmacro %}
 
 
-{% macro afficheContenuDocumentation(specification,monJEEI,theme,publicCible) %}
+{% macro afficheContenuDocumentation(specification,monJEEI,theme,publicCible,currentUser) %}
 
 
 
@@ -269,7 +266,7 @@
 
 
 
-{% macro afficheContenuTest(questions, monJEEI) %}
+{% macro afficheContenuTest(questions, monJEEI,currentUser) %}
 <div class="scroller" >
   {% for i in range(10) %}
     <form id="idFormulaireContenuTest" class="formulaireContenuTestMesJEEI " style="margin:25px">
@@ -411,7 +408,7 @@ FAIRE JUSTE UN TABLEAUX CLASSIQU avec les informations qui résume bien l'experi
 {% endmacro %}
 
 
-{% macro afficheContenuEquipe(membres,monJEEI) %}
+{% macro afficheContenuEquipe(membres,monJEEI,currentUser) %}
 
 <!-- Button trigger modal -->
 <div class="row rowEquipeFirst ">

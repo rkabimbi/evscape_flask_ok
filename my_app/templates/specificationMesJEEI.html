@@ -71,17 +71,17 @@
 
 <row>
     <div id="idContenuSousPagePresentation">
-      {{macro_specificationMesJEEI.afficheContenuPresentation(monJEEIRecupere)}}
+      {{macro_specificationMesJEEI.afficheContenuPresentation(monJEEIRecupere,currentUser)}}
       
     </div>
  
     <div id="idContenuSousPageDocumentation">
-      {{macro_specificationMesJEEI.afficheContenuDocumentation(specificationJEEIRecupere,monJEEIRecupere,theme,publicCible)}}
+      {{macro_specificationMesJEEI.afficheContenuDocumentation(specificationJEEIRecupere,monJEEIRecupere,theme,publicCible,currentUser)}}
       
     </div>
     
     <div id="idContenuSousPageTest">
-      {{macro_specificationMesJEEI.afficheContenuTest(questions,monJEEIRecupere)}}
+      {{macro_specificationMesJEEI.afficheContenuTest(questions,monJEEIRecupere,currentUser)}}
      
     </div>
     <div id="idContenuSousPageResultats">
@@ -93,7 +93,7 @@
      
     </div>
     <div id="idContenuSousPageEquipe">
-      {{macro_specificationMesJEEI.afficheContenuEquipe(membres,monJEEIRecupere)}}
+      {{macro_specificationMesJEEI.afficheContenuEquipe(membres,monJEEIRecupere,currentUser)}}
      
     </div>
 </row>
