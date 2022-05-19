@@ -15,7 +15,7 @@ class User(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethodes relativ
     __tablename__ = 'User' #pour renomr la table "enigme""
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True)
+    email = db.Column(db.String(120))
     password = db.Column(db.String(250), nullable=False)
     dateCreation= db.Column(db.Date, nullable=True)
     #admin = db.Column(db.Boolean, nullable=False)

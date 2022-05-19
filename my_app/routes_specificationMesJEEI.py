@@ -293,18 +293,24 @@ def fonction_sauvegardeNouveauMembre():
     membreEmail=request.args.get("membreEmail")
     idJeei= request.args.get("idJeei")
     reponse="nok"
-    if User.query.filter_by(email=membreEmail).first(): #si il y a qq ds la DB qui a cette adresse
-        #alors on ne fait rien
-        print("existe deja")
+  
+    #on recupere tt les membres de l'équipe à ce stade
+    jeei = Jeei.query.filter_by(id=idJeei).first()
+    jointuresJeeiUser= JointureJeeiUser.query.filter_by(fk_JeeiId=jeei.id).all()
+    print(jointuresJeeiUser)
+    existeDeja=False
+    #on va verifier si dans les lien entre JEEI et User concernant ce Jeei ci il y a pas qq soit qui a les memes nom soit qui a la meme adresse -->si c'est le cas on ajoute pas (reponse reste "nok")
+    for assignation in jointuresJeeiUser:
+        membre=assignation.fk_UserId
         
-    if User.query.filter_by(firstname=membrePrenom).first():
-        if User.query.filter_by(lastname=membreNom).first():
-            if User.query.filter_by(universite=membreUniversite).first():#si il y a qq ds la DB qui a cette adresse
-                #alors on ne fait rien
-                print("existe deja")
-               
-    
-    else:
+        user = User.query.filter_by(id=membre).first()
+        print(user)
+        if user.email.lower() == membreEmail.lower() or (user.lastname.lower()==membreNom.lower() and user.firstname.lower()==membrePrenom.lower() and user.universite.lower() == membreUniversite.lower()):
+            existeDeja=True
+            print("EXISTE DEJA !!!!!!")
+
+
+    if not existeDeja:
         new_user = User(username=str(membreNom+membrePrenom),firstname=membrePrenom, lastname=membreNom,password=pwd(10,True,True,True,True),email=membreEmail,titre="",universite=membreUniversite)#crée l'utilisateur (je n'utilise pas de constructeur . je trouce cela plus clair comme ceci
         print('utilisateur sauvé!!!!!!!')
         print(new_user)

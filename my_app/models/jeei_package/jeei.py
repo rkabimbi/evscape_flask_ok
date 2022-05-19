@@ -19,7 +19,7 @@ class Jeei(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethodes relativ
     nom = db.Column(db.String(80),  nullable=True,default=' ')#nullable pour qu'il puisse creer à vide + Je mets le points pcq sinon dans ele HTML ca pose probleme pr afficher les cartes avec du NONe
     img = db.Column(db.String(120), nullable=True, default=' ')# Je mets le points pcq sinon dans ele HTML ca pose probleme pr afficher les cartes avec du NONe
     descriptif = db.Column(db.String(140),  nullable=True, default=' ')# Je mets le points pcq sinon dans ele HTML ca pose probleme pr afficher les cartes avec du NONe
-
+    estValide =db.Column(db.Boolean,default=False, nullable=False)
     dateCreation= db.Column(db.Date, nullable=False)
     fk_SpecificationId = db.Column(db.Integer, db.ForeignKey('Specification.id'),nullable=False)#db.foreignkey : c'est l'id de l'autre table et le nom de la table correspond à la back ref
     rel_JointureJeeiUser = relationship("JointureJeeiUser", backref='Jeei', uselist=False)
@@ -44,7 +44,7 @@ class Jeei(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethodes relativ
     
     
     def __repr__(self):#toString
-        return "( id = %s, nom = %s , img=%s, descriptif=%s,dateCreation=%s,fk_SpecificationId=%s)\n" % ( self.id, self.nom,self.img,self.descriptif,self.dateCreation,self.fk_SpecificationId)
+        return "( id = %s, nom = %s , img=%s, descriptif=%s,dateCreation=%s,fk_SpecificationId=%s, estValide=%s)\n" % ( self.id, self.nom,self.img,self.descriptif,self.dateCreation,self.fk_SpecificationId,self.estValide)
 
 
 

@@ -398,6 +398,7 @@ function afficherLeNouveauMembre(responseText)
         if (responseText=="nok")
         {
             console.log("chercheur deja ajouté")
+            document.getElementById("flashModalMembreexistant").innerHTML="<div class='alert alert-warning' style = 'margin-left:25px'role='alert'> Cet utilisateur est déjà assigné à ce projet </div>"
         }
         else
         {
