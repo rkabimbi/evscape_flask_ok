@@ -63,7 +63,7 @@
             <textarea style="color:rgb(79, 79, 79)" class="form-control" id="idDescriptifMonJEEI" maxlength='140'rows="4" 
               onchange='fonction_sauvegardeTableJeei("idDescriptifMonJEEI",{{monJEEI.id}})'style="color:grey" 
               {# if  est pour le cas où le jeei est valide alors on disabled#}
-              {% if monJEEI.estValide %}
+              {% if monJEEI.estValide or currentUser.id is not sameas monJEEI.auteurID %}
               disabled
               {% endif %}> 
           {{monJEEI.descriptif}}</textarea> 
@@ -92,7 +92,7 @@
     <div class="col-sm-2">
       <input type="number" class="form-control" id="idNbrJoueursMinMonJEEI" value="{{specification.nbrJoueursMin}}" onchange="fonction_sauvegardeTableJeei('idNbrJoueursMinMonJEEI',{{monJEEI.id}})" style="color:grey"
       {# if  est pour le cas où le jeei est valide alors on disabled#}
-          {% if monJEEI.estValide %}
+          {% if monJEEI.estValide or currentUser.id is not sameas monJEEI.auteurID %}
             disabled
           {% endif %}>
     </div>
@@ -104,7 +104,7 @@
     <div class="col-sm-2">
       <input type="number" class="form-control" id="idNbrJoueursMaxMonJEEI" value="{{specification.nbrJoueursMax}}" onchange="fonction_sauvegardeTableJeei('idNbrJoueursMaxMonJEEI',{{monJEEI.id}})" style="color:grey"
       {# if  est pour le cas où le jeei est valide alors on disabled#}
-          {% if monJEEI.estValide %}
+          {% if monJEEI.estValide or currentUser.id is not sameas monJEEI.auteurID %}
             disabled
           {% endif %}>
     </div>
@@ -120,7 +120,7 @@
     <div class="col-sm-2">
       <input type="number" class="form-control" id="idBudgetMonJEEI" value="{{specification.budget}}"onchange="fonction_sauvegardeTableJeei('idBudgetMonJEEI',{{monJEEI.id}})" style="color:grey"
       {# if  est pour le cas où le jeei est valide alors on disabled#}
-          {% if monJEEI.estValide %}
+          {% if monJEEI.estValide or currentUser.id is not sameas monJEEI.auteurID %}
             disabled
           {% endif %}>
     </div>
@@ -133,7 +133,7 @@
      
       <input type="number" class="form-control" id="idDureeMinutesMonJEEI" value="{{specification.dureeMinutes}}" onchange="fonction_sauvegardeTableJeei('idDureeMinutesMonJEEI',{{monJEEI.id}})" style="color:grey"
       {# if  est pour le cas où le jeei est valide alors on disabled#}
-          {% if monJEEI.estValide %}
+          {% if monJEEI.estValide or currentUser.id is not sameas monJEEI.auteurID %}
             disabled
           {% endif %}>
     </div>
@@ -149,7 +149,7 @@
         <textarea class="form-control" id="idScenarioMonJEEI" maxlength='140'rows="4" 
           onchange='fonction_sauvegardeTableJeei("idScenarioMonJEEI",{{monJEEI.id}})'style="color:grey"
           {# if  est pour le cas où le jeei est valide alors on disabled#}
-          {% if monJEEI.estValide %}
+          {% if monJEEI.estValide or currentUser.id is not sameas monJEEI.auteurID %}
             disabled
           {% endif %}> {{specification.scenario}}</textarea> 
     </div>
@@ -165,7 +165,7 @@
       
       <select class="form-select form-select-lg mb-3 " aria-label=".form-select-lg example" id="idPublicCibleMonJEEI" onchange='fonction_sauvegardeTableJeei("idPublicCibleMonJEEI",{{monJEEI.id}})' selected="{{specification.publicCible.name}}" style="color:grey"
       {# if  est pour le cas où le jeei est valide alors on disabled#}
-          {% if monJEEI.estValide %}
+          {% if monJEEI.estValide or currentUser.id is not sameas monJEEI.auteurID %}
             disabled
           {% endif %}>
         <!-- si specification.publicCibleName (ce qui vient dela DB) == publicName (nom du champs) alors tu dis que c'est le "selected"-->
@@ -183,7 +183,7 @@
     <div class="col-sm-2">
       <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="idThemeMonJEEI" onchange='fonction_sauvegardeTableJeei("idThemeMonJEEI",{{monJEEI.id}})' selected="{{specification.theme.name}}" 
       {# if  est pour le cas où le jeei est valide alors on disabled#}
-          {% if monJEEI.estValide %}
+          {% if monJEEI.estValide or currentUser.id is not sameas monJEEI.auteurID %}
             disabled
           {% endif %}>
         <!-- si specification.publicCibleName (ce qui vient dela DB) == publicName (nom du champs) alors tu dis que c'est le "selected"-->
@@ -210,7 +210,7 @@
         <div class="col-sm-8">
           <input type="text" class="form-control" id="idChapitreMonJEEI"  value="{{specification.chapitre}}"  onchange="fonction_sauvegardeTableJeei('idChapitreMonJEEI',{{monJEEI.id}})" style="color:grey"
           {# if  est pour le cas où le jeei est valide alors on disabled#}
-          {% if monJEEI.estValide %}
+          {% if monJEEI.estValide or currentUser.id is not sameas monJEEI.auteurID %}
             disabled
           {% endif %} > 
         </div>
@@ -237,7 +237,7 @@
       <input type="file" name="file" label="documentation" style="color:grey">
       <input type="submit" id="idBtnChargezSpec" value="Chargez" class="btn btn-secondary  file-upload-btn" id= "idDocMonJEEI"style="cursor :pointer" 
       {# if  est pour le cas où le jeei est valide alors on disabled#}
-          {% if monJEEI.estValide %}
+          {% if monJEEI.estValide or currentUser.id is not sameas monJEEI.auteurID %}
             disabled
           {% endif %}> 
       {%if specification.documentation is defined %}
@@ -278,7 +278,7 @@
           <div class="col-sm-8">
             <input type="text" class="form-control testQuestion"  id={{"idTestQuestionMonJEEI"~ questions[i].id}}  value="{{questions[i].question}}"   style="color:grey" onchange="fonction_sauvegardeSpecificationTest('question','idTestQuestionMonJEEI',{{questions[i].id}})" 
             {# if  est pour le cas où le jeei est valide alors on disabled#}
-          {% if monJEEI.estValide %}
+          {% if monJEEI.estValide or currentUser.id is not sameas monJEEI.auteurID %}
             disabled
           {% endif %}> 
           </div>
@@ -295,7 +295,7 @@
         <div class="col-sm-8">
           <input type="text" class="form-control testQuestion"  id={{"idTestSolutionCorrecteMonJEEI"~ questions[i].id }} value="{{questions[i].solutionCorrecte}}"   style="color:grey" onchange="fonction_sauvegardeSpecificationTest('solution','idTestSolutionCorrecteMonJEEI',{{questions[i].id}})"
           {# if  est pour le cas où le jeei est valide alors on disabled#}
-          {% if monJEEI.estValide %}
+          {% if monJEEI.estValide or currentUser.id is not sameas monJEEI.auteurID %}
             disabled
           {% endif %}> 
         </div>
@@ -313,7 +313,7 @@
         
           <textarea class="form-control testQuestion"  id={{"idExplicatifMonJEEI"~ questions[i].id}} maxlength='140'rows="4" style="color:grey" onchange="fonction_sauvegardeSpecificationTest('explicatif','idExplicatifMonJEEI',{{questions[i].id}})"
           {# if  est pour le cas où le jeei est valide alors on disabled#}
-          {% if monJEEI.estValide %}
+          {% if monJEEI.estValide or currentUser.id is not sameas monJEEI.auteurID %}
             disabled
           {% endif %}>
            {{questions[i].explicatif}} </textarea> 
@@ -334,7 +334,7 @@
         <div class="col-sm-8">
           <input type="text" class="form-control testQuestion"  id={{"idSolutionIncorrecteMonJEEI"~ questions[i].id}}  value="{{questions[i].solutionIncorrecte1}}"   style="color:grey" onchange="fonction_sauvegardeSpecificationTest('solutionIncorrecte1','idSolutionIncorrecteMonJEEI',{{questions[i].id}})"
           {# if  est pour le cas où le jeei est valide alors on disabled#}
-          {% if monJEEI.estValide %}
+          {% if monJEEI.estValide or currentUser.id is not sameas monJEEI.auteurID %}
             disabled
           {% endif %}> 
         </div>
@@ -350,7 +350,7 @@
         <div class="col-sm-8">
           <input type="text" class="form-control testQuestion"  id={{"idSolutionIncorrecteMonJEEI2"~ questions[i].id}}  value="{{questions[i].solutionIncorrecte2}}"   style="color:grey" onchange="fonction_sauvegardeSpecificationTest('solutionIncorrecte2','idSolutionIncorrecteMonJEEI2',{{questions[i].id}})"
           {# if  est pour le cas où le jeei est valide alors on disabled#}
-          {% if monJEEI.estValide %}
+          {% if monJEEI.estValide or currentUser.id is not sameas monJEEI.auteurID %}
             disabled
           {% endif %}> 
         </div>
@@ -365,7 +365,7 @@
         <div class="col-sm-8">
           <input type="text" class="form-control testQuestion"  id={{"idSolutionIncorrecteMonJEEI3"~ questions[i].id}}  value="{{questions[i].solutionIncorrecte3}}"   style="color:grey" onchange="fonction_sauvegardeSpecificationTest('solutionIncorrecte3','idSolutionIncorrecteMonJEEI3',{{questions[i].id}})"
           {# if  est pour le cas où le jeei est valide alors on disabled#}
-          {% if monJEEI.estValide %}
+          {% if monJEEI.estValide or currentUser.id is not sameas monJEEI.auteurID %}
             disabled
           {% endif %}> 
         </div>
@@ -414,7 +414,7 @@ FAIRE JUSTE UN TABLEAUX CLASSIQU avec les informations qui résume bien l'experi
 <div class="row rowEquipeFirst ">
   <button type="button" style="height : 40px"class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalCenter" id="idBtnModalEquipe"
   {# if  est pour le cas où le jeei est valide alors on disabled#}
-          {% if monJEEI.estValide %}
+          {% if monJEEI.estValide or currentUser.id is not sameas monJEEI.auteurID %}
             disabled
           {% endif %} >
     Ajouter membre
