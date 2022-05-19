@@ -348,3 +348,70 @@ function reponseBackEndTest(responseText, champs,idTest)
   
     
 }
+
+function fonction_ajouterMembreEquipe(id)
+{
+    console.log("id JEEI :"+id)
+
+    let membre=
+       { nom:"",
+        prenom:"",
+        email:"",
+        universite:""}
+    
+    //membre=[]
+
+    membre.nom=document.getElementById("nomMembreEquipeModal").value
+    membre.prenom=document.getElementById("prenomMembreEquipeModal").value
+    membre.email=document.getElementById("emailMembreEquipeModal").value
+    membre.universite=document.getElementById("universiteMembreEquipeModal").value
+
+    //membre=JSON.stringify(membre);
+    console.log("donnees du modal")
+    console.log(membre.nom)
+
+    
+    
+    
+    
+    var xhttp = new XMLHttpRequest( );
+    let url = new URL('http://127.0.0.1:5000/sauvegardeNouveauMembre?idJeei='+ id+'&membreNom='+membre.nom +'&membrePrenom='+membre.prenom +'&membreEmail='+membre.email +'&membreUniversite='+membre.universite);  
+    xhttp.open("GET", url.toString(), true);
+    xhttp.send()
+    xhttp.onreadystatechange = function()
+    { 
+        if (this.readyState == 4 && this.status == 200) 
+        {
+            afficherLeNouveauMembre(this.responseText)   
+        }
+    };
+
+}
+
+
+function afficherLeNouveauMembre(responseText)
+{
+        console.log("afficherLeNouveauMembre")
+        console.log(responseText)
+        //console.log(champs)
+        //console.log(responseText)
+       
+        var fichJsonParse=JSON.parse(responseText);//parsing du fichier JSON envoyé par jsonify
+        //console.log(fichJsonParse.reponse, champs)//
+        console.log(fichJsonParse)
+
+        //je recup dans une variable la liste actuelle et j'y ajoute mon new membre
+        listeMembre = document.getElementById("listeEquipe").innerHTML
+
+        newmembre =recreationMembreHTML(fichJsonParse)
+
+        document.getElementById("listeEquipe").innerHTML= listeMembre + newmembre
+        
+        
+}
+
+
+function recreationMembreHTML(membre)
+{
+    return '<div class="col-sm-5 carteMembreEquipe"  > <ul class="list-group list-group-flush"> <li class="list-group-item"> <B> Nom</B> :'+membre.reponse.nom+' </li> <li class="list-group-item"> <B> Prénom</B> :'+membre.reponse.prenom+' </li> <li class="list-group-item"> <B>Université  </B>: '+membre.reponse.universite+' </li> <li class="list-group-item"> <B> email </B>: '+membre.reponse.email+' </li> </ul> </div>' 
+}

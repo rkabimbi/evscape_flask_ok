@@ -334,10 +334,10 @@ FAIRE JUSTE UN TABLEAUX CLASSIQU avec les informations qui résume bien l'experi
 {% endmacro %}
 
 
-{% macro afficheContenuEquipe(membres) %}
+{% macro afficheContenuEquipe(membres,monJEEI) %}
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalCenter">
+<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalCenter" >
   Ajouter membre
 </button>
 
@@ -353,30 +353,30 @@ FAIRE JUSTE UN TABLEAUX CLASSIQU avec les informations qui résume bien l'experi
       </div>
       <div class="modal-body">
         <label for="nomMembreEquipe" class="col-sm-2 col-form-label" >Nom</label>
-        <input type="text" class="form-control" id="nomMembreEquipe"  value=""   style="color:grey" >
+        <input type="text" class="form-control" id="nomMembreEquipeModal"  value=""   style="color:grey" >
 
         <label for="prenomMembreEquipe" class="col-sm-2 col-form-label" >Prénom</label>
-        <input type="text" class="form-control" id="prenomMembreEquipe"  value=""   style="color:grey" >
+        <input type="text" class="form-control" id="prenomMembreEquipeModal"  value=""   style="color:grey" >
 
         <label for="emailMembreEquipe" class="col-sm-2 col-form-label" >email</label>
-        <input type="text" class="form-control" id="emailMembreEquipe"  value=""   style="color:grey" >
+        <input type="text" class="form-control" id="emailMembreEquipeModal"  value=""   style="color:grey" >
 
         <label for="universiteMembreEquipe" class="col-sm-2 col-form-label" >Universite</label>
-        <input type="text" class="form-control" id="universiteMembreEquipe"  value=""   style="color:grey" >
+        <input type="text" class="form-control" id="universiteMembreEquipeModal"  value=""   style="color:grey" >
 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-        <button type="button" class="btn btn-warning">Sauver</button>
+        <button type="button" class="btn btn-warning" onclick="fonction_ajouterMembreEquipe({{monJEEI.id}})">Sauver</button>
       </div>
     </div>
   </div>
 </div>
 
 <!-- Affichage des membres deja present-->
-<div class="row listeEquipe" >
+<div class="row listeEquipe" id="listeEquipe">
 
-  
+  {{monJEEI}}
   {{afficheCarteMembreEquipe(membres)}}
 
 

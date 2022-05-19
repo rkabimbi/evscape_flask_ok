@@ -39,6 +39,7 @@ from werkzeug.utils import secure_filename
 from flask import send_from_directory
 from my_app.models.jeei_package.questionApprentissage import QuestionApprentissage
 from my_app.models.jeei_package.jointureJeeiUser import JointureJeeiUser
+from random import choice, randint
 
 @app.route("/specificationMesJEEI", methods=['GET', 'POST'])
 @login_required
@@ -280,3 +281,75 @@ def fonction_sauvegardeSpecificationTest():
     reponse= jsonify(reponse="ok")
   
     return reponse
+
+
+
+@app.route("/sauvegardeNouveauMembre", methods=['GET', 'POST'])
+@login_required
+def fonction_sauvegardeNouveauMembre():
+    membreNom=request.args.get("membreNom")
+    membreUniversite=request.args.get("membreUniversite")
+    membrePrenom=request.args.get("membrePrenom")
+    membreEmail=request.args.get("membreEmail")
+    idJeei= request.args.get("idJeei")
+    
+
+
+    new_user = User(username=str(membreNom+membrePrenom),firstname=membrePrenom, lastname=membreNom,password=pwd(10,True,True,True,True),email=membreEmail,titre="",universite=membreUniversite)#crée l'utilisateur (je n'utilise pas de constructeur . je trouce cela plus clair comme ceci
+    print('utilisateur sauvé!!!!!!!')
+    print(new_user)
+    db.session.add(new_user)#sauve dans la DB
+    db.session.commit()
+    newMembreId= User.query.order_by(User.id.desc()).first().id
+    jointureJeeiUser = JointureJeeiUser( fk_UserId=newMembreId , fk_JeeiId=idJeei)
+    db.session.add(jointureJeeiUser)#sauve dans la DB
+    db.session.commit()
+
+    membreARenvoyer=User.query.filter_by(id=newMembreId).first()
+    objJson={
+        "nom": membreARenvoyer.lastname,
+        "prenom":membreARenvoyer.firstname ,
+        "email":membreARenvoyer.email ,
+        "universite":membreARenvoyer.universite 
+
+    }
+ 
+    reponse= jsonify(reponse=objJson)
+  
+    return reponse
+
+
+
+
+
+
+
+
+alphabet_min = [ chr(i) for i in range(97,123) ]
+alphabet_maj = [ chr(i) for i in range(65,91) ]
+chiffres = [ chr(i) for i in range(48,58) ]
+caracteres_speciaux = [ '%' , '_' , '-' , '!' , '$' , '^' , '&' , '#' , '(' , ')' , '[' , ']' , '=' , '@']
+
+
+def pwd(n , min = True, maj = True, chif = True, cs = True):
+    alphabets = dict()
+    key = 0
+    if min:
+        alphabets[key] = alphabet_min
+        key += 1
+    if maj:
+        alphabets[key] = alphabet_maj
+        key += 1
+    if chif:
+        alphabets[key] = chiffres
+        key += 1
+    if cs:
+        alphabets[key] = caracteres_speciaux
+        key += 1
+    
+    mdp = ''
+    for i in range(n):
+            s = randint(0,key-1)
+            mdp += choice( alphabets[s] )
+            
+    return mdp

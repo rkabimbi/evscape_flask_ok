@@ -36,3 +36,6 @@ function fonction_Test()
     console.log("fonction_Test")
     fonction_activationBouton("navLinkTest")
     //selection de c
+
+}
+
