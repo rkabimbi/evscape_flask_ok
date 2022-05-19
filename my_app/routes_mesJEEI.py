@@ -83,14 +83,15 @@ def fonction_mesJEEI():
 
 
 def fonction_conversionSQLDICT(mesJEEI,specifications):
-    res ={"noms":[],"auteurs":[],"nbrExperimentations":[],"img":[],"themes":[],"id":[],"statuts":[],"descriptifs":[]}
+    res ={"noms":[],"auteurs":[],"auteursID":[],"nbrExperimentations":[],"img":[],"themes":[],"id":[],"statuts":[],"descriptifs":[]}
 
     for JEEI in mesJEEI:
         res["noms"].append(JEEI.nom)
-        jointureJeeiUser=JointureJeeiUser.query.filter_by(fk_JeeiId=JEEI.id).first()#car le premier dans la jointure est d'office le createur car crée au moment
-        createur=User.query.filter_by(id=jointureJeeiUser.fk_UserId).first()
+        #jointureJeeiUser=JointureJeeiUser.query.filter_by(fk_JeeiId=JEEI.id).first()#car le premier dans la jointure est d'office le createur car crée au moment
+        createur=User.query.filter_by(id=JEEI.auteurID).first()
         createur=createur.lastname+", "+createur.firstname
         res["auteurs"].append(createur)
+        res["auteursID"].append(JEEI.auteurID)
         res["nbrExperimentations"].append(10) # en attendant d'avoir les tables qu'il faut
         if specifications[JEEI.fk_SpecificationId-1].theme!=None:#si y a pas de value selectionnée par l'utilisateur et qu'on a donc un JEEI sans thème alors ici quand il va faire la fonction .value ca va bugguer
             res["themes"].append(specifications[JEEI.fk_SpecificationId-1].theme.value)#-1 car la liste commence à zero et .value c'est pour recuperer le string de l'enum
@@ -104,6 +105,7 @@ def fonction_conversionSQLDICT(mesJEEI,specifications):
             res["statuts"].append(specifications[JEEI.fk_SpecificationId-1].statut.value)#-1 car la liste commence à zero
         else:#obligé de faire ce else sinon quand il charge les cartes il lui manque des données pour les boucles dans le HTML
             res["statuts"].append(None)
+       
   
     return res
         

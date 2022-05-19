@@ -38,7 +38,23 @@
         <a class="nav-link nvSousPage" onclick="fonction_Equipe()">Equipe</a>
       </li>
       <li>
-        <a class="btn btn-success" href="http://127.0.0.1:5000/ValiderMonJEEI?idJEEI={{monJEEIRecupere.id}}" role="button">Valider</a>
+        {# si la personne est pas l'auteur du JEEI elle voit pas le bouton valider#}
+        {% if currentUser.id == monJEEIRecupere.auteurID %} 
+        <button type="button" class="btn btn-success" onclick='fonction_validerJEEI({{monJEEIRecupere.id}})' 
+        
+        {% if monJEEIRecupere.estValide %}
+            disabled
+            style="color:rgb(255, 255, 255); background: red;"
+          > 
+          Validé
+         {% else %} 
+         >
+          Valider
+          {% endif %} 
+        </button>
+        {% endif %} 
+      
+      
       </li>
       
   </ul>
@@ -65,7 +81,7 @@
     </div>
     
     <div id="idContenuSousPageTest">
-      {{macro_specificationMesJEEI.afficheContenuTest(questions)}}
+      {{macro_specificationMesJEEI.afficheContenuTest(questions,monJEEIRecupere)}}
      
     </div>
     <div id="idContenuSousPageResultats">

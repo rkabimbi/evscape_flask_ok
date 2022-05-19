@@ -82,7 +82,7 @@ def fonction_specificationMesJEEI():
         newSpecificationId=Specification.query.order_by(Specification.id.desc()).first().id
         print("dernier eleent =",newSpecificationId)
         #je creer un JEEI et renseigne à quel specification il est lié (celle que je viens de creer)
-        monJEEIAEnvoyer=Jeei(None,None,None,fk_SpecificationId=newSpecificationId)
+        monJEEIAEnvoyer=Jeei(None,None,None,fk_SpecificationId=newSpecificationId,auteurID=current_user.id)
         db.session.add(monJEEIAEnvoyer)#sauve dans la DB
         db.session.commit()
         #je crée 10 test vides
@@ -369,3 +369,16 @@ def pwd(n , min = True, maj = True, chif = True, cs = True):
             mdp += choice( alphabets[s] )
             
     return mdp
+
+
+
+@app.route("/validerJEEI", methods=['GET', 'POST'])
+@login_required
+def fonction_validerJEEI():
+    idJEEI=request.args.get("idJeei")
+    jeei = Jeei.query.filter_by(id=idJEEI).first()
+    jeei.estValide=True
+    db.session.add(jeei)#sauve dans la DB
+    db.session.commit()
+
+    return "ok"

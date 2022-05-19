@@ -21,19 +21,21 @@ class Jeei(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethodes relativ
     descriptif = db.Column(db.String(140),  nullable=True, default=' ')# Je mets le points pcq sinon dans ele HTML ca pose probleme pr afficher les cartes avec du NONe
     estValide =db.Column(db.Boolean,default=False, nullable=False)
     dateCreation= db.Column(db.Date, nullable=False)
+    auteurID = db.Column(db.Integer, nullable=False)
     fk_SpecificationId = db.Column(db.Integer, db.ForeignKey('Specification.id'),nullable=False)#db.foreignkey : c'est l'id de l'autre table et le nom de la table correspond à la back ref
     rel_JointureJeeiUser = relationship("JointureJeeiUser", backref='Jeei', uselist=False)
 
   
     
     
-    def __init__(self, nom,img,descriptif,fk_SpecificationId):
+    def __init__(self, nom,img,descriptif,fk_SpecificationId,auteurID):
 
         self.nom = nom
         self.img = img
         self.descriptif = descriptif
         self.dateCreation= datetime.today() 
         self.fk_SpecificationId=fk_SpecificationId
+        self.auteurID=auteurID
 
         #creation table jointure directement (il va assigner la personne qui le crée comme membre d'equipe)
         #creation de jointure entre JEEI et User
@@ -44,7 +46,7 @@ class Jeei(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethodes relativ
     
     
     def __repr__(self):#toString
-        return "( id = %s, nom = %s , img=%s, descriptif=%s,dateCreation=%s,fk_SpecificationId=%s, estValide=%s)\n" % ( self.id, self.nom,self.img,self.descriptif,self.dateCreation,self.fk_SpecificationId,self.estValide)
+        return "( id = %s, nom = %s , img=%s, descriptif=%s,dateCreation=%s,fk_SpecificationId=%s, estValide=%s,auteurID=%s)\n" % ( self.id, self.nom,self.img,self.descriptif,self.dateCreation,self.fk_SpecificationId,self.estValide, self.auteurID)
 
 
 

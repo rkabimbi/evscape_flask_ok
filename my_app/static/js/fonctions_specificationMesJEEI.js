@@ -433,3 +433,45 @@ function recreationMembreHTML(membre)
 {
     return '<div class="col-sm-5 carteMembreEquipe"  > <ul class="list-group list-group-flush"> <li class="list-group-item"> <B> Nom</B> :'+membre.reponse.nom+' </li> <li class="list-group-item"> <B> Prénom</B> :'+membre.reponse.prenom+' </li> <li class="list-group-item"> <B>Université  </B>: '+membre.reponse.universite+' </li> <li class="list-group-item"> <B> email </B>: '+membre.reponse.email+' </li> </ul> </div>' 
 }
+
+
+function fonction_validerJEEI(idJeei,question)
+{
+    console.log("fonction_validerJEEI")
+    document.getElementById('idNomMonJEEI').disabled = true;
+    document.getElementById('idDescriptifMonJEEI').disabled = true;
+    document.getElementById('idNbrJoueursMinMonJEEI').disabled = true;
+    document.getElementById('idNbrJoueursMaxMonJEEI').disabled = true;
+    document.getElementById('idBudgetMonJEEI').disabled = true;
+    document.getElementById('idDureeMinutesMonJEEI').disabled = true;
+    document.getElementById('idScenarioMonJEEI').disabled = true;
+    document.getElementById('idPublicCibleMonJEEI').disabled = true;
+    document.getElementById('idThemeMonJEEI').disabled = true;
+    document.getElementById('idChapitreMonJEEI').disabled = true;
+    var questions = document.getElementsByClassName('form-control testQuestion')
+    for(var i=0;i<questions.length;i++)
+    {
+        questions[i].disabled=true
+    }
+    document.getElementById('idBtnModalEquipe').disabled = true;
+    document.getElementById('idBtnChargezSpec').disabled = true;
+
+  
+    var xhttp = new XMLHttpRequest( );
+    let url = new URL('http://127.0.0.1:5000/validerJEEI?idJeei='+ idJeei);  
+    xhttp.open("GET", url.toString(), true);
+    xhttp.send()
+    xhttp.onreadystatechange = function()
+    { 
+        if (this.readyState == 4 && this.status == 200) 
+        {
+            //afficherLeNouveauMembre(this.responseText)   
+            console.log("ok c'est validé")
+        }
+    };
+
+
+
+    //href="http://127.0.0.1:5000/ValiderMonJEEI?idJEEI={{monJEEIRecupere.id}}
+
+}

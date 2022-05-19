@@ -15,7 +15,7 @@
           <form action="uploadPhoto?idJEEI={{monJEEI.id}}" method="post" enctype=multipart/form-data>
            
           <input type="file" name="file" >
-          <input type="submit" value="Chargez" class="btn btn-secondary  file-upload-btn" style="cursor :pointer" > 
+          <input  type="submit" value="Chargez" class="btn btn-secondary  file-upload-btn" style="cursor :pointer" > 
         </form>
 
   </div>
@@ -42,7 +42,18 @@
     <div class="row mb-3">
         <label for="nomMonJEEI" class="col-sm-2 col-form-label" >Nom</label>
         <div class="col-sm-8">
-          <input type="text" class="form-control" id="idNomMonJEEI"  value="{{monJEEI.nom}}"  onchange="fonction_sauvegardeTableJeei('idNomMonJEEI',{{monJEEI.id}})" style="color:grey" > 
+          <input type="text" class="form-control" id="idNomMonJEEI"  value="{{monJEEI.nom}}"  onchange="fonction_sauvegardeTableJeei('idNomMonJEEI',{{monJEEI.id}})" style="color:grey" 
+          {# if  est pour le cas où le jeei est valide alors on disabled#}
+          {% if monJEEI.estValide  %}
+            disabled
+          {% endif %}
+          
+          {% if currentUser.id == monJEEI.auteurID %} 
+            disabled
+          {%endif%}
+       
+          
+          > 
         </div>
         <div class="col-sm-2 " id='affichageValidationSauvegardenom'>
           
@@ -52,8 +63,13 @@
     <div class="row mb-3">
         <label class="col-sm-2 form-label" for="descriptifMonJEEI" >Descriptif </label>
         <div class=" col-sm-8 form-outline">
-            <textarea class="form-control" id="idDescriptifMonJEEI" maxlength='140'rows="4" 
-              onchange='fonction_sauvegardeTableJeei("idDescriptifMonJEEI",{{monJEEI.id}})'style="color:grey"> {{monJEEI.descriptif}}</textarea> 
+            <textarea style="color:rgb(79, 79, 79)" class="form-control" id="idDescriptifMonJEEI" maxlength='140'rows="4" 
+              onchange='fonction_sauvegardeTableJeei("idDescriptifMonJEEI",{{monJEEI.id}})'style="color:grey" 
+              {# if  est pour le cas où le jeei est valide alors on disabled#}
+              {% if monJEEI.estValide %}
+              disabled
+              {% endif %}> 
+          {{monJEEI.descriptif}}</textarea> 
         </div>
         <div class="col-sm-2 " id='affichageValidationSauvegardedescriptif'>
           
@@ -77,7 +93,11 @@
   <div class="row mb-3">
     <label for="nbrJoueursMinMonJEEI" class="col-sm-2 col-form-label" >Nbr Joueurs(min)</label>
     <div class="col-sm-2">
-      <input type="number" class="form-control" id="idNbrJoueursMinMonJEEI" value="{{specification.nbrJoueursMin}}" onchange="fonction_sauvegardeTableJeei('idNbrJoueursMinMonJEEI',{{monJEEI.id}})" style="color:grey">
+      <input type="number" class="form-control" id="idNbrJoueursMinMonJEEI" value="{{specification.nbrJoueursMin}}" onchange="fonction_sauvegardeTableJeei('idNbrJoueursMinMonJEEI',{{monJEEI.id}})" style="color:grey"
+      {# if  est pour le cas où le jeei est valide alors on disabled#}
+          {% if monJEEI.estValide %}
+            disabled
+          {% endif %}>
     </div>
     <div class="col-sm-2 " id='affichageValidationSauvegardenbrJoueursMin'>
         
@@ -85,7 +105,11 @@
 
     <label for="nbrJoueursMaxMonJEEI" class="col-sm-2 col-form-label" >Nbr Joueurs(max)</label>
     <div class="col-sm-2">
-      <input type="number" class="form-control" id="idNbrJoueursMaxMonJEEI" value="{{specification.nbrJoueursMax}}" onchange="fonction_sauvegardeTableJeei('idNbrJoueursMaxMonJEEI',{{monJEEI.id}})" style="color:grey">
+      <input type="number" class="form-control" id="idNbrJoueursMaxMonJEEI" value="{{specification.nbrJoueursMax}}" onchange="fonction_sauvegardeTableJeei('idNbrJoueursMaxMonJEEI',{{monJEEI.id}})" style="color:grey"
+      {# if  est pour le cas où le jeei est valide alors on disabled#}
+          {% if monJEEI.estValide %}
+            disabled
+          {% endif %}>
     </div>
     <div class="col-sm-2 " id='affichageValidationSauvegardenbrJoueursMax'>
         
@@ -97,7 +121,11 @@
   <div class="row mb-3">
     <label for="budgetMonJEEI" class="col-sm-2 col-form-label" >Budget(Eur.)</label>
     <div class="col-sm-2">
-      <input type="number" class="form-control" id="idBudgetMonJEEI" value="{{specification.budget}}"onchange="fonction_sauvegardeTableJeei('idBudgetMonJEEI',{{monJEEI.id}})" style="color:grey">
+      <input type="number" class="form-control" id="idBudgetMonJEEI" value="{{specification.budget}}"onchange="fonction_sauvegardeTableJeei('idBudgetMonJEEI',{{monJEEI.id}})" style="color:grey"
+      {# if  est pour le cas où le jeei est valide alors on disabled#}
+          {% if monJEEI.estValide %}
+            disabled
+          {% endif %}>
     </div>
     <div class="col-sm-2 " id='affichageValidationSauvegardebudget'>
         
@@ -106,7 +134,11 @@
     <label for="dureeMinutesMonJEEI" class="col-sm-2 col-form-label" >Durée(minutes)</label>
     <div class="col-sm-2">
      
-      <input type="number" class="form-control" id="idDureeMinutesMonJEEI" value="{{specification.dureeMinutes}}" onchange="fonction_sauvegardeTableJeei('idDureeMinutesMonJEEI',{{monJEEI.id}})" style="color:grey">
+      <input type="number" class="form-control" id="idDureeMinutesMonJEEI" value="{{specification.dureeMinutes}}" onchange="fonction_sauvegardeTableJeei('idDureeMinutesMonJEEI',{{monJEEI.id}})" style="color:grey"
+      {# if  est pour le cas où le jeei est valide alors on disabled#}
+          {% if monJEEI.estValide %}
+            disabled
+          {% endif %}>
     </div>
  
     <div class="col-sm-2 " id='affichageValidationSauvegardedureeMinutes'>
@@ -118,7 +150,11 @@
     <label class="col-sm-2 form-label" for="scenarioMonJEEI" >Scenario </label>
     <div class=" col-sm-8 form-outline">
         <textarea class="form-control" id="idScenarioMonJEEI" maxlength='140'rows="4" 
-          onchange='fonction_sauvegardeTableJeei("idScenarioMonJEEI",{{monJEEI.id}})'style="color:grey"> {{specification.scenario}}</textarea> 
+          onchange='fonction_sauvegardeTableJeei("idScenarioMonJEEI",{{monJEEI.id}})'style="color:grey"
+          {# if  est pour le cas où le jeei est valide alors on disabled#}
+          {% if monJEEI.estValide %}
+            disabled
+          {% endif %}> {{specification.scenario}}</textarea> 
     </div>
     <div class="col-sm-1 " id='affichageValidationSauvegardescenario'>
       
@@ -130,7 +166,11 @@
     <label for="publicCibleMonJEEI" class="col-sm-2 col-form-label" >Public</label>
     <div class="col-sm-2">
       
-      <select class="form-select form-select-lg mb-3 " aria-label=".form-select-lg example" id="idPublicCibleMonJEEI" onchange='fonction_sauvegardeTableJeei("idPublicCibleMonJEEI",{{monJEEI.id}})' selected="{{specification.publicCible.name}}" style="color:grey">
+      <select class="form-select form-select-lg mb-3 " aria-label=".form-select-lg example" id="idPublicCibleMonJEEI" onchange='fonction_sauvegardeTableJeei("idPublicCibleMonJEEI",{{monJEEI.id}})' selected="{{specification.publicCible.name}}" style="color:grey"
+      {# if  est pour le cas où le jeei est valide alors on disabled#}
+          {% if monJEEI.estValide %}
+            disabled
+          {% endif %}>
         <!-- si specification.publicCibleName (ce qui vient dela DB) == publicName (nom du champs) alors tu dis que c'est le "selected"-->
         {% for public in publicCible %}
           <option  style="color:grey" value="{{ public.name }}" {% if public.name==specification.publicCible.name %} selected="selected"{% endif %} >{{ public.name }}</option> 
@@ -144,7 +184,11 @@
 
     <label for="themeMonJEEI" class="col-sm-2 col-form-label" >Thème</label>
     <div class="col-sm-2">
-      <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="idThemeMonJEEI" onchange='fonction_sauvegardeTableJeei("idThemeMonJEEI",{{monJEEI.id}})' selected="{{specification.theme.name}}" >
+      <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="idThemeMonJEEI" onchange='fonction_sauvegardeTableJeei("idThemeMonJEEI",{{monJEEI.id}})' selected="{{specification.theme.name}}" 
+      {# if  est pour le cas où le jeei est valide alors on disabled#}
+          {% if monJEEI.estValide %}
+            disabled
+          {% endif %}>
         <!-- si specification.publicCibleName (ce qui vient dela DB) == publicName (nom du champs) alors tu dis que c'est le "selected"-->
         {% for tm in theme %}
           <option style="color:grey" value="{{ tm.name }}" {% if tm.name==specification.theme.name %} selected="selected"{% endif %} >{{ tm.name }}</option> 
@@ -167,7 +211,11 @@
 
     <label for="chapitreMonJEEI" class="col-sm-2 col-form-label" >Chapitre</label>
         <div class="col-sm-8">
-          <input type="text" class="form-control" id="idChapitreMonJEEI"  value="{{specification.chapitre}}"  onchange="fonction_sauvegardeTableJeei('idChapitreMonJEEI',{{monJEEI.id}})" style="color:grey" > 
+          <input type="text" class="form-control" id="idChapitreMonJEEI"  value="{{specification.chapitre}}"  onchange="fonction_sauvegardeTableJeei('idChapitreMonJEEI',{{monJEEI.id}})" style="color:grey"
+          {# if  est pour le cas où le jeei est valide alors on disabled#}
+          {% if monJEEI.estValide %}
+            disabled
+          {% endif %} > 
         </div>
         <div class="col-sm-2 " id='affichageValidationSauvegardechapitre'>
           
@@ -190,7 +238,11 @@
     <form action="uploadFilePdf?idJEEI={{monJEEI.id}}" method="post" enctype=multipart/form-data>
       
       <input type="file" name="file" label="documentation" style="color:grey">
-      <input type="submit" value="Chargez" class="btn btn-secondary  file-upload-btn" style="cursor :pointer" > 
+      <input type="submit" id="idBtnChargezSpec" value="Chargez" class="btn btn-secondary  file-upload-btn" id= "idDocMonJEEI"style="cursor :pointer" 
+      {# if  est pour le cas où le jeei est valide alors on disabled#}
+          {% if monJEEI.estValide %}
+            disabled
+          {% endif %}> 
       {%if specification.documentation is defined %}
         <button type="button" class="btn btn-warning">Consultez</button>
       {%endif%}
@@ -217,7 +269,7 @@
 
 
 
-{% macro afficheContenuTest(questions) %}
+{% macro afficheContenuTest(questions, monJEEI) %}
 <div class="scroller" >
   {% for i in range(10) %}
     <form id="idFormulaireContenuTest" class="formulaireContenuTestMesJEEI " style="margin:25px">
@@ -227,7 +279,11 @@
         
           <label for="testQuestionMonJEEI" class="col-sm-2 col-form-label" >Question</label>
           <div class="col-sm-8">
-            <input type="text" class="form-control" id={{"idTestQuestionMonJEEI"~ questions[i].id}}  value="{{questions[i].question}}"   style="color:grey" onchange="fonction_sauvegardeSpecificationTest('question','idTestQuestionMonJEEI',{{questions[i].id}})" > 
+            <input type="text" class="form-control testQuestion"  id={{"idTestQuestionMonJEEI"~ questions[i].id}}  value="{{questions[i].question}}"   style="color:grey" onchange="fonction_sauvegardeSpecificationTest('question','idTestQuestionMonJEEI',{{questions[i].id}})" 
+            {# if  est pour le cas où le jeei est valide alors on disabled#}
+          {% if monJEEI.estValide %}
+            disabled
+          {% endif %}> 
           </div>
           <div class="col-sm-2 " id={{'validationTestquestion'~ questions[i].id}}>
               
@@ -240,7 +296,11 @@
 
         <label for="testSolutionCorrecteMonJEEI" class="col-sm-2 col-form-label" >Solution</label>
         <div class="col-sm-8">
-          <input type="text" class="form-control" id={{"idTestSolutionCorrecteMonJEEI"~ questions[i].id }} value="{{questions[i].solutionCorrecte}}"   style="color:grey" onchange="fonction_sauvegardeSpecificationTest('solution','idTestSolutionCorrecteMonJEEI',{{questions[i].id}})"> 
+          <input type="text" class="form-control testQuestion"  id={{"idTestSolutionCorrecteMonJEEI"~ questions[i].id }} value="{{questions[i].solutionCorrecte}}"   style="color:grey" onchange="fonction_sauvegardeSpecificationTest('solution','idTestSolutionCorrecteMonJEEI',{{questions[i].id}})"
+          {# if  est pour le cas où le jeei est valide alors on disabled#}
+          {% if monJEEI.estValide %}
+            disabled
+          {% endif %}> 
         </div>
         <div class="col-sm-2 " id={{'validationTestsolution'~questions[i].id }}>
             
@@ -254,7 +314,12 @@
         <label for="testExplicatifMonJEEI" class="col-sm-2 col-form-label" >Explicatif</label>
         <div class="col-sm-8">
         
-          <textarea class="form-control" id={{"idExplicatifMonJEEI"~ questions[i].id}} maxlength='140'rows="4" style="color:grey" onchange="fonction_sauvegardeSpecificationTest('explicatif','idExplicatifMonJEEI',{{questions[i].id}})"> {{questions[i].explicatif}} </textarea> 
+          <textarea class="form-control testQuestion"  id={{"idExplicatifMonJEEI"~ questions[i].id}} maxlength='140'rows="4" style="color:grey" onchange="fonction_sauvegardeSpecificationTest('explicatif','idExplicatifMonJEEI',{{questions[i].id}})"
+          {# if  est pour le cas où le jeei est valide alors on disabled#}
+          {% if monJEEI.estValide %}
+            disabled
+          {% endif %}>
+           {{questions[i].explicatif}} </textarea> 
         </div>
         <div class="col-sm-2 " id={{'validationTestexplicatif'~questions[i].id }}>
             
@@ -270,7 +335,11 @@
 
         <label for="testSolutionIncorrecte1MonJEEI" class="col-sm-2 col-form-label" >Proposition 1</label>
         <div class="col-sm-8">
-          <input type="text" class="form-control" id={{"idSolutionIncorrecteMonJEEI"~ questions[i].id}}  value="{{questions[i].solutionIncorrecte1}}"   style="color:grey" onchange="fonction_sauvegardeSpecificationTest('solutionIncorrecte1','idSolutionIncorrecteMonJEEI',{{questions[i].id}})"> 
+          <input type="text" class="form-control testQuestion"  id={{"idSolutionIncorrecteMonJEEI"~ questions[i].id}}  value="{{questions[i].solutionIncorrecte1}}"   style="color:grey" onchange="fonction_sauvegardeSpecificationTest('solutionIncorrecte1','idSolutionIncorrecteMonJEEI',{{questions[i].id}})"
+          {# if  est pour le cas où le jeei est valide alors on disabled#}
+          {% if monJEEI.estValide %}
+            disabled
+          {% endif %}> 
         </div>
         <div class="col-sm-2 " id={{'validationTestsolutionIncorrecte1'~questions[i].id }}>
             
@@ -282,7 +351,11 @@
 
         <label for="testSolutionIncorrecte2MonJEEI" class="col-sm-2 col-form-label" >Proposition 2</label>
         <div class="col-sm-8">
-          <input type="text" class="form-control" id={{"idSolutionIncorrecteMonJEEI2"~ questions[i].id}}  value="{{questions[i].solutionIncorrecte2}}"   style="color:grey" onchange="fonction_sauvegardeSpecificationTest('solutionIncorrecte2','idSolutionIncorrecteMonJEEI2',{{questions[i].id}})"> 
+          <input type="text" class="form-control testQuestion"  id={{"idSolutionIncorrecteMonJEEI2"~ questions[i].id}}  value="{{questions[i].solutionIncorrecte2}}"   style="color:grey" onchange="fonction_sauvegardeSpecificationTest('solutionIncorrecte2','idSolutionIncorrecteMonJEEI2',{{questions[i].id}})"
+          {# if  est pour le cas où le jeei est valide alors on disabled#}
+          {% if monJEEI.estValide %}
+            disabled
+          {% endif %}> 
         </div>
         <div class="col-sm-2 " id={{'validationTestsolutionIncorrecte2'~questions[i].id }}>
             
@@ -293,7 +366,11 @@
 
         <label for="testSolutionIncorrecte3MonJEEI" class="col-sm-2 col-form-label" >Proposition 3</label>
         <div class="col-sm-8">
-          <input type="text" class="form-control" id={{"idSolutionIncorrecteMonJEEI3"~ questions[i].id}}  value="{{questions[i].solutionIncorrecte3}}"   style="color:grey" onchange="fonction_sauvegardeSpecificationTest('solutionIncorrecte3','idSolutionIncorrecteMonJEEI3',{{questions[i].id}})"> 
+          <input type="text" class="form-control testQuestion"  id={{"idSolutionIncorrecteMonJEEI3"~ questions[i].id}}  value="{{questions[i].solutionIncorrecte3}}"   style="color:grey" onchange="fonction_sauvegardeSpecificationTest('solutionIncorrecte3','idSolutionIncorrecteMonJEEI3',{{questions[i].id}})"
+          {# if  est pour le cas où le jeei est valide alors on disabled#}
+          {% if monJEEI.estValide %}
+            disabled
+          {% endif %}> 
         </div>
         <div class="col-sm-2 " id={{'validationTestsolutionIncorrecte3'~questions[i].id }}>
             
@@ -338,7 +415,11 @@ FAIRE JUSTE UN TABLEAUX CLASSIQU avec les informations qui résume bien l'experi
 
 <!-- Button trigger modal -->
 <div class="row rowEquipeFirst ">
-  <button type="button" style="height : 40px"class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalCenter" >
+  <button type="button" style="height : 40px"class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalCenter" id="idBtnModalEquipe"
+  {# if  est pour le cas où le jeei est valide alors on disabled#}
+          {% if monJEEI.estValide %}
+            disabled
+          {% endif %} >
     Ajouter membre
   </button>
   <div id="flashModalMembreexistant" style="height : 40px" >
