@@ -131,3 +131,6 @@ input[type="text"]:disabled{
     transform: scale(1.05);
     }
   
+.rowEquipeFirst{
+    height : 40px
+}
