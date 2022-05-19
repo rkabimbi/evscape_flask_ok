@@ -395,19 +395,36 @@ function afficherLeNouveauMembre(responseText)
         console.log(responseText)
         //console.log(champs)
         //console.log(responseText)
-       
-        var fichJsonParse=JSON.parse(responseText);//parsing du fichier JSON envoyé par jsonify
-        //console.log(fichJsonParse.reponse, champs)//
-        console.log(fichJsonParse)
-
-        //je recup dans une variable la liste actuelle et j'y ajoute mon new membre
-        listeMembre = document.getElementById("listeEquipe").innerHTML
-
-        newmembre =recreationMembreHTML(fichJsonParse)
-
-        document.getElementById("listeEquipe").innerHTML= listeMembre + newmembre
+        if (responseText=="nok")
+        {
+            console.log("chercheur deja ajouté")
+        }
+        else
+        {
+            var fichJsonParse=JSON.parse(responseText);//parsing du fichier JSON envoyé par jsonify
+            //console.log(fichJsonParse.reponse, champs)//
+            console.log(fichJsonParse)
+      
         
-        
+            //je recup dans une variable la liste actuelle et j'y ajoute mon new membre
+            listeMembre = document.getElementById("listeEquipe").innerHTML
+
+            newmembre =recreationMembreHTML(fichJsonParse)
+
+            document.getElementById("listeEquipe").innerHTML= listeMembre + newmembre
+
+      
+  
+            let d = document.getElementById('exampleModalCenter')
+            d.style.display = "none"
+        }
+
+
+          
+
+
+     
+
 }
 
 

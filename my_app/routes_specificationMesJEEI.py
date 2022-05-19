@@ -292,29 +292,39 @@ def fonction_sauvegardeNouveauMembre():
     membrePrenom=request.args.get("membrePrenom")
     membreEmail=request.args.get("membreEmail")
     idJeei= request.args.get("idJeei")
+    reponse="nok"
+    if User.query.filter_by(email=membreEmail).first(): #si il y a qq ds la DB qui a cette adresse
+        #alors on ne fait rien
+        print("existe deja")
+        
+    if User.query.filter_by(firstname=membrePrenom).first():
+        if User.query.filter_by(lastname=membreNom).first():
+            if User.query.filter_by(universite=membreUniversite).first():#si il y a qq ds la DB qui a cette adresse
+                #alors on ne fait rien
+                print("existe deja")
+               
     
+    else:
+        new_user = User(username=str(membreNom+membrePrenom),firstname=membrePrenom, lastname=membreNom,password=pwd(10,True,True,True,True),email=membreEmail,titre="",universite=membreUniversite)#crée l'utilisateur (je n'utilise pas de constructeur . je trouce cela plus clair comme ceci
+        print('utilisateur sauvé!!!!!!!')
+        print(new_user)
+        db.session.add(new_user)#sauve dans la DB
+        db.session.commit()
+        newMembreId= User.query.order_by(User.id.desc()).first().id
+        jointureJeeiUser = JointureJeeiUser( fk_UserId=newMembreId , fk_JeeiId=idJeei)
+        db.session.add(jointureJeeiUser)#sauve dans la DB
+        db.session.commit()
+        membreARenvoyer=User.query.filter_by(id=newMembreId).first()
+        objJson={
+            "nom": membreARenvoyer.lastname,
+            "prenom":membreARenvoyer.firstname ,
+            "email":membreARenvoyer.email ,
+            "universite":membreARenvoyer.universite,
+            "id":membreARenvoyer.id
 
-
-    new_user = User(username=str(membreNom+membrePrenom),firstname=membrePrenom, lastname=membreNom,password=pwd(10,True,True,True,True),email=membreEmail,titre="",universite=membreUniversite)#crée l'utilisateur (je n'utilise pas de constructeur . je trouce cela plus clair comme ceci
-    print('utilisateur sauvé!!!!!!!')
-    print(new_user)
-    db.session.add(new_user)#sauve dans la DB
-    db.session.commit()
-    newMembreId= User.query.order_by(User.id.desc()).first().id
-    jointureJeeiUser = JointureJeeiUser( fk_UserId=newMembreId , fk_JeeiId=idJeei)
-    db.session.add(jointureJeeiUser)#sauve dans la DB
-    db.session.commit()
-
-    membreARenvoyer=User.query.filter_by(id=newMembreId).first()
-    objJson={
-        "nom": membreARenvoyer.lastname,
-        "prenom":membreARenvoyer.firstname ,
-        "email":membreARenvoyer.email ,
-        "universite":membreARenvoyer.universite 
-
-    }
+        }
  
-    reponse= jsonify(reponse=objJson)
+        reponse= jsonify(reponse=objJson)
   
     return reponse
 
