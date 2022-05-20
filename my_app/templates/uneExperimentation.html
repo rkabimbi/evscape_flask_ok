@@ -1,0 +1,48 @@
+<head>
+ 
+    <link href="/static/css/uneExperimentation.css" rel="stylesheet"><!-- idem-->
+    {% import "macros/macro_uneExperimentation.html" as macro_uneExperimentation %}<!-- import de macro. Comme ça c'est dispo pour toutes les pages filles -->
+</head>
+
+<!-- herite de main (de tout sauf les blocks (donc le menu)) -->
+{% extends "parentPage.html" %}
+
+<!-- Tout ce dont on a pas herité de main -->
+
+
+
+{% block body %}
+<body onload="changerImageFond()"> </body>
+
+<div class="row titreUneExperimentation"> 
+    <h1> {{JEEI.nom}}</h1>
+    <h3 class="numExperimentation"> Experimentation #1</h3>
+
+</div >
+
+<div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Etape 1 - Identification des participants</h5>
+        <p class="card-text">Créez la liste des participants à votre experimentation</p>
+  
+        <a class="btn btn-secondary" href="http://127.0.0.1:5000/listeParticipants?idJEEI={{JEEI.id}}" role="button">Créer</a>
+      </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+</div>
+<script src="{{ url_for('static',filename='js/fonctions_uneExperimentation.js')}}"></script>
+<script src="{{ url_for('static',filename='js/fonctions_flux.js')}}"></script> <!-- Laisser ca partout - besoin pour mon hack de fond-->
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+.numExperimentation{
+    margin-left: 25px;
+    color: grey;
+}
+
+.titreUneExperimentation{
+    flex-wrap: wrap ;
+    display : flex;
+    flex-direction: row;
+    align-items:baseline;
+    margin-bottom: 25px;
+    
+}
+
+.formListeParticipante{
+    margin: 10px;
+}
+
+.fondFormListeParticipants{
+
+}
+
+.buttonEnvoiListe{
+    flex-wrap: wrap ;
+    display : flex;
+    flex-direction: row;
+    justify-content:flex-end
+}

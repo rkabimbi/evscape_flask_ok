@@ -1,0 +1,70 @@
+<head>
+ 
+    <link href="/static/css/listeParticipants.css" rel="stylesheet"><!-- idem-->
+    {% import "macros/macro_listeParticipants.html" as macro_listeParticipants %}<!-- import de macro. Comme ça c'est dispo pour toutes les pages filles -->
+</head>
+
+<!-- herite de main (de tout sauf les blocks (donc le menu)) -->
+{% extends "parentPage.html" %}
+
+<!-- Tout ce dont on a pas herité de main -->
+
+
+
+{% block body %}
+<body onload="changerImageFond()"> </body>
+
+<div class="row titreUneExperimentation"> 
+    <h1> {{JEEI.nom}}</h1>
+    <h3 class="numExperimentation"> Experimentation #1</h3>
+
+</div >
+
+<div class="row">
+
+    <div class="col-sm-6 fondFormListeParticipants">
+        <div class="row formListeParticipante">
+            <label for="nomParticipant" class="col-sm-4 col-form-label" >Nom</label>
+            <input type="text" class="form-control col-sm-8 "  />
+        </div>
+        <div class="row formListeParticipante">
+            <label for="prenomParticipant" class="col-sm-4 col-form-label" >Prénom</label>
+            <input type="text" class="form-control col-sm-8 "  />
+        </div>
+        <div class="row formListeParticipante">
+            <label for="emailParticipant" class="col-sm-4 col-form-label" >Email</label>
+            <input type="text" class="form-control col-sm-8 "  />
+        </div>
+        <div class="row buttonEnvoiListe" >
+        <button type="button " class="btn btn-warning">Ajouter</button>
+        </div>
+    </div>
+
+
+    <div class="col-sm-6">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit consequatur corporis quae, perferendis quisquam voluptas dolore. Soluta eos laborum recusandae eum? Provident vero temporibus magnam totam, tempora saepe perspiciatis possimus.
+    </div>
+
+
+
+
+
+</row>
+
+
+
+
+
+
+
+
+
+
+
+</div>
+<script src="{{ url_for('static',filename='js/fonctions_listeParticipants.js')}}"></script>
+<script src="{{ url_for('static',filename='js/fonctions_flux.js')}}"></script> <!-- Laisser ca partout - besoin pour mon hack de fond-->
+
+</div>
+
+{% endblock %}

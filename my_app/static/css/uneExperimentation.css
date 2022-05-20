@@ -1,0 +1,13 @@
+.numExperimentation{
+    margin-left: 25px;
+    color: grey;
+}
+
+.titreUneExperimentation{
+    flex-wrap: wrap ;
+    display : flex;
+    flex-direction: row;
+    align-items:baseline;
+    margin-bottom: 25px;
+    
+}
