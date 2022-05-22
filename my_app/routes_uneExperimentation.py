@@ -45,4 +45,25 @@ def fonction_uneExperimentation():
     idJEEIaEnvoyer = request.args.get("idJEEI")
     JEEIAEnvoyer = Jeei.query.filter_by(id=idJEEIaEnvoyer).first()
     specificationAEnvoyer = specification=Specification.query.filter_by(id=JEEIAEnvoyer.fk_SpecificationId).first()
-    return render_template("uneExperimentation.html",currentUser=current_user,JEEI=JEEIAEnvoyer,specification=specificationAEnvoyer)
+    #recuperer le numero de la dernière experimentation  et faire +1
+    #en attendant je fais ceci
+    idExperimentation=1
+
+
+    return render_template("uneExperimentation.html",currentUser=current_user,JEEI=JEEIAEnvoyer,specification=specificationAEnvoyer,idExperimentation=1)
+
+
+@app.route("/consulterGroupesParticipants", methods=['GET', 'POST'])
+@login_required
+def fonction_consulterGroupesParticipants():
+    print("consulterGroupesParticipants")
+    print("Afficher la liste des groupes construits par la machine ")
+    
+    idJEEIaEnvoyer = request.args.get("idJEEI")
+    JEEIAEnvoyer = Jeei.query.filter_by(id=idJEEIaEnvoyer).first()
+
+
+    #en attendant je fais ceci
+    idExperimentation=1
+    return render_template("groupesParticipants.html",currentUser=current_user,JEEI=JEEIAEnvoyer,idExperimentation=1)
+    

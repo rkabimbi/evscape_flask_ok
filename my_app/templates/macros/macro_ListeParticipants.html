@@ -1,0 +1,35 @@
+
+
+
+{% macro afficheCarteParticipant(nom, prenom, email,consentement) %}
+
+<div class="col-sm-12 carteListeParticipant"  >
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        
+        <B> Nom</B> : {{nom}} 
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+
+      </li>
+      <li class="list-group-item">
+        <B> Prénom</B> : {{prenom}}
+      </li>
+  
+      <li class="list-group-item">
+        <B> Email </B>: {{email}}
+      </li>
+
+      <li class="list-group-item">
+        <B> Consentement </B>:  
+            {% if consentement==true %} 
+                <span class="badge badge-pill badge-success">Oui</span>
+            {%else %}
+                <span class="badge badge-pill badge-danger"> Non</span>
+            {% endif %}
+      </li>
+    </ul>
+</div>
+
+{% endmacro %}

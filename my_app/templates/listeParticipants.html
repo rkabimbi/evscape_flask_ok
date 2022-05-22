@@ -17,8 +17,15 @@
 <div class="row titreUneExperimentation"> 
     <h1> {{JEEI.nom}}</h1>
     <h3 class="numExperimentation"> Experimentation #1</h3>
-
+    
 </div >
+<div class="row"> 
+    <h4 class="col-sm-6 sousTitreUneExperimentation" >/ Liste des participants</h4>
+    <div class=" col-sm-6 ligneBoutonEnvoyer"> 
+        <button type="button " class="btn btn-secondary" style="margin-left: 25px;">Retour</button>
+        <button type="button " class="btn btn-success" style="margin-left: 25px;" alt="Fixez la liste définitive des participants">Valider</button>
+    </div>
+</div> 
 
 <div class="row">
 
@@ -39,10 +46,21 @@
         <button type="button " class="btn btn-warning">Ajouter</button>
         </div>
     </div>
+    <div class="scrollerListeParticipants col-sm-6">
 
 
-    <div class="col-sm-6">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit consequatur corporis quae, perferendis quisquam voluptas dolore. Soluta eos laborum recusandae eum? Provident vero temporibus magnam totam, tempora saepe perspiciatis possimus.
+        
+       
+        {{macro_listeParticipants.afficheCarteParticipant("LEROY", "Laurent", "ll@student.unamur.edu",true)}}
+
+        {{macro_listeParticipants.afficheCarteParticipant("COLLICIHIA", "Michael", "cm@student.unamur.edu",false)}}
+
+        {{macro_listeParticipants.afficheCarteParticipant("DI STASIO", "Anthony", "da@student.unamur.edu",true)}}
+        {{macro_listeParticipants.afficheCarteParticipant("HERION", "Christophe", "hc@student.unamur.edu",false)}}
+
+
+
+        
     </div>
 
 

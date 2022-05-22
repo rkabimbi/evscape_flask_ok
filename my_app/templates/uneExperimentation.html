@@ -16,21 +16,172 @@
 
 <div class="row titreUneExperimentation"> 
     <h1> {{JEEI.nom}}</h1>
-    <h3 class="numExperimentation"> Experimentation #1</h3>
+    <h3 class="numExperimentation"> Experimentation #{{idExperimentation}}</h3>
 
 </div >
+<div class="row"> 
 
-<div class="col-sm-6">
-    <div class="card">
+
+  <div class="col-sm-4">
+      <div class="card cardUneExperimentation">
+        <div class="card-body">
+          <h5 class="card-title" style="color: grey; font-weight: bold;">Etape 1</h5>
+          <h5 class="card-title">Identification des participants</h5>
+          <p class="card-text">Créez la liste des participants à votre experimentation.  </p>
+    
+          <a class="btn btn-secondary" href="http://127.0.0.1:5000/listeParticipants?idJEEI={{JEEI.id}}&idExperimentation={{idExperimentation}}" role="button">Consulter</a>
+        </div>
+      </div>
+  </div>
+
+
+  <div class="col-sm-4">
+    <div class="card cardUneExperimentation">
       <div class="card-body">
-        <h5 class="card-title">Etape 1 - Identification des participants</h5>
-        <p class="card-text">Créez la liste des participants à votre experimentation</p>
-  
-        <a class="btn btn-secondary" href="http://127.0.0.1:5000/listeParticipants?idJEEI={{JEEI.id}}" role="button">Créer</a>
+        <h5 class="card-title" style="color: grey; font-weight: bold;">Etape 2</h5>
+        <h5 class="card-title">Explications protocole</h5>
+        <p class="card-text">Séance d'explications  du déroulement de l'expérimentation.</p>
+
+        <a class="btn btn-secondary" href="http://127.0.0.1:5000/consulterGroupesParticipants?idJEEI={{JEEI.id}}&idExperimentation={{idExperimentation}}" role="button">Consulter</a>
       </div>
     </div>
-</div>
+  </div>
 
+  <div class="col-sm-4">
+    <div class="card cardUneExperimentation">
+      <div class="card-body">
+        <h5 class="card-title" style="color: grey; font-weight: bold;">Etape 3</h5>
+        <h5 class="card-title">Questionnaire démographique</h5>
+        <p class="card-text">Débloquez le questionnaire démographique aux sessions participants.  </p>
+
+        <button type="button" class="btn btn-success" onclick="fonction_debloquerFormulaireDemographique('{{JEEI.id}}', {{idExperimentation}})" >Débloquer</button>
+        <button type="button" class="btn btn-danger" onclick="fonction_bloquerFormulaireDemographique('{{JEEI.id}}', {{idExperimentation}})" >Bloquer</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-4">
+    <div class="card cardUneExperimentation">
+      <div class="card-body">
+        <h5 class="card-title" style="color: grey; font-weight: bold;">Etape 4</h5>
+        <h5 class="card-title">Cours magistral</h5>
+        <p class="card-text"> Dispensez le cours magistral à l'ensemble des participants </p>
+
+        <button type="button" class="btn btn-success" onclick="fonction_confirmerCoursOk('{{JEEI.id}}', {{idExperimentation}})" >Fait</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-4">
+    <div class="card cardUneExperimentation">
+      <div class="card-body">
+        <h5 class="card-title" style="color: grey; font-weight: bold;">Etape 5</h5>
+        <h5 class="card-title">Annonce groupes</h5>
+        <p class="card-text">Annoncez aux participants le groupe auxquels ils ont été assignés  </p>
+
+        <a class="btn btn-secondary" href="http://127.0.0.1:5000/consulterGroupesParticipants?idJEEI={{JEEI.id}}&idExperimentation={{idExperimentation}}" role="button">Consulter</a>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-sm-4">
+    <div class="card cardUneExperimentation">
+      <div class="card-body">
+        <h5 class="card-title" style="color: grey; font-weight: bold;">Etape 6</h5>
+        <h5 class="card-title">Pré-test</h5>
+        <p class="card-text">Débloquez le questionnaire de pré-test aux sessions participants.  </p>
+
+        <button type="button" class="btn btn-success" onclick="fonction_debloquerPreTest('{{JEEI.id}}', {{idExperimentation}})" >Débloquer</button>
+        <button type="button" class="btn btn-danger" onclick="fonction_bloquerPreTest('{{JEEI.id}}', {{idExperimentation}})" >Bloquer</button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-sm-4">
+    <div class="card cardUneExperimentation">
+      <div class="card-body">
+        <h5 class="card-title" style="color: grey; font-weight: bold;">Etape 7</h5>
+        <h5 class="card-title">Activité pratique</h5>
+        <p class="card-text"> Les étudiants participent à l'activité à laquelle ils ont été assignés.  </p>
+
+        <button type="button" class="btn btn-success" onclick="fonction_confirmerActiviteOk('{{JEEI.id}}', {{idExperimentation}})" >Fait</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-4">
+    <div class="card cardUneExperimentation">
+      <div class="card-body">
+        <h5 class="card-title" style="color: grey; font-weight: bold;">Etape 8</h5>
+        <h5 class="card-title">Cooling period</h5>
+        <p class="card-text"> Echangez à chaud avec les étudiants quant à leur ressenti.  </p>
+
+        <button type="button" class="btn btn-success" onclick="fonction_confirmerCoolingperiodOk('{{JEEI.id}}', {{idExperimentation}})" >Fait</button>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="col-sm-4">
+    <div class="card cardUneExperimentation">
+      <div class="card-body">
+        <h5 class="card-title" style="color: grey; font-weight: bold;">Etape 9</h5>
+        <h5 class="card-title">Post-test I</h5>
+        <p class="card-text">Débloquez le questionnaire de post-test aux sessions participants.  </p>
+
+        <button type="button" class="btn btn-success" onclick="fonction_debloquerPostTest('{{JEEI.id}}', {{idExperimentation}})" >Débloquer</button>
+        <button type="button" class="btn btn-danger" onclick="fonction_bloquerPostTest('{{JEEI.id}}', {{idExperimentation}})" >Bloquer</button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-sm-4">
+    <div class="card cardUneExperimentation">
+      <div class="card-body">
+        <h5 class="card-title" style="color: grey; font-weight: bold;">Etape 10</h5>
+        <h5 class="card-title">Questionnaire expérience utilisateur</h5>
+        <p class="card-text">Débloquez le questionnaire d'expérience utilisateur aux sessions participants.  </p>
+
+        <button type="button" class="btn btn-success" onclick="fonction_debloquerUX('{{JEEI.id}}', {{idExperimentation}})" >Débloquer</button>
+        <button type="button" class="btn btn-danger" onclick="fonction_bloquerUX('{{JEEI.id}}', {{idExperimentation}})" >Bloquer</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-4">
+    <div class="card cardUneExperimentation">
+      <div class="card-body">
+        <h5 class="card-title" style="color: grey; font-weight: bold;">Etape 11</h5>
+        <h5 class="card-title">Focus group</h5>
+        <p class="card-text"> Echangez  avec les étudiants afin d'obtenir plus d'informations quant à leur ressenti.  </p>
+
+        <button type="button" class="btn btn-success" onclick="fonction_confirmerFocusGroupOk('{{JEEI.id}}', {{idExperimentation}})" >Fait</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-4">
+    <div class="card cardUneExperimentation">
+      <div class="card-body">
+        <h5 class="card-title" style="color: grey; font-weight: bold;">Etape 10</h5>
+        <h5 class="card-title">Post-Test II</h5>
+        <p class="card-text">Débloquez le questionnaire d'expérience utilisateur aux sessions participants.  </p>
+
+        <button type="button" class="btn btn-success" onclick="fonction_debloquerPostTestRetention('{{JEEI.id}}', {{idExperimentation}})" >Débloquer</button>
+        <button type="button" class="btn btn-danger" onclick="fonction_bloquerPostTestRetention('{{JEEI.id}}', {{idExperimentation}})" >Bloquer</button>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+</div>
 
 
 
