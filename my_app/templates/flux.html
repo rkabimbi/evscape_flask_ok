@@ -13,54 +13,110 @@
 {% block body %}
 <body onload="changerImageFond()"> </body>
 
-FAIRE JUSTE UN TABLEAUX CLASSIQU ET j'Y MET TTE LES DATAS (dans un premier temps en tt cas)
 
+<div class="row titreUneExperimentation"> 
+    <h1>Indicateurs clés</h1>
+ 
+    
+    
+</div >
 
 <div class="row fluxKpi">
-    <div class="col fluxKpiItem ">
+    <div class="col-sm-4 fluxKpiItemTemoin ">
+        <h1 class="chiffreCle"> + 0,12</h1>
+        <div class="card-body">
+          <h5 class="card-title titrechiffreCleTemoin"> INDQ1.1A</h5>
+          <p class="card-text textChiffreCleTemoin">Evolution relative d'apprentissage moyenne (groupe temoin)tous jeux d'évasion éducatifs confondus.</p>
+        </div>
     </div>
-    <div class="col fluxKpiItem  ">
+    <div class="col-sm-4 fluxKpiItemExperimental  ">
+     
+            <h1 class="chiffreCle"> + 0,37</h1>
+            <div class="card-body">
+              <h5 class="card-title titrechiffreCle"> INDQ1.1B</h5>
+              <p class="card-text textChiffreCle">Evolution relative d'apprentissage moyenne (groupe experimental) toutes séances de travaux paratiques classiques confondues.</p>
+            </div>
+
+     
     </div>
-    <div class="col fluxKpiItem ">
-    </div>
-    <div class="col fluxKpiItem ">
-    </div>
+
     
 </div>
-<a class="lienHypertexte" href="http://127.0.0.1:5000/KPIdetails">autres KPI(lien)</a>
 
-<div class="row composantFlux"> 
-    
-    
-        <div class="carteJEEI  col-md-4 col-xl-3 " >
 
-        </div>
 
-        <div class="carteJEEI  col-md-4 col-xl-3 ">
+<table class="table tableGroupe">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col" style="text-align:left">#</th>
+        <th scope="col"style="text-align:left">Indicateur*</th>
+        <th scope="col" style="text-align:center">Groupe témoin</th>
+        <th scope="col" style="text-align:center">Groupe expérimental</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>INDQ1.1</td>
+        <td style="text-align:center">+0,37</td>
+        <td style="text-align:center">+0,12</td>
+        
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td>INDQ1.2</td>
+        <td style="text-align:center">0,06</td>
+        <td style="text-align:center">0,14 </td>
+     
+      </tr>
+      <tr>
+        <th scope="row">3</th>
+        <td>INDQ1.3</td>
+        <td colspan="2" style="text-align:center">44</td>
 
-        </div>
+      </tr>
 
-        <div class="carteJEEI  col-md-4 col-xl-3 ">
+      <tr>
+        <th scope="row">4</th>
+        <td>INDQ2.1A</td>
+        <td style="text-align:center">0,26</td>
+        <td style="text-align:center">N/A </td>
+     
+      </tr>
 
-        </div>
+      <tr>
+        <th scope="row">5</th>
+        <td>INDQ2.1B</td>
+        <td style="text-align:center">0,33</td>
+        <td style="text-align:center"> N/A </td>
+     
+      </tr>
 
-        <div class="carteJEEI col-md-4 col-xl-3">
+      <tr>
+        <th scope="row">6</th>
+        <td>INDQ2.1C</td>
+        <td style="text-align:center">0,12</td>
+        <td style="text-align:center">N/A </td>
+     
+      </tr>
 
-        </div>
+      <tr>
+        <th scope="row">7</th>
+        <td>INDQ2.1D</td>
+        <td style="text-align:center">0,16</td>
+        <td style="text-align:center">N/A </td>
+     
+      </tr>
 
-        <div class="carteJEEI col-md-4 col-xl-3 ">
 
-        </div>
+    </tbody>
+  </table>
+  *Voir documentation 
 
-        <div class="carteJEEI col-md-4 col-xl-3 ">
 
-        </div>
 
-        <div class="carteJEEI  col-md-4 col-xl-3 ">
 
-        </div>
-
-</div>
     </div>
     <script src="{{ url_for('static',filename='js/fonctions_flux.js')}}"></script>
     </div>

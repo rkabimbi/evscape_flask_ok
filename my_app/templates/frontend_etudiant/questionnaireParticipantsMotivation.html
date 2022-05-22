@@ -12,24 +12,25 @@
 
 {% block body %}
 <body onload="changerImageFond()"> </body>
-<h2 class="likert-header" style="color: grey;">Questionnaire d'expérience utilisateur - {{nomJEEI}} </h2>
-
+<h2 class="likert-header" style="color: grey;">Questionnaire de motivation - {{nomJEEI}} </h2>
 
 <div class="wrap">
+
     <form action="">
 
-            {{macro_questionnaireParticipantsUX.afficheUnElementLikert("questions UX 1")}}
+        {{macro_questionnaireParticipantsUX.afficheUnElementLikert("Je suis enthousiaste à l’idée de réaliser l’activité pédagogique pratique à laquelle j’ai été assigné.","M01")}}
+
+        {{macro_questionnaireParticipantsUX.afficheUnElementLikert("Je suis intéressé(e) par la matière enseignée au travers de l’activité pédagogique qui m’est proposée","M02")}}
+
+        {{macro_questionnaireParticipantsUX.afficheUnElementLikert("Je pense que la matière enseignée au travers de l’activité pédagogique qui m’est proposée est difficile à appréhender.","M03")}}
 
         <div class="buttons">
-            <button class="clear">Clear</button>
-            <button class="submit">Submit</button>
+            <button type="button" class="btn btn-warning">Envoyer</button>
         </div>
     </form>
 </div>
 
 
-
-</div>
 <script src="{{ url_for('static',filename='js/fonctions_questionnaireParticipantsUX.js')}}"></script>
 <script src="{{ url_for('static',filename='js/fonctions_flux.js')}}"></script> <!-- Laisser ca partout - besoin pour mon hack de fond-->
 </div>

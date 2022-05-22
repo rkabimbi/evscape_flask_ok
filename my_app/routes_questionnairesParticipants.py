@@ -46,7 +46,15 @@ from my_app.models.jeei_package.jointureJeeiUser import JointureJeeiUser
 
 @app.route("/questionnaireParticipantsUX", methods=['GET', 'POST'])
 def fonction_questionnaireParticipantsUX():
-    return render_template("frontend_etudiant/questionnaireParticipantsUX.html",currentUser=current_user)
+    nomJEEI="Deskape"
+    return render_template("frontend_etudiant/questionnaireParticipantsUX.html",currentUser=current_user,nomJEEI=nomJEEI)
+
+
+
+@app.route("/questionnaireParticipantsMotivation", methods=['GET', 'POST'])
+def fonction_questionnaireParticipantsMotivation():
+    nomJEEI="Deskape"
+    return render_template("frontend_etudiant/questionnaireParticipantsMotivation.html",currentUser=current_user,nomJEEI=nomJEEI)
 
 
 
