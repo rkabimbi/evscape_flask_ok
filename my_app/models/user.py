@@ -24,6 +24,7 @@ class User(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethodes relativ
     titre = db.Column(db.String(30), nullable=True)
     universite = db.Column(db.String(30), nullable=True)
     rel_JointureJeeiUser = relationship("JointureJeeiUser", backref='User', uselist=False)
+    rel_Experimentation = relationship("Experimentation", backref='User', uselist=False)
  
   
 

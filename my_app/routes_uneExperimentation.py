@@ -10,7 +10,8 @@ from jinja2 import environment
 from random import randint
 import math
 import os
-from my_app import db #import de la db
+from my_app import db
+import my_app #import de la db
 
 from my_app.models.user import User
 
@@ -37,6 +38,7 @@ from flask import send_from_directory
 from my_app.models.jeei_package.questionApprentissage import QuestionApprentissage
 from my_app.models.jeei_package.jointureJeeiUser import JointureJeeiUser
 from random import choice, randint
+from my_app.models.experimentation import Experimentation
 
 @app.route("/uneExperimentation", methods=['GET', 'POST'])
 @login_required
@@ -45,12 +47,16 @@ def fonction_uneExperimentation():
     idJEEIaEnvoyer = request.args.get("idJEEI")
     JEEIAEnvoyer = Jeei.query.filter_by(id=idJEEIaEnvoyer).first()
     specificationAEnvoyer = specification=Specification.query.filter_by(id=JEEIAEnvoyer.fk_SpecificationId).first()
-    #recuperer le numero de la dernière experimentation  et faire +1
-    #en attendant je fais ceci
-    idExperimentation=1
+    #creation experimentatio,
+    experimentation = Experimentation(fk_JeeiId=JEEIAEnvoyer.id,fk_UserId=current_user.id)
+    db.session.add(experimentation)#sauve dans la DB
+    db.session.commit()
+
+    print(experimentation)
+    
 
 
-    return render_template("uneExperimentation.html",currentUser=current_user,JEEI=JEEIAEnvoyer,specification=specificationAEnvoyer,idExperimentation=1)
+    return render_template("uneExperimentation.html",currentUser=current_user,JEEI=JEEIAEnvoyer,specification=specificationAEnvoyer,experimentation=experimentation)
 
 
 @app.route("/consulterGroupesParticipants", methods=['GET', 'POST'])

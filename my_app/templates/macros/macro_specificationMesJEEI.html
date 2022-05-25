@@ -401,7 +401,17 @@ FAIRE JUSTE UN TABLEAUX CLASSIQU ET j'Y MET TTE LES DATAS (dans un premier temps
 
 {% endmacro %}
 
-{% macro afficheContenuListeExperimentations() %}
+{% macro afficheContenuListeExperimentations(monJEEI) %}
+
+</row>
+  <div class="btnGroupMesJEEIPresentation ">
+
+    <a class="btn btn-secondary" href="http://127.0.0.1:5000/uneExperimentation?idJEEI={{monJEEI.id}}" role="button" style =" margin-left: 15px; margin-right: 15px;">Expérimentation</a>
+
+
+  </div>
+<row>
+
 
 FAIRE JUSTE UN TABLEAUX CLASSIQU avec les informations qui résume bien l'experimentation
 

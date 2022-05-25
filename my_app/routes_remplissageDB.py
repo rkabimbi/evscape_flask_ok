@@ -27,6 +27,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime, date
 
 from flask import json, jsonify
+from my_app.models.experimentation import Experimentation
 
 from my_app.models.user import User
 
@@ -106,7 +107,7 @@ def function_lancementDBFictive():
     db.session.add(jeei)#sauve dans la DB
     db.session.commit()
 
-    jeei=Jeei(nom="Unbox",img="static/img/img2.png",descriptif="Les poupees russes vous feront perdre la tête",fk_SpecificationId=2,auteurID=2)
+    jeei=Jeei(nom="Unbox",img="static/img/img2.png",descriptif="Les poupees russes vous feront perdre la tête",fk_SpecificationId=2,auteurID=1)
     db.session.add(jeei)#sauve dans la DB
     db.session.commit()
 
@@ -114,7 +115,7 @@ def function_lancementDBFictive():
     db.session.add(jeei)#sauve dans la DB
     db.session.commit()
 
-    jeei=Jeei(nom="Algorithmo Express",img="static/img/img4.png",descriptif="Entrez dans les méandres de la récursivité",fk_SpecificationId=4,auteurID=3)
+    jeei=Jeei(nom="Algorithmo Express",img="static/img/img4.png",descriptif="Entrez dans les méandres de la récursivité",fk_SpecificationId=4,auteurID=1)
     db.session.add(jeei)#sauve dans la DB
     db.session.commit()
 
@@ -173,7 +174,26 @@ def function_lancementDBFictive():
     jointureJeeiUser=JointureJeeiUser(fk_JeeiId=5,fk_UserId=1)
     db.session.add(jointureJeeiUser)#sauve dans la DB
     db.session.commit()
+    
+    experimentation = Experimentation(fk_JeeiId=1,fk_UserId=1)
+    db.session.add(experimentation)#sauve dans la DB
+    db.session.commit()
 
+    experimentation = Experimentation(fk_JeeiId=1,fk_UserId=2)
+    db.session.add(experimentation)#sauve dans la DB
+    db.session.commit()
+
+    experimentation = Experimentation(fk_JeeiId=1,fk_UserId=1)
+    db.session.add(experimentation)#sauve dans la DB
+    db.session.commit()
+
+    experimentation = Experimentation(fk_JeeiId=3,fk_UserId=2)
+    db.session.add(experimentation)#sauve dans la DB
+    db.session.commit()
+
+    experimentation = Experimentation(fk_JeeiId=3,fk_UserId=1)
+    db.session.add(experimentation)#sauve dans la DB
+    db.session.commit()
 
 
 

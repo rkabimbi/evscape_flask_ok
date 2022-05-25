@@ -97,3 +97,18 @@ function fonction_bloquerPostTest(idJEEI, idExperimentation)
     console.log("fonction_bloquerPostTest II")
    
 }
+
+
+function fonction_debloquerMotivation(idJEEI, idExperimentation)
+{
+    console.log("fonction_debloquerMotivation")
+    
+}
+
+
+
+function fonction_bloquerMotivation(idJEEI, idExperimentation)
+{
+    console.log("fonction_bloquerMotivation")
+    
+}
