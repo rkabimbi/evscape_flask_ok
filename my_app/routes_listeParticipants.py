@@ -37,15 +37,19 @@ from flask import send_from_directory
 from my_app.models.jeei_package.questionApprentissage import QuestionApprentissage
 from my_app.models.jeei_package.jointureJeeiUser import JointureJeeiUser
 from random import choice, randint
+from my_app.models.experimentation import Experimentation
 
 @app.route("/listeParticipants", methods=['GET', 'POST'])
 @login_required
 def fonction_listeParticipants():
     print("fonction_listeParticipants")
     idJEEIaEnvoyer = request.args.get("idJEEI")
+    
     #pour chercher la bonne experimentation liée au JEEI
     idExperimentation = request.args.get("idExperimentation")
+ 
     JEEIAEnvoyer = Jeei.query.filter_by(id=idJEEIaEnvoyer).first()
-    specificationAEnvoyer = specification=Specification.query.filter_by(id=JEEIAEnvoyer.fk_SpecificationId).first()
+    specificationAEnvoyer = Specification.query.filter_by(id=JEEIAEnvoyer.fk_SpecificationId).first()
+    experimentation=Experimentation.query.filter_by(id=idExperimentation).first()
     
-    return render_template("listeParticipants.html",currentUser=current_user,JEEI=JEEIAEnvoyer,specification=specificationAEnvoyer)
+    return render_template("listeParticipants.html",currentUser=current_user,JEEI=JEEIAEnvoyer,specification=specificationAEnvoyer,experimentation=experimentation)

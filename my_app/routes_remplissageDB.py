@@ -28,6 +28,7 @@ from datetime import datetime, date
 
 from flask import json, jsonify
 from my_app.models.experimentation import Experimentation
+from my_app.models.participant import Participant
 
 from my_app.models.user import User
 
@@ -43,7 +44,7 @@ from my_app.models.jeei_package.jeei import Jeei
 from my_app.models.jeei_package.specification import Specification, Statut, Theme, PublicCible
 from my_app.models.jeei_package.questionApprentissage import QuestionApprentissage
 from my_app.models.jeei_package.jointureJeeiUser import JointureJeeiUser
-
+from my_app.models.participant import Participant, Sexe, ExperienceJeei, Localisation, Experience
 
 """
 Pour rappel le fonction de flask c'est qu'à chaque changement il reparcours tt le fichier je pense. Notament pour le login.
@@ -195,6 +196,21 @@ def function_lancementDBFictive():
     db.session.add(experimentation)#sauve dans la DB
     db.session.commit()
 
+    participant = Participant(age=21,sexe=Sexe.MASCULIN,email='p1@student.be',expJEEI=ExperienceJeei.RAREMENT,etudes=PublicCible.BACCALAUREAT,localisation= Localisation.AFRIQUE,experience= Experience.EXPERT,groupeExperimental=True,consentement=True,fk_ExperimentationId=1,nom='jean',prenom='pierre')
+    db.session.add(participant)#sauve dans la DB
+    db.session.commit()
+
+    participant = Participant(24,Sexe.FEMININ,'p2@student.be',ExperienceJeei.RAREMENT,PublicCible.BACCALAUREAT, Localisation.AFRIQUE, Experience.EXPERT,True,True,2,'Khalid','Boudlal')
+    db.session.add(participant)#sauve dans la DB
+    db.session.commit()
+
+    participant = Participant(20,Sexe.MASCULIN,'p3@student.be',ExperienceJeei.RAREMENT,PublicCible.BACCALAUREAT, Localisation.AFRIQUE, Experience.EXPERT,True,True,2,'Elie','Tozer')
+    db.session.add(participant)#sauve dans la DB
+    db.session.commit()
+
+    participant = Participant(21,Sexe.MASCULIN,'p4@student.be',ExperienceJeei.RAREMENT,PublicCible.BACCALAUREAT, Localisation.AFRIQUE, Experience.EXPERT,True,True,2,'Zoe','Lita')
+    db.session.add(participant)#sauve dans la DB
+    db.session.commit()
 
 
 
