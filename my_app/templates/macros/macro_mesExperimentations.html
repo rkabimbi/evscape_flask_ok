@@ -1,0 +1,65 @@
+{%macro afficherCarteMesExperimentations(experimentation)%}
+
+
+<div class="col-sm-10 carteListeMesExperimentations"  >
+    <h3> {{experimentation.nom}}</h3>
+  <div class="row">
+    <div class="col-sm-5">
+        
+          <ul class="column list-group list-group-flush">
+            <li class="list-group-item">
+              
+              <B> Date</B> : TBD 
+
+
+            </li>
+            <li class="list-group-item">
+              <B> Public</B> :{{experimentation.publicCible}}
+            </li>
+            <li class="list-group-item">
+              <B> Theme</B> : {{experimentation.theme}}
+            </li>
+            <li class="list-group-item">
+                <B> Chapitre</B> : {{experimentation.chapitre}}
+              </li>
+
+ 
+          </ul>
+
+      </div>   
+      
+      <div class="col-sm-5">
+        <ul class="column list-group list-group-flush">
+     
+         
+
+          <li class="list-group-item">
+            <B> Participants </B>: {{experimentation.participants}}
+          </li>
+
+          <li class="list-group-item">
+            <B> Apprentissage </B>: {{experimentation.Apprentissage}}
+          </li>
+
+          <li class="list-group-item">
+            <B> Perception </B>: {{experimentation.PerceptionGlobale}}
+          </li>
+
+          
+        </ul>
+
+
+
+
+
+
+    </div>   
+
+
+
+
+  </div>
+</div>
+
+
+{% endmacro %}

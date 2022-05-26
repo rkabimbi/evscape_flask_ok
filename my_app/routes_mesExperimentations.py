@@ -13,7 +13,8 @@ from jinja2 import environment
 from random import randint
 import math
 
-from my_app import db #import de la db
+from my_app import db
+from my_app.models.experimentation import Experimentation #import de la db
 
 from my_app.models.user import User
 
@@ -45,6 +46,36 @@ from my_app.models.jeei_package.specification import Specification, Statut, Them
 @app.route("/mesExperimentations", methods=['GET', 'POST'])
 @login_required
 def fonction_mesExperimentations():
-    return render_template("mesExperimentations.html",currentUser=current_user)
+    user=current_user
+    mesExperimentations=Experimentation.query.filter_by(fk_UserId=user.id).all()
+    #je vais construire un disctionnaire pq?
+    # ici je renvoi un sous tableau de tous les JEEI donc les id ne corrspondront pas
+    # aux id des JEEI dans l'objet experimentation
+    #je vais donc fournir un dictionnaire qui garanti le bon mapping entre les choses
+    experimentationsTabDeDict=[]
+    for experimentation in mesExperimentations:
+        jeeiExperimente = Jeei.query.filter_by(id=experimentation.fk_JeeiId).first()
+        specificationJeeiExperimente = Specification.query.filter_by(id=jeeiExperimente.fk_SpecificationId).first()
+
+        experimentationDict={
+            #tous les id ici me permettront de passer aux routes l'id afin qu'ils puissent savoir de quoi
+            #il s'agit et rebalancer de l'info
+            "idExperimentation": experimentation.id,
+            "idJeei":experimentation.fk_JeeiId,
+            "idSpecification":jeeiExperimente.fk_SpecificationId,
+            "nom":jeeiExperimente.nom,
+            "publicCible":specificationJeeiExperimente.publicCible,
+            "theme":specificationJeeiExperimente.theme,
+            "chapitre":specificationJeeiExperimente.chapitre,
+            "participants":"TBD",
+            "Apprentissage":"TBD",
+            "PerceptionGlobale":"TBD",
+        }
+
+        experimentationsTabDeDict.append(experimentationDict) 
+
+    
+    print(experimentationsTabDeDict)
+    return render_template("mesExperimentations.html",currentUser=current_user,  mesExperimentations=experimentationsTabDeDict)
 
    
