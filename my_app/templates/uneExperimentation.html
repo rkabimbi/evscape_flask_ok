@@ -19,30 +19,39 @@
     <h3 class="numExperimentation"> Experimentation #{{experimentation.idInterne}}</h3>
 
 </div >
-<div class="row"> 
+<div class="row" > 
 
 
-  <div class="col-sm-4">
+  <div class="col-sm-4" >
       <div class="card cardUneExperimentation">
-        <div class="card-body">
+        <div class="card-body" >
           <h5 class="card-title" style="color: grey; font-weight: bold;">Etape 1</h5>
           <h5 class="card-title">Identification des participants</h5>
           <p class="card-text">Créez la liste des participants à votre experimentation.  </p>
-    
-          <a class="btn btn-secondary" href="http://127.0.0.1:5000/listeParticipants?idJEEI={{JEEI.id}}&idExperimentation={{experimentation.id}}" role="button">Consulter</a>
+     
+            <a class="btn btn-secondary" href="http://127.0.0.1:5000/listeParticipants?idJEEI={{JEEI.id}}&idExperimentation={{experimentation.id}}" role="button">Consulter</a>
+
+           
+          
         </div>
       </div>
   </div>
 
+ 
 
+ 
+  
   <div class="col-sm-4">
     <div class="card cardUneExperimentation">
-      <div class="card-body">
+      <div class="card-body" style="background-color: lightgray;">
         <h5 class="card-title" style="color: grey; font-weight: bold;">Etape 2</h5>
         <h5 class="card-title">Explications protocole</h5>
         <p class="card-text">Séance d'explications  du déroulement de l'expérimentation.</p>
+        
+        <a class="btn btn-success" href="http://127.0.0.1:5000/consulterGroupesParticipants?idJEEI={{JEEI.id}}&idExperimentation={{experimentation.id}}" role="button">Fait</a>
 
-        <a class="btn btn-secondary" href="http://127.0.0.1:5000/consulterGroupesParticipants?idJEEI={{JEEI.id}}&idExperimentation={{experimentation.id}}" role="button">Consulter</a>
+        {{macro_uneExperimentation.afficheModalProtocol()}}
+     
       </div>
     </div>
   </div>
@@ -160,7 +169,7 @@
     <div class="card cardUneExperimentation">
       <div class="card-body">
         <h5 class="card-title" style="color: grey; font-weight: bold;">Etape 10</h5>
-        <h5 class="card-title">Questionnaire expérience utilisateur</h5>
+        <h5 class="card-title">Questionnaire UX</h5>
         <p class="card-text">Débloquez le questionnaire d'expérience utilisateur aux sessions participants.  </p>
 
         <button type="button" class="btn btn-success" onclick="fonction_debloquerUX('{{JEEI.id}}', {{experimentation.id}})" >Débloquer</button>
