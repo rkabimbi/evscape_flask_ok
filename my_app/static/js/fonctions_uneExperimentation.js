@@ -112,3 +112,28 @@ function fonction_bloquerMotivation(idJEEI, idExperimentation)
     console.log("fonction_bloquerMotivation")
     
 }
+
+
+function fonction_validerEtape(experimentationId,etape )
+{
+    console.log("fonctiiion_validerEtape")
+    var xhttp = new XMLHttpRequest( );
+    let url = new URL('http://127.0.0.1:5000/validerEtapeExperimentation?idExperimentation='+ experimentationId+'&etape='+etape);  
+    xhttp.open("GET", url.toString(), true);
+    xhttp.send()
+    xhttp.onreadystatechange = function()
+    { 
+        if (this.readyState == 4 && this.status == 200) 
+        {
+            retourValidationEtape(this.responseText,etape)   
+        }
+    };
+}
+
+function retourValidationEtape(responseText,etape)
+{
+    console.log("retourValidationEtape")
+    document.getElementById("etapeExperimentation"+etape).innerHTML='<h5 class="card-title" style="color: grey; font-weight: bold;" id="etapeExperimentation2">Etape '+etape+'<span style="color:green"> [étape validée]</span>'
+
+    document.getElementById("btnValiderEtape"+etape).disabled=true
+}

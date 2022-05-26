@@ -25,7 +25,13 @@
   <div class="col-sm-4" >
       <div class="card cardUneExperimentation">
         <div class="card-body" >
-          <h5 class="card-title" style="color: grey; font-weight: bold;">Etape 1</h5>
+          <h5 class="card-title" style="color: grey; font-weight: bold;">Etape 1 
+            {%if experimentation.etape1==True%}
+              <span style="color:green"> [étape validée]</span>
+            {%endif%}
+          
+          </h5>
+          
           <h5 class="card-title">Identification des participants</h5>
           <p class="card-text">Créez la liste des participants à votre experimentation.  </p>
      
@@ -43,14 +49,25 @@
   
   <div class="col-sm-4">
     <div class="card cardUneExperimentation">
-      <div class="card-body" style="background-color: lightgray;">
-        <h5 class="card-title" style="color: grey; font-weight: bold;">Etape 2</h5>
+      <div class="card-body" >
+        <h5 class="card-title" style="color: grey; font-weight: bold;" id="etapeExperimentation2">Etape 2
+          {%if experimentation.etape2==True%}
+              <span style="color:green"> [étape validée]</span>
+            {%endif%}
+        
+        </h5>
         <h5 class="card-title">Explications protocole</h5>
         <p class="card-text">Séance d'explications  du déroulement de l'expérimentation.</p>
         
-        <a class="btn btn-success" href="http://127.0.0.1:5000/consulterGroupesParticipants?idJEEI={{JEEI.id}}&idExperimentation={{experimentation.id}}" role="button">Fait</a>
+       
 
         {{macro_uneExperimentation.afficheModalProtocol()}}
+
+        <button type="button" class="btn btn-success" onclick="fonction_validerEtape( {{experimentation.id}},2)" id="btnValiderEtape2" 
+        {%if experimentation.etape2==True%}
+        disabled
+      {%endif%} 
+      >Fait</button>
      
       </div>
     </div>
@@ -59,12 +76,19 @@
   <div class="col-sm-4">
     <div class="card cardUneExperimentation">
       <div class="card-body">
-        <h5 class="card-title" style="color: grey; font-weight: bold;">Etape 3</h5>
+        <h5 class="card-title" style="color: grey; font-weight: bold;" id="etapeExperimentation3">Etape 3
+        
+          {%if experimentation.etape3==True%}
+          <span style="color:green"> [étape validée]</span>
+        {%endif%}
+        </h5>
         <h5 class="card-title">Questionnaire démographique</h5>
         <p class="card-text">Débloquez le questionnaire démographique aux sessions participants.  </p>
 
         <button type="button" class="btn btn-success" onclick="fonction_debloquerFormulaireDemographique('{{JEEI.id}}', {{experimentation.id}})" >Débloquer</button>
-        <button type="button" class="btn btn-danger" onclick="fonction_bloquerFormulaireDemographique('{{JEEI.id}}', {{experimentation.id}})" >Bloquer</button>
+        <button type="button" class="btn btn-danger"   onclick="fonction_validerEtape( {{experimentation.id}},3)" id="btnValiderEtape3" {%if experimentation.etape3==True%}
+        disabled
+      {%endif%} >Bloquer</button>
       </div>
     </div>
   </div>
@@ -72,11 +96,19 @@
   <div class="col-sm-4">
     <div class="card cardUneExperimentation">
       <div class="card-body">
-        <h5 class="card-title" style="color: grey; font-weight: bold;">Etape 4</h5>
+        <h5 class="card-title" style="color: grey; font-weight: bold;" id="etapeExperimentation4">Etape 4
+        
+          {%if experimentation.etape4==True%}
+          <span style="color:green"> [étape validée]</span>
+        {%endif%}
+        
+        </h5>
         <h5 class="card-title">Cours magistral</h5>
         <p class="card-text"> Dispensez le cours magistral à l'ensemble des participants </p>
 
-        <button type="button" class="btn btn-success" onclick="fonction_confirmerCoursOk('{{JEEI.id}}', {{experimentation.id}})" >Fait</button>
+        <button type="button" class="btn btn-success"  onclick="fonction_validerEtape( {{experimentation.id}},4)" id="btnValiderEtape4" {%if experimentation.etape4==True%}
+        disabled
+      {%endif%}  >Fait</button>
       </div>
     </div>
   </div>
@@ -84,7 +116,13 @@
   <div class="col-sm-4">
     <div class="card cardUneExperimentation">
       <div class="card-body">
-        <h5 class="card-title" style="color: grey; font-weight: bold;">Etape 5</h5>
+        <h5 class="card-title" style="color: grey; font-weight: bold;" id="etapeExperimentation5">Etape 5
+        
+          {%if experimentation.etape5==True%}
+          <span style="color:green"> [étape validée]</span>
+          {%endif%}
+        
+        </h5>
         <h5 class="card-title">Annonce groupes</h5>
         <p class="card-text">Annoncez aux participants le groupe auxquels ils ont été assignés  </p>
 
@@ -97,12 +135,19 @@
   <div class="col-sm-4">
     <div class="card cardUneExperimentation">
       <div class="card-body">
-        <h5 class="card-title" style="color: grey; font-weight: bold;">Etape 6</h5>
+        <h5 class="card-title" style="color: grey; font-weight: bold;" id="etapeExperimentation6">Etape 6
+          {%if experimentation.etape6==True%}
+          <span style="color:green"> [étape validée]</span>
+        {%endif%}
+        
+        </h5>
         <h5 class="card-title">Questionnaire Motivation</h5>
         <p class="card-text">Débloquez le questionnaire de motivation aux sessions participants.  </p>
 
         <button type="button" class="btn btn-success" onclick="fonction_debloquerMotivation('{{JEEI.id}}', {{experimentation.id}})" >Débloquer</button>
-        <button type="button" class="btn btn-danger" onclick="fonction_bloquerMotivation('{{JEEI.id}}', {{experimentation.id}})" >Bloquer</button>
+        <button type="button" class="btn btn-danger" onclick="fonction_validerEtape( {{experimentation.id}},6)" id="btnValiderEtape6" {%if experimentation.etape6==True%}
+        disabled
+      {%endif%}  >Bloquer</button>
       </div>
     </div>
   </div>
@@ -114,12 +159,20 @@
   <div class="col-sm-4">
     <div class="card cardUneExperimentation">
       <div class="card-body">
-        <h5 class="card-title" style="color: grey; font-weight: bold;">Etape 6</h5>
+        <h5 class="card-title" style="color: grey; font-weight: bold;" id="etapeExperimentation7">Etape 7
+          {%if experimentation.etape7==True%}
+          <span style="color:green"> [étape validée]</span>
+        {%endif%}
+        
+        
+        </h5>
         <h5 class="card-title">Pré-test</h5>
         <p class="card-text">Débloquez le questionnaire de pré-test aux sessions participants.  </p>
 
         <button type="button" class="btn btn-success" onclick="fonction_debloquerPreTest('{{JEEI.id}}', {{experimentation.id}})" >Débloquer</button>
-        <button type="button" class="btn btn-danger" onclick="fonction_bloquerPreTest('{{JEEI.id}}', {{experimentation.id}})" >Bloquer</button>
+        <button type="button" class="btn btn-danger" onclick="fonction_validerEtape( {{experimentation.id}},7)" id="btnValiderEtape7" {%if experimentation.etape7==True%}
+        disabled
+      {%endif%}  >Bloquer</button>
       </div>
     </div>
   </div>
@@ -128,11 +181,18 @@
   <div class="col-sm-4">
     <div class="card cardUneExperimentation">
       <div class="card-body">
-        <h5 class="card-title" style="color: grey; font-weight: bold;">Etape 7</h5>
+        <h5 class="card-title" style="color: grey; font-weight: bold;" id="etapeExperimentation8">Etape 8
+          {%if experimentation.etape8==True%}
+          <span style="color:green"> [étape validée]</span>
+        {%endif%}
+        
+        </h5>
         <h5 class="card-title">Activité pratique</h5>
         <p class="card-text"> Les étudiants participent à l'activité à laquelle ils ont été assignés.  </p>
 
-        <button type="button" class="btn btn-success" onclick="fonction_confirmerActiviteOk('{{JEEI.id}}', {{experimentation.id}})" >Fait</button>
+        <button type="button" class="btn btn-success" onclick="fonction_validerEtape( {{experimentation.id}},8)" id="btnValiderEtape8" {%if experimentation.etape8==True%}
+        disabled
+      {%endif%} >Fait</button>
       </div>
     </div>
   </div>
@@ -140,11 +200,19 @@
   <div class="col-sm-4">
     <div class="card cardUneExperimentation">
       <div class="card-body">
-        <h5 class="card-title" style="color: grey; font-weight: bold;">Etape 8</h5>
+        <h5 class="card-title" style="color: grey; font-weight: bold;" id="etapeExperimentation9">Etape 9
+        
+          {%if experimentation.etape9==True%}
+          <span style="color:green"> [étape validée]</span>
+        {%endif%}
+        
+        </h5>
         <h5 class="card-title">Cooling period</h5>
         <p class="card-text"> Echangez à chaud avec les étudiants quant à leur ressenti.  </p>
 
-        <button type="button" class="btn btn-success" onclick="fonction_confirmerCoolingperiodOk('{{JEEI.id}}', {{experimentation.id}})" >Fait</button>
+        <button type="button" class="btn btn-success" onclick="fonction_validerEtape( {{experimentation.id}},9)" id="btnValiderEtape9" {%if experimentation.etape9==True%}
+        disabled
+      {%endif%}  >Fait</button>
       </div>
     </div>
   </div>
@@ -154,12 +222,19 @@
   <div class="col-sm-4">
     <div class="card cardUneExperimentation">
       <div class="card-body">
-        <h5 class="card-title" style="color: grey; font-weight: bold;">Etape 9</h5>
+        <h5 class="card-title" style="color: grey; font-weight: bold;" id="etapeExperimentation10">Etape 10
+          {%if experimentation.etape10==True%}
+          <span style="color:green"> [étape validée]</span>
+        {%endif%}
+        
+        </h5>
         <h5 class="card-title">Post-test I</h5>
         <p class="card-text">Débloquez le questionnaire de post-test aux sessions participants.  </p>
 
         <button type="button" class="btn btn-success" onclick="fonction_debloquerPostTest('{{JEEI.id}}', {{experimentation.id}})" >Débloquer</button>
-        <button type="button" class="btn btn-danger" onclick="fonction_bloquerPostTest('{{JEEI.id}}', {{experimentation.id}})" >Bloquer</button>
+        <button type="button" class="btn btn-danger" onclick="fonction_validerEtape( {{experimentation.id}},10)" id="btnValiderEtape10" {%if experimentation.etape10==True%}
+        disabled
+      {%endif%}  >Bloquer</button>
       </div>
     </div>
   </div>
@@ -168,12 +243,19 @@
   <div class="col-sm-4">
     <div class="card cardUneExperimentation">
       <div class="card-body">
-        <h5 class="card-title" style="color: grey; font-weight: bold;">Etape 10</h5>
+        <h5 class="card-title" style="color: grey; font-weight: bold;" id="etapeExperimentation11">Etape 11
+          {%if experimentation.etape11==True%}
+          <span style="color:green"> [étape validée]</span>
+        {%endif%}
+        
+        </h5>
         <h5 class="card-title">Questionnaire UX</h5>
         <p class="card-text">Débloquez le questionnaire d'expérience utilisateur aux sessions participants.  </p>
 
         <button type="button" class="btn btn-success" onclick="fonction_debloquerUX('{{JEEI.id}}', {{experimentation.id}})" >Débloquer</button>
-        <button type="button" class="btn btn-danger" onclick="fonction_bloquerUX('{{JEEI.id}}', {{experimentation.id}})" >Bloquer</button>
+        <button type="button" class="btn btn-danger" onclick="fonction_validerEtape( {{experimentation.id}},11)" id="btnValiderEtape11" {%if experimentation.etape11==True%}
+        disabled
+      {%endif%}  >Bloquer</button>
       </div>
     </div>
   </div>
@@ -181,11 +263,20 @@
   <div class="col-sm-4">
     <div class="card cardUneExperimentation">
       <div class="card-body">
-        <h5 class="card-title" style="color: grey; font-weight: bold;">Etape 11</h5>
+        <h5 class="card-title" style="color: grey; font-weight: bold;" id="etapeExperimentation12">Etape 12
+        
+        
+          {%if experimentation.etape12==True%}
+          <span style="color:green"> [étape validée]</span>
+        {%endif%}
+      
+      </h5>
         <h5 class="card-title">Focus group</h5>
         <p class="card-text"> Echangez  avec les étudiants afin d'obtenir plus d'informations quant à leur ressenti.  </p>
 
-        <button type="button" class="btn btn-success" onclick="fonction_confirmerFocusGroupOk('{{JEEI.id}}', {{experimentation.id}})" >Fait</button>
+        <button type="button" class="btn btn-success" onclick="fonction_validerEtape( {{experimentation.id}},12)" id="btnValiderEtape12" {%if experimentation.etape12==True%}
+        disabled
+      {%endif%}  >Fait</button>
       </div>
     </div>
   </div>
@@ -193,12 +284,21 @@
   <div class="col-sm-4">
     <div class="card cardUneExperimentation">
       <div class="card-body">
-        <h5 class="card-title" style="color: grey; font-weight: bold;">Etape 10</h5>
+        <h5 class="card-title" style="color: grey; font-weight: bold;" id="etapeExperimentation13">Etape 13
+        
+        
+          {%if experimentation.etape13==True%}
+          <span style="color:green"> [étape validée]</span>
+        {%endif%}
+        
+        </h5>
         <h5 class="card-title">Post-Test II</h5>
         <p class="card-text">Débloquez le questionnaire d'expérience utilisateur aux sessions participants.  </p>
 
         <button type="button" class="btn btn-success" onclick="fonction_debloquerPostTestRetention('{{JEEI.id}}', {{experimentation.id}})" >Débloquer</button>
-        <button type="button" class="btn btn-danger" onclick="fonction_bloquerPostTestRetention('{{JEEI.id}}', {{experimentation.id}})" >Bloquer</button>
+        <button type="button" class="btn btn-danger" onclick="fonction_validerEtape( {{experimentation.id}},13)" id="btnValiderEtape13" {%if experimentation.etape13==True%}
+        disabled
+      {%endif%}  >Bloquer</button>
       </div>
     </div>
   </div>

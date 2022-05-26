@@ -1,5 +1,7 @@
 
 from turtle import pos
+
+from sqlalchemy import Identity
 from my_app import app
 from flask import Flask, redirect
 from flask import request
@@ -99,4 +101,44 @@ def fonction_afficherUneExperimentationExistante():
 
 
     return render_template("uneExperimentation.html",currentUser=current_user,JEEI=JEEIAEnvoyer,specification=specificationAEnvoyer,experimentation=experimentation)
+
+
+
+@app.route("/validerEtapeExperimentation", methods=['GET', 'POST'])
+@login_required
+def fonction_validerEtapeExperimentation():
+    print("validerEtapeExperimentation")
+    idExperimentation= request.args.get("idExperimentation")
+    etape= int(request.args.get("etape"))
+    print(idExperimentation, etape)
+    experimentation = Experimentation.query.filter_by(id=idExperimentation).first()
+    if etape==2:
+        experimentation.etape2=True
+    if etape==3:
+        experimentation.etape3=True
+    if etape==4:
+        experimentation.etape4=True
+        experimentation.etape5=True#car cette etape ne necessite pas de validation
+    if etape==6:
+        experimentation.etape6=True
+    if etape==7:
+        experimentation.etape7=True
+    if etape==8:
+        experimentation.etape8=True
+    if etape==9:
+        experimentation.etape9=True
+    if etape==10:
+        experimentation.etape10=True
+    if etape==11:
+        experimentation.etape11=True
+    if etape==12:
+        experimentation.etape12=True
+    if etape==13:
+        experimentation.etape13=True
+
+    db.session.add(experimentation)#sauve dans la DB
+    db.session.commit()
+    print(experimentation)
+
+    return "ok"
     
