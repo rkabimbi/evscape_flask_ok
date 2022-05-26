@@ -40,6 +40,9 @@ from my_app.models.jeei_package.jointureJeeiUser import JointureJeeiUser
 from random import choice, randint
 from my_app.models.experimentation import Experimentation
 
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#!!!!!!!route pour creer une nouvelle experimentation !!!!!!!!!
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 @app.route("/uneExperimentation", methods=['GET', 'POST'])
 @login_required
 def fonction_uneExperimentation():
@@ -82,4 +85,18 @@ def fonction_consulterGroupesParticipants():
     #en attendant je fais ceci
     idExperimentation=1
     return render_template("groupesParticipants.html",currentUser=current_user,JEEI=JEEIAEnvoyer,idExperimentation=1)
+
+
+
+@app.route("/afficherUneExperimentationExistante", methods=['GET', 'POST'])
+@login_required
+def fonction_afficherUneExperimentationExistante():
+    print("afficherUneExperimentationExistante")
+    idExperimentation= request.args.get("idExperimentation")
+    experimentation = Experimentation.query.filter_by(id=idExperimentation).first()
+    JEEIAEnvoyer= Jeei.query.filter_by(id=experimentation.fk_JeeiId).first()
+    specificationAEnvoyer = Specification.query.filter_by(id=JEEIAEnvoyer.fk_SpecificationId).first()
+
+
+    return render_template("uneExperimentation.html",currentUser=current_user,JEEI=JEEIAEnvoyer,specification=specificationAEnvoyer,experimentation=experimentation)
     

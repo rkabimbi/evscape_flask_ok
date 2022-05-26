@@ -39,3 +39,11 @@ function fonction_Test()
 
 }
 
+
+function redirectionVersUneExperimentation(idExperimentation)
+{
+    adresseRedicrection = '/afficherUneExperimentationExistante?idExperimentation='+idExperimentation 
+    console.log(adresseRedicrection)
+    
+    location.href = adresseRedicrection;
+}
