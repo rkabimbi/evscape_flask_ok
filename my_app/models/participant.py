@@ -46,15 +46,15 @@ class Participant(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethodes 
     __tablename__ = 'Participant' #pour renomr la table "enigme""
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
    
-    age = db.Column(db.Integer, nullable=False)
+    age = db.Column(db.Integer, nullable=True)
     sexe =db.Column(db.Enum(Sexe),nullable=True)
     email = db.Column(db.String(120))
     expJEEI =db.Column(db.Enum(ExperienceJeei),nullable=True)
     etudes = db.Column(db.Enum(PublicCible),nullable=True)
     localisation =db.Column(db.Enum(Localisation),nullable=True)
     experience = db.Column(db.Enum(Experience),nullable=True)
-    groupeExperimental =db.Column(db.Boolean,default=False, nullable=False)
-    consentement =db.Column(db.Boolean,default=False, nullable=False)
+    groupeExperimental =db.Column(db.Boolean,default=False, nullable=True)
+    consentement =db.Column(db.Boolean,default=False, nullable=True)
     nom= db.Column(db.String(120))
     prenom= db.Column(db.String(120))
 
@@ -65,9 +65,27 @@ class Participant(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethodes 
 
     #score=db.Column(db.Integer,default=0)
     #r_enigme=db.relationship('Enigmes', backref=db.backref('auteur', lazy=True))#on dit que la relation c'est avec la classe Enigmes 
+
+    def __init__(self):
+        print("constructeur vide")
+        
+ 
+
     
     
-    def __init__(self, age,sexe,email,expJEEI, etudes, localisation,experience,groupeExperimental, consentement,fk_ExperimentationId, nom, prenom):
+    
+    def __repr__(self):#toString
+        return "( nom = %s, prenom = %s , email=%s, etude=%s,Experimentation=%s)\n" % ( self.nom, self.prenom,self.email,self.etudes,self.fk_ExperimentationId)
+
+
+
+
+db.create_all()#impératif!!!!
+
+
+"""
+
+def __init__(self, age,sexe,email,expJEEI, etudes, localisation,experience,groupeExperimental, consentement,fk_ExperimentationId, nom, prenom):
 
         self.age=age
         self.sexe=sexe
@@ -81,20 +99,6 @@ class Participant(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethodes 
         self.fk_ExperimentationId=fk_ExperimentationId
         self.nom=nom
         self.prenom=prenom
-        
-    
-
-
-
-    
-    
-    
-    def __repr__(self):#toString
-        return "( nom = %s, prenom = %s , email=%s, etude=%s,Experimentation=%s)\n" % ( self.nom, self.prenom,self.email,self.etudes,self.fk_ExperimentationId)
-
-
-
-
-db.create_all()#impératif!!!!
+"""
 
 

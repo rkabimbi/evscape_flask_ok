@@ -32,21 +32,21 @@
     <div class="col-sm-6 fondFormListeParticipants">
         <div class="row formListeParticipante">
             <label for="nomParticipant" class="col-sm-4 col-form-label" >Nom</label>
-            <input type="text" class="form-control col-sm-8 "  />
+            <input type="text" class="form-control col-sm-8 "  id="idNomListeParticipant"/>
         </div>
         <div class="row formListeParticipante">
             <label for="prenomParticipant" class="col-sm-4 col-form-label" >Prénom</label>
-            <input type="text" class="form-control col-sm-8 "  />
+            <input type="text" class="form-control col-sm-8 " id="idPrenomListeParticipant"  />
         </div>
         <div class="row formListeParticipante">
             <label for="emailParticipant" class="col-sm-4 col-form-label" >Email</label>
-            <input type="text" class="form-control col-sm-8 "  />
+            <input type="text" class="form-control col-sm-8 " id="idEmailListeParticipant" />
         </div>
         <div class="row buttonEnvoiListe" >
-        <button type="button " class="btn btn-warning">Ajouter</button>
+        <button type="button " class="btn btn-warning" onclick="fonction_ajouterParticipant({{experimentation.id}})">Ajouter</button>
         </div>
     </div>
-    <div class="scrollerListeParticipants col-sm-6">
+    <div class="scrollerListeParticipants col-sm-6" id="zoneScrollListeParticipants">
       
         {% for participant in participants%}
 

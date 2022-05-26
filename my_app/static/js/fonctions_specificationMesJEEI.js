@@ -285,7 +285,7 @@ function reponseBackEnd(responseText, champs)
         //console.log(fichJsonParse.reponse, champs)//
         
     
-        affichageValidationSauvegarde='<h3>  <span style="color:white"class="badge bg-success">V</span></h3>' 
+        affichageValidationSauvegarde='<h3>  <span style="color:white"class="badge bg-success ">V</span></h3>' 
         document.getElementById("affichageValidationSauvegarde"+champs).innerHTML=affichageValidationSauvegarde
         
     }

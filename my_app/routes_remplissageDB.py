@@ -196,19 +196,73 @@ def function_lancementDBFictive():
     db.session.add(experimentation)#sauve dans la DB
     db.session.commit()
 
-    participant = Participant(age=21,sexe=Sexe.MASCULIN,email='p1@student.be',expJEEI=ExperienceJeei.RAREMENT,etudes=PublicCible.BACCALAUREAT,localisation= Localisation.AFRIQUE,experience= Experience.EXPERT,groupeExperimental=True,consentement=True,fk_ExperimentationId=1,nom='jean',prenom='pierre')
+    participant = Participant()
+    participant.age=21
+    participant.sexe=Sexe.MASCULIN
+    participant.email='p1@student.be'
+    participant.expJEEI=ExperienceJeei.RAREMENT
+    participant.etudes=PublicCible.BACCALAUREAT
+    participant.localisation= Localisation.AFRIQUE
+    participant.experience= Experience.EXPERT
+    participant.groupeExperimental=True
+    participant.consentement=True
+    participant.fk_ExperimentationId=1
+    participant.nom='jean'
+    participant.prenom='pierre'
     db.session.add(participant)#sauve dans la DB
     db.session.commit()
 
-    participant = Participant(24,Sexe.FEMININ,'p2@student.be',ExperienceJeei.RAREMENT,PublicCible.BACCALAUREAT, Localisation.AFRIQUE, Experience.EXPERT,True,True,3,'Khalid','Boudlal')
+ 
+    participant = Participant()
+    participant.age=24
+    participant.sexe=Sexe.FEMININ
+    participant.email='p2@student.be'
+    participant.expJEEI=ExperienceJeei.RAREMENT
+    participant.etudes=PublicCible.BACCALAUREAT
+    participant.localisation= Localisation.AFRIQUE
+    participant.experience= Experience.EXPERT
+    participant.groupeExperimental=True
+    participant.consentement=True
+    participant.fk_ExperimentationId=3
+    participant.nom='Boudlal'
+    participant.prenom='Khalid'
     db.session.add(participant)#sauve dans la DB
     db.session.commit()
 
-    participant = Participant(20,Sexe.MASCULIN,'p3@student.be',ExperienceJeei.RAREMENT,PublicCible.BACCALAUREAT, Localisation.AFRIQUE, Experience.EXPERT,True,True,3,'Elie','Tozer')
+
+   
+
+    participant = Participant()
+    participant.age=20
+    participant.sexe=Sexe.MASCULIN
+    participant.email='p3@student.be'
+    participant.expJEEI=ExperienceJeei.REGULIEREMENT
+    participant.etudes=PublicCible.MASTER
+    participant.localisation= Localisation.AFRIQUE
+    participant.experience= Experience.NEANT
+    participant.groupeExperimental=True
+    participant.consentement=True
+    participant.fk_ExperimentationId=3
+    participant.nom='Tozer'
+    participant.prenom='Elie'
+  
     db.session.add(participant)#sauve dans la DB
     db.session.commit()
 
-    participant = Participant(21,Sexe.MASCULIN,'p4@student.be',ExperienceJeei.RAREMENT,PublicCible.BACCALAUREAT, Localisation.AFRIQUE, Experience.EXPERT,True,True,3,'Zoe','Lita')
+    
+    participant = Participant()
+    participant.age=21
+    participant.sexe=Sexe.MASCULIN
+    participant.email='p4@student.be'
+    participant.expJEEI=ExperienceJeei.REGULIEREMENT
+    participant.etudes=PublicCible.MASTER
+    participant.localisation= Localisation.AFRIQUE
+    participant.experience= Experience.NEANT
+    participant.groupeExperimental=True
+    participant.consentement=True
+    participant.fk_ExperimentationId=3
+    participant.nom='Lita'
+    participant.prenom='Zoe'
     db.session.add(participant)#sauve dans la DB
     db.session.commit()
 

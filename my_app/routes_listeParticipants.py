@@ -58,3 +58,38 @@ def fonction_listeParticipants():
     print(participants)
     
     return render_template("listeParticipants.html",currentUser=current_user,JEEI=JEEIAEnvoyer,specification=specificationAEnvoyer,experimentation=experimentation,participants=participants)
+
+
+@app.route("/ajouterParticipant", methods=['GET', 'POST'])
+@login_required
+def fonction_ajouterParticipant():
+    print("Fonction ajouterParticipant")
+    idExperimentation = request.args.get("experimentationId")
+    participantNom = request.args.get("participantNom")
+    participantEmail = request.args.get("participantEmail")
+    participantPrenom = request.args.get("participantPrenom")
+  
+    
+    participant=Participant()
+    participant.email=participantEmail
+    participant.fk_ExperimentationId=idExperimentation
+    participant.nom=participantNom
+    participant.prenom=participantPrenom
+    participant.consentement=False
+ 
+
+    db.session.add(participant)#sauve dans la DB
+    db.session.commit()
+
+    participantJzonizable={
+        'nom': participant.nom,
+        'prenom':participant.prenom,
+        'email': participant.email ,
+        'consentement':participant.consentement
+    }
+
+
+    reponse= jsonify(reponse=participantJzonizable)
+    print(reponse)
+
+    return reponse
