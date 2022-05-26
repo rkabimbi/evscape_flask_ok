@@ -57,7 +57,7 @@ def fonction_listeParticipants():
     participants=Participant.query.filter_by(fk_ExperimentationId=experimentation.id).all()
     print(participants)
     
-    return render_template("listeParticipants.html",currentUser=current_user,JEEI=JEEIAEnvoyer,specification=specificationAEnvoyer,experimentation=experimentation,participants=participants)
+    return render_template("listeParticipants.html",currentUser=current_user,JEEI=JEEIAEnvoyer,specification=specificationAEnvoyer,experimentation=experimentation,participants=participants,nbrParticipants=len(participants))
 
 
 @app.route("/ajouterParticipant", methods=['GET', 'POST'])
@@ -68,6 +68,7 @@ def fonction_ajouterParticipant():
     participantNom = request.args.get("participantNom")
     participantEmail = request.args.get("participantEmail")
     participantPrenom = request.args.get("participantPrenom")
+    
   
     
     participant=Participant()
@@ -81,6 +82,9 @@ def fonction_ajouterParticipant():
     db.session.add(participant)#sauve dans la DB
     db.session.commit()
 
+    participants=Participant.query.filter_by(fk_ExperimentationId=idExperimentation).all()
+    nbrParticipants = len(participants)
+
     participantJzonizable={
         'nom': participant.nom,
         'prenom':participant.prenom,
@@ -89,7 +93,21 @@ def fonction_ajouterParticipant():
     }
 
 
-    reponse= jsonify(reponse=participantJzonizable)
+    reponse= jsonify(reponse=participantJzonizable,nbrParticipants=nbrParticipants)
     print(reponse)
 
     return reponse
+
+
+@app.route("/validerListeParticipants", methods=['GET', 'POST'])
+@login_required
+def fonction_validerListeParticipants():
+    print("Fonction validerListeParticipants")
+    experimentationId = request.args.get("experimentationId")
+
+    experimentation=Experimentation.query.filter_by(id=experimentationId).first()
+    experimentation.etape1=True
+    db.session.add(experimentation)#sauve dans la DB
+    db.session.commit()
+
+    return "ok"
