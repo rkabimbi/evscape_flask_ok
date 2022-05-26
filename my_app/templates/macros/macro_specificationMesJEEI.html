@@ -414,11 +414,13 @@ FAIRE JUSTE UN TABLEAUX CLASSIQU ET j'Y MET TTE LES DATAS (dans un premier temps
 
 <div class="row scrollercarteListeExperimentation"> 
 
+  {%if experimentations%}<!-- pour ne pas que ca foire quand c'est null-->
   {%for experimentation in experimentations%}
 
     {{afficherCarteExperimentation(users[experimentation.fk_UserId],experimentation, monJeei)}}
 
   {%endfor%}
+  {%endif%}
 
 </div>
 
