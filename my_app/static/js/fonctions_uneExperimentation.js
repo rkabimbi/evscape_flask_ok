@@ -133,7 +133,7 @@ function fonction_validerEtape(experimentationId,etape )
 function retourValidationEtape(responseText,etape)
 {
     console.log("retourValidationEtape")
-    document.getElementById("etapeExperimentation"+etape).innerHTML='<h5 class="card-title" style="color: grey; font-weight: bold;" id="etapeExperimentation2">Etape '+etape+'<span style="color:green"> [étape validée]</span>'
+    document.getElementById("etapeExperimentation"+etape).innerHTML='<h5 class="card-title" style="color: grey; font-weight: bold;" id="etapeExperimentation2">Etape '+etape+'<span class="badge badge-warning">étape validée</span>'
 
     document.getElementById("btnValiderEtape"+etape).disabled=true
 }
