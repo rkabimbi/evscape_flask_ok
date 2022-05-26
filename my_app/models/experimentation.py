@@ -16,6 +16,8 @@ from my_app.models.jeei_package.specification import Specification, Theme, Publi
 class Experimentation(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethodes relatives aux login et l'autre pour les DB
     __tablename__ = 'Experimentation' #pour renomr la table 
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
+    idInterne = db.Column(db.Integer,nullable=True)
+    #dateEvenement= db.Column(db.Date, nullable=True)
     etape1 =db.Column(db.Boolean,default=False, nullable=False)
     etape2 =db.Column(db.Boolean,default=False, nullable=False)
     etape3 =db.Column(db.Boolean,default=False, nullable=False)
@@ -36,9 +38,10 @@ class Experimentation(UserMixin, db.Model):#userMixiin c'est pr traiter lesmetho
   
     
     
-    def __init__(self,fk_JeeiId,fk_UserId):
+    def __init__(self,fk_JeeiId,fk_UserId,idInterne,):
         self.fk_JeeiId=fk_JeeiId
         self.fk_UserId=fk_UserId
+        self.idInterne=idInterne
 
        
 
@@ -51,7 +54,7 @@ class Experimentation(UserMixin, db.Model):#userMixiin c'est pr traiter lesmetho
     
     
     def __repr__(self):#toString
-        return "( id = %s, etape1 = %s , etape2=%s, etape3=%s,etape4=%s,etape5=%s, etape6=%s,etape7=%s,etape8=%s,etape9=%s,etape10=%s,etape11=%s,etape12=%s,jeeiId=%s)\n" % ( self.id, self.etape1,self.etape2,self.etape3,self.etape4,self.etape5,self.etape6, self.etape7,self.etape8,self.etape9,self.etape10,self.etape11,self.etape12,self.fk_JeeiId)
+        return "( id = %s, idInterne=%s, etape1 = %s , etape2=%s, etape3=%s,etape4=%s,etape5=%s, etape6=%s,etape7=%s,etape8=%s,etape9=%s,etape10=%s,etape11=%s,etape12=%s,jeeiId=%s)\n" % ( self.id, self.idInterne,self.etape1,self.etape2,self.etape3,self.etape4,self.etape5,self.etape6, self.etape7,self.etape8,self.etape9,self.etape10,self.etape11,self.etape12,self.fk_JeeiId)
 
 
 

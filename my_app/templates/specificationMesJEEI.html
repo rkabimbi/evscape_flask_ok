@@ -1,6 +1,7 @@
 <head>
  
     <link href="/static/css/specificationMesJEEI.css" rel="stylesheet"><!-- idem-->
+    <link href="/static/css/mesExperimentations.css" rel="stylesheet"><!-- idem-->
     {% import "macros/macro_specificationMesJEEI.html" as macro_specificationMesJEEI %}<!-- import de macro. Comme ça c'est dispo pour toutes les pages filles -->
 </head>
 
@@ -89,7 +90,7 @@
       
     </div>
     <div id="idContenuSousPageListeExperimentations">
-      {{macro_specificationMesJEEI.afficheContenuListeExperimentations(monJEEIRecupere)}}
+      {{macro_specificationMesJEEI.afficheContenuListeExperimentations(monJEEIRecupere,experimentations,users)}}
      
     </div>
     <div id="idContenuSousPageEquipe">

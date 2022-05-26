@@ -16,7 +16,7 @@
 
 <div class="row titreUneExperimentation"> 
     <h1> {{JEEI.nom}}</h1>
-    <h3 class="numExperimentation"> Experimentation #{{experimentation.id}}</h3>
+    <h3 class="numExperimentation"> Experimentation #{{experimentation.idInterne}}</h3>
     
 </div >
 <div class="row"> 
@@ -47,8 +47,12 @@
         </div>
     </div>
     <div class="scrollerListeParticipants col-sm-6">
+        {{participants}}
+        {% for participant in participants%}
 
+            {{macro_listeParticipants.afficheCarteParticipant(particpant.nom, participant.prenom, participant.email,participant.consentement)}}
 
+        {%endfor%}
         
        
         {{macro_listeParticipants.afficheCarteParticipant("LEROY", "Laurent", "ll@student.unamur.edu",true)}}

@@ -40,6 +40,8 @@ from flask import send_from_directory
 from my_app.models.jeei_package.questionApprentissage import QuestionApprentissage
 from my_app.models.jeei_package.jointureJeeiUser import JointureJeeiUser
 from random import choice, randint
+from my_app.models.experimentation import Experimentation
+from my_app.models.participant import Participant
 
 @app.route("/specificationMesJEEI", methods=['GET', 'POST'])
 @login_required
@@ -52,6 +54,9 @@ def fonction_specificationMesJEEI():
     monJEEIAEnvoyer=None
     specification=None
     membres=[]
+    #pour pouvoir manipuler les données des utilisateurs sur les experimentations qui ne sont donc 
+    #pas necessairement celles de l'utilisateur courrant
+    users=User.query.all()
     
     if idJEEIAmodifier: #si un id est renseigné (ca veut dire qu'on a cliqué uncarte et donc on doit aller chercher le JEEI en question)
         #chercher dans DB
@@ -68,6 +73,12 @@ def fonction_specificationMesJEEI():
             membres.append(membreEquipe)
         print("Tableaux membres----------------------")
         print(membres)
+
+        experimentations = Experimentation.query.filter_by(fk_JeeiId=monJEEIAEnvoyer.id).all()
+
+
+        #on va chercher les experimentations et les participants
+
 
         
       
@@ -99,12 +110,13 @@ def fonction_specificationMesJEEI():
         membres.append(current_user)
         print(questions)
         flash("Votre Jeu d'Evasion a été crée [id :"+str(newJeeiId)+ "]. Bonne évaluation!!!", 'success')
+        experimentations=None
 
 
         
     print(monJEEIAEnvoyer)
     print(specification)
-    return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEIAEnvoyer,specificationJEEIRecupere=specification,theme=Theme,publicCible=PublicCible,questions=questions,membres=membres)
+    return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEIAEnvoyer,specificationJEEIRecupere=specification,theme=Theme,publicCible=PublicCible,questions=questions,membres=membres,experimentations=experimentations,users=users)
 
 
 

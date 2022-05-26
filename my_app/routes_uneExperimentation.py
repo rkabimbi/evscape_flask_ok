@@ -47,8 +47,18 @@ def fonction_uneExperimentation():
     idJEEIaEnvoyer = request.args.get("idJEEI")
     JEEIAEnvoyer = Jeei.query.filter_by(id=idJEEIaEnvoyer).first()
     specificationAEnvoyer = specification=Specification.query.filter_by(id=JEEIAEnvoyer.fk_SpecificationId).first()
+
+
+
+    #pour recup que les experimentations liées aux JEEI afin de connaitre le numéro "idInterne" du JEEI par rapport à l'experimentation en question
+    experimentations=Experimentation.query.filter_by(fk_JeeiId=JEEIAEnvoyer.id).all()
+
+    #je lui donne le numero "interne"
+    dernierIdInterne=len(experimentations)
+    print("nbInterne :",dernierIdInterne)
+
     #creation experimentatio,
-    experimentation = Experimentation(fk_JeeiId=JEEIAEnvoyer.id,fk_UserId=current_user.id)
+    experimentation = Experimentation(fk_JeeiId=JEEIAEnvoyer.id,fk_UserId=current_user.id,idInterne=dernierIdInterne+1)
     db.session.add(experimentation)#sauve dans la DB
     db.session.commit()
 

@@ -10,7 +10,8 @@ from jinja2 import environment
 from random import randint
 import math
 import os
-from my_app import db #import de la db
+from my_app import db
+from my_app.models.participant import Participant #import de la db
 
 from my_app.models.user import User
 
@@ -38,6 +39,7 @@ from my_app.models.jeei_package.questionApprentissage import QuestionApprentissa
 from my_app.models.jeei_package.jointureJeeiUser import JointureJeeiUser
 from random import choice, randint
 from my_app.models.experimentation import Experimentation
+from my_app.models.participant import Participant
 
 @app.route("/listeParticipants", methods=['GET', 'POST'])
 @login_required
@@ -50,6 +52,9 @@ def fonction_listeParticipants():
  
     JEEIAEnvoyer = Jeei.query.filter_by(id=idJEEIaEnvoyer).first()
     specificationAEnvoyer = Specification.query.filter_by(id=JEEIAEnvoyer.fk_SpecificationId).first()
-    experimentation=Experimentation.query.filter_by(id=idExperimentation).first()
     
-    return render_template("listeParticipants.html",currentUser=current_user,JEEI=JEEIAEnvoyer,specification=specificationAEnvoyer,experimentation=experimentation)
+    experimentation=Experimentation.query.filter_by(id=idExperimentation).first()
+    participants=Participant.query.filter_by(fk_ExperimentationId=experimentation.id).all()
+    print(participants)
+    
+    return render_template("listeParticipants.html",currentUser=current_user,JEEI=JEEIAEnvoyer,specification=specificationAEnvoyer,experimentation=experimentation,participants=participants)

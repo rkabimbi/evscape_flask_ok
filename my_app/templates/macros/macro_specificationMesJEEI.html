@@ -401,21 +401,109 @@ FAIRE JUSTE UN TABLEAUX CLASSIQU ET j'Y MET TTE LES DATAS (dans un premier temps
 
 {% endmacro %}
 
-{% macro afficheContenuListeExperimentations(monJEEI) %}
+{% macro afficheContenuListeExperimentations(monJEEI,experimentations,users) %}
 
-</row>
-  <div class="btnGroupMesJEEIPresentation ">
+<div class="row">
+  <div class="btnGroupMesJEEIExperimentation ">
 
-    <a class="btn btn-secondary" href="http://127.0.0.1:5000/uneExperimentation?idJEEI={{monJEEI.id}}" role="button" style =" margin-left: 15px; margin-right: 15px;">Expérimentation</a>
+    <a class="btn btn-secondary" href="http://127.0.0.1:5000/uneExperimentation?idJEEI={{monJEEI.id}}" role="button" style =" margin-left: 15px; margin-right: 15px;">Experimenter</a>
 
 
   </div>
-<row>
+</div>
+
+<div class="row scrollercarteListeExperimentation"> 
+
+  {%for experimentation in experimentations%}
+
+    {{afficherCarteExperimentation(users[experimentation.fk_UserId],experimentation, monJeei)}}
+
+  {%endfor%}
+
+</div>
 
 
-FAIRE JUSTE UN TABLEAUX CLASSIQU avec les informations qui résume bien l'experimentation
+
+
 
 {% endmacro %}
+
+
+
+
+
+
+{%macro afficherCarteExperimentation(user,experimentation, jeei)%}
+
+<div class="col-sm-10 carteListeExperimentation"  >
+  <div class="row">
+    <div class="col-sm-5">
+          <ul class="column list-group list-group-flush">
+            <li class="list-group-item">
+              
+              <B> Date</B> : TBD 
+
+
+            </li>
+            <li class="list-group-item">
+              <B> id</B> :{{experimentation.id}}
+            </li>
+            <li class="list-group-item">
+              <B> Statut</B> : complete ou non?
+            </li>
+
+            <li class="list-group-item">
+              <B> Contact </B>: {{user.lastname}}, {{user.firstname}}
+            </li>
+ 
+          </ul>
+
+      </div>   
+      
+      <div class="col-sm-5">
+        <ul class="column list-group list-group-flush">
+     
+          <li class="list-group-item">
+            <B> Lieu </B>: Lieu
+          </li>
+
+          <li class="list-group-item">
+            <B> Participants </B>: nbrParticipants
+          </li>
+
+          <li class="list-group-item">
+            <B> Apprentissage </B>: score 1
+          </li>
+
+          <li class="list-group-item">
+            <B> Perception </B>: score 2
+          </li>
+
+          
+        </ul>
+
+
+
+
+
+
+    </div>   
+
+
+
+
+  </div>
+</div>
+
+
+{% endmacro %}
+
+
+
+
+
+
+
 
 
 {% macro afficheContenuEquipe(membres,monJEEI,currentUser) %}

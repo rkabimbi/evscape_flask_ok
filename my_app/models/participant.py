@@ -45,6 +45,7 @@ class Experience(enum.Enum):
 class Participant(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethodes relatives aux login et l'autre pour les DB
     __tablename__ = 'Participant' #pour renomr la table "enigme""
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
+   
     age = db.Column(db.Integer, nullable=False)
     sexe =db.Column(db.Enum(Sexe),nullable=True)
     email = db.Column(db.String(120))
@@ -80,6 +81,7 @@ class Participant(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethodes 
         self.fk_ExperimentationId=fk_ExperimentationId
         self.nom=nom
         self.prenom=prenom
+        
     
 
 

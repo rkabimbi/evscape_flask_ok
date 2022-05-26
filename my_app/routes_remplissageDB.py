@@ -176,23 +176,23 @@ def function_lancementDBFictive():
     db.session.add(jointureJeeiUser)#sauve dans la DB
     db.session.commit()
     
-    experimentation = Experimentation(fk_JeeiId=1,fk_UserId=1)
+    experimentation = Experimentation(fk_JeeiId=1,fk_UserId=1,idInterne=1)
     db.session.add(experimentation)#sauve dans la DB
     db.session.commit()
 
-    experimentation = Experimentation(fk_JeeiId=1,fk_UserId=2)
+    experimentation = Experimentation(fk_JeeiId=1,fk_UserId=2,idInterne=2)
     db.session.add(experimentation)#sauve dans la DB
     db.session.commit()
 
-    experimentation = Experimentation(fk_JeeiId=1,fk_UserId=1)
+    experimentation = Experimentation(fk_JeeiId=1,fk_UserId=1,idInterne=3)
     db.session.add(experimentation)#sauve dans la DB
     db.session.commit()
 
-    experimentation = Experimentation(fk_JeeiId=3,fk_UserId=2)
+    experimentation = Experimentation(fk_JeeiId=3,fk_UserId=2,idInterne=1)
     db.session.add(experimentation)#sauve dans la DB
     db.session.commit()
 
-    experimentation = Experimentation(fk_JeeiId=3,fk_UserId=1)
+    experimentation = Experimentation(fk_JeeiId=3,fk_UserId=1,idInterne=2)
     db.session.add(experimentation)#sauve dans la DB
     db.session.commit()
 
