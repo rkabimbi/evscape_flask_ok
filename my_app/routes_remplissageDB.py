@@ -200,15 +200,15 @@ def function_lancementDBFictive():
     db.session.add(participant)#sauve dans la DB
     db.session.commit()
 
-    participant = Participant(24,Sexe.FEMININ,'p2@student.be',ExperienceJeei.RAREMENT,PublicCible.BACCALAUREAT, Localisation.AFRIQUE, Experience.EXPERT,True,True,2,'Khalid','Boudlal')
+    participant = Participant(24,Sexe.FEMININ,'p2@student.be',ExperienceJeei.RAREMENT,PublicCible.BACCALAUREAT, Localisation.AFRIQUE, Experience.EXPERT,True,True,3,'Khalid','Boudlal')
     db.session.add(participant)#sauve dans la DB
     db.session.commit()
 
-    participant = Participant(20,Sexe.MASCULIN,'p3@student.be',ExperienceJeei.RAREMENT,PublicCible.BACCALAUREAT, Localisation.AFRIQUE, Experience.EXPERT,True,True,2,'Elie','Tozer')
+    participant = Participant(20,Sexe.MASCULIN,'p3@student.be',ExperienceJeei.RAREMENT,PublicCible.BACCALAUREAT, Localisation.AFRIQUE, Experience.EXPERT,True,True,3,'Elie','Tozer')
     db.session.add(participant)#sauve dans la DB
     db.session.commit()
 
-    participant = Participant(21,Sexe.MASCULIN,'p4@student.be',ExperienceJeei.RAREMENT,PublicCible.BACCALAUREAT, Localisation.AFRIQUE, Experience.EXPERT,True,True,2,'Zoe','Lita')
+    participant = Participant(21,Sexe.MASCULIN,'p4@student.be',ExperienceJeei.RAREMENT,PublicCible.BACCALAUREAT, Localisation.AFRIQUE, Experience.EXPERT,True,True,3,'Zoe','Lita')
     db.session.add(participant)#sauve dans la DB
     db.session.commit()
 

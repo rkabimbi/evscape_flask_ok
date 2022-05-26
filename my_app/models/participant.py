@@ -90,7 +90,7 @@ class Participant(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethodes 
     
     
     def __repr__(self):#toString
-        return "( nom = %s, prenom = %s , email=%s, etude=%s,Experimentation=%s)\n" % ( self.nom, self.prenom,self.email,self.etude,self.fk_ExperimentationId)
+        return "( nom = %s, prenom = %s , email=%s, etude=%s,Experimentation=%s)\n" % ( self.nom, self.prenom,self.email,self.etudes,self.fk_ExperimentationId)
 
 
 

@@ -47,20 +47,14 @@
         </div>
     </div>
     <div class="scrollerListeParticipants col-sm-6">
-        {{participants}}
+      
         {% for participant in participants%}
 
-            {{macro_listeParticipants.afficheCarteParticipant(particpant.nom, participant.prenom, participant.email,participant.consentement)}}
+            {{macro_listeParticipants.afficheCarteParticipant(participant.nom, participant.prenom, participant.email,participant.consentement)}}
 
         {%endfor%}
         
        
-        {{macro_listeParticipants.afficheCarteParticipant("LEROY", "Laurent", "ll@student.unamur.edu",true)}}
-
-        {{macro_listeParticipants.afficheCarteParticipant("COLLICIHIA", "Michael", "cm@student.unamur.edu",false)}}
-
-        {{macro_listeParticipants.afficheCarteParticipant("DI STASIO", "Anthony", "da@student.unamur.edu",true)}}
-        {{macro_listeParticipants.afficheCarteParticipant("HERION", "Christophe", "hc@student.unamur.edu",false)}}
 
 
 
