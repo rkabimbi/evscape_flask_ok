@@ -9,10 +9,10 @@ function sauverFormulaireDemographique(idParticipant, idExperimentation)
     experienceJeei = document.getElementById("idQuestionnaireDemographiqueExperienceJeeiParticipant").value
 
     
-    console.log("idParticipant "+ idParticipant+ "idExperiemnation:"+ idExperimentation+"age : "+age+"sexe"+sexe)
+    console.log("idParticipant "+ idParticipant+ "idExperiemnation:"+ idExperimentation+"age : "+age+"sexe"+sexe+ experienceJeei)
 
     var xhttp = new XMLHttpRequest( );
-    let url = new URL('http://127.0.0.1:5000/sauvegardeQuestionnaireDemographique?idParticipant='+ idParticipant+'&idExperimentation='+idExperimentation+'&age='+age+'&sexe='+sexe+'&localisation='+localisation+'&experience='+experience+"&experienceJeei="+experienceJeei  );  
+    let url = new URL('http://127.0.0.1:5000/sauvegardeQuestionnaireDemographique?idParticipant='+ idParticipant+'&idExperimentation='+idExperimentation+'&age='+age+'&sexe='+sexe+'&localisation='+localisation+'&experience='+experience+'&experienceJeei='+experienceJeei  );  
     xhttp.open("GET", url.toString(), true);
     xhttp.send()
     xhttp.onreadystatechange = function()

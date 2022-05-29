@@ -81,7 +81,7 @@ def fonction_sauvegardeQuestionnaireDemographique():
     participant.sexe=request.args.get("sexe")
     participant.localisation= request.args.get("localisation")
     participant.experience=request.args.get("experience")
-    participant.experienceJeei=request.args.get("experienceJeei")
+    participant.expJeei=request.args.get("experienceJeei")
     db.session.add(participant)
     db.session.commit()
     return "ok"
