@@ -136,10 +136,30 @@ function retourValidationEtape(responseText,etape)
     document.getElementById("etapeExperimentation"+etape).innerHTML='<h5 class="card-title" style="color: grey; font-weight: bold;" id="etapeExperimentation2">Etape '+etape+'<span class="badge badge-warning">étape validée</span>'
 
     document.getElementById("btnValiderEtape"+etape).disabled=true
-
+    nextetape=etape+1//pour debloquer l'etape d'apres
     //si c'est un bouton où il y a un bouton "debloquer avec" alors il doit griser le "debloquer aussi"
     if(etape==3|| etape==6 || etape==7 || etape==10 || etape==11 || etape==13)
     {
         document.getElementById("btnValiderEtapeDebloque"+etape).disabled=true
+        console.log("je bloque le debloquer de l'etape "+etape)
+        
     }
+
+    //pour gerer les cas où il y a un ou deux boutons à débloquer après
+    if(nextetape==3|| nextetape==6 || nextetape==7 || nextetape==10 || nextetape==11 || nextetape==13)
+    {
+        document.getElementById("btnValiderEtapeDebloque"+nextetape).disabled=false
+        console.log("je débloque le debloquer de l'etape "+nextetape)
+
+        document.getElementById("btnValiderEtape"+nextetape).disabled=false
+        console.log("je débloque le bloquer de l'etape "+nextetape)
+    }
+    else{
+            
+        document.getElementById("btnValiderEtape"+nextetape).disabled=false
+        console.log("je débloque le bloquer de l'etape "+nextetape)
+    }
+
+
+
 }
