@@ -13,7 +13,7 @@ function fonction_debloquerFormulaireDemographique(idJEEI, idExperimentation)
     { 
         if (this.readyState == 4 && this.status == 200) 
         {
-            retourValidationEtape(this.responseText,etape)   
+            retourDebloquerFormulaireDemographique(this.responseText)   
         }
     };
 }
@@ -22,7 +22,8 @@ function fonction_debloquerFormulaireDemographique(idJEEI, idExperimentation)
 function retourDebloquerFormulaireDemographique(responseText)
 {
     console.log("retourDebloquerFormulaireDemographique")
-    var fichJsonParse=JSON.parse(responseText);//parsing du fichier JSON envoyé par jsonify
+    console.log(responseText)
+    //var fichJsonParse=JSON.parse(responseText);//parsing du fichier JSON envoyé par jsonify
     
 
 
