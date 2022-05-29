@@ -1,0 +1,25 @@
+<head>
+    <link href="/static/css/questionnaireParticipantsUX.css" rel="stylesheet"><!-- idem-->
+    {% import "frontend_etudiant/macros/macro_questionnaireParticipantsDemographique.html" as macro_questionnaireParticipantsDemographique %}<!-- import de macro. Comme ça c'est dispo pour toutes les pages filles -->
+</head>
+
+<!-- herite de main (de tout sauf les blocks (donc le menu)) -->
+{% extends "frontend_etudiant/parentPageEtudiant.html" %}
+
+<!-- Tout ce dont on a pas herité de main -->
+
+
+
+{% block body %}
+<body onload="changerImageFond()"> </body>
+
+
+
+MERCI!!!!
+
+
+<script src="{{ url_for('static',filename='js/fonctions_questionnaireParticipantsUDemographique.js')}}"></script>
+<script src="{{ url_for('static',filename='js/fonctions_flux.js')}}"></script> <!-- Laisser ca partout - besoin pour mon hack de fond-->
+</div>
+
+{% endblock %}

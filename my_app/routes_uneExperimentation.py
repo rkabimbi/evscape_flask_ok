@@ -173,9 +173,10 @@ def fonction_debloquerFormulaireDemographique():
         
         if participant.consentement:#si il a marqué son consentment
             msg = Message((jeei.nom,' : Formulaire démographique'), sender = ( 'Equipe EvscApp' ,'rudy.kabimbingoy@teams.student.unamur.be'), recipients = [participant.email ])
-            url="location.href='http://127.0.0.1:5000/questionnaireParticipantsDemographique/"+participant.urlPerso+"'"
+            url="http://127.0.0.1:5000/questionnaireParticipantsDemographique/"+participant.urlPerso
             #url="location.href='http://127.0.0.1:5000/questionnaireParticipantsDemographique/'"
-            msg.html = "<b>"+participant.nom+"</b>, <p>Vous avez marqué votre consentement à participer à l'activité "+jeei.nom+". Merci dès lors de bien vouloir compléter une enquête démographique via le lien ci-dessous </p> <button onclick='"+ url+ "'> Enquête Démographique </button>"
+            msg.html = "<b>"+participant.nom+"</b>, <p>Vous avez marqué votre consentement à participer à l'activité "+jeei.nom+". Merci dès lors de bien vouloir compléter une enquête démographique via le lien ci-dessous </p> <a href="+url+">Questionnaire Démographique </a>"
+            #<button onclick='"+ url+ "'> Enquête Démographique </button>"
             mail.send(msg)
     
 

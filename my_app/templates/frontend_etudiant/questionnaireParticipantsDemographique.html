@@ -1,6 +1,6 @@
 <head>
     <link href="/static/css/questionnaireParticipantsUX.css" rel="stylesheet"><!-- idem-->
-    {% import "frontend_etudiant/macros/macro_questionnaireParticipantsUX.html" as macro_questionnaireParticipantsUX %}<!-- import de macro. Comme ça c'est dispo pour toutes les pages filles -->
+    {% import "frontend_etudiant/macros/macro_questionnaireParticipantsDemographique.html" as macro_questionnaireParticipantsDemographique %}<!-- import de macro. Comme ça c'est dispo pour toutes les pages filles -->
 </head>
 
 <!-- herite de main (de tout sauf les blocks (donc le menu)) -->
@@ -12,26 +12,39 @@
 
 {% block body %}
 <body onload="changerImageFond()"> </body>
-<h2 class="likert-header" style="color: grey;">Questionnaire DEMOGRAPHIQUE A UPDATE!!! de {{participant.nom}} - {{nomJEEI}} </h2>
+<h2 class="likert-header" style="color: grey;">Questionnaire Démographique ({{jeei.nom}}) </h2>
+<h4> Participant :  {{participant.nom}} {{participant.prenom}} </h4>
 
-<div class="wrap">
+<div class="boxQuestionnaireDemographique">
+    <div class="form-group">
+      <label for="ageParticipant">Quel âge avez-vous?</label>
+      <input type="number" class="form-control" id="idQuestionnaireDemographiqueAgeParticipant"  placeholder="Entrez votre-âge">
+      
+    </div>
 
-    <form action="">
+    <div class="form-group boxQuestionnaireDemographique">
+      <label for="genreParticipant">De quel genre êtes-vous?</label>
+      <Br>
+      <select class="form-control  " aria-label=".form-select-lg example" id="idQuestionnaireDemographiqueSexeParticipant"   style="color:grey">
+        
+        {% for sexe in sexes %}
+            <option  style="color:grey" value="{{ sexe.name }}" >{{ sexe.name }}</option> 
+        {% endfor %}
+        
+      </select>
 
-        {{macro_questionnaireParticipantsUX.afficheUnElementLikert("Je suis enthousiaste à l’idée de réaliser l’activité pédagogique pratique à laquelle j’ai été assigné.","M01")}}
+    </div>
 
-        {{macro_questionnaireParticipantsUX.afficheUnElementLikert("Je suis intéressé(e) par la matière enseignée au travers de l’activité pédagogique qui m’est proposée","M02")}}
 
-        {{macro_questionnaireParticipantsUX.afficheUnElementLikert("Je pense que la matière enseignée au travers de l’activité pédagogique qui m’est proposée est difficile à appréhender.","M03")}}
 
-        <div class="buttons">
-            <button type="button" class="btn btn-warning">Envoyer</button>
-        </div>
-    </form>
+   
+    <button type="submit" class="btn btn-warning" onclick="sauverFormulaireDemographique({{participant.id}},{{experimentation.id}})">Soumettre</button>
 </div>
 
 
-<script src="{{ url_for('static',filename='js/fonctions_questionnaireParticipantsUX.js')}}"></script>
+
+
+<script src="{{ url_for('static',filename='js/fonctions_questionnaireParticipantsDemographique.js')}}"></script>
 <script src="{{ url_for('static',filename='js/fonctions_flux.js')}}"></script> <!-- Laisser ca partout - besoin pour mon hack de fond-->
 </div>
 

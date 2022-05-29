@@ -20,9 +20,19 @@ class Evaluation(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethodes r
     __tablename__ = 'Evaluation' #pour renomr la table 
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
     dateCreation= db.Column(db.Date, nullable=True)
+
+    #pour faire le suivi de l'etat d'avancement de chaque participant dans l'evaluation
+    questionnaireDemographique = db.Column(db.Boolean, default=False,nullable=False)
+    questionnaireMotivation= db.Column(db.Boolean, default=False,nullable=False)
+    preTest  = db.Column(db.Boolean, default=False,nullable=False)
+    postTest1  = db.Column(db.Boolean, default=False,nullable=False)
+    questionnaireUX = db.Column(db.Boolean, default=False,nullable=False)
+    postTest2 = db.Column(db.Boolean, default=False,nullable=False)
+
     fk_JeeiId = db.Column(db.Integer, db.ForeignKey('Jeei.id'),nullable=False)
     fk_ExperimentationId = db.Column(db.Integer, db.ForeignKey('Experimentation.id'),nullable=False)
     fk_ParticipantId = db.Column(db.Integer, db.ForeignKey('Participant.id'),nullable=False)
+
     
 
 

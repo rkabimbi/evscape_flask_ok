@@ -186,6 +186,8 @@ def function_lancementDBFictive():
     db.session.commit()
 
     experimentation = Experimentation(fk_JeeiId=1,fk_UserId=1,idInterne=3)
+    experimentation.etape1=True #je fait ca pour eviter de devoir tjrs valider la liste des personne
+    experimentation.etape2=True
     db.session.add(experimentation)#sauve dans la DB
     db.session.commit()
 
