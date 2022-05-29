@@ -85,7 +85,9 @@
         <h5 class="card-title">Questionnaire démographique</h5>
         <p class="card-text">Débloquez le questionnaire démographique aux sessions participants.  </p>
 
-        <button type="button" class="btn btn-success" onclick="fonction_debloquerFormulaireDemographique('{{JEEI.id}}', {{experimentation.id}})" >Débloquer</button>
+        <button type="button" class="btn btn-success" onclick="fonction_debloquerFormulaireDemographique('{{JEEI.id}}', {{experimentation.id}})" id="btnValiderEtapeDebloque3" {%if experimentation.etape6==True%}
+        disabled
+      {%endif%}>Débloquer</button>
         <button type="button" class="btn btn-danger"   onclick="fonction_validerEtape( {{experimentation.id}},3)" id="btnValiderEtape3" {%if experimentation.etape3==True%}
         disabled
       {%endif%} >Bloquer</button>
@@ -144,7 +146,11 @@
         <h5 class="card-title">Questionnaire Motivation</h5>
         <p class="card-text">Débloquez le questionnaire de motivation aux sessions participants.  </p>
 
-        <button type="button" class="btn btn-success" onclick="fonction_debloquerMotivation('{{JEEI.id}}', {{experimentation.id}})" >Débloquer</button>
+        <button type="button" class="btn btn-success" id="btnValiderEtapeDebloque6" onclick="fonction_debloquerMotivation('{{JEEI.id}}', {{experimentation.id}})"
+        {%if experimentation.etape6==True%}
+        disabled
+      {%endif%}
+       >Débloquer</button>
         <button type="button" class="btn btn-danger" onclick="fonction_validerEtape( {{experimentation.id}},6)" id="btnValiderEtape6" {%if experimentation.etape6==True%}
         disabled
       {%endif%}  >Bloquer</button>
@@ -169,7 +175,9 @@
         <h5 class="card-title">Pré-test</h5>
         <p class="card-text">Débloquez le questionnaire de pré-test aux sessions participants.  </p>
 
-        <button type="button" class="btn btn-success" onclick="fonction_debloquerPreTest('{{JEEI.id}}', {{experimentation.id}})" >Débloquer</button>
+        <button type="button" class="btn btn-success" id="btnValiderEtapeDebloque7" onclick="fonction_debloquerPreTest('{{JEEI.id}}', {{experimentation.id}})" {%if experimentation.etape7==True%}
+        disabled
+      {%endif%}>Débloquer</button>
         <button type="button" class="btn btn-danger" onclick="fonction_validerEtape( {{experimentation.id}},7)" id="btnValiderEtape7" {%if experimentation.etape7==True%}
         disabled
       {%endif%}  >Bloquer</button>
@@ -231,7 +239,9 @@
         <h5 class="card-title">Post-test I</h5>
         <p class="card-text">Débloquez le questionnaire de post-test aux sessions participants.  </p>
 
-        <button type="button" class="btn btn-success" onclick="fonction_debloquerPostTest('{{JEEI.id}}', {{experimentation.id}})" >Débloquer</button>
+        <button type="button" class="btn btn-success" id="btnValiderEtapeDebloque10" onclick="fonction_debloquerPostTest('{{JEEI.id}}', {{experimentation.id}})" {%if experimentation.etape10==True%}
+        disabled
+      {%endif%}>Débloquer</button>
         <button type="button" class="btn btn-danger" onclick="fonction_validerEtape( {{experimentation.id}},10)" id="btnValiderEtape10" {%if experimentation.etape10==True%}
         disabled
       {%endif%}  >Bloquer</button>
@@ -252,7 +262,9 @@
         <h5 class="card-title">Questionnaire UX</h5>
         <p class="card-text">Débloquez le questionnaire d'expérience utilisateur aux sessions participants.  </p>
 
-        <button type="button" class="btn btn-success" onclick="fonction_debloquerUX('{{JEEI.id}}', {{experimentation.id}})" >Débloquer</button>
+        <button type="button" class="btn btn-success" id="btnValiderEtapeDebloque11" onclick="fonction_debloquerUX('{{JEEI.id}}', {{experimentation.id}})" {%if experimentation.etape11==True%}
+        disabled
+      {%endif%}>Débloquer</button>
         <button type="button" class="btn btn-danger" onclick="fonction_validerEtape( {{experimentation.id}},11)" id="btnValiderEtape11" {%if experimentation.etape11==True%}
         disabled
       {%endif%}  >Bloquer</button>
@@ -295,7 +307,9 @@
         <h5 class="card-title">Post-Test II</h5>
         <p class="card-text">Débloquez le questionnaire d'expérience utilisateur aux sessions participants.  </p>
 
-        <button type="button" class="btn btn-success" onclick="fonction_debloquerPostTestRetention('{{JEEI.id}}', {{experimentation.id}})" >Débloquer</button>
+        <button type="button" class="btn btn-success" id="btnValiderEtapeDebloque13" onclick="fonction_debloquerPostTestRetention('{{JEEI.id}}', {{experimentation.id}})" {%if experimentation.etape13==True%}
+        disabled
+      {%endif%}>Débloquer</button>
         <button type="button" class="btn btn-danger" onclick="fonction_validerEtape( {{experimentation.id}},13)" id="btnValiderEtape13" {%if experimentation.etape13==True%}
         disabled
       {%endif%}  >Bloquer</button>
