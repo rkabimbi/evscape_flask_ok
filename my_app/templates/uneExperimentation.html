@@ -35,7 +35,7 @@
           <h5 class="card-title">Identification des participants</h5>
           <p class="card-text">Créez la liste des participants à votre experimentation.  </p>
      
-          <a  class="btn btn-secondary" href="http://127.0.0.1:5000/listeParticipants?idJEEI={{JEEI.id}}&idExperimentation={{experimentation.id}}" role="button" >Consulter</a>
+          <button  class="btn btn-secondary"  onclick="location.href='http://127.0.0.1:5000/listeParticipants?idJEEI={{JEEI.id}}&idExperimentation={{experimentation.id}}'" >Consulter</button>
 
            
           
@@ -63,7 +63,7 @@
 
         {{macro_uneExperimentation.afficheModalProtocol()}}
 
-        <button type="button" class="btn btn-success" onclick="fonction_validerEtape( {{experimentation.id}},2)" id="btnValiderEtape2" 
+        <button type="button" class="btn btn-warning" onclick="fonction_validerEtape( {{experimentation.id}},2)" id="btnValiderEtape2" 
         {%if experimentation.etape2==True or experimentation.etape1==False%}
         disabled
       {%endif%} 
@@ -85,10 +85,10 @@
         <h5 class="card-title">Questionnaire démographique</h5>
         <p class="card-text">Débloquez le questionnaire démographique aux sessions participants.  </p>
 
-        <button type="button" class="btn btn-success" onclick="fonction_debloquerFormulaireDemographique('{{JEEI.id}}', {{experimentation.id}})" id="btnValiderEtapeDebloque3" {%if experimentation.etape3==True or experimentation.etape2==False%}
+        <button type="button" class="btn btn-secondary" onclick="fonction_debloquerFormulaireDemographique('{{JEEI.id}}', {{experimentation.id}})" id="btnValiderEtapeDebloque3" {%if experimentation.etape3==True or experimentation.etape2==False%}
         disabled
       {%endif%}>Débloquer</button>
-        <button type="button" class="btn btn-danger"   onclick="fonction_validerEtape( {{experimentation.id}},3)" id="btnValiderEtape3" {%if experimentation.etape3==True or experimentation.etape2==False%}
+        <button type="button" class="btn btn-warning"   onclick="fonction_validerEtape( {{experimentation.id}},3)" id="btnValiderEtape3" {%if experimentation.etape3==True or experimentation.etape2==False%}
         disabled
       {%endif%} >Bloquer</button>
       </div>
@@ -108,7 +108,7 @@
         <h5 class="card-title">Cours magistral</h5>
         <p class="card-text"> Dispensez le cours magistral à l'ensemble des participants </p>
 
-        <button type="button" class="btn btn-success"  onclick="fonction_validerEtape( {{experimentation.id}},4)" id="btnValiderEtape4" {%if experimentation.etape4==True or experimentation.etape3==False%}
+        <button type="button" class="btn btn-warning"  onclick="fonction_validerEtape( {{experimentation.id}},4)" id="btnValiderEtape4" {%if experimentation.etape4==True or experimentation.etape3==False%}
         disabled
       {%endif%}  >Fait</button>
       </div>
@@ -128,9 +128,9 @@
         <h5 class="card-title">Annonce groupes</h5>
         <p class="card-text">Annoncez aux participants le groupe auxquels ils ont été assignés  </p>
 
-        <a class="btn btn-secondary" href="http://127.0.0.1:5000/consulterGroupesParticipants?idJEEI={{JEEI.id}}&idExperimentation={{experimentation.id}}" role="button" {%if experimentation.etape4==False %}
+        <button class="btn btn-secondary" onclick="location.href='http://127.0.0.1:5000/consulterGroupesParticipants?idJEEI={{JEEI.id}}&idExperimentation={{experimentation.id}}'" id="btnValiderEtape5" {%if experimentation.etape4==False %}
         disabled
-      {%endif%}>Consulter</a>
+      {%endif%}>Consulter</button>
       </div>
     </div>
   </div>
@@ -148,12 +148,12 @@
         <h5 class="card-title">Questionnaire Motivation</h5>
         <p class="card-text">Débloquez le questionnaire de motivation aux sessions participants.  </p>
 
-        <button type="button" class="btn btn-success" id="btnValiderEtapeDebloque6" onclick="fonction_debloquerMotivation('{{JEEI.id}}', {{experimentation.id}})"
+        <button type="button" class="btn btn-secondary" id="btnValiderEtapeDebloque6" onclick="fonction_debloquerMotivation('{{JEEI.id}}', {{experimentation.id}})"
         {%if experimentation.etape6==True or experimentation.etape5==False %}
         disabled
       {%endif%}
        >Débloquer</button>
-        <button type="button" class="btn btn-danger" onclick="fonction_validerEtape( {{experimentation.id}},6)" id="btnValiderEtape6" {%if experimentation.etape6==True or experimentation.etape5==False %}
+        <button type="button" class="btn btn-warning" onclick="fonction_validerEtape( {{experimentation.id}},6)" id="btnValiderEtape6" {%if experimentation.etape6==True or experimentation.etape5==False %}
         disabled
       {%endif%}  >Bloquer</button>
       </div>
@@ -177,10 +177,10 @@
         <h5 class="card-title">Pré-test</h5>
         <p class="card-text">Débloquez le questionnaire de pré-test aux sessions participants.  </p>
 
-        <button type="button" class="btn btn-success" id="btnValiderEtapeDebloque7" onclick="fonction_debloquerPreTest('{{JEEI.id}}', {{experimentation.id}})" {%if experimentation.etape7==True or experimentation.etape6==False %}
+        <button type="button" class="btn btn-secondary" id="btnValiderEtapeDebloque7" onclick="fonction_debloquerPreTest('{{JEEI.id}}', {{experimentation.id}})" {%if experimentation.etape7==True or experimentation.etape6==False %}
         disabled
       {%endif%}>Débloquer</button>
-        <button type="button" class="btn btn-danger" onclick="fonction_validerEtape( {{experimentation.id}},7)" id="btnValiderEtape7" {%if experimentation.etape7==True or experimentation.etape6==False %}
+        <button type="button" class="btn btn-warning" onclick="fonction_validerEtape( {{experimentation.id}},7)" id="btnValiderEtape7" {%if experimentation.etape7==True or experimentation.etape6==False %}
         disabled
       {%endif%}  >Bloquer</button>
       </div>
@@ -200,7 +200,7 @@
         <h5 class="card-title">Activité pratique</h5>
         <p class="card-text"> Les étudiants participent à l'activité à laquelle ils ont été assignés.  </p>
 
-        <button type="button" class="btn btn-success" onclick="fonction_validerEtape( {{experimentation.id}},8)" id="btnValiderEtape8" {%if experimentation.etape8==True or experimentation.etape7==False%}
+        <button type="button" class="btn btn-warning" onclick="fonction_validerEtape( {{experimentation.id}},8)" id="btnValiderEtape8" {%if experimentation.etape8==True or experimentation.etape7==False%}
         disabled
       {%endif%} >Fait</button>
       </div>
@@ -220,7 +220,7 @@
         <h5 class="card-title">Cooling period</h5>
         <p class="card-text"> Echangez à chaud avec les étudiants quant à leur ressenti.  </p>
 
-        <button type="button" class="btn btn-success" onclick="fonction_validerEtape( {{experimentation.id}},9)" id="btnValiderEtape9" {%if experimentation.etape9==True or experimentation.etape8==False %}
+        <button type="button" class="btn btn-warning" onclick="fonction_validerEtape( {{experimentation.id}},9)" id="btnValiderEtape9" {%if experimentation.etape9==True or experimentation.etape8==False %}
         disabled
       {%endif%}  >Fait</button>
       </div>
@@ -241,10 +241,10 @@
         <h5 class="card-title">Post-test I</h5>
         <p class="card-text">Débloquez le questionnaire de post-test aux sessions participants.  </p>
 
-        <button type="button" class="btn btn-success" id="btnValiderEtapeDebloque10" onclick="fonction_debloquerPostTest('{{JEEI.id}}', {{experimentation.id}})" {%if experimentation.etape10==True or experimentation.etape9==False %}
+        <button type="button" class="btn btn-secondary" id="btnValiderEtapeDebloque10" onclick="fonction_debloquerPostTest('{{JEEI.id}}', {{experimentation.id}})" {%if experimentation.etape10==True or experimentation.etape9==False %}
         disabled
       {%endif%}>Débloquer</button>
-        <button type="button" class="btn btn-danger" onclick="fonction_validerEtape( {{experimentation.id}},10)" id="btnValiderEtape10" {%if experimentation.etape10==True or experimentation.etape9==False %}
+        <button type="button" class="btn btn-warning" onclick="fonction_validerEtape( {{experimentation.id}},10)" id="btnValiderEtape10" {%if experimentation.etape10==True or experimentation.etape9==False %}
         disabled
       {%endif%}  >Bloquer</button>
       </div>
@@ -264,10 +264,10 @@
         <h5 class="card-title">Questionnaire UX</h5>
         <p class="card-text">Débloquez le questionnaire d'expérience utilisateur aux sessions participants.  </p>
 
-        <button type="button" class="btn btn-success" id="btnValiderEtapeDebloque11" onclick="fonction_debloquerUX('{{JEEI.id}}', {{experimentation.id}})" {%if experimentation.etape11==True or experimentation.etape10==False %}
+        <button type="button" class="btn btn-secondary" id="btnValiderEtapeDebloque11" onclick="fonction_debloquerUX('{{JEEI.id}}', {{experimentation.id}})" {%if experimentation.etape11==True or experimentation.etape10==False %}
         disabled
       {%endif%}>Débloquer</button>
-        <button type="button" class="btn btn-danger" onclick="fonction_validerEtape( {{experimentation.id}},11)" id="btnValiderEtape11" {%if experimentation.etape11==True or  experimentation.etape10==False %}
+        <button type="button" class="btn btn-warning" onclick="fonction_validerEtape( {{experimentation.id}},11)" id="btnValiderEtape11" {%if experimentation.etape11==True or  experimentation.etape10==False %}
         disabled
       {%endif%}  >Bloquer</button>
       </div>
@@ -288,7 +288,7 @@
         <h5 class="card-title">Focus group</h5>
         <p class="card-text"> Echangez  avec les étudiants afin d'obtenir plus d'informations quant à leur ressenti.  </p>
 
-        <button type="button" class="btn btn-success" onclick="fonction_validerEtape( {{experimentation.id}},12)" id="btnValiderEtape12" {%if experimentation.etape12==True or experimentation.etape11==False%}
+        <button type="button" class="btn btn-warning" onclick="fonction_validerEtape( {{experimentation.id}},12)" id="btnValiderEtape12" {%if experimentation.etape12==True or experimentation.etape11==False%}
         disabled
       {%endif%}  >Fait</button>
       </div>
@@ -309,10 +309,10 @@
         <h5 class="card-title">Post-Test II</h5>
         <p class="card-text">Débloquez le questionnaire d'expérience utilisateur aux sessions participants.  </p>
 
-        <button type="button" class="btn btn-success" id="btnValiderEtapeDebloque13" onclick="fonction_debloquerPostTestRetention('{{JEEI.id}}', {{experimentation.id}})" {%if experimentation.etape13==True or experimentation.etape12==False %}
+        <button type="button" class="btn btn-secondary" id="btnValiderEtapeDebloque13" onclick="fonction_debloquerPostTestRetention('{{JEEI.id}}', {{experimentation.id}})" {%if experimentation.etape13==True or experimentation.etape12==False %}
         disabled
       {%endif%}>Débloquer</button>
-        <button type="button" class="btn btn-danger" onclick="fonction_validerEtape( {{experimentation.id}},13)" id="btnValiderEtape13" {%if experimentation.etape13==True or experimentation.etape12==False %}
+        <button type="button" class="btn btn-warning" onclick="fonction_validerEtape( {{experimentation.id}},13)" id="btnValiderEtape13" {%if experimentation.etape13==True or experimentation.etape12==False %}
         disabled
       {%endif%}  >Bloquer</button>
       </div>
