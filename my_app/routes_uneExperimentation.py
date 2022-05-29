@@ -13,7 +13,8 @@ from random import randint
 import math
 import os
 from my_app import db
-import my_app #import de la db
+import my_app
+from my_app.models.participant import Participant #import de la db
 
 from my_app.models.user import User
 
@@ -158,8 +159,28 @@ def fonction_validerEtapeExperimentation():
 @login_required
 def fonction_debloquerFormulaireDemographique():
     print("fonction_debloquerFormulaireDemographique - Envoie email")
+    #on recupere tous les etudiants liés à l'experience lambda
+    idExperimentation= request.args.get("idExperimentation")
+    participants=Participant.query.filter_by(fk_ExperimentationId=idExperimentation).all()
+    print("liste Participants liée à l'experimentation ",idExperimentation)
+    print(participants)
+    experimentation=Experimentation.query.filter_by(id=idExperimentation).first()
+
+    jeei = Jeei.query.filter_by(id=experimentation.fk_JeeiId).first()
+
+    
+    for participant in participants:
+        
+        if participant.consentement:#si il a marqué son consentment
+            msg = Message((jeei.nom,' : Formulaire démographique'), sender = ( 'Equipe EvscApp' ,'rudy.kabimbingoy@teams.student.unamur.be'), recipients = [participant.email ])
+            url="location.href='http://127.0.0.1:5000/questionnaireParticipantsDemographique/"+participant.urlPerso+"'"
+            #url="location.href='http://127.0.0.1:5000/questionnaireParticipantsDemographique/'"
+            msg.html = "<b>"+participant.nom+"</b>, <p>Vous avez marqué votre consentement à participer à l'activité "+jeei.nom+". Merci dès lors de bien vouloir compléter une enquête démographique via le lien ci-dessous </p> <button onclick='"+ url+ "'> Enquête Démographique </button>"
+            mail.send(msg)
+    
+
+
+    return "Messages envoyés!"
+
    
-    msg = Message('Hello from the other side!', sender = ( 'Equipe EvscApp' ,'rudy.kabimbingoy@teams.student.unamur.be'), recipients = ['paul@mailtrap.io'])
-    msg.html = "<b>Hey Paul</b>, sending you this email from my <a href='https://google.com'>Flask app</a>, lmk if it works"
-    mail.send(msg)
-    return "Message sent!"
+    

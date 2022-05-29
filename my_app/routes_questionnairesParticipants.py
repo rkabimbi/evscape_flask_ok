@@ -14,7 +14,9 @@ from jinja2 import environment
 from random import randint
 import math
 
-from my_app import db #import de la db
+from my_app import db
+from my_app.models.experimentation import Experimentation
+from my_app.models.participant import Participant #import de la db
 
 from my_app.models.user import User
 
@@ -55,6 +57,19 @@ def fonction_questionnaireParticipantsUX():
 def fonction_questionnaireParticipantsMotivation():
     nomJEEI="Deskape"
     return render_template("frontend_etudiant/questionnaireParticipantsMotivation.html",currentUser=current_user,nomJEEI=nomJEEI)
+
+
+@app.route("/questionnaireParticipantsDemographique/<path:UrlUtilisateur>", methods=['GET', 'POST'])
+def fonction_questionnaireParticipantsDemographique(UrlUtilisateur):
+    participant=Participant.query.filter_by(urlPerso=UrlUtilisateur).first()
+    experimentation=Experimentation.query.filter_by(id=participant.fk_ExperimentationId).first()
+    jeei=Jeei.query.filter_by(id=experimentation.fk_JeeiId).first()
+    if participant:
+        print("c'est bien un participant  et donc on accèpte qu'il se connecte avec cet url qui lui est propre")
+        nomJEEI=jeei.nom
+        return render_template("frontend_etudiant/questionnaireParticipantsDemographique.html",currentUser=current_user,nomJEEI=nomJEEI,participant=participant)
+    else:
+       return render_template("user_login.html")
 
 
 

@@ -1,0 +1,38 @@
+<head>
+    <link href="/static/css/questionnaireParticipantsUX.css" rel="stylesheet"><!-- idem-->
+    {% import "frontend_etudiant/macros/macro_questionnaireParticipantsUX.html" as macro_questionnaireParticipantsUX %}<!-- import de macro. Comme ça c'est dispo pour toutes les pages filles -->
+</head>
+
+<!-- herite de main (de tout sauf les blocks (donc le menu)) -->
+{% extends "frontend_etudiant/parentPageEtudiant.html" %}
+
+<!-- Tout ce dont on a pas herité de main -->
+
+
+
+{% block body %}
+<body onload="changerImageFond()"> </body>
+<h2 class="likert-header" style="color: grey;">Questionnaire DEMOGRAPHIQUE A UPDATE!!! de {{participant.nom}} - {{nomJEEI}} </h2>
+
+<div class="wrap">
+
+    <form action="">
+
+        {{macro_questionnaireParticipantsUX.afficheUnElementLikert("Je suis enthousiaste à l’idée de réaliser l’activité pédagogique pratique à laquelle j’ai été assigné.","M01")}}
+
+        {{macro_questionnaireParticipantsUX.afficheUnElementLikert("Je suis intéressé(e) par la matière enseignée au travers de l’activité pédagogique qui m’est proposée","M02")}}
+
+        {{macro_questionnaireParticipantsUX.afficheUnElementLikert("Je pense que la matière enseignée au travers de l’activité pédagogique qui m’est proposée est difficile à appréhender.","M03")}}
+
+        <div class="buttons">
+            <button type="button" class="btn btn-warning">Envoyer</button>
+        </div>
+    </form>
+</div>
+
+
+<script src="{{ url_for('static',filename='js/fonctions_questionnaireParticipantsUX.js')}}"></script>
+<script src="{{ url_for('static',filename='js/fonctions_flux.js')}}"></script> <!-- Laisser ca partout - besoin pour mon hack de fond-->
+</div>
+
+{% endblock %}

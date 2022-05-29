@@ -200,7 +200,7 @@ def function_lancementDBFictive():
     participant = Participant()
     participant.age=21
     participant.sexe=Sexe.MASCULIN
-    participant.email='p1@student.be'
+    participant.email='rkabimbi@yahoo.fr'
     participant.expJEEI=ExperienceJeei.RAREMENT
     participant.etudes=PublicCible.BACCALAUREAT
     participant.localisation= Localisation.AFRIQUE
@@ -217,7 +217,7 @@ def function_lancementDBFictive():
     participant = Participant()
     participant.age=24
     participant.sexe=Sexe.FEMININ
-    participant.email='p2@student.be'
+    participant.email='rudy.kabimbingoy@student.unamur.be'
     participant.expJEEI=ExperienceJeei.RAREMENT
     participant.etudes=PublicCible.BACCALAUREAT
     participant.localisation= Localisation.AFRIQUE
@@ -236,7 +236,7 @@ def function_lancementDBFictive():
     participant = Participant()
     participant.age=20
     participant.sexe=Sexe.MASCULIN
-    participant.email='p3@student.be'
+    participant.email='rkabimbi@yahoo.fr'
     participant.expJEEI=ExperienceJeei.REGULIEREMENT
     participant.etudes=PublicCible.MASTER
     participant.localisation= Localisation.AFRIQUE
@@ -254,7 +254,7 @@ def function_lancementDBFictive():
     participant = Participant()
     participant.age=21
     participant.sexe=Sexe.MASCULIN
-    participant.email='p4@student.be'
+    participant.email='rudy.kabimbingoy@student.unamur.be'
     participant.expJEEI=ExperienceJeei.REGULIEREMENT
     participant.etudes=PublicCible.MASTER
     participant.localisation= Localisation.AFRIQUE
