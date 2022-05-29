@@ -133,7 +133,7 @@ function fonction_validerEtape(experimentationId,etape )
 function retourValidationEtape(responseText,etape)
 {
     console.log("retourValidationEtape")
-    document.getElementById("etapeExperimentation"+etape).innerHTML='<h5 class="card-title" style="color: grey; font-weight: bold;" id="etapeExperimentation2">Etape '+etape+'<span class="badge badge-warning">étape validée</span>'
+    document.getElementById("etapeExperimentation"+etape).innerHTML='<h5 class="card-title" style="color: grey; font-weight: bold;" id="etapeExperimentation2">Etape '+etape+'<span class="badge badge-warning" style="margin-left:15px">étape validée</span>'
 
     document.getElementById("btnValiderEtape"+etape).disabled=true
     nextetape=etape+1//pour debloquer l'etape d'apres
@@ -143,6 +143,15 @@ function retourValidationEtape(responseText,etape)
         document.getElementById("btnValiderEtapeDebloque"+etape).disabled=true
         console.log("je bloque le debloquer de l'etape "+etape)
         
+    }
+    if (etape==4)
+    {
+        next=nextetape+1
+        document.getElementById("btnValiderEtapeDebloque"+next).disabled=false
+        console.log("je débloque le debloquer de l'etape "+next)
+
+        document.getElementById("btnValiderEtape"+next).disabled=false
+        console.log("je débloque le bloquer de l'etape "+next)
     }
 
     //pour gerer les cas où il y a un ou deux boutons à débloquer après
