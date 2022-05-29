@@ -9,6 +9,7 @@ from flask_login import LoginManager
 
 from flask_cors import CORS, cross_origin #important sans ca...il n'accepte pas les trucsAJAX!!! : https://flask-cors.readthedocs.io/en/latest/ 
 
+from flask_mail import Mail
 
 
 
@@ -19,6 +20,8 @@ app.config.from_object(BaseConfig)
 #migrate=Migrate(app,db)
 print ("in init  : %s" %__name__)#afficher la valeur de main / pour savoir où on est
 app.config['TEMPLATES_AUTO_RELOAD']=True
+
+
 
 #gestion des login
 

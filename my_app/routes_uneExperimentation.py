@@ -41,6 +41,16 @@ from my_app.models.jeei_package.questionApprentissage import QuestionApprentissa
 from my_app.models.jeei_package.jointureJeeiUser import JointureJeeiUser
 from random import choice, randint
 from my_app.models.experimentation import Experimentation
+from flask_mail import Mail, Message
+#config email
+
+app.config['MAIL_SERVER']='smtp.mailtrap.io'
+app.config['MAIL_PORT'] = 2525
+app.config['MAIL_USERNAME'] = '2a505d7be718ed'
+app.config['MAIL_PASSWORD'] = '37960d02bef471'
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USE_SSL'] = False
+mail=Mail(app)
 
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #!!!!!!!route pour creer une nouvelle experimentation !!!!!!!!!
@@ -142,3 +152,14 @@ def fonction_validerEtapeExperimentation():
 
     return "ok"
     
+
+
+@app.route("/debloquerFormulaireDemographique", methods=['GET', 'POST'])
+@login_required
+def fonction_debloquerFormulaireDemographique():
+    print("fonction_debloquerFormulaireDemographique - Envoie email")
+   
+    msg = Message('Hello from the other side!', sender = ( 'Equipe EvscApp' ,'rudy.kabimbingoy@teams.student.unamur.be'), recipients = ['paul@mailtrap.io'])
+    msg.html = "<b>Hey Paul</b>, sending you this email from my <a href='https://google.com'>Flask app</a>, lmk if it works"
+    mail.send(msg)
+    return "Message sent!"

@@ -34,6 +34,7 @@ class Experimentation(UserMixin, db.Model):#userMixiin c'est pr traiter lesmetho
     fk_JeeiId = db.Column(db.Integer, db.ForeignKey('Jeei.id'),nullable=False)#db.foreignkey : c'est l'id de l'autre table et le nom de la table correspond à la back ref
     fk_UserId = db.Column(db.Integer, db.ForeignKey('User.id'),nullable=False)
     rel_Participant = relationship("Participant", backref='Experimentation', uselist=False)
+    rel_Evaluation = relationship("Evaluation", backref='Experimentation', uselist=False)
 
 
   

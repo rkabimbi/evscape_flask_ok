@@ -59,7 +59,7 @@ class Participant(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethodes 
     prenom= db.Column(db.String(120))
 
     fk_ExperimentationId = db.Column(db.Integer, db.ForeignKey('Experimentation.id'),nullable=False)
-   
+    rel_Evaluation = relationship("Evaluation", backref='Participant', uselist=False)
  
   
 

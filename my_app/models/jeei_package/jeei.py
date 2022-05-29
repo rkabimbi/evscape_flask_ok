@@ -11,6 +11,7 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 from my_app.models.jeei_package.specification import Specification, Theme, PublicCible, Statut
 #from my_app.models.jeei_package.jointureJeeiUser import JointureJeeiUser
+#from my_app.models.evaluation import Evaluation
 
 #on crée une table 
 class Jeei(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethodes relatives aux login et l'autre pour les DB
@@ -25,6 +26,7 @@ class Jeei(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethodes relativ
     fk_SpecificationId = db.Column(db.Integer, db.ForeignKey('Specification.id'),nullable=False)#db.foreignkey : c'est l'id de l'autre table et le nom de la table correspond à la back ref
     rel_JointureJeeiUser = relationship("JointureJeeiUser", backref='Jeei', uselist=False)
     rel_Experimentation = relationship("Experimentation", backref='Jeei', uselist=False)
+    rel_Evaluation = relationship("Evaluation", backref='Jeei', uselist=False)
 
   
     

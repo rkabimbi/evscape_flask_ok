@@ -2,7 +2,32 @@ function fonction_debloquerFormulaireDemographique(idJEEI, idExperimentation)
 {
     console.log("fonction_debloquerFormulaireDemographique")
     console.log("On va chercher à débloquer le formulaire en live pour :"+idJEEI + " et l'experimentation :"+idExperimentation)
+
+    //juste renvoyer le num d'IDexperimentation coté back...là il recupere tt les candidats et cree
+    //une veluation pr eux  + leur envoi un email 
+    var xhttp = new XMLHttpRequest( );
+    let url = new URL('http://127.0.0.1:5000/debloquerFormulaireDemographique?idExperimentation='+ idExperimentation);  
+    xhttp.open("GET", url.toString(), true);
+    xhttp.send()
+    xhttp.onreadystatechange = function()
+    { 
+        if (this.readyState == 4 && this.status == 200) 
+        {
+            retourValidationEtape(this.responseText,etape)   
+        }
+    };
 }
+
+
+function retourDebloquerFormulaireDemographique(responseText)
+{
+    console.log("retourDebloquerFormulaireDemographique")
+    var fichJsonParse=JSON.parse(responseText);//parsing du fichier JSON envoyé par jsonify
+    
+
+
+}
+
 
 
 
@@ -10,7 +35,10 @@ function fonction_bloquerFormulaireDemographique(idJEEI, idExperimentation)
 {
     console.log("fonction_bloquerFormulaireDemographique")
     console.log("On va chercher à bloquer le formulaire en live pour :"+idJEEI + " et l'experimentation :"+idExperimentation)
+   
 }
+
+
 
 
 function fonction_confirmerCoursOk(idJEEI, idExperimentation)
