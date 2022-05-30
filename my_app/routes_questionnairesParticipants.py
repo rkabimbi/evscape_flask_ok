@@ -41,6 +41,8 @@ from datetime import date
 from my_app.models.jeei_package.jeei import Jeei
 from my_app.models.jeei_package.specification import Specification, Statut, Theme, PublicCible
 from my_app.models.jeei_package.jointureJeeiUser import JointureJeeiUser
+from my_app.models.evaluation import Evaluation
+from my_app.models.questionnaireMotivation import QuestionnaireMotivation
 
 
 
@@ -53,10 +55,52 @@ def fonction_questionnaireParticipantsUX():
 
 
 
-@app.route("/questionnaireParticipantsMotivation", methods=['GET', 'POST'])
-def fonction_questionnaireParticipantsMotivation():
-    nomJEEI="Deskape"
-    return render_template("frontend_etudiant/questionnaireParticipantsMotivation.html",currentUser=current_user,nomJEEI=nomJEEI)
+@app.route("/questionnaireParticipantsMotivation/<path:UrlUtilisateur>", methods=['GET', 'POST'])
+def fonction_questionnaireParticipantsMotivation(UrlUtilisateur):
+    participant=Participant.query.filter_by(urlPerso=UrlUtilisateur).first()
+    experimentation=Experimentation.query.filter_by(id=participant.fk_ExperimentationId).first()
+    jeei=Jeei.query.filter_by(id=experimentation.fk_JeeiId).first()
+    if participant:
+        print("c'est bien un participant  et donc on accèpte qu'il se connecte avec cet url qui lui est propre")
+        nomJEEI=jeei.nom
+        return render_template("frontend_etudiant/questionnaireParticipantsMotivation.html",currentUser=current_user,jeei=jeei,participant=participant, experimentation=experimentation)
+    else:
+       return render_template("user_login.html")
+
+
+@app.route("/sauvegardeQuestionnaireMotivation/<int:IdExperimentation>/<int:IdParticipant>", methods=['GET', 'POST'])
+def fonction_sauvegardeQuestionnaireMotivation(IdExperimentation,IdParticipant):
+    print("sauvegardeQuestionnaireMotivation")
+    #on va parametrer l'evaluation (à ce stade pas encore fait car on ne sait pas si l'utilisateur va vrmt evaluer le JEEI)
+    #pour les autres formulaire il faudra juste recuperer l'eval (ici on la crée)
+    participant=Participant.query.filter_by(id=IdParticipant).first()
+    experimentation=Experimentation.query.filter_by(id=IdExperimentation).first()
+    idJeei=experimentation.fk_JeeiId
+
+    #je lui cree une evaluation
+    evaluation=Evaluation(idJeei,experimentation.id,participant.id)
+    evaluation.questionnaireMotivation=True
+    db.session.add(evaluation)
+    db.session.commit()
+
+    #je cree une instance de la clase questionnaire motivation
+    questionnaireMotivation=QuestionnaireMotivation()
+    print(request.args.get("likertm01"))
+    questionnaireMotivation.m01=request.args.get("likertm01")
+    print(request.args.get("likertm02"))
+    questionnaireMotivation.m02=request.args.get("likertm02")
+    print(request.args.get("likertm03"))
+    questionnaireMotivation.m03=request.args.get("likertm03")
+    
+    db.session.add(questionnaireMotivation)
+    db.session.commit()
+    return render_template("frontend_etudiant/remerciements.html")
+
+
+
+
+  
+
 
 
 @app.route("/questionnaireParticipantsDemographique/<path:UrlUtilisateur>", methods=['GET', 'POST'])

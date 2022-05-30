@@ -12,20 +12,21 @@
 
 {% block body %}
 <body onload="changerImageFond()"> </body>
-<h2 class="likert-header" style="color: grey;">Questionnaire de motivation - {{nomJEEI}} </h2>
+<h2 class="likert-header" style="color: grey;">Questionnaire Motivation ({{jeei.nom}}) </h2>
+<h4> Participant :  {{participant.nom}} {{participant.prenom}} </h4>
 
 <div class="wrap">
 
-    <form action="">
+    <form action="/sauvegardeQuestionnaireMotivation/{{experimentation.id}}/{{participant.id}}">
 
-        {{macro_questionnaireParticipantsUX.afficheUnElementLikert("Je suis enthousiaste à l’idée de réaliser l’activité pédagogique pratique à laquelle j’ai été assigné.","M01")}}
+        {{macro_questionnaireParticipantsUX.afficheUnElementLikert("Je suis enthousiaste à l’idée de réaliser l’activité pédagogique pratique à laquelle j’ai été assigné.","m01")}}
 
-        {{macro_questionnaireParticipantsUX.afficheUnElementLikert("Je suis intéressé(e) par la matière enseignée au travers de l’activité pédagogique qui m’est proposée","M02")}}
+        {{macro_questionnaireParticipantsUX.afficheUnElementLikert("Je suis intéressé(e) par la matière enseignée au travers de l’activité pédagogique qui m’est proposée","m02")}}
 
-        {{macro_questionnaireParticipantsUX.afficheUnElementLikert("Je pense que la matière enseignée au travers de l’activité pédagogique qui m’est proposée est difficile à appréhender.","M03")}}
+        {{macro_questionnaireParticipantsUX.afficheUnElementLikert("Je pense que la matière enseignée au travers de l’activité pédagogique qui m’est proposée est difficile à appréhender.","m03")}}
 
         <div class="buttons">
-            <button type="button" class="btn btn-warning">Envoyer</button>
+            <button type="submit" class="btn btn-warning">Envoyer</button>
         </div>
     </form>
 </div>

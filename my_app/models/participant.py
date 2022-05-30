@@ -13,6 +13,7 @@ import enum
 from random import choice, randint
 
 from my_app.models.jeei_package.specification import PublicCible
+from my_app.models.questionnaireMotivation import QuestionnaireMotivation
 
 
 
@@ -24,7 +25,7 @@ chiffres = [ chr(i) for i in range(48,58) ]
 caracteres_speciaux = [ '%' , '_' , '-' , '!' , '$' , '^' , '&' , '#' , '(' , ')' , '[' , ']' , '=' , '@']
 
 
-def pwd(n , min = True, maj = True, chif = True, cs = True):
+def pwd(n , min = True, maj = True, chif = True, cs = False):
     alphabets = dict()
     key = 0
     if min:
@@ -104,7 +105,7 @@ class Participant(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethodes 
     #r_enigme=db.relationship('Enigmes', backref=db.backref('auteur', lazy=True))#on dit que la relation c'est avec la classe Enigmes 
 
     def __init__(self):
-        print("constructeur vide")
+        print("constructeur vide participant")
         self.urlPerso=pwd(20,True,True,True,False)
         
  

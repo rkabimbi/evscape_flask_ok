@@ -32,6 +32,7 @@ class Evaluation(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethodes r
     fk_JeeiId = db.Column(db.Integer, db.ForeignKey('Jeei.id'),nullable=False)
     fk_ExperimentationId = db.Column(db.Integer, db.ForeignKey('Experimentation.id'),nullable=False)
     fk_ParticipantId = db.Column(db.Integer, db.ForeignKey('Participant.id'),nullable=False)
+    fk_QuestionnaireMotivationId = db.Column(db.Integer, db.ForeignKey('QuestionnaireMotivation.id'),nullable=True)
 
     
 

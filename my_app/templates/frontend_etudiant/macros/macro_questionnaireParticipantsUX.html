@@ -4,26 +4,26 @@
 {% macro afficheUnElementLikert (element,idElement) %}
 
 
-      <label class="statement">{{element}}.</label>
+      <label class="statement">{{element}}</label>
       <ul class='likert'>
         <li>
-          <input type="radio" name="likert{{idElement}}" value="strong_agree">
+          <input type="radio" name="likert{{idElement}}" value="0">
           <label>Fortement en accord</label>
         </li>
         <li>
-          <input type="radio" name="likert{{idElement}}" value="agree">
+          <input type="radio" name="likert{{idElement}}" value="1">
           <label>D'accord</label>
         </li>
         <li>
-          <input type="radio" name="likert{{idElement}}" value="neutre">
+          <input type="radio" name="likert{{idElement}}" value="2">
           <label>Neutre</label>
         </li>
         <li>
-          <input type="radio" name="likert{{idElement}}" value="disagree">
+          <input type="radio" name="likert{{idElement}}" value="3">
           <label>En désaccord</label>
         </li>
         <li>
-          <input type="radio" name="likert{{idElement}}" value="strong_disagree">
+          <input type="radio" name="likert{{idElement}}" value="4">
           <label>Fortement en désaccord</label>
         </li>
       </ul>
