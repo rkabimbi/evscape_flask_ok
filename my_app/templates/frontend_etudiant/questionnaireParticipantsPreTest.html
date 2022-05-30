@@ -23,25 +23,25 @@
 
     <p class="questionposeePreTest" id="question{{questionsApprentissage['id'][n]}}">{{questionsApprentissage['question'][n]}}</p>
     <div class="form-check choixMultiple" >
-        <input class="form-check-input" type="radio" name="flexRadioDefault{{questionsApprentissage['id'][n]}}" id="flexRadioDefault{{questionsApprentissage['id'][n]}}1">
+        <input class="form-check-input" type="radio" name="flexRadioDefault{{questionsApprentissage['id'][n]}}" id="flexRadioDefault{{questionsApprentissage['id'][n]}}1" value="{{questionsApprentissage['reponses'][n][0]}}">
         <label class="form-check-label" for="flexRadioDefault1">
             {{questionsApprentissage['reponses'][n][0]}}
         </label>
     </div>
     <div class="form-check choixMultiple">
-        <input class="form-check-input" type="radio" name="flexRadioDefault{{questionsApprentissage['id'][n]}}" id="flexRadioDefault{{questionsApprentissage['id'][n]}}2" checked>
+        <input class="form-check-input" type="radio" name="flexRadioDefault{{questionsApprentissage['id'][n]}}" id="flexRadioDefault{{questionsApprentissage['id'][n]}}2" value="{{questionsApprentissage['reponses'][n][1]}}"  >
         <label class="form-check-label" for="flexRadioDefault2">
             {{questionsApprentissage['reponses'][n][1]}}
         </label>
     </div>
     <div class="form-check choixMultiple">
-        <input class="form-check-input" type="radio" name="flexRadioDefault{{questionsApprentissage['id'][n]}}" id="flexRadioDefault{{questionsApprentissage['id'][n]}}3" checked>
+        <input class="form-check-input" type="radio" name="flexRadioDefault{{questionsApprentissage['id'][n]}}" id="flexRadioDefault{{questionsApprentissage['id'][n]}}3" value="{{questionsApprentissage['reponses'][n][2]}}">
         <label class="form-check-label" for="flexRadioDefault2">
             {{questionsApprentissage['reponses'][n][2]}}
         </label>
     </div>
     <div class="form-check choixMultiple">
-        <input class="form-check-input" type="radio" name="flexRadioDefault{{questionsApprentissage['id'][n]}}" id="flexRadioDefault{{questionsApprentissage['id'][n]}}4" checked>
+        <input class="form-check-input" type="radio" name="flexRadioDefault{{questionsApprentissage['id'][n]}}" id="flexRadioDefault{{questionsApprentissage['id'][n]}}4" value="{{questionsApprentissage['reponses'][n][3]}}" >
         <label class="form-check-label" for="flexRadioDefault2">
             {{questionsApprentissage['reponses'][n][3]}}
         </label>
@@ -54,6 +54,7 @@
 </div>
 {% endfor %}
 
+<button type="button" class="btn btn-warning" onclick="fonction_sauverPreTest({{participant.id}},{{questionsApprentissage}})">Soumettre</button>
 
 
 

@@ -316,7 +316,7 @@ def fonction_sauvegardeQuestionnairePreTest():
 
     #je recupere l'évaluation liée
     evaluation=Evaluation.query.filter_by(fk_ParticipantId=participant.id).first()
-    evaluation.questionnaireDemographique=True
+    evaluation.questionnairePreTest=True
     db.session.add(evaluation)
     db.session.commit()
 
