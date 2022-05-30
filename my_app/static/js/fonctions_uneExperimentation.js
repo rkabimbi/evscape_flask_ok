@@ -52,7 +52,33 @@ function fonction_confirmerCoursOk(idJEEI, idExperimentation)
 function fonction_debloquerPreTest(idJEEI, idExperimentation)
 {
     console.log("fonction_debloquerPreTest")
+    
+
+
+    //juste renvoyer le num d'IDexperimentation coté back...là il recupere tt les candidats et cree
+    //une veluation pr eux  + leur envoi un email 
+    var xhttp = new XMLHttpRequest( );
+    let url = new URL('http://127.0.0.1:5000/debloquerFormulairePreTest?idExperimentation='+ idExperimentation);  
+    xhttp.open("GET", url.toString(), true);
+    xhttp.send()
+    xhttp.onreadystatechange = function()
+    { 
+        if (this.readyState == 4 && this.status == 200) 
+        {
+            retourDebloquerFormulairePreTest(this.responseText)   
+        }
+    };
    
+}
+
+function retourDebloquerFormulairePreTest(responseText)
+{
+    console.log("retourDebloquerFormulairePreTest")
+    console.log(responseText)
+    //var fichJsonParse=JSON.parse(responseText);//parsing du fichier JSON envoyé par jsonify
+    
+
+
 }
 
 
@@ -60,6 +86,7 @@ function fonction_debloquerPreTest(idJEEI, idExperimentation)
 function fonction_bloquerPreTest(idJEEI, idExperimentation)
 {
     console.log("fonction_bloquerPreTest")
+    
    
 }
 
