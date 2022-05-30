@@ -5,20 +5,20 @@ function fonction_sauverPreTest(idParticipant,questionsApprentissage)
 
 
     //je recupere tte les valeur de mon questionnaire
-    reponseQ1=document.querySelector('input[name="flexRadioDefault'+questionsApprentissage.id[0]+'"]:checked').value;
-    reponseQ2=document.querySelector('input[name="flexRadioDefault'+questionsApprentissage.id[0]+'"]:checked').value;
-    reponseQ3=document.querySelector('input[name="flexRadioDefault'+questionsApprentissage.id[0]+'"]:checked').value;
-    reponseQ4=document.querySelector('input[name="flexRadioDefault'+questionsApprentissage.id[0]+'"]:checked').value;
-    reponseQ5=document.querySelector('input[name="flexRadioDefault'+questionsApprentissage.id[0]+'"]:checked').value;
-    reponseQ6=document.querySelector('input[name="flexRadioDefault'+questionsApprentissage.id[0]+'"]:checked').value;
-    reponseQ7=document.querySelector('input[name="flexRadioDefault'+questionsApprentissage.id[0]+'"]:checked').value;
-    reponseQ8=document.querySelector('input[name="flexRadioDefault'+questionsApprentissage.id[0]+'"]:checked').value;
-    reponseQ9=document.querySelector('input[name="flexRadioDefault'+questionsApprentissage.id[0]+'"]:checked').value;
-    reponseQ10=document.querySelector('input[name="flexRadioDefault'+questionsApprentissage.id[0]+'"]:checked').value;
+    responseQ1=document.querySelector('input[name="flexRadioDefault'+questionsApprentissage.id[0]+'"]:checked').value;
+    responseQ2=document.querySelector('input[name="flexRadioDefault'+questionsApprentissage.id[1]+'"]:checked').value;
+    responseQ3=document.querySelector('input[name="flexRadioDefault'+questionsApprentissage.id[2]+'"]:checked').value;
+    responseQ4=document.querySelector('input[name="flexRadioDefault'+questionsApprentissage.id[3]+'"]:checked').value;
+    responseQ5=document.querySelector('input[name="flexRadioDefault'+questionsApprentissage.id[4]+'"]:checked').value;
+    responseQ6=document.querySelector('input[name="flexRadioDefault'+questionsApprentissage.id[5]+'"]:checked').value;
+    responseQ7=document.querySelector('input[name="flexRadioDefault'+questionsApprentissage.id[6]+'"]:checked').value;
+    responseQ8=document.querySelector('input[name="flexRadioDefault'+questionsApprentissage.id[7]+'"]:checked').value;
+    responseQ9=document.querySelector('input[name="flexRadioDefault'+questionsApprentissage.id[8]+'"]:checked').value;
+    responseQ10=document.querySelector('input[name="flexRadioDefault'+questionsApprentissage.id[9]+'"]:checked').value;
 
 
     var xhttp = new XMLHttpRequest( );
-    let url = new URL('http://127.0.0.1:5000/sauvegardeQuestionnairePreTest?idParticipant='+ idParticipant+'&responseQ1='+reponseQ+'&responseQ2='+reponseQ2  +'&responseQ3='+reponseQ3 +'&responseQ4='+reponseQ4 +'&responseQ5='+reponseQ5 +'&responseQ6='+reponseQ6 +'&responseQ7='+reponseQ7 +'&responseQ8='+reponseQ8 +'&responseQ9='+reponseQ9 +'&responseQ10='+reponseQ10 );  
+    let url = new URL('http://127.0.0.1:5000/sauvegardeQuestionnairePreTest?idParticipant='+ idParticipant+'&responseQ1='+responseQ1+'&responseQ2='+responseQ2  +'&responseQ3='+responseQ3 +'&responseQ4='+responseQ4 +'&responseQ5='+responseQ5 +'&responseQ6='+responseQ6 +'&responseQ7='+responseQ7 +'&responseQ8='+responseQ8 +'&responseQ9='+responseQ9 +'&responseQ10='+responseQ10 );  
     xhttp.open("GET", url.toString(), true);
     xhttp.send()
     xhttp.onreadystatechange = function()
@@ -32,7 +32,9 @@ function fonction_sauverPreTest(idParticipant,questionsApprentissage)
     
 }
 
-function reponseBackEndPreTest(this.responseText) 
+function reponseBackEndPreTest(responseText) 
 {
     console.log("retour du back pour le questionnaire preTest")
+  
+    window.location.href = "http://127.0.0.1:5000/remerciements";
 }

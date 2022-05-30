@@ -46,6 +46,7 @@ from my_app.models.jeei_package.jointureJeeiUser import JointureJeeiUser
 from my_app.models.evaluation import Evaluation
 from my_app.models.questionnaireMotivation import QuestionnaireMotivation
 from my_app.models.questionnaireUX import QuestionnaireUX, Benchmark
+from my_app.models.questionnairePreTest import QuestionnairePreTest
 
 
 
@@ -187,6 +188,9 @@ def fonction_sauvegardeQuestionnaireUX(IdExperimentation,IdParticipant):
 
     #on va chercher l'evaluation
     evaluation=Evaluation.query.filter_by(fk_ParticipantId=participant.id).first()
+    print("//////////////////////////////////////////////////")
+    print(evaluation)
+    print("//////////////////////////////////////////////////")
     evaluation.questionnaireUX=True
     db.session.add(evaluation)
     db.session.commit()
@@ -194,9 +198,13 @@ def fonction_sauvegardeQuestionnaireUX(IdExperimentation,IdParticipant):
 
     #je cree une instance de la clase questionnaire UX
     questionnaireUX=QuestionnaireUX()
+    db.session.add(questionnaireUX)
+    db.session.commit()
 
     #link evaluation et questionnaire UX
-    evaluation.fk_QuestionnaireUXId=questionnaireUX.id
+    questionnaireUx = QuestionnaireUX.query.order_by(QuestionnaireUX.id.desc()).first()
+    evaluation=Evaluation.query.filter_by(fk_ParticipantId=participant.id).first()
+    evaluation.fk_QuestionnaireUXId=questionnaireUx.id
     db.session.add(evaluation)
     db.session.commit()
 
@@ -259,11 +267,14 @@ def fonction_sauvegardeQuestionnaireUX(IdExperimentation,IdParticipant):
 
 
     #je recupere le questionnaire que je viens de cree
-    idQuestionnaire = QuestionnaireUX.query.order_by(QuestionnaireUX.id.desc()).first().id
+    questionnaire = QuestionnaireUX.query.order_by(QuestionnaireUX.id.desc()).first()
     #j'assigne son id à l'évaluation pr creer du lien entre l'évaluation et le questionnaire concerné
-    evaluation.fk_QuestionnaireUXId=idQuestionnaire
+    evaluation.fk_QuestionnaireUXId=questionnaire.id  
     db.session.add(evaluation)
     db.session.commit()
+
+
+
 
 
     return render_template("frontend_etudiant/remerciements.html")
@@ -316,17 +327,34 @@ def fonction_sauvegardeQuestionnairePreTest():
 
     #je recupere l'évaluation liée
     evaluation=Evaluation.query.filter_by(fk_ParticipantId=participant.id).first()
-    evaluation.questionnairePreTest=True
+    evaluation.preTest=True
     db.session.add(evaluation)
     db.session.commit()
 
+    #je cree une instance de la clase questionnaire PreTest
+    questionnairePreTest=QuestionnairePreTest()
+    db.session.add(questionnairePreTest)
+    db.session.commit()
 
-    participant.age=request.args.get("age")
-    participant.sexe=request.args.get("sexe")
-    participant.localisation= request.args.get("localisation")
-    participant.experience=request.args.get("experience")
-    participant.expJeei=request.args.get("experienceJeei")
-    db.session.add(participant)
+    #link evaluation et questionnaire UX
+    questionnaire = QuestionnairePreTest.query.order_by(QuestionnairePreTest.id.desc()).first()
+    evaluation.fk_QuestionnairePreTestId=questionnaire.id
+    db.session.add(evaluation)
+    db.session.commit()
+
+    questionnairePreTest.pt01=request.args.get("responseQ1")
+    questionnairePreTest.pt02=request.args.get("responseQ2")
+    questionnairePreTest.pt03=request.args.get("responseQ3")
+    questionnairePreTest.pt04=request.args.get("responseQ4")
+    questionnairePreTest.pt05=request.args.get("responseQ5")
+    questionnairePreTest.pt06=request.args.get("responseQ6")
+    questionnairePreTest.pt07=request.args.get("responseQ7")
+    questionnairePreTest.pt08=request.args.get("responseQ8")
+    questionnairePreTest.pt09=request.args.get("responseQ9")
+    questionnairePreTest.pt10=request.args.get("responseQ10")
+    
+    
+    db.session.add(questionnairePreTest)
     db.session.commit()
     return "ok"
 

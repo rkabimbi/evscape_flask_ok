@@ -17,14 +17,21 @@ from my_app.models.jeei_package.specification import PublicCible
 
 
 #on crée une table d'Enigmes
-class QuestionnaireMotivation(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethodes relatives aux login et l'autre pour les DB
-    __tablename__ = 'QuestionnaireMotivation' 
+class QuestionnairePreTest(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethodes relatives aux login et l'autre pour les DB
+    __tablename__ = 'QuestionnairePreTest' 
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
    
-    m01 = db.Column(db.Integer, nullable=True)
-    m02 = db.Column(db.Integer, nullable=True)
-    m03 = db.Column(db.Integer, nullable=True)
-    rel_Evaluation = relationship("Evaluation", backref='QuestionnaireMotivation', uselist=False)
+    pt01 = db.Column(db.String(120),nullable=True,default='')
+    pt02 = db.Column(db.String(120),nullable=True,default='')
+    pt03 = db.Column(db.String(120),nullable=True,default='')
+    pt04 = db.Column(db.String(120),nullable=True,default='')
+    pt05 = db.Column(db.String(120),nullable=True,default='')
+    pt06 = db.Column(db.String(120),nullable=True,default='')
+    pt07 = db.Column(db.String(120),nullable=True,default='')
+    pt08 = db.Column(db.String(120),nullable=True,default='')
+    pt09 = db.Column(db.String(120),nullable=True,default='')
+    pt10 = db.Column(db.String(120),nullable=True,default='')
+    rel_Evaluation = relationship("Evaluation", backref='QuestionnairePreTest', uselist=False)
  
   
 
@@ -32,7 +39,7 @@ class QuestionnaireMotivation(UserMixin, db.Model):#userMixiin c'est pr traiter 
     #r_enigme=db.relationship('Enigmes', backref=db.backref('auteur', lazy=True))#on dit que la relation c'est avec la classe Enigmes 
 
     def __init__(self):
-        print("constructeur vide questionnaire motivation")
+        print("constructeur vide questionnaire pretest")
         
         
  
@@ -41,7 +48,7 @@ class QuestionnaireMotivation(UserMixin, db.Model):#userMixiin c'est pr traiter 
     
     
     def __repr__(self):#toString
-        return "( id = %s, m01 = %s , m02=%s, m03=%s)\n" % ( self.id, self.m01,self.m02,self.m03)
+        return "( id = %s, pt01 = %s , pt02=%s, pt03=%s)\n" % ( self.id, self.pt01,self.pt02,self.pt03)
 
 
 

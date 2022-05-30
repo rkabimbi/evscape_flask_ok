@@ -17,6 +17,7 @@ from my_app.models.participant import Participant
 from my_app.models.jeei_package.jeei import Jeei
 from my_app.models.questionnaireUX import QuestionnaireUX
 from my_app.models.questionnaireMotivation import QuestionnaireMotivation
+from my_app.models.questionnairePreTest import QuestionnairePreTest
 
 #on crée une table 
 class Evaluation(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethodes relatives aux login et l'autre pour les DB
@@ -37,6 +38,7 @@ class Evaluation(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethodes r
     fk_ParticipantId = db.Column(db.Integer, db.ForeignKey('Participant.id'),nullable=False)
     fk_QuestionnaireMotivationId = db.Column(db.Integer, db.ForeignKey('QuestionnaireMotivation.id'),nullable=True)
     fk_QuestionnaireUXId = db.Column(db.Integer, db.ForeignKey('QuestionnaireUX.id'),nullable=True)
+    fk_QuestionnairePreTestId = db.Column(db.Integer, db.ForeignKey('QuestionnairePreTest.id'),nullable=True)
 
     
 
