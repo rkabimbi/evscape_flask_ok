@@ -268,6 +268,7 @@ def fonction_debloquerFormulairePreTest():
     experimentation=Experimentation.query.filter_by(id=idExperimentation).first()
 
     jeei = Jeei.query.filter_by(id=experimentation.fk_JeeiId).first()
+  
 
     
     for participant in participants:
