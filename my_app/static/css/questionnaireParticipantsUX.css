@@ -72,3 +72,18 @@ form .buttons .submit:hover {background-color: #14892c;}
 .boxQuestionnaireDemographique{
   margin-top: 25px;
 }
+
+.questionPreTest{
+  margin-top: 25px;
+
+  border:solid grey;
+  border-radius: 15px;
+  padding: 15px;
+}
+
+.questionposeePreTest{
+  font-weight: bold;
+  font-size: large;
+  font-style: italic;
+  color: grey;
+}

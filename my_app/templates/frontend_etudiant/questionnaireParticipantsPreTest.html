@@ -16,15 +16,12 @@
 <h4> Participant :  {{participant.nom}} {{participant.prenom}} </h4>
 
 
-    {{questionsApprentissage['question'][0]}}
-    {{questionsApprentissage['id'][0]}}
-    {{questionsApprentissage['reponses'][0][0]}}
     
 
 {% for n in range(10) %}
-<div>
+<div class=" questionPreTest">
 
-    <p id="question{{questionsApprentissage['id'][n]}}">{{questionsApprentissage['question'][n]}}</p>
+    <p class="questionposeePreTest" id="question{{questionsApprentissage['id'][n]}}">{{questionsApprentissage['question'][n]}}</p>
     <div class="form-check choixMultiple" >
         <input class="form-check-input" type="radio" name="flexRadioDefault{{questionsApprentissage['id'][n]}}" id="flexRadioDefault{{questionsApprentissage['id'][n]}}1">
         <label class="form-check-label" for="flexRadioDefault1">
