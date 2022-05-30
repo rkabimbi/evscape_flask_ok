@@ -43,6 +43,7 @@ from my_app.models.jeei_package.jointureJeeiUser import JointureJeeiUser
 from random import choice, randint
 from my_app.models.experimentation import Experimentation
 from flask_mail import Mail, Message
+from my_app.models.evaluation import Evaluation
 #config email
 
 app.config['MAIL_SERVER']='smtp.mailtrap.io'
@@ -172,6 +173,15 @@ def fonction_debloquerFormulaireDemographique():
     for participant in participants:
         
         if participant.consentement:#si il a marqué son consentment
+
+            #on crée alors un évaluation complète pour lui
+    
+
+            evaluation=Evaluation(jeei.id,experimentation.id,participant.id)
+            db.session.add(evaluation)
+            db.session.commit()
+            
+            #on lui envoi un email
             msg = Message((jeei.nom,' : Formulaire démographique'), sender = ( 'Equipe EvscApp' ,'rudy.kabimbingoy@teams.student.unamur.be'), recipients = [participant.email ])
             url="http://127.0.0.1:5000/questionnaireParticipantsDemographique/"+participant.urlPerso
             #url="location.href='http://127.0.0.1:5000/questionnaireParticipantsDemographique/'"

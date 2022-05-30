@@ -72,7 +72,7 @@ class Localisation(enum.Enum):
 
 class Experience(enum.Enum):
     NEANT="Néant"
-    Novice="Novice"
+    NOVICE="Novice"
     CONFIRME="Confirme"
     EXPERT="Expert"
 

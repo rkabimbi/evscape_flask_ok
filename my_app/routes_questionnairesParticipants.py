@@ -80,8 +80,9 @@ def fonction_sauvegardeQuestionnaireMotivation(IdExperimentation,IdParticipant):
     idJeei=experimentation.fk_JeeiId
 
     #je lui cree une evaluation
-    evaluation=Evaluation(idJeei,experimentation.id,participant.id)
+    evaluation=Evaluation.query.filter_by(fk_ParticipantId=participant.id).first()
     evaluation.questionnaireMotivation=True
+    
     db.session.add(evaluation)
     db.session.commit()
 
@@ -96,6 +97,15 @@ def fonction_sauvegardeQuestionnaireMotivation(IdExperimentation,IdParticipant):
     
     db.session.add(questionnaireMotivation)
     db.session.commit()
+
+
+    #je recupere le questionnaire que je viens de cree
+    idQuestionnaire = QuestionnaireMotivation.query.order_by(QuestionnaireMotivation.id.desc()).first().id
+    #j'assigne son id à l'évaluation pr creer du lien entre l'évaluation et le questionnaire concerné
+    evaluation.fk_QuestionnaireMotivationId=idQuestionnaire
+    db.session.add(evaluation)
+    db.session.commit()
+
     return render_template("frontend_etudiant/remerciements.html")
 
 
@@ -123,6 +133,14 @@ def fonction_sauvegardeQuestionnaireDemographique():
     print("sauvegardeQuestionnaireDemographique")
     idParticipant= request.args.get("idParticipant")
     participant = Participant.query.filter_by(id=idParticipant).first()
+
+    #je recupere l'évaluation liée
+    evaluation=Evaluation.query.filter_by(fk_ParticipantId=participant.id).first()
+    evaluation.questionnaireDemographique=True
+    db.session.add(evaluation)
+    db.session.commit()
+
+
     participant.age=request.args.get("age")
     participant.sexe=request.args.get("sexe")
     participant.localisation= request.args.get("localisation")
@@ -236,5 +254,15 @@ def fonction_sauvegardeQuestionnaireUX(IdExperimentation,IdParticipant):
     
     db.session.add(questionnaireUX)
     db.session.commit()
+
+
+    #je recupere le questionnaire que je viens de cree
+    idQuestionnaire = QuestionnaireUX.query.order_by(QuestionnaireUX.id.desc()).first().id
+    #j'assigne son id à l'évaluation pr creer du lien entre l'évaluation et le questionnaire concerné
+    evaluation.fk_QuestionnaireUXId=idQuestionnaire
+    db.session.add(evaluation)
+    db.session.commit()
+
+
     return render_template("frontend_etudiant/remerciements.html")
 
