@@ -214,4 +214,32 @@ def fonction_debloquerFormulaireMotivation():
     return "Messages envoyés!"
 
    
+
+@app.route("/debloquerFormulaireUX", methods=['GET', 'POST'])
+@login_required
+def fonction_debloquerFormulaireUX():
+    print("fonction_debloquerFormulaireUX - Envoie email")
+    #on recupere tous les etudiants liés à l'experience lambda
+    idExperimentation= request.args.get("idExperimentation")
+    participants=Participant.query.filter_by(fk_ExperimentationId=idExperimentation).all()
+    print("liste Participants liée à l'experimentation ",idExperimentation)
+    print(participants)
+    experimentation=Experimentation.query.filter_by(id=idExperimentation).first()
+
+    jeei = Jeei.query.filter_by(id=experimentation.fk_JeeiId).first()
+
+    
+    for participant in participants:
+        
+        if participant.consentement:#si il a marqué son consentment
+            msg = Message((jeei.nom,' : Formulaire UX'), sender = ( 'Equipe EvscApp' ,'rudy.kabimbingoy@teams.student.unamur.be'), recipients = [participant.email ])
+            url="http://127.0.0.1:5000/questionnaireParticipantsUX/"+participant.urlPerso
+            #url="location.href='http://127.0.0.1:5000/questionnaireParticipantsDemographique/'"
+            msg.html = "<b>"+participant.nom+"</b>, <p>Vous avez marqué votre consentement à participer à l'activité "+jeei.nom+". Merci dès lors de bien vouloir compléter une enquête UX via le lien ci-dessous </p> <a href="+url+">Questionnaire Motivation </a>"
+            #<button onclick='"+ url+ "'> Enquête Démographique </button>"
+            mail.send(msg)
+    
+
+
+    return "Messages envoyés!"
     

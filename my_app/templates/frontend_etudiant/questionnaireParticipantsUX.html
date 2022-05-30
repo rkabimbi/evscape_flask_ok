@@ -15,14 +15,82 @@
 <h2 class="likert-header" style="color: grey;">Questionnaire d'expérience utilisateur - {{nomJEEI}} </h2>
 
 
-<div class="wrap">
-    <form action="">
+<h2 class="likert-header" style="color: grey;">Questionnaire Expérience utilisateur ({{jeei.nom}}) </h2>
+<h4> Participant :  {{participant.nom}} {{participant.prenom}} </h4>
 
-            {{macro_questionnaireParticipantsUX.afficheUnElementLikert("questions UX 1")}}
+<div class="wrap">
+
+    <form action="/sauvegardeQuestionnaireUX/{{experimentation.id}}/{{participant.id}}">
+
+        {{macro_questionnaireParticipantsUX.afficheUnElementLikert("Je ne me suis pas soucié(e) des évènements externes à l’activité pratique à laquelle j’ai participé.","u01")}}
+
+        {{macro_questionnaireParticipantsUX.afficheUnElementLikert("J’ai été captivé(e) par l’activité pratique depuis le départ.","u02")}}
+
+        {{macro_questionnaireParticipantsUX.afficheUnElementLikert("Je pense que le niveau de défi de l’activité pratique était adéquat (ni trop facile, ni trop difficile).","u03")}}
+
+        {{macro_questionnaireParticipantsUX.afficheUnElementLikert("Je recommanderai cette activité pratique à d’autres étudiants de premier cycle en informatique.","u04")}}
+
+        {{macro_questionnaireParticipantsUX.afficheUnElementLikert("Je souhaite faire plus d’activités pratiques similaires dans le cadre de ma formation en informatique.","u05")}}
+
+
+        {{macro_questionnaireParticipantsUX.afficheUnElementLikert("Je pense que la durée de l’activité pratique était adéquate.","u06")}}
+
+        {{macro_questionnaireParticipantsUX.afficheUnElementLikert("Je me suis senti(e) viscéralement impliqué(e) dans l’activité pratique.","u07")}}
+
+        {{macro_questionnaireParticipantsUX.afficheUnElementLikert("J'ai relebé des incohérences (ou erreurs) au cours de l'activité pratique qui m'a été présentée.","u08")}}
+
+        {{macro_questionnaireParticipantsUX.afficheUnElementLikert("J’étais tellement impliqué(e) dans l’activité que j’ai perdu la notion du temps","u09")}}
+
+        {{macro_questionnaireParticipantsUX.afficheUnElementLikert("Je pense que l’activité pratique proposée est une méthode d’enseignement adéquate pour cette matière.","u10")}}
+
+        {{macro_questionnaireParticipantsUX.afficheUnElementLikert("Je pense que la conception de l’activité pratique est attrayante","u11")}}
+
+        {{macro_questionnaireParticipantsUX.afficheUnElementLikert("J’ai trouvé du plaisir dans l’activité pratique proposé","u12")}}
+
+        {{macro_questionnaireParticipantsUX.afficheUnElementLikert("Je pense que les tâches proposées dans l’activité pratique étaient amusantes.","u13")}}
+
+        {{macro_questionnaireParticipantsUX.afficheUnElementLikert("Je pense que les tâches proposées dans l’activité pratique étaient variée","u14")}}
+
+        {{macro_questionnaireParticipantsUX.afficheUnElementLikert("Je pense que certains éléments proposés dans étaient non essentiels à l’acquisition des savoirs visés","u15")}}
+
+        {{macro_questionnaireParticipantsUX.afficheUnElementLikert("Je pense que l’activité pratique était une expérience stressante","u16")}}
+
+        {{macro_questionnaireParticipantsUX.afficheUnElementLikert("Je pense que tous les participants ont été impliqués de manière équitable dans l’activité pratique.","u17")}}
+
+        {{macro_questionnaireParticipantsUX.afficheUnElementLikert("Je pense que l’activité pratique était inutilement complexe.","u18")}}
+
+        {{macro_questionnaireParticipantsUX.afficheUnElementLikert("’ai pu faire le lien entre la séance théorique et l’activité pratique proposée.","u19")}}
+
+        {{macro_questionnaireParticipantsUX.afficheUnElementLikert("A l’issue de l’activité pratique, je souhaite en savoir plus sur la matière enseignée.","u20")}}
+
+        {{macro_questionnaireParticipantsUX.afficheUnElementLikert("Au cours de l’activité pratique, j’ai pu rapidement me rendre compte de mes erreurs ou réussites.","u21")}}
+
+        {{macro_questionnaireParticipantsUX.afficheUnElementLikert("Au cours de l'activité pratique, j'ai pu compter sur l'aide des autres participants pour augmenter mes connaissances dans la matière enseignée.","u22")}}
+
+        {{macro_questionnaireParticipantsUX.afficheUnElementLikert("J’estime que l’activité pratique m’a permis de mettre en pratique mes connaissances théoriques.","u23")}}
+
+        {{macro_questionnaireParticipantsUX.afficheUnElementLikert("Je pense que l’activité pratique à laquelle j’ai été assigné(e) m’ a permis de mieux apprendre que si j’avais été affecté(e) à l’autre.","u24")}}
+
+
+        {{macro_questionnaireParticipantsUX.afficheUnElementLikert("Je pense que l’activité favorise les échanges et la collaboration entre participants.","u25")}}
+
+        <div class="form-group boxQuestionnaireDemographique">
+            <label for="questionEG1">Quelle est votre opinion générale sur le jeu d’évasion ?</label>
+            <Br>
+            <select class="form-control  " aria-label=".form-select-lg example" id="idQuestionEG1"   style="color:grey">
+              
+              {% for benchmark in benchmarks %}
+                  <option  style="color:grey" value="{{ benchmark.value }}" >{{ benchmark.value }}</option> 
+              {% endfor %}
+              
+            </select>
+      
+          </div>
+
+
 
         <div class="buttons">
-            <button class="clear">Clear</button>
-            <button class="submit">Submit</button>
+            <button type="submit" class="btn btn-warning">Envoyer</button>
         </div>
     </form>
 </div>

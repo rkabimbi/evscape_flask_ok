@@ -43,16 +43,18 @@ from my_app.models.jeei_package.specification import Specification, Statut, Them
 from my_app.models.jeei_package.jointureJeeiUser import JointureJeeiUser
 from my_app.models.evaluation import Evaluation
 from my_app.models.questionnaireMotivation import QuestionnaireMotivation
+from my_app.models.questionnaireUX import QuestionnaireUX, Benchmark
 
 
 
 
 
+""" 
 @app.route("/questionnaireParticipantsUX", methods=['GET', 'POST'])
 def fonction_questionnaireParticipantsUX():
     nomJEEI="Deskape"
     return render_template("frontend_etudiant/questionnaireParticipantsUX.html",currentUser=current_user,nomJEEI=nomJEEI)
-
+"""
 
 
 @app.route("/questionnaireParticipantsMotivation/<path:UrlUtilisateur>", methods=['GET', 'POST'])
@@ -65,7 +67,7 @@ def fonction_questionnaireParticipantsMotivation(UrlUtilisateur):
         nomJEEI=jeei.nom
         return render_template("frontend_etudiant/questionnaireParticipantsMotivation.html",currentUser=current_user,jeei=jeei,participant=participant, experimentation=experimentation)
     else:
-       return render_template("user_login.html")
+       return render_template("frontend_etudiant/noaccess.html")
 
 
 @app.route("/sauvegardeQuestionnaireMotivation/<int:IdExperimentation>/<int:IdParticipant>", methods=['GET', 'POST'])
@@ -113,7 +115,7 @@ def fonction_questionnaireParticipantsDemographique(UrlUtilisateur):
         nomJEEI=jeei.nom
         return render_template("frontend_etudiant/questionnaireParticipantsDemographique.html",currentUser=current_user,jeei=jeei,participant=participant, experimentation=experimentation,sexes=Sexe,localisations=Localisation, experiences=Experience, experiencesJeei=ExperienceJeei)
     else:
-       return render_template("user_login.html")
+       return render_template("frontend_etudiant/noaccess.html")
 
 
 @app.route("/sauvegardeQuestionnaireDemographique", methods=['GET', 'POST'])
@@ -133,3 +135,106 @@ def fonction_sauvegardeQuestionnaireDemographique():
 @app.route("/remerciements", methods=['GET', 'POST'])
 def fonction_remerciements():
     return render_template("frontend_etudiant/remerciements.html")
+
+@app.route("/noaccess", methods=['GET', 'POST'])
+def fonction_noaccess():
+    return render_template("frontend_etudiant/noaccess.html")
+
+
+
+
+
+@app.route("/questionnaireParticipantsUX/<path:UrlUtilisateur>", methods=['GET', 'POST'])
+def fonction_questionnaireParticipantsUX(UrlUtilisateur):
+    participant=Participant.query.filter_by(urlPerso=UrlUtilisateur).first()
+    experimentation=Experimentation.query.filter_by(id=participant.fk_ExperimentationId).first()
+    jeei=Jeei.query.filter_by(id=experimentation.fk_JeeiId).first()
+    if participant:
+        print("c'est bien un participant  et donc on accèpte qu'il se connecte avec cet url qui lui est propre")
+        
+        return render_template("frontend_etudiant/questionnaireParticipantsUX.html",currentUser=current_user,jeei=jeei,participant=participant, experimentation=experimentation,benchmarks=Benchmark)
+    else:
+       return render_template("frontend_etudiant/noaccess.html")
+
+
+@app.route("/sauvegardeQuestionnaireUX/<int:IdExperimentation>/<int:IdParticipant>", methods=['GET', 'POST'])
+def fonction_sauvegardeQuestionnaireUX(IdExperimentation,IdParticipant):
+    print("sauvegardeQuestionnaireUX")
+
+    participant=Participant.query.filter_by(id=IdParticipant).first()
+    experimentation=Experimentation.query.filter_by(id=IdExperimentation).first()
+    idJeei=experimentation.fk_JeeiId
+
+    #on va chercher l'evaluation
+    evaluation=Evaluation.query.filter_by(fk_ParticipantId=participant.id).first()
+    evaluation.questionnaireUX=True
+    db.session.add(evaluation)
+    db.session.commit()
+
+
+    #je cree une instance de la clase questionnaire UX
+    questionnaireUX=QuestionnaireUX()
+
+    #link evaluation et questionnaire UX
+    evaluation.fk_QuestionnaireUXId=questionnaireUX.id
+    db.session.add(evaluation)
+    db.session.commit()
+
+   
+    
+    questionnaireUX.u01=request.args.get("likertu01")
+    
+    questionnaireUX.u02=request.args.get("likertu02")
+   
+    questionnaireUX.u03=request.args.get("likertu03")
+
+    questionnaireUX.u04=request.args.get("likertu04")
+
+    questionnaireUX.u05=request.args.get("likertu05")
+
+    questionnaireUX.u06=request.args.get("likertu06")
+
+    questionnaireUX.u07=request.args.get("likertu07")
+
+    questionnaireUX.u08=request.args.get("likertu08")
+
+    questionnaireUX.u09=request.args.get("likertu09")
+
+    questionnaireUX.u10=request.args.get("likertu10")
+
+    questionnaireUX.u11=request.args.get("likertu11")
+
+    questionnaireUX.u12=request.args.get("likertu12")
+
+    questionnaireUX.u13=request.args.get("likertu13")
+
+    questionnaireUX.u14=request.args.get("likertu14")
+
+    questionnaireUX.u15=request.args.get("likertu15")
+
+    questionnaireUX.u16=request.args.get("likertu16")
+
+    questionnaireUX.u17=request.args.get("likertu17")
+
+    questionnaireUX.u18=request.args.get("likertu18")
+
+    questionnaireUX.u19=request.args.get("likertu19")
+
+    questionnaireUX.u20=request.args.get("likertu20")
+
+    questionnaireUX.u21=request.args.get("likertu21")
+
+    questionnaireUX.u22=request.args.get("likertu22")
+
+    questionnaireUX.u23=request.args.get("likertu23")
+
+    questionnaireUX.u24=request.args.get("likertu24")
+
+    questionnaireUX.u25=request.args.get("likertu25")
+
+
+    
+    db.session.add(questionnaireUX)
+    db.session.commit()
+    return render_template("frontend_etudiant/remerciements.html")
+

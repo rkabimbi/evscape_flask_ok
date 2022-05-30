@@ -1,4 +1,5 @@
 from email.policy import default
+import imp
 from flask_login import UserMixin
 from my_app import login_manager
 from my_app import db #importe l'objet DB cree dans le init.py
@@ -14,6 +15,8 @@ from my_app.models.jeei_package.specification import Specification, Theme, Publi
 from my_app.models.experimentation import Experimentation
 from my_app.models.participant import Participant
 from my_app.models.jeei_package.jeei import Jeei
+from my_app.models.questionnaireUX import QuestionnaireUX
+from my_app.models.questionnaireMotivation import QuestionnaireMotivation
 
 #on crée une table 
 class Evaluation(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethodes relatives aux login et l'autre pour les DB
@@ -33,6 +36,7 @@ class Evaluation(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethodes r
     fk_ExperimentationId = db.Column(db.Integer, db.ForeignKey('Experimentation.id'),nullable=False)
     fk_ParticipantId = db.Column(db.Integer, db.ForeignKey('Participant.id'),nullable=False)
     fk_QuestionnaireMotivationId = db.Column(db.Integer, db.ForeignKey('QuestionnaireMotivation.id'),nullable=True)
+    fk_QuestionnaireUXId = db.Column(db.Integer, db.ForeignKey('QuestionnaireUX.id'),nullable=True)
 
     
 

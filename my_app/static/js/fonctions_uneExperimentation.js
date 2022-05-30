@@ -161,6 +161,39 @@ function retourDebloquerFormulaireMotivation(responseText)
 }
 
 
+function fonction_debloquerUX(idJEEI, idExperimentation)
+{
+    console.log("fonction_debloquerUX")
+ 
+    console.log("On va chercher à débloquer le formulaire de motivation en live pour :"+idJEEI + " et l'experimentation :"+idExperimentation)
+
+    //juste renvoyer le num d'IDexperimentation coté back...là il recupere tt les candidats et cree
+    //une veluation pr eux  + leur envoi un email 
+    var xhttp = new XMLHttpRequest( );
+    let url = new URL('http://127.0.0.1:5000/debloquerFormulaireUX?idExperimentation='+ idExperimentation);  
+    xhttp.open("GET", url.toString(), true);
+    xhttp.send()
+    xhttp.onreadystatechange = function()
+    { 
+        if (this.readyState == 4 && this.status == 200) 
+        {
+            retourDebloquerFormulaireUX(this.responseText)   
+        }
+    };
+    
+}
+
+function retourDebloquerFormulaireUX(responseText)
+{
+    console.log("retourDebloquerFormulaireUX")
+    console.log(responseText)
+    //var fichJsonParse=JSON.parse(responseText);//parsing du fichier JSON envoyé par jsonify
+    
+
+
+}
+
+
 
 function fonction_bloquerMotivation(idJEEI, idExperimentation)
 {
