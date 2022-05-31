@@ -16,7 +16,7 @@
 <h4> Participant :  {{participant.nom}} {{participant.prenom}} </h4>
 
 
-    
+{%if experimentation.etape10==false%}   
 
 {% for n in range(10) %}
 <div class=" questionPreTest">
@@ -56,7 +56,16 @@
 
 <button type="button" class="btn btn-warning" style="margin-top:25px"onclick="fonction_sauverPostTest({{participant.id}},{{questionsApprentissage}})">Soumettre</button>
 
+{%else%}
+<div>
 
+    <div class="jumbotron text-center " style="background-color:rgb(104, 104, 104)">
+      <h1 class="display-3" style="color:white">ATTENTION!</h1>
+      <p class="lead"  style="color:white"><strong>Votre enseignant à mis un terme à cette étape, il ne vous est plus possible d'évaluer.</strong> </p>
+      <hr>
+  </div>
+
+{%endif%}
 
 
 

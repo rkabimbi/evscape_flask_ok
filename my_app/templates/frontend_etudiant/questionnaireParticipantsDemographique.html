@@ -15,6 +15,9 @@
 <h2 class="likert-header" style="color: grey;">Questionnaire Démographique ({{jeei.nom}}) </h2>
 <h4> Participant :  {{participant.nom}} {{participant.prenom}} </h4>
 
+
+{%if experimentation.etape3==false%}
+
 <div class="boxQuestionnaireDemographique">
     <div class="form-group">
       <label for="ageParticipant">Quel âge avez-vous?</label>
@@ -79,7 +82,16 @@
    
     <button type="submit" class="btn btn-warning" onclick="sauverFormulaireDemographique({{participant.id}},{{experimentation.id}})">Soumettre</button>
 </div>
+{%else%}
+<div>
 
+    <div class="jumbotron text-center " style="background-color:rgb(104, 104, 104)">
+      <h1 class="display-3" style="color:white">ATTENTION!</h1>
+      <p class="lead"  style="color:white"><strong>Votre enseignant à mis un terme à cette étape, il ne vous est plus possible d'évaluer.</strong> </p>
+      <hr>
+  </div>
+
+{%endif%}
 
 
 

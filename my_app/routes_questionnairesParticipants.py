@@ -66,6 +66,7 @@ def fonction_questionnaireParticipantsMotivation(UrlUtilisateur):
     participant=Participant.query.filter_by(urlPerso=UrlUtilisateur).first()
     experimentation=Experimentation.query.filter_by(id=participant.fk_ExperimentationId).first()
     jeei=Jeei.query.filter_by(id=experimentation.fk_JeeiId).first()
+    
     if participant:
         print("c'est bien un participant  et donc on accèpte qu'il se connecte avec cet url qui lui est propre")
         nomJEEI=jeei.nom
