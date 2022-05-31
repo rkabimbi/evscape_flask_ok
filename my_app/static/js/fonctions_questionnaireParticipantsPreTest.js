@@ -1,6 +1,6 @@
 function fonction_sauverPreTest(idParticipant,questionsApprentissage)
 {
-    console.log(fonction_sauverPreTest)
+    console.log("fonction_sauverPreTest")
     console.log(questionsApprentissage)
 
 

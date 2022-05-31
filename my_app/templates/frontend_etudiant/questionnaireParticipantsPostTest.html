@@ -1,0 +1,69 @@
+<head>
+    <link href="/static/css/questionnaireParticipantsUX.css" rel="stylesheet"><!-- idem-->
+    {% import "frontend_etudiant/macros/macro_questionnaireParticipantsPreTest.html" as macro_questionnaireParticipantsPreTest %}<!-- import de macro. Comme ça c'est dispo pour toutes les pages filles -->
+</head>
+
+<!-- herite de main (de tout sauf les blocks (donc le menu)) -->
+{% extends "frontend_etudiant/parentPageEtudiant.html" %}
+
+<!-- Tout ce dont on a pas herité de main -->
+
+
+
+{% block body %}
+<body onload="changerImageFond()"> </body>
+<h2 class="likert-header" style="color: grey;">Post-Test ({{jeei.nom}}) </h2>
+<h4> Participant :  {{participant.nom}} {{participant.prenom}} </h4>
+
+
+    
+
+{% for n in range(10) %}
+<div class=" questionPreTest">
+
+    <p class="questionposeePreTest" id="question{{questionsApprentissage['id'][n]}}">{{questionsApprentissage['question'][n]}}</p>
+    <div class="form-check choixMultiple" >
+        <input class="form-check-input" type="radio" name="flexRadioDefaultA{{questionsApprentissage['id'][n]}}" id="flexRadioDefault{{questionsApprentissage['id'][n]}}1" value="{{questionsApprentissage['reponses'][n][0]}}">
+        <label class="form-check-label" for="flexRadioDefault1">
+            {{questionsApprentissage['reponses'][n][0]}}
+        </label>
+    </div>
+    <div class="form-check choixMultiple">
+        <input class="form-check-input" type="radio" name="flexRadioDefaultA{{questionsApprentissage['id'][n]}}" id="flexRadioDefault{{questionsApprentissage['id'][n]}}2" value="{{questionsApprentissage['reponses'][n][1]}}"  >
+        <label class="form-check-label" for="flexRadioDefault2">
+            {{questionsApprentissage['reponses'][n][1]}}
+        </label>
+    </div>
+    <div class="form-check choixMultiple">
+        <input class="form-check-input" type="radio" name="flexRadioDefaultA{{questionsApprentissage['id'][n]}}" id="flexRadioDefault{{questionsApprentissage['id'][n]}}3" value="{{questionsApprentissage['reponses'][n][2]}}">
+        <label class="form-check-label" for="flexRadioDefault2">
+            {{questionsApprentissage['reponses'][n][2]}}
+        </label>
+    </div>
+    <div class="form-check choixMultiple">
+        <input class="form-check-input" type="radio" name="flexRadioDefaultA{{questionsApprentissage['id'][n]}}" id="flexRadioDefault{{questionsApprentissage['id'][n]}}4" value="{{questionsApprentissage['reponses'][n][3]}}" >
+        <label class="form-check-label" for="flexRadioDefault2">
+            {{questionsApprentissage['reponses'][n][3]}}
+        </label>
+    </div>
+    
+
+
+
+
+</div>
+{% endfor %}
+
+<button type="button" class="btn btn-warning" style="margin-top:25px"onclick="fonction_sauverPostTest({{participant.id}},{{questionsApprentissage}})">Soumettre</button>
+
+
+
+
+
+
+
+<script src="{{ url_for('static',filename='js/fonctions_questionnaireParticipantsPostTest.js')}}"></script>
+<script src="{{ url_for('static',filename='js/fonctions_flux.js')}}"></script> <!-- Laisser ca partout - besoin pour mon hack de fond-->
+</div>
+
+{% endblock %}

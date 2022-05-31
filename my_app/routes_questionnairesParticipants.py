@@ -47,6 +47,7 @@ from my_app.models.evaluation import Evaluation
 from my_app.models.questionnaireMotivation import QuestionnaireMotivation
 from my_app.models.questionnaireUX import QuestionnaireUX, Benchmark
 from my_app.models.questionnairePreTest import QuestionnairePreTest
+from my_app.models.questionnairePostTest import QuestionnairePostTest
 
 
 
@@ -358,3 +359,82 @@ def fonction_sauvegardeQuestionnairePreTest():
     db.session.commit()
     return "ok"
 
+
+
+
+@app.route("/questionnaireParticipantsPostTest/<path:UrlUtilisateur>", methods=['GET', 'POST'])
+def fonction_questionnaireParticipantsPostTest(UrlUtilisateur):
+    participant=Participant.query.filter_by(urlPerso=UrlUtilisateur).first()
+    experimentation=Experimentation.query.filter_by(id=participant.fk_ExperimentationId).first()
+    jeei=Jeei.query.filter_by(id=experimentation.fk_JeeiId).first()
+    if participant:
+        print("c'est bien un participant  et donc on accèpte qu'il se connecte avec cet url qui lui est propre")
+        nomJEEI=jeei.nom
+        #je vais chercher la liste de questions à envoyer
+        specificationId =jeei.fk_SpecificationId
+        questionsApprentissage = QuestionApprentissage.query.filter_by(fk_SpecificationId=specificationId).all()
+        #on va recup les propositions de chaque questions d'apprentissage et les mettre dans un ordre aleatoire
+        dictQuestionsApprentissage={
+            "id":[],
+            "question":[],
+            "reponses":[]
+        }
+        for questionApprentissage in questionsApprentissage:
+            tabQuestionApprentissage=[]
+            tabQuestionApprentissage.append(questionApprentissage.solutionCorrecte)
+            tabQuestionApprentissage.append(questionApprentissage.solutionIncorrecte1)
+            tabQuestionApprentissage.append(questionApprentissage.solutionIncorrecte2)
+            tabQuestionApprentissage.append(questionApprentissage.solutionIncorrecte3)
+            print("Tab avant melnage")
+            print(tabQuestionApprentissage)
+            print("Tab apres melnage")
+            shuffle(tabQuestionApprentissage)
+            print(tabQuestionApprentissage)
+            dictQuestionsApprentissage["id"].append(questionApprentissage.id)
+            dictQuestionsApprentissage["question"].append(questionApprentissage.question)
+            dictQuestionsApprentissage["reponses"].append(tabQuestionApprentissage)
+
+        print(dictQuestionsApprentissage)
+        return render_template("frontend_etudiant/questionnaireParticipantsPostTest.html",currentUser=current_user,jeei=jeei,participant=participant, experimentation=experimentation,questionsApprentissage=dictQuestionsApprentissage)
+    else:
+       return render_template("frontend_etudiant/noaccess.html")
+
+
+@app.route("/sauvegardeQuestionnairePostTest", methods=['GET', 'POST'])
+def fonction_sauvegardeQuestionnairePostTest():
+    print("sauvegardeQuestionnairePostTest")
+    idParticipant= request.args.get("idParticipant")
+    participant = Participant.query.filter_by(id=idParticipant).first()
+
+    #je recupere l'évaluation liée
+    evaluation=Evaluation.query.filter_by(fk_ParticipantId=participant.id).first()
+    evaluation.postTest1=True
+    db.session.add(evaluation)
+    db.session.commit()
+
+    #je cree une instance de la clase questionnaire PreTest
+    questionnairePostTest=QuestionnairePostTest()
+    db.session.add(questionnairePostTest)
+    db.session.commit()
+
+    #link evaluation et questionnaire UX
+    questionnaire = QuestionnairePostTest.query.order_by(QuestionnairePostTest.id.desc()).first()
+    evaluation.fk_QuestionnairePostTestId=questionnaire.id
+    db.session.add(evaluation)
+    db.session.commit()
+
+    questionnairePostTest.pt01=request.args.get("responseQ1")
+    questionnairePostTest.pt02=request.args.get("responseQ2")
+    questionnairePostTest.pt03=request.args.get("responseQ3")
+    questionnairePostTest.pt04=request.args.get("responseQ4")
+    questionnairePostTest.pt05=request.args.get("responseQ5")
+    questionnairePostTest.pt06=request.args.get("responseQ6")
+    questionnairePostTest.pt07=request.args.get("responseQ7")
+    questionnairePostTest.pt08=request.args.get("responseQ8")
+    questionnairePostTest.pt09=request.args.get("responseQ9")
+    questionnairePostTest.pt10=request.args.get("responseQ10")
+    
+    
+    db.session.add(questionnairePostTest)
+    db.session.commit()
+    return "ok"
