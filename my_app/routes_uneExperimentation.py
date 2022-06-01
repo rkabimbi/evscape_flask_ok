@@ -238,6 +238,7 @@ def fonction_debloquerFormulaireMotivation():
     for participant in participants:
         
         if participant.consentement:#si il a marqué son consentment
+            time.sleep(0.4)#je met un time de 5 secondes sinon python envoi plus de 3 emails par seconde et alors mailtrap ne suis pas et ca renvoi une erreur 500
             msg = Message((jeei.nom,' : Formulaire de Motivation'), sender = ( 'Equipe EvscApp' ,'rudy.kabimbingoy@teams.student.unamur.be'), recipients = [participant.email ])
             url="http://127.0.0.1:5000/questionnaireParticipantsMotivation/"+participant.urlPerso
             #url="location.href='http://127.0.0.1:5000/questionnaireParticipantsDemographique/'"
@@ -268,6 +269,7 @@ def fonction_debloquerFormulaireUX():
     for participant in participants:
         
         if participant.consentement:#si il a marqué son consentment
+            time.sleep(0.4)#je met un time de 5 secondes sinon python envoi plus de 3 emails par seconde et alors mailtrap ne suis pas et ca renvoi une erreur 500
             msg = Message((jeei.nom,' : Formulaire UX'), sender = ( 'Equipe EvscApp' ,'rudy.kabimbingoy@teams.student.unamur.be'), recipients = [participant.email ])
             url="http://127.0.0.1:5000/questionnaireParticipantsUX/"+participant.urlPerso
             #url="location.href='http://127.0.0.1:5000/questionnaireParticipantsDemographique/'"
@@ -300,6 +302,7 @@ def fonction_debloquerFormulairePreTest():
     for participant in participants:
         
         if participant.consentement:#si il a marqué son consentment
+            time.sleep(0.4)#je met un time de 5 secondes sinon python envoi plus de 3 emails par seconde et alors mailtrap ne suis pas et ca renvoi une erreur 500
             msg = Message((jeei.nom,' : Questionnaire Pre-Test'), sender = ( 'Equipe EvscApp' ,'rudy.kabimbingoy@teams.student.unamur.be'), recipients = [participant.email ])
             url="http://127.0.0.1:5000/questionnaireParticipantsPreTest/"+participant.urlPerso
             #url="location.href='http://127.0.0.1:5000/questionnaireParticipantsDemographique/'"
@@ -332,6 +335,7 @@ def fonction_debloquerFormulairePostTest():
     for participant in participants:
         
         if participant.consentement:#si il a marqué son consentment
+            time.sleep(0.4)#je met un time de 5 secondes sinon python envoi plus de 3 emails par seconde et alors mailtrap ne suis pas et ca renvoi une erreur 500
             msg = Message((jeei.nom,' : Questionnaire Post-Test'), sender = ( 'Equipe EvscApp' ,'rudy.kabimbingoy@teams.student.unamur.be'), recipients = [participant.email ])
             url="http://127.0.0.1:5000/questionnaireParticipantsPostTest/"+participant.urlPerso
             #url="location.href='http://127.0.0.1:5000/questionnaireParticipantsDemographique/'"

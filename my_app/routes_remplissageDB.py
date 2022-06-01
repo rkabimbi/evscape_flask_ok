@@ -332,6 +332,70 @@ def function_lancementDBFictive():
     participant.prenom='Albert'
     db.session.add(participant)#sauve dans la DB
     db.session.commit()
+    
+    participant = Participant()
+    participant.age=23
+    participant.sexe=Sexe.MASCULIN
+    participant.email='riLito@student.unamur.be'
+    participant.expJEEI=ExperienceJeei.REGULIEREMENT
+    participant.etudes=PublicCible.MASTER
+    participant.localisation= Localisation.AFRIQUE
+    participant.experience= Experience.NEANT
+    participant.groupeExperimental=False
+    participant.consentement=True
+    participant.fk_ExperimentationId=3
+    participant.nom='to'
+    participant.prenom='lie'
+    db.session.add(participant)#sauve dans la DB
+    db.session.commit()
+
+    participant = Participant()
+    participant.age=19
+    participant.sexe=Sexe.MASCULIN
+    participant.email='rudy.RusaiLito@s.unamur.be'
+    participant.expJEEI=ExperienceJeei.REGULIEREMENT
+    participant.etudes=PublicCible.MASTER
+    participant.localisation= Localisation.AFRIQUE
+    participant.experience= Experience.NEANT
+    participant.groupeExperimental=False
+    participant.consentement=True
+    participant.fk_ExperimentationId=3
+    participant.nom='Gele'
+    participant.prenom='Gigi'
+    db.session.add(participant)#sauve dans la DB
+    db.session.commit()
+
+    participant = Participant()
+    participant.age=27
+    participant.sexe=Sexe.MASCULIN
+    participant.email='Paick.RuiLito@student.unamur.be'
+    participant.expJEEI=ExperienceJeei.REGULIEREMENT
+    participant.etudes=PublicCible.MASTER
+    participant.localisation= Localisation.AFRIQUE
+    participant.experience= Experience.NEANT
+    participant.groupeExperimental=False
+    participant.consentement=True
+    participant.fk_ExperimentationId=3
+    participant.nom='Patrke'
+    participant.prenom='Klert'
+    db.session.add(participant)#sauve dans la DB
+    db.session.commit()
+
+    participant = Participant()
+    participant.age=12
+    participant.sexe=Sexe.MASCULIN
+    participant.email='berd.albert@student.unamur.be'
+    participant.expJEEI=ExperienceJeei.REGULIEREMENT
+    participant.etudes=PublicCible.MASTER
+    participant.localisation= Localisation.AFRIQUE
+    participant.experience= Experience.NEANT
+    participant.groupeExperimental=False
+    participant.consentement=True
+    participant.fk_ExperimentationId=3
+    participant.nom='Berrd'
+    participant.prenom='Aert'
+    db.session.add(participant)#sauve dans la DB
+    db.session.commit()
 
 
 

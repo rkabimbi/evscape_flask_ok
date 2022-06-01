@@ -27,18 +27,21 @@
         </div>
 </div> 
 
+<table class="table tableGroupe">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col" >#</th>
+      <th scope="col" style=" text-align: left;">Nom</th>
+      <th scope="col" style=" text-align: left;">Prénom</th>
+      <th scope="col" style=" text-align: left;">Type</th>
+ 
+    </tr>
+  </thead>
+</table>
 
 <div class="scroller"> 
 <table class="table tableGroupe">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Nom</th>
-        <th scope="col">Prénom</th>
-        <th scope="col">Type</th>
-   
-      </tr>
-    </thead>
+
  
     <tbody >
       {%for participant in participants%}
