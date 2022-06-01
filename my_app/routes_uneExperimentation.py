@@ -28,6 +28,7 @@ from datetime import datetime, date
 
 from flask import json, jsonify
 from datetime import date
+import time
 
 #from dateutil.relativedelta import *#pour calculer age
 
@@ -45,6 +46,7 @@ from my_app.models.experimentation import Experimentation
 from flask_mail import Mail, Message
 from my_app.models.evaluation import Evaluation
 #config email
+import random
 
 app.config['MAIL_SERVER']='smtp.mailtrap.io'
 app.config['MAIL_PORT'] = 2525
@@ -94,11 +96,10 @@ def fonction_consulterGroupesParticipants():
     
     idJEEIaEnvoyer = request.args.get("idJEEI")
     JEEIAEnvoyer = Jeei.query.filter_by(id=idJEEIaEnvoyer).first()
-
-
-    #en attendant je fais ceci
-    idExperimentation=1
-    return render_template("groupesParticipants.html",currentUser=current_user,JEEI=JEEIAEnvoyer,idExperimentation=1)
+    idExperimentation = request.args.get("idExperimentation")
+    participants=Participant.query.filter_by(fk_ExperimentationId=idExperimentation).all()
+   
+    return render_template("groupesParticipants.html",currentUser=current_user,JEEI=JEEIAEnvoyer,idExperimentation=idExperimentation,participants=participants)
 
 
 
@@ -131,6 +132,7 @@ def fonction_validerEtapeExperimentation():
     if etape==4:
         experimentation.etape4=True
         experimentation.etape5=True#car cette etape ne necessite pas de validation
+        creerGroupe(idExperimentation)
     if etape==6:
         experimentation.etape6=True
     if etape==7:
@@ -153,7 +155,30 @@ def fonction_validerEtapeExperimentation():
     print(experimentation)
 
     return "ok"
-    
+
+
+def creerGroupe(idExperimentation):
+    #recup de tous les participants propre à l'experimentation concernée
+    participants=Participant.query.filter_by(fk_ExperimentationId=idExperimentation).all()
+    nbrParticipantsValides=0
+    for participant in participants:
+        if participant.consentement:
+            nbrParticipantsValides=nbrParticipantsValides+1
+
+    nbrParticipantGroupeExp=nbrParticipantsValides/2
+    #tant qu'il y a des membres a assigné au groupe exp
+    while nbrParticipantGroupeExp>0:
+        #parcours la liste de tous les participants
+        for participant in participants:
+            #si consentement , tjrs des membres à assigner (obligé car boucle dans boucle)!!! et qu'il est pas deja assigné au groupe exp (pour eviter repetition d'une meme personne)
+            if participant.consentement and nbrParticipantGroupeExp>0 and  not participant.groupeExperimental:
+                #on lui donne une valeur aleatoire
+                participant.groupeExperimental= random.choice([True,False])
+                db.session.add(participant) 
+                db.session.commit()
+                if participant.groupeExperimental:
+                    nbrParticipantGroupeExp=nbrParticipantGroupeExp-1
+                    print("j'ai sauve un membre experimental")
 
 
 @app.route("/debloquerFormulaireDemographique", methods=['GET', 'POST'])
@@ -180,7 +205,8 @@ def fonction_debloquerFormulaireDemographique():
             evaluation=Evaluation(jeei.id,experimentation.id,participant.id)
             db.session.add(evaluation)
             db.session.commit()
-            
+            time.sleep(0.4)#je met un time de 5 secondes sinon python envoi plus de 3 emails par seconde et alors mailtrap ne suis pas et ca renvoi une erreur 500
+
             #on lui envoi un email
             msg = Message((jeei.nom,' : Formulaire démographique'), sender = ( 'Equipe EvscApp' ,'rudy.kabimbingoy@teams.student.unamur.be'), recipients = [participant.email ])
             url="http://127.0.0.1:5000/questionnaireParticipantsDemographique/"+participant.urlPerso

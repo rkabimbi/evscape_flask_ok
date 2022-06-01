@@ -224,7 +224,7 @@ def function_lancementDBFictive():
     participant.etudes=PublicCible.BACCALAUREAT
     participant.localisation= Localisation.AFRIQUE
     participant.experience= Experience.EXPERT
-    participant.groupeExperimental=True
+    participant.groupeExperimental=False
     participant.consentement=True
     participant.fk_ExperimentationId=3
     participant.nom='Boudlal'
@@ -238,12 +238,12 @@ def function_lancementDBFictive():
     participant = Participant()
     participant.age=20
     participant.sexe=Sexe.MASCULIN
-    participant.email='rkabimbi@yahoo.fr'
+    participant.email='zouzou@yahoo.fr'
     participant.expJEEI=ExperienceJeei.REGULIEREMENT
     participant.etudes=PublicCible.MASTER
     participant.localisation= Localisation.AFRIQUE
     participant.experience= Experience.NEANT
-    participant.groupeExperimental=True
+    participant.groupeExperimental=False
     participant.consentement=True
     participant.fk_ExperimentationId=3
     participant.nom='Tozer'
@@ -261,11 +261,75 @@ def function_lancementDBFictive():
     participant.etudes=PublicCible.MASTER
     participant.localisation= Localisation.AFRIQUE
     participant.experience= Experience.NEANT
-    participant.groupeExperimental=True
+    participant.groupeExperimental=False
     participant.consentement=True
     participant.fk_ExperimentationId=3
     participant.nom='Lita'
     participant.prenom='Zoe'
+    db.session.add(participant)#sauve dans la DB
+    db.session.commit()
+    
+    participant = Participant()
+    participant.age=18
+    participant.sexe=Sexe.MASCULIN
+    participant.email='rudy.kabimbiLito@student.unamur.be'
+    participant.expJEEI=ExperienceJeei.REGULIEREMENT
+    participant.etudes=PublicCible.MASTER
+    participant.localisation= Localisation.AFRIQUE
+    participant.experience= Experience.NEANT
+    participant.groupeExperimental=False
+    participant.consentement=True
+    participant.fk_ExperimentationId=3
+    participant.nom='toto'
+    participant.prenom='litoe'
+    db.session.add(participant)#sauve dans la DB
+    db.session.commit()
+
+    participant = Participant()
+    participant.age=19
+    participant.sexe=Sexe.MASCULIN
+    participant.email='rudy.RusaiLito@student.unamur.be'
+    participant.expJEEI=ExperienceJeei.REGULIEREMENT
+    participant.etudes=PublicCible.MASTER
+    participant.localisation= Localisation.AFRIQUE
+    participant.experience= Experience.NEANT
+    participant.groupeExperimental=False
+    participant.consentement=True
+    participant.fk_ExperimentationId=3
+    participant.nom='Gisele'
+    participant.prenom='Giligi'
+    db.session.add(participant)#sauve dans la DB
+    db.session.commit()
+
+    participant = Participant()
+    participant.age=27
+    participant.sexe=Sexe.MASCULIN
+    participant.email='Patrick.RusaiLito@student.unamur.be'
+    participant.expJEEI=ExperienceJeei.REGULIEREMENT
+    participant.etudes=PublicCible.MASTER
+    participant.localisation= Localisation.AFRIQUE
+    participant.experience= Experience.NEANT
+    participant.groupeExperimental=False
+    participant.consentement=True
+    participant.fk_ExperimentationId=3
+    participant.nom='Patricke'
+    participant.prenom='Kluivert'
+    db.session.add(participant)#sauve dans la DB
+    db.session.commit()
+
+    participant = Participant()
+    participant.age=12
+    participant.sexe=Sexe.MASCULIN
+    participant.email='bernard.albert@student.unamur.be'
+    participant.expJEEI=ExperienceJeei.REGULIEREMENT
+    participant.etudes=PublicCible.MASTER
+    participant.localisation= Localisation.AFRIQUE
+    participant.experience= Experience.NEANT
+    participant.groupeExperimental=False
+    participant.consentement=True
+    participant.fk_ExperimentationId=3
+    participant.nom='Bernard'
+    participant.prenom='Albert'
     db.session.add(participant)#sauve dans la DB
     db.session.commit()
 

@@ -16,19 +16,19 @@
 
 <div class="row titreUneExperimentation"> 
     <h1> {{JEEI.nom}}</h1>
-    <h3 class="numExperimentation"> Experimentation #1</h3>
+    <h3 class="numExperimentation"> Experimentation #{{idExperimentation}}</h3>
     
     
 </div >
 <div class="row"> 
     <h4 class="col-sm-6 sousTitreUneExperimentation" >/ Liste des groupes</h4>
     <div class=" col-sm-6 ligneBoutonEnvoyer"> 
-        <button type="button " class="btn btn-secondary" style="margin-left: 25px;">Retour</button>
+        <button type="button " class="btn btn-secondary" style="margin-left: 25px;" onclick="location.href='http://127.0.0.1:5000/afficherUneExperimentationExistante?idExperimentation={{idExperimentation}}'">Retour</button>
         </div>
 </div> 
 
 
-
+<div class="scroller"> 
 <table class="table tableGroupe">
     <thead class="thead-dark">
       <tr>
@@ -36,33 +36,29 @@
         <th scope="col">Nom</th>
         <th scope="col">Prénom</th>
         <th scope="col">Type</th>
-        <th scope="col">Groupe</th>
+   
       </tr>
     </thead>
-    <tbody>
+ 
+    <tbody >
+      {%for participant in participants%}
       <tr>
-        <th scope="row">1</th>
-        <td>LEROY</td>
-        <td>Laurent</td>
-        <td>Experimental</td>
-        <td>1</td>
+        <th scope="row">{{participant.id}}</th>
+        <td>{{participant.nom}}</td>
+        <td>{{participant.prenom}}</td>
+        {%if participant.groupeExperimental%}
+          <td>Experimental</td>
+        {%else%}
+          <td>Témoin</td>
+        {%endif%}
+      
       </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>DI STASIO</td>
-        <td>Anthony</td>
-        <td>Experimental </td>
-        <td>1</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>HERION</td>
-        <td>Christophe</td>
-        <td>Temoin</td>
-        <td>2</td>
-      </tr>
+      {%endfor%}
+     
     </tbody>
+
   </table>
+</div>
   
 
 
