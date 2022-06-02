@@ -405,8 +405,11 @@ FAIRE JUSTE UN TABLEAUX CLASSIQU ET j'Y MET TTE LES DATAS (dans un premier temps
 
 <div class="row">
   <div class="btnGroupMesJEEIExperimentation ">
-
-    <a class="btn btn-secondary" href="http://127.0.0.1:5000/uneExperimentation?idJEEI={{monJEEI.id}}" role="button" style =" margin-left: 15px; margin-right: 15px;">Experimenter</a>
+    {%if monJEEI.estValide %}
+    <button class="btn btn-secondary" onclick="window.location.href = 'http://127.0.0.1:5000/uneExperimentation?idJEEI={{monJEEI.id}}' "  style =" margin-left: 15px; margin-right: 15px;">Experimenter</button>
+    {%else %}
+    <button class="btn btn-secondary" id="btnExpDansSpec" onclick="window.location.href = 'http://127.0.0.1:5000/uneExperimentation?idJEEI={{monJEEI.id}}' " disabled  style =" margin-left: 15px; margin-right: 15px;">Experimenter</button>
+    {%endif%}
 
 
   </div>

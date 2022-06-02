@@ -89,24 +89,24 @@ def function_lancementDBFictive():
 
 
     #CREA De JEEI
-    specification= Specification(nbrJoueursMax=4,nbrJoueursMin=2,budget=500,dureeMinutes=150, publicCible=PublicCible.MASTER,theme=Theme.MATHEMATIQUE,scenario="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pellentesque mollis nisi ut maximus. Duis convallis volutpat erat, vel quis.",chapitre="Logique propositionelle",statut=Statut.ENCOURS,documentation="")
+    specification= Specification(nbrJoueursMax=4,nbrJoueursMin=2,budget=500,dureeMinutes=150, publicCible=PublicCible.MASTER,theme=Theme.AL,scenario="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pellentesque mollis nisi ut maximus. Duis convallis volutpat erat, vel quis.",chapitre="Logique propositionelle",statut=Statut.ENCOURS,documentation="")
     db.session.add(specification)#sauve dans la DB
     db.session.commit()
-    specification= Specification(nbrJoueursMax=3,nbrJoueursMin=2,budget=5500,dureeMinutes=120, publicCible=PublicCible.PRIMAIRE,theme=Theme.SECURITEIT,scenario="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pellentesque mollis nisi ut maximus. Duis convallis volutpat erat, vel quis.",chapitre="chiffrement de cesar",statut=Statut.ENCOURS,documentation="")
+    specification= Specification(nbrJoueursMax=3,nbrJoueursMin=2,budget=5500,dureeMinutes=120, publicCible=PublicCible.PRIMAIRE,theme=Theme.DS,scenario="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pellentesque mollis nisi ut maximus. Duis convallis volutpat erat, vel quis.",chapitre="chiffrement de cesar",statut=Statut.ENCOURS,documentation="")
     db.session.add(specification)#sauve dans la DB
     db.session.commit()
-    specification= Specification(nbrJoueursMax=8,nbrJoueursMin=1,budget=1500,dureeMinutes=60,statut=Statut.PRET, publicCible=PublicCible.SECONDAIRE,theme=Theme.INGENIRIELOGICIEL,scenario="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pellentesque mollis nisi ut maximus. Duis convallis volutpat erat, vel quis.",chapitre="Diagramme de classe",documentation="")
+    specification= Specification(nbrJoueursMax=8,nbrJoueursMin=1,budget=1500,dureeMinutes=60,statut=Statut.PRET, publicCible=PublicCible.SECONDAIRE,theme=Theme.HCI,scenario="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pellentesque mollis nisi ut maximus. Duis convallis volutpat erat, vel quis.",chapitre="Diagramme de classe",documentation="")
 
     db.session.add(specification)#sauve dans la DB
     db.session.commit()
-    specification= Specification(nbrJoueursMax=4,nbrJoueursMin=2,budget=850,dureeMinutes=100, publicCible=PublicCible.MASTER,theme=Theme.ALGORITHMIE,scenario="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pellentesque mollis nisi ut maximus. Duis convallis volutpat erat, vel quis.",chapitre="Recursivité",statut=Statut.ENCOURS,documentation="")
+    specification= Specification(nbrJoueursMax=4,nbrJoueursMin=2,budget=850,dureeMinutes=100, publicCible=PublicCible.MASTER,theme=Theme.AL,scenario="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pellentesque mollis nisi ut maximus. Duis convallis volutpat erat, vel quis.",chapitre="Recursivité",statut=Statut.ENCOURS,documentation="")
     db.session.add(specification)#sauve dans la DB
     db.session.commit()
-    specification= Specification(nbrJoueursMax=4,nbrJoueursMin=2,budget=500,dureeMinutes=150,statut=Statut.PRET, publicCible=PublicCible.BACCALAUREAT,theme=Theme.PROGRAMMATION,scenario="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pellentesque mollis nisi ut maximus. Duis convallis volutpat erat, vel quis.",chapitre="Orienté objet",documentation="")
+    specification= Specification(nbrJoueursMax=4,nbrJoueursMin=2,budget=500,dureeMinutes=150,statut=Statut.PRET, publicCible=PublicCible.BACCALAUREAT,theme=Theme.PL,scenario="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pellentesque mollis nisi ut maximus. Duis convallis volutpat erat, vel quis.",chapitre="Orienté objet",documentation="")
 
     db.session.add(specification)#sauve dans la DB
     db.session.commit()
-    specification= Specification(nbrJoueursMax=18,nbrJoueursMin=2,budget=2800,dureeMinutes=150, publicCible=PublicCible.BACCALAUREAT,theme=Theme.ALGORITHMIE,scenario="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pellentesque mollis nisi ut maximus. Duis convallis volutpat erat, vel quis.",chapitre="Complexité",statut=Statut.ENCOURS,documentation="")
+    specification= Specification(nbrJoueursMax=18,nbrJoueursMin=2,budget=2800,dureeMinutes=150, publicCible=PublicCible.BACCALAUREAT,theme=Theme.AL,scenario="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pellentesque mollis nisi ut maximus. Duis convallis volutpat erat, vel quis.",chapitre="Complexité",statut=Statut.ENCOURS,documentation="")
 
     db.session.add(specification)#sauve dans la DB
     db.session.commit()
@@ -438,7 +438,7 @@ def function_lancementDBFictive():
     participants = Participant.query.filter_by(fk_ExperimentationId=3).all()
     print(participants)
     for participant in participants:
-          participant.groupeExperimental=True
+          participant.groupeExperimental=random.choice([True,False])
           db.session.add(participant)#sauve dans la DB
           db.session.commit()
           print(participant)

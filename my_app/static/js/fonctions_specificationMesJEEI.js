@@ -455,6 +455,7 @@ function fonction_validerJEEI(idJeei,question)
     }
     document.getElementById('idBtnModalEquipe').disabled = true;
     document.getElementById('idBtnChargezSpec').disabled = true;
+    document.getElementById('btnExpDansSpec').disabled = false;
 
   
     var xhttp = new XMLHttpRequest( );

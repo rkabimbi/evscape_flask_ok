@@ -30,12 +30,25 @@ class PublicCible(enum.Enum):
 
 
 class Theme(enum.Enum):
-    ALGORITHMIE = "Algorithmie"
-    PROGRAMMATION = "Programmation"
-    SECURITEIT = "Securité Informatique"
-    MATHEMATIQUE = "Mathématiques"
-    INGENIRIELOGICIEL = "Inegnierie Logicielle"
-    ADEFINIR = "A Définir"
+    AL = "Algorithmie et complexité"
+    AR = "Architecture et Organisation"
+    CN = "Science Computationelle"
+    DS = "Structure Discrete"
+    GV = "Graphique et généralisation"
+    HCI = "Interraction Homme-Machine"
+    IAS="Sécurité"
+    IM= "Management des informations"
+    IS ="Système intelligent"
+    NC="Réseaux et communications"
+    OS= "Système d'exploitation"
+    PBD = "Developpement basé sur les plateforme"
+    PD= "Informatique distribué"
+    PL="Langage de programmation"
+    SDF = "Fondement de développement logiciel"
+    SE="Ingénirie Logicielle"
+    SF= "Fondement de système"
+    SP="Pratique professionnelle"
+    TBD="A définir"
 
 
 
@@ -50,7 +63,7 @@ class Specification(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethode
     dureeMinutes=db.Column(db.Integer,nullable=True,default=0)
     scenario = db.Column(db.Text(),nullable=True,default='')
     publicCible =db.Column(db.Enum(PublicCible),nullable=True, default=PublicCible.ADEFINIR)
-    theme =db.Column(db.Enum(Theme),nullable=True, default=Theme.ADEFINIR)
+    theme =db.Column(db.Enum(Theme),nullable=True, default=Theme.TBD)
     chapitre = db.Column(db.String(120),nullable=True,default='')
     statut =db.Column(db.Enum(Statut),nullable=True, default=Statut.ENCOURS)
     documentation = db.Column(db.String(120), nullable=True, default=' ')#adresse locale vers la doc
