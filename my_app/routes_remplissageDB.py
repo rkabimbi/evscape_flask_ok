@@ -3,6 +3,8 @@
 ##########################################################
 
 from cgi import test
+
+from sqlalchemy import true
 from my_app import app
 from flask import Flask, redirect
 from flask import request
@@ -29,6 +31,8 @@ from datetime import datetime, date
 from flask import json, jsonify
 from my_app.models.experimentation import Experimentation
 from my_app.models.participant import Participant
+from my_app.models.questionnaireMotivation import QuestionnaireMotivation
+from my_app.models.questionnaireUX import QuestionnaireUX
 
 from my_app.models.user import User
 
@@ -396,6 +400,109 @@ def function_lancementDBFictive():
     participant.prenom='Aert'
     db.session.add(participant)#sauve dans la DB
     db.session.commit()
+
+
+
+
+    ###########################################################################
+    #        REMPLISSAGE DB spécifique pour tester les calculs!!!! #######
+    #####################################################################
+
+    experimentation=Experimentation.query.filter_by(id=3).first()
+    experimentation.etape1=True
+    experimentation.etape2=True
+    experimentation.etape3=True
+    experimentation.etape4=True
+    experimentation.etape5=True
+    experimentation.etape6=True
+    experimentation.etape7=True
+    experimentation.etape8=True
+    experimentation.etape9=True
+    experimentation.etape10=True
+    experimentation.etape11=True
+    experimentation.etape12=True
+    db.session.add(experimentation)#sauve dans la DB
+    db.session.commit()
+
+
+    
+    participants = Participant.query.filter_by(fk_ExperimentationId=3).all()
+    print(participants)
+    for participant in participants:
+          participant.groupeExperimental=True
+          db.session.add(participant)#sauve dans la DB
+          db.session.commit()
+          print(participant)
+          evaluation=Evaluation(1,3,participant.id)
+          db.session.add(evaluation)#sauve dans la DB
+          db.session.commit()
+          evaluation = Evaluation.query.filter_by(fk_ParticipantId=participant.id).first()
+          print(evaluation)
+          evaluation.questionnaireDemographique=True
+          evaluation.questionnaireMotivation=True
+          evaluation.postTest1=True
+          evaluation.preTest=True
+          evaluation.questionnaireUX=True
+          db.session.add(evaluation)#sauve dans la DB
+          db.session.commit()
+
+          #creation et linkage du questionnaire motivation avec eval
+          questionnaireMotivation=QuestionnaireMotivation()
+          db.session.add(questionnaireMotivation)#sauve dans la DB
+          db.session.commit()
+          questionnaireMotivation=QuestionnaireMotivation.query.order_by(QuestionnaireMotivation.id.desc()).first()
+          evaluation.fk_QuestionnaireMotivationId=questionnaireMotivation.id
+          db.session.add(evaluation)#sauve dans la DB
+          db.session.commit()
+
+
+          questionnaireMotivation=QuestionnaireMotivation.query.filter_by(id=evaluation.fk_QuestionnaireMotivationId).first()
+          questionnaireMotivation.m01=randint(0,4)
+          questionnaireMotivation.m02=randint(0,4)
+          questionnaireMotivation.m03=randint(0,4)
+          db.session.add(questionnaireMotivation)#sauve dans la DB
+          db.session.commit()
+
+          questionnaireUX=QuestionnaireUX()
+          db.session.add(questionnaireUX)#sauve dans la DB
+          db.session.commit()
+          questionnaireUX=QuestionnaireUX.query.order_by(QuestionnaireUX.id.desc()).first()
+          evaluation.fk_QuestionnaireUXId=questionnaireUX.id
+          db.session.add(evaluation)#sauve dans la DB
+          db.session.commit()
+
+
+          questionnaireUX=QuestionnaireUX.query.filter_by(id=evaluation.fk_QuestionnaireUXId).first()
+          questionnaireUX.u01=randint(0,4)
+          questionnaireUX.u02=randint(0,4)
+          questionnaireUX.u03=randint(0,4)
+          questionnaireUX.u04=randint(0,4)
+          questionnaireUX.u05=randint(0,4)
+          questionnaireUX.u06=randint(0,4)
+          questionnaireUX.u07=randint(0,4)
+          questionnaireUX.u08=randint(0,4)
+          questionnaireUX.u09=randint(0,4)
+          questionnaireUX.u10=randint(0,4)
+          questionnaireUX.u11=randint(0,4)
+          questionnaireUX.u12=randint(0,4)
+          questionnaireUX.u13=randint(0,4)
+          questionnaireUX.u14=randint(0,4)
+          questionnaireUX.u15=randint(0,4)
+          questionnaireUX.u16=randint(0,4)
+          questionnaireUX.u17=randint(0,4)
+          questionnaireUX.u18=randint(0,4)
+          questionnaireUX.u19=randint(0,4)
+          questionnaireUX.u20=randint(0,4)
+          questionnaireUX.u21=randint(0,4)
+          questionnaireUX.u22=randint(0,4)
+          questionnaireUX.u23=randint(0,4)
+          questionnaireUX.u24=randint(0,4)
+          questionnaireUX.u25=randint(0,4)
+       
+          db.session.add(questionnaireUX)#sauve dans la DB
+          db.session.commit()
+          
+
 
 
 
