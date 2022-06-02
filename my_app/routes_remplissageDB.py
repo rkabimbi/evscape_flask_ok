@@ -32,9 +32,12 @@ from flask import json, jsonify
 from my_app.models.experimentation import Experimentation
 from my_app.models.participant import Participant
 from my_app.models.questionnaireMotivation import QuestionnaireMotivation
+from my_app.models.questionnairePreTest import QuestionnairePreTest
 from my_app.models.questionnaireUX import QuestionnaireUX
+from my_app.models.questionnairePostTest import QuestionnairePostTest
 
 from my_app.models.user import User
+import random
 
 from datetime import date
 #from dateutil.relativedelta import *#pour calculer age
@@ -424,6 +427,12 @@ def function_lancementDBFictive():
     db.session.add(experimentation)#sauve dans la DB
     db.session.commit()
 
+    idJeei=1
+    specification=Specification.query.filter_by(id=idJeei).first()
+    questionsApprentissage=QuestionApprentissage.query.filter_by(fk_SpecificationId=specification.id).all()
+    print("questions")
+    print(questionsApprentissage)
+
 
     
     participants = Participant.query.filter_by(fk_ExperimentationId=3).all()
@@ -501,6 +510,110 @@ def function_lancementDBFictive():
        
           db.session.add(questionnaireUX)#sauve dans la DB
           db.session.commit()
+
+          questionnairePreTest=QuestionnairePreTest()
+          db.session.add(questionnairePreTest)#sauve dans la DB
+          db.session.commit()
+          questionnairePreTest=QuestionnairePreTest.query.order_by(QuestionnairePreTest.id.desc()).first()
+          evaluation.fk_QuestionnairePreTestId=questionnairePreTest.id
+          db.session.add(evaluation)#sauve dans la DB
+          db.session.commit()
+          #for question in questionsApprentissage:
+          questionnairePreTest.pt01=random.choice([questionsApprentissage[0].solutionCorrecte, questionsApprentissage[0].solutionIncorrecte1, questionsApprentissage[0].solutionIncorrecte2,questionsApprentissage[0].solutionIncorrecte3])
+          db.session.add(questionnairePreTest)#sauve dans la DB
+          db.session.commit()
+
+          questionnairePreTest.pt02=random.choice([questionsApprentissage[1].solutionCorrecte, questionsApprentissage[1].solutionIncorrecte1, questionsApprentissage[1].solutionIncorrecte2,questionsApprentissage[1].solutionIncorrecte3])
+          db.session.add(questionnairePreTest)#sauve dans la DB
+          db.session.commit()
+
+          questionnairePreTest.pt03=random.choice([questionsApprentissage[2].solutionCorrecte, questionsApprentissage[2].solutionIncorrecte1, questionsApprentissage[2].solutionIncorrecte2,questionsApprentissage[2].solutionIncorrecte3])
+          db.session.add(questionnairePreTest)#sauve dans la DB
+          db.session.commit()
+
+          questionnairePreTest.pt04=random.choice([questionsApprentissage[3].solutionCorrecte, questionsApprentissage[3].solutionIncorrecte1, questionsApprentissage[3].solutionIncorrecte2,questionsApprentissage[3].solutionIncorrecte3])
+          db.session.add(questionnairePreTest)#sauve dans la DB
+          db.session.commit()
+
+          questionnairePreTest.pt05=random.choice([questionsApprentissage[4].solutionCorrecte, questionsApprentissage[4].solutionIncorrecte1, questionsApprentissage[4].solutionIncorrecte2,questionsApprentissage[4].solutionIncorrecte3])
+          db.session.add(questionnairePreTest)#sauve dans la DB
+          db.session.commit()
+
+          questionnairePreTest.pt06=random.choice([questionsApprentissage[5].solutionCorrecte, questionsApprentissage[5].solutionIncorrecte1, questionsApprentissage[5].solutionIncorrecte2,questionsApprentissage[5].solutionIncorrecte3])
+          db.session.add(questionnairePreTest)#sauve dans la DB
+          db.session.commit()
+
+          questionnairePreTest.pt07=random.choice([questionsApprentissage[6].solutionCorrecte, questionsApprentissage[6].solutionIncorrecte1, questionsApprentissage[6].solutionIncorrecte2,questionsApprentissage[6].solutionIncorrecte3])
+          db.session.add(questionnairePreTest)#sauve dans la DB
+          db.session.commit()
+
+          questionnairePreTest.pt08=random.choice([questionsApprentissage[7].solutionCorrecte, questionsApprentissage[7].solutionIncorrecte1, questionsApprentissage[7].solutionIncorrecte2,questionsApprentissage[7].solutionIncorrecte3])
+          db.session.add(questionnairePreTest)#sauve dans la DB
+          db.session.commit()
+
+          questionnairePreTest.pt09=random.choice([questionsApprentissage[8].solutionCorrecte, questionsApprentissage[8].solutionIncorrecte1, questionsApprentissage[8].solutionIncorrecte2,questionsApprentissage[8].solutionIncorrecte3])
+          db.session.add(questionnairePreTest)#sauve dans la DB
+          db.session.commit()
+
+          questionnairePreTest.pt10=random.choice([questionsApprentissage[9].solutionCorrecte, questionsApprentissage[9].solutionIncorrecte1, questionsApprentissage[9].solutionIncorrecte2,questionsApprentissage[9].solutionIncorrecte3])
+          db.session.add(questionnairePreTest)#sauve dans la DB
+          db.session.commit()
+
+
+          ###idem pour post test
+
+          questionnairePostTest=QuestionnairePostTest()
+          db.session.add(questionnairePostTest)#sauve dans la DB
+          db.session.commit()
+          questionnairePostTest=QuestionnairePostTest.query.order_by(QuestionnairePostTest.id.desc()).first()
+          evaluation.fk_QuestionnairePostTestId=questionnairePostTest.id
+          db.session.add(evaluation)#sauve dans la DB
+          db.session.commit()
+          #for question in questionsApprentissage:
+          questionnairePostTest.pt01=random.choice([questionsApprentissage[0].solutionCorrecte, questionsApprentissage[0].solutionIncorrecte1, questionsApprentissage[0].solutionIncorrecte2,questionsApprentissage[0].solutionIncorrecte3])
+          db.session.add(questionnairePostTest)#sauve dans la DB
+          db.session.commit()
+
+          questionnairePostTest.pt02=random.choice([questionsApprentissage[1].solutionCorrecte, questionsApprentissage[1].solutionIncorrecte1, questionsApprentissage[1].solutionIncorrecte2,questionsApprentissage[1].solutionIncorrecte3])
+          db.session.add(questionnairePostTest)#sauve dans la DB
+          db.session.commit()
+
+          questionnairePostTest.pt03=random.choice([questionsApprentissage[2].solutionCorrecte, questionsApprentissage[2].solutionIncorrecte1, questionsApprentissage[2].solutionIncorrecte2,questionsApprentissage[2].solutionIncorrecte3])
+          db.session.add(questionnairePostTest)#sauve dans la DB
+          db.session.commit()
+
+          questionnairePostTest.pt04=random.choice([questionsApprentissage[3].solutionCorrecte, questionsApprentissage[3].solutionIncorrecte1, questionsApprentissage[3].solutionIncorrecte2,questionsApprentissage[3].solutionIncorrecte3])
+          db.session.add(questionnairePostTest)#sauve dans la DB
+          db.session.commit()
+
+          questionnairePostTest.pt05=random.choice([questionsApprentissage[4].solutionCorrecte, questionsApprentissage[4].solutionIncorrecte1, questionsApprentissage[4].solutionIncorrecte2,questionsApprentissage[4].solutionIncorrecte3])
+          db.session.add(questionnairePostTest)#sauve dans la DB
+          db.session.commit()
+
+          questionnairePostTest.pt06=random.choice([questionsApprentissage[5].solutionCorrecte, questionsApprentissage[5].solutionIncorrecte1, questionsApprentissage[5].solutionIncorrecte2,questionsApprentissage[5].solutionIncorrecte3])
+          db.session.add(questionnairePostTest)#sauve dans la DB
+          db.session.commit()
+
+          questionnairePostTest.pt07=random.choice([questionsApprentissage[6].solutionCorrecte, questionsApprentissage[6].solutionIncorrecte1, questionsApprentissage[6].solutionIncorrecte2,questionsApprentissage[6].solutionIncorrecte3])
+          db.session.add(questionnairePostTest)#sauve dans la DB
+          db.session.commit()
+
+          questionnairePostTest.pt08=random.choice([questionsApprentissage[7].solutionCorrecte, questionsApprentissage[7].solutionIncorrecte1, questionsApprentissage[7].solutionIncorrecte2,questionsApprentissage[7].solutionIncorrecte3])
+          db.session.add(questionnairePostTest)#sauve dans la DB
+          db.session.commit()
+
+          questionnairePostTest.pt09=random.choice([questionsApprentissage[8].solutionCorrecte, questionsApprentissage[8].solutionIncorrecte1, questionsApprentissage[8].solutionIncorrecte2,questionsApprentissage[8].solutionIncorrecte3])
+          db.session.add(questionnairePostTest)#sauve dans la DB
+          db.session.commit()
+
+          questionnairePostTest.pt10=random.choice([questionsApprentissage[9].solutionCorrecte, questionsApprentissage[9].solutionIncorrecte1, questionsApprentissage[9].solutionIncorrecte2,questionsApprentissage[9].solutionIncorrecte3])
+          db.session.add(questionnairePostTest)#sauve dans la DB
+          db.session.commit()
+
+
+
+          
+
           
 
 
