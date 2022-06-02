@@ -65,13 +65,13 @@
         </div>
 
       
-        <div class="footer">
+        <footer class="footer">
             {% if currentUser.is_authenticated%}
            
                 <p class="text-white-50 bg-dark">Utilisateur connecté  :   <strong>  <font color="gold"> {{currentUser.firstname}} {{currentUser.lastname}}</font></strong> </p>
        
             {%endif%}
-        </div>
+        </footer >
 
         <script src="/static/js/JQuery.js"></script> <!-- lien vers fichiers du javascript -->
         <script src="/static/js/bootstrap.min.js"></script>
