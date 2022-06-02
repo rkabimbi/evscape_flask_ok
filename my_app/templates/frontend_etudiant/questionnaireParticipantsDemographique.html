@@ -29,7 +29,7 @@
       <label for="genreParticipant">De quel genre êtes-vous?</label>
       <Br>
       <select class="form-control  " aria-label=".form-select-lg example" id="idQuestionnaireDemographiqueSexeParticipant"   style="color:grey">
-        
+        <option disabled selected value> -- Selectionnez une option -- </option>
         {% for sexe in sexes %}
             <option  style="color:grey" value="{{ sexe.name }}" >{{ sexe.value }}</option> 
         {% endfor %}
@@ -39,10 +39,27 @@
     </div>
 
     <div class="form-group boxQuestionnaireDemographique">
+      <label for="etudesParticipant">Quel est votre niveau d’études actuel?</label>
+      <Br>
+      <select class="form-control  " aria-label=".form-select-lg example" id="idQuestionnaireDemographiqueEtudesParticipant"   style="color:grey">
+        <option disabled selected value> -- Selectionnez une option -- </option>
+        {% for etude in etudes %}
+            <option  style="color:grey" value="{{ etude.name }}" >{{ etude.value }}</option> 
+        {% endfor %}
+        
+      </select>
+
+    </div>
+
+
+
+
+
+    <div class="form-group boxQuestionnaireDemographique">
         <label for="localisationParticipant">Dans quelle région du monde avez vous vécu le plus longtemps au cours de ces 5 dernières années ?</label>
         <Br>
         <select class="form-control  " aria-label=".form-select-lg example" id="idQuestionnaireDemographiqueLocalisationParticipant"   style="color:grey">
-          
+          <option disabled selected value> -- Selectionnez une option -- </option>
           {% for localisation in localisations %}
               <option  style="color:grey" value="{{ localisation.name }}" >{{ localisation.value }}</option> 
           {% endfor %}
@@ -55,7 +72,7 @@
         <label for="experienceParticipant">Selon vous, quel est votre niveau de maîtrise de la matière abordée dans l’activité pédagogique concernée par cette évaluation ?</label>
         <Br>
         <select class="form-control  " aria-label=".form-select-lg example" id="idQuestionnaireDemographiqueExperienceParticipant"   style="color:grey">
-          
+          <option disabled selected value> -- Selectionnez une option -- </option>
           {% for experience in experiences %}
               <option  style="color:grey" value="{{ experience.name }}" >{{ experience.value }}</option> 
           {% endfor %}
@@ -68,7 +85,7 @@
         <label for="experienceJeeiParticipant">A quelle fréquence jouez vous à des jeux d’évasion ( pédagogique ou non) ?</label>
         <Br>
         <select class="form-control  " aria-label=".form-select-lg example" id="idQuestionnaireDemographiqueExperienceJeeiParticipant"   style="color:grey">
-          
+          <option disabled selected value> -- Selectionnez une option -- </option>
           {% for experienceJeei in experiencesJeei %}
               <option  style="color:grey" value="{{ experienceJeei.name }}" >{{ experienceJeei.value }}</option> 
           {% endfor %}
