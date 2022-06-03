@@ -167,12 +167,29 @@ def calculResultats(jeei):
                     evaluationsRetenues.append(evaluation)
 
         #on calcule le resultat
-        resultatMotivation=0
-        resultatUX=0
-        resultatPreTest=0
-        resultatPostTest=0
+        
+        resultatsGroupeExperimental={
+            "motivation":0,
+            "ux":0,
+            "pre":0,
+            "post":0
+        }
+
+        resultatsGroupeTemoin={
+            "motivation":0,
+            "ux":0,
+            "pre":0,
+            "post":0
+        }
+
+
+
 
         for evaluation in evaluationsRetenues:
+            resultatMotivation=0
+            resultatUX=0
+            resultatPreTest=0
+            resultatPostTest=0
             #motivation
             questionnaireMotivation=QuestionnaireMotivation.query.filter_by(id=evaluation.fk_QuestionnaireMotivationId).first()
             resultatMotivation=resultatMotivation+questionnaireMotivation.m01
@@ -282,6 +299,9 @@ def calculResultats(jeei):
                 resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
             else:
                 resultatPreTest=resultatPreTest-10
+            
+            if resultatPreTest<0:
+                resultatPreTest=0
 
             #PostTest
             postTest=QuestionnairePostTest.query.filter_by(id=evaluation.fk_QuestionnairePostTestId).first()
@@ -360,20 +380,37 @@ def calculResultats(jeei):
                 resultatPostTest=resultatPostTest+0 #pas utile mais c'est pour bien représenter le protocol
             else:
                 resultatPostTest=resultatPostTest-10
+            if resultatPostTest<0:
+                resultatPostTest=0
+
+            #on check à quel groupe le participant appartient pour en fonction incrementer ce qu'il faut
+            participant = Participant.query.filter_by(id=evaluation.fk_ParticipantId).first()
+            if participant.groupeExperimental:
+                resultatsGroupeExperimental["motivation"]=resultatsGroupeExperimental["motivation"]+resultatMotivation
+                resultatsGroupeExperimental["ux"]=resultatsGroupeExperimental["ux"]+resultatUX
+                resultatsGroupeExperimental["pre"]=resultatsGroupeExperimental["pre"]+resultatPreTest
+                resultatsGroupeExperimental["post"]=resultatsGroupeExperimental["post"]+resultatPostTest
+            else:
+                resultatsGroupeTemoin["motivation"]=resultatsGroupeTemoin["motivation"]+resultatMotivation
+                resultatsGroupeTemoin["ux"]=resultatsGroupeTemoin["ux"]+resultatUX
+                resultatsGroupeTemoin["pre"]=resultatsGroupeTemoin["pre"]+resultatPreTest
+                resultatsGroupeTemoin["post"]=resultatsGroupeTemoin["post"]+resultatPostTest
 
 
-        #transformation en %age
-        print("resultat total motivation :",resultatMotivation)
-        print("resultat total UX :",resultatUX)
-        print("resultat total pre :",resultatPreTest)
-        print("resultat total post :",resultatPostTest)
+        #Resultats finaux absolus
+        print("resultat groupe temoin :",resultatsGroupeTemoin)
+        print("resultat groupe exp:",resultatsGroupeExperimental)
 
-        resultats={
-            "motivation":resultatMotivation,
-            "ux":resultatUX,
-            "pre":resultatPreTest,
-            "post":resultatPostTest
-        }
+
+        #Resultats finaux relatifs et moyens
+
+        #nbrEvalRetenues=len(evaluationsRetenues)
+
+        #resultatMotivationMoyen=resultatMotivation/nbrEvalRetenues
+
+
+
+        resultats=[resultatsGroupeTemoin,resultatsGroupeExperimental]
         #on doit renvoyer un dictionnaire (voir methode appellante)
 
         #A MODIFIER!!!!!! c'est juste pour me permettre de voir ce que ce ca calcule à ce stade avec des print
