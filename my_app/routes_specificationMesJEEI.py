@@ -42,6 +42,14 @@ from my_app.models.jeei_package.jointureJeeiUser import JointureJeeiUser
 from random import choice, randint
 from my_app.models.experimentation import Experimentation
 from my_app.models.participant import Participant, pwd, alphabet_min,alphabet_maj,chiffres,caracteres_speciaux
+from my_app.models.evaluation import Evaluation
+
+from my_app.models.questionnaireMotivation import QuestionnaireMotivation
+from my_app.models.questionnairePostTest import QuestionnairePostTest
+from my_app.models.questionnairePreTest import QuestionnairePreTest
+from my_app.models.questionnaireUX import QuestionnaireUX
+
+
 
 @app.route("/specificationMesJEEI", methods=['GET', 'POST'])
 @login_required
@@ -57,6 +65,12 @@ def fonction_specificationMesJEEI():
     #pour pouvoir manipuler les données des utilisateurs sur les experimentations qui ne sont donc 
     #pas necessairement celles de l'utilisateur courrant
     users=User.query.all()
+
+    resultats={
+        "Apprentissage":[],
+        "UX":[],
+        "Motivation":[]
+    }
     
     if idJEEIAmodifier: #si un id est renseigné (ca veut dire qu'on a cliqué uncarte et donc on doit aller chercher le JEEI en question)
         #chercher dans DB
@@ -77,8 +91,8 @@ def fonction_specificationMesJEEI():
         experimentations = Experimentation.query.filter_by(fk_JeeiId=monJEEIAEnvoyer.id).all()
 
 
-        #on va chercher les experimentations et les participants
-
+        
+        resultats=calculResultats(monJEEIAEnvoyer)
 
         
       
@@ -118,7 +132,324 @@ def fonction_specificationMesJEEI():
     print(specification)
     return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEIAEnvoyer,specificationJEEIRecupere=specification,theme=Theme,publicCible=PublicCible,questions=questions,membres=membres,experimentations=experimentations,users=users)
 
+def calculResultats(jeei):
+    #on va gerer les resultats
+        #on recupere  les reponses des questionnaires apprentissage)
+        specification=Specification.query.filter_by(id=jeei.fk_Specification.id)
+        reponses=QuestionApprentissage.query.filter_by(fk_SpecificationId=specification.id)
 
+
+        #on recupere toutes les experimentations pour lesquelles on est arrivé à l'étape 12 (en lien avec ce jeei)
+        experimentations=Experimentation.query.filter_by(fk_JeeiId=jeei.id).all()
+        experimentationsRetenues=[]
+        for expermentation in experimentations:
+            if experimentations.etape12:
+                experimentationsRetenues.append(expermentation)
+        
+
+        evaluationsRetenues=[]
+        #pour chacun de ses experimentations on recupere tte les evaluations où tt est à true
+        #on obtient donc l'ensemble des evaluations pour un JEEI (pour toutes les eval)
+        for experimentation in experimentationsRetenues:
+            #je recupere tt les eval en lien avec les experimentations retenues
+            evaluations=Evaluation.query.filter_by(fk_ExperimentationId=experimentation.id).all()
+            #je check si les évaluation sont complete ou non et je cree un tableau d'evaluation complete
+            for evaluation in evaluations:
+                #on recupere chacun des questionnaire liés et pour chacun d'eux on verifie que tout est complété
+                #je ne fais pas ca pour les questionnaires pretest et post test car là il peut y avoir abstention
+                questionnaireMotivation=QuestionnaireMotivation.query.filter_by(id=evaluation.fk_QuestionnaireMotivationId).first()
+                questionnaireUX=QuestionnaireUX.query.filter_by(id=evaluation.fk_QuestionnaireUXId).first()
+                participant = Participant.query.filter_by(id=evaluation.fk_ParticipantId).first()
+                complet=verificationComplet(questionnaireMotivation,questionnaireUX,participant)
+                if complet:
+                    #alors on ajoute l'evaluation courrante aux evaluation retenue
+                    evaluationsRetenues.append(evaluation)
+
+        #on calcule le resultat
+        resultatMotivation=0
+        resultatUX=0
+        resultatPreTest=0
+        resultatPostTest=0
+
+        for evaluation in evaluationsRetenues:
+            #motivation
+            questionnaireMotivation=QuestionnaireMotivation.query.filter_by(id=evaluation.fk_QuestionnaireMotivationId).first()
+            resultatMotivation=resultatMotivation+questionnaireMotivation.m01
+            resultatMotivation=resultatMotivation+questionnaireMotivation.m02
+            resultatMotivation=resultatMotivation+questionnaireMotivation.m03
+
+            #UX
+            questionnaireUX=QuestionnaireUX.query.filter_by(id=evaluation.fk_QuestionnaireUXId).first()
+            resultatUX=resultatUX+questionnaireUX.u01
+            resultatUX=resultatUX+questionnaireUX.u02
+            resultatUX=resultatUX+questionnaireUX.u03
+            resultatUX=resultatUX+questionnaireUX.u04
+            resultatUX=resultatUX+questionnaireUX.u05
+            resultatUX=resultatUX+questionnaireUX.u06
+            resultatUX=resultatUX+questionnaireUX.u07
+            resultatUX=resultatUX+questionnaireUX.u08
+            resultatUX=resultatUX+questionnaireUX.u09
+            resultatUX=resultatUX+questionnaireUX.u10
+            resultatUX=resultatUX+questionnaireUX.u11
+            resultatUX=resultatUX+questionnaireUX.u12
+            resultatUX=resultatUX+questionnaireUX.u13
+            resultatUX=resultatUX+questionnaireUX.u14
+            resultatUX=resultatUX+questionnaireUX.u15
+            resultatUX=resultatUX+questionnaireUX.u16
+            resultatUX=resultatUX+questionnaireUX.u17
+            resultatUX=resultatUX+questionnaireUX.u18
+            resultatUX=resultatUX+questionnaireUX.u19
+            resultatUX=resultatUX+questionnaireUX.u20
+            resultatUX=resultatUX+questionnaireUX.u21
+            resultatUX=resultatUX+questionnaireUX.u22
+            resultatUX=resultatUX+questionnaireUX.u23
+            resultatUX=resultatUX+questionnaireUX.u24
+            resultatUX=resultatUX+questionnaireUX.u25
+
+            #PreTest
+            preTest=QuestionnairePreTest.query.filter_by(id=evaluation.fk_QuestionnairePreTestId).first()
+
+            if preTest.pt01==reponses[0]:
+                resultatPreTest=resultatPreTest+10
+            elif preTest.pt01==None or preTest.pt01=="je ne sais pas répondre":
+                resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
+            else:
+                resultatPreTest=resultatPreTest-10
+            
+            if preTest.pt02==reponses[1]:
+                resultatPreTest=resultatPreTest+10
+            elif preTest.pt02==None or preTest.pt02=="je ne sais pas répondre":
+                resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
+            else:
+                resultatPreTest=resultatPreTest-10
+
+            if preTest.pt03==reponses[2]:
+                resultatPreTest=resultatPreTest+10
+            elif preTest.pt03==None or preTest.pt03=="je ne sais pas répondre":
+                resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
+            else:
+                resultatPreTest=resultatPreTest-10            
+
+            if preTest.pt04==reponses[3]:
+                resultatPreTest=resultatPreTest+10
+            elif preTest.pt04==None or preTest.pt04=="je ne sais pas répondre":
+                resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
+            else:
+                resultatPreTest=resultatPreTest-10
+
+            if preTest.pt05==reponses[4]:
+                resultatPreTest=resultatPreTest+10
+            elif preTest.pt05==None or preTest.pt05=="je ne sais pas répondre":
+                resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
+            else:
+                resultatPreTest=resultatPreTest-10
+
+
+            if preTest.pt06==reponses[5]:
+                resultatPreTest=resultatPreTest+10
+            elif preTest.pt06==None or preTest.pt06=="je ne sais pas répondre":
+                resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
+            else:
+                resultatPreTest=resultatPreTest-10
+
+
+            if preTest.pt07==reponses[6]:
+                resultatPreTest=resultatPreTest+10
+            elif preTest.pt07==None or preTest.pt07=="je ne sais pas répondre":
+                resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
+            else:
+                resultatPreTest=resultatPreTest-10
+
+
+            if preTest.pt08==reponses[7]:
+                resultatPreTest=resultatPreTest+10
+            elif preTest.pt08==None or preTest.pt08=="je ne sais pas répondre":
+                resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
+            else:
+                resultatPreTest=resultatPreTest-10
+        
+            if preTest.pt09==reponses[8]:
+                resultatPreTest=resultatPreTest+10
+            elif preTest.pt09==None or preTest.pt09=="je ne sais pas répondre":
+                resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
+            else:
+                resultatPreTest=resultatPreTest-10
+
+            if preTest.pt10==reponses[9]:
+                resultatPreTest=resultatPreTest+10
+            elif preTest.pt10==None or preTest.pt10=="je ne sais pas répondre":
+                resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
+            else:
+                resultatPreTest=resultatPreTest-10
+
+            #PostTest
+            postTest=QuestionnairePostTest.query.filter_by(id=evaluation.fk_QuestionnairePostTestId).first()
+
+            if postTest.pt01==reponses[0]:
+                resultatPostTest=resultatPostTest+10
+            elif postTest.pt01==None or postTest.pt01=="je ne sais pas répondre":
+                resultatPostTest=resultatPostTest+0 #pas utile mais c'est pour bien représenter le protocol
+            else:
+                resultatPostTest=resultatPostTest-10
+            
+            if postTest.pt02==reponses[1]:
+                resultatPostTest=resultatPostTest+10
+            elif postTest.pt02==None or postTest.pt02=="je ne sais pas répondre":
+                resultatPostTest=resultatPostTest+0 #pas utile mais c'est pour bien représenter le protocol
+            else:
+                resultatPostTest=resultatPostTest-10
+
+            #REPRENDRE APD D'ICI pour modifier mes trucs en mode postTest. Apres faire un test pour voir si ca renvoi des trucs "cohérents"...si j'ai l'impression que oui implementer l'export xls pour faire des verification
+
+            if preTest.pt03==reponses[2]:
+                resultatPreTest=resultatPreTest+10
+            elif preTest.pt03==None or preTest.pt03=="je ne sais pas répondre":
+                resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
+            else:
+                resultatPreTest=resultatPreTest-10            
+
+            if preTest.pt04==reponses[3]:
+                resultatPreTest=resultatPreTest+10
+            elif preTest.pt04==None or preTest.pt04=="je ne sais pas répondre":
+                resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
+            else:
+                resultatPreTest=resultatPreTest-10
+
+            if preTest.pt05==reponses[4]:
+                resultatPreTest=resultatPreTest+10
+            elif preTest.pt05==None or preTest.pt05=="je ne sais pas répondre":
+                resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
+            else:
+                resultatPreTest=resultatPreTest-10
+
+
+            if preTest.pt06==reponses[5]:
+                resultatPreTest=resultatPreTest+10
+            elif preTest.pt06==None or preTest.pt06=="je ne sais pas répondre":
+                resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
+            else:
+                resultatPreTest=resultatPreTest-10
+
+
+            if preTest.pt07==reponses[6]:
+                resultatPreTest=resultatPreTest+10
+            elif preTest.pt07==None or preTest.pt07=="je ne sais pas répondre":
+                resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
+            else:
+                resultatPreTest=resultatPreTest-10
+
+
+            if preTest.pt08==reponses[7]:
+                resultatPreTest=resultatPreTest+10
+            elif preTest.pt08==None or preTest.pt08=="je ne sais pas répondre":
+                resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
+            else:
+                resultatPreTest=resultatPreTest-10
+        
+            if preTest.pt09==reponses[8]:
+                resultatPreTest=resultatPreTest+10
+            elif preTest.pt09==None or preTest.pt09=="je ne sais pas répondre":
+                resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
+            else:
+                resultatPreTest=resultatPreTest-10
+
+            if preTest.pt10==reponses[9]:
+                resultatPreTest=resultatPreTest+10
+            elif preTest.pt10==None or preTest.pt10=="je ne sais pas répondre":
+                resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
+            else:
+                resultatPreTest=resultatPreTest-10
+
+
+        #transformation en %age
+        print("resultat total motivation :",resultatMotivation)
+        print("resultat total UX :",resultatUX)
+        print("resultat total pre :",resultatPreTest)
+        print("resultat total pre :",resultatPostTest)
+
+        #on doit renvoyer un dictionnaire (voir methode appellante)
+
+        #A MODIFIER!!!!!! c'est juste pour me permettre de voir ce que ce ca calcule à ce stade avec des print
+        return 0
+
+
+def verificationComplet(questionnaireMotivation, questionnaireUX,participant):
+    if questionnaireMotivation.m01==None:
+        return False
+    if questionnaireMotivation.m02==None:
+        return False
+    if questionnaireMotivation.m03==None:
+        return False
+    if questionnaireUX.u01==None:
+        return False
+    if questionnaireUX.u02==None:
+        return False
+    if questionnaireUX.u03==None:
+        return False
+    if questionnaireUX.u04==None:
+        return False
+    if questionnaireUX.u05==None:
+        return False
+    if questionnaireUX.u06==None:
+        return False
+    if questionnaireUX.u07==None:
+        return False
+    if questionnaireUX.u08==None:
+        return False
+    if questionnaireUX.u09==None:
+        return False
+
+    if questionnaireUX.u10==None:
+        return False
+    if questionnaireUX.u11==None:
+        return False
+    if questionnaireUX.u12==None:
+        return False
+
+    if questionnaireUX.u13==None:
+        return False
+    if questionnaireUX.u14==None:
+        return False
+    if questionnaireUX.u15==None:
+        return False
+
+    if questionnaireUX.u16==None:
+        return False
+    if questionnaireUX.u17==None:
+        return False
+    if questionnaireUX.u18==None:
+        return False
+
+    if questionnaireUX.u19==None:
+        return False
+    if questionnaireUX.u20==None:
+        return False
+    if questionnaireUX.u21==None:
+        return False
+
+    if questionnaireUX.u22==None:
+        return False
+    if questionnaireUX.u23==None:
+        return False
+    if questionnaireUX.u24==None:
+        return False
+    if questionnaireUX.u25==None:
+        return False
+    if participant.sexe==None:
+        return False
+    if participant.expJEEI==None:
+        return False
+    if participant.etudes==None:
+        return False
+    if participant.localisation==None:
+        return False
+    if participant.experience==None:
+        return False
+    if not participant.consentement:
+        return False
+    else:
+        print("evaluation valide entrant en ligne de compte pour le score individuel")
+        return True
 
 @app.route("/sauvegardeTableJeei", methods=['GET', 'POST'])
 @login_required
