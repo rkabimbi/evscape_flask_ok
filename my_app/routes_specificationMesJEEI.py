@@ -93,6 +93,7 @@ def fonction_specificationMesJEEI():
 
         
         resultats=calculResultats(monJEEIAEnvoyer)
+        print(resultats)
 
         
       
@@ -135,16 +136,16 @@ def fonction_specificationMesJEEI():
 def calculResultats(jeei):
     #on va gerer les resultats
         #on recupere  les reponses des questionnaires apprentissage)
-        specification=Specification.query.filter_by(id=jeei.fk_Specification.id)
-        reponses=QuestionApprentissage.query.filter_by(fk_SpecificationId=specification.id)
+        specification=Specification.query.filter_by(id=jeei.fk_SpecificationId).first()
+        reponses=QuestionApprentissage.query.filter_by(fk_SpecificationId=specification.id).all()
 
 
         #on recupere toutes les experimentations pour lesquelles on est arrivé à l'étape 12 (en lien avec ce jeei)
         experimentations=Experimentation.query.filter_by(fk_JeeiId=jeei.id).all()
         experimentationsRetenues=[]
-        for expermentation in experimentations:
-            if experimentations.etape12:
-                experimentationsRetenues.append(expermentation)
+        for experimentation in experimentations:
+            if experimentation.etape12:
+                experimentationsRetenues.append(experimentation)
         
 
         evaluationsRetenues=[]
@@ -301,76 +302,82 @@ def calculResultats(jeei):
 
             #REPRENDRE APD D'ICI pour modifier mes trucs en mode postTest. Apres faire un test pour voir si ca renvoi des trucs "cohérents"...si j'ai l'impression que oui implementer l'export xls pour faire des verification
 
-            if preTest.pt03==reponses[2]:
-                resultatPreTest=resultatPreTest+10
-            elif preTest.pt03==None or preTest.pt03=="je ne sais pas répondre":
-                resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
+            if postTest.pt03==reponses[2]:
+                resultatPostTest=resultatPostTest+10
+            elif postTest.pt03==None or postTest.pt03=="je ne sais pas répondre":
+                resultatPostTest=resultatPostTest+0 #pas utile mais c'est pour bien représenter le protocol
             else:
-                resultatPreTest=resultatPreTest-10            
+                resultatPostTest=resultatPostTest-10            
 
-            if preTest.pt04==reponses[3]:
-                resultatPreTest=resultatPreTest+10
-            elif preTest.pt04==None or preTest.pt04=="je ne sais pas répondre":
-                resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
+            if postTest.pt04==reponses[3]:
+                resultatPostTest=resultatPostTest+10
+            elif postTest.pt04==None or postTest.pt04=="je ne sais pas répondre":
+                resultatPostTest=resultatPostTest+0 #pas utile mais c'est pour bien représenter le protocol
             else:
-                resultatPreTest=resultatPreTest-10
+                resultatPostTest=resultatPostTest-10
 
-            if preTest.pt05==reponses[4]:
-                resultatPreTest=resultatPreTest+10
-            elif preTest.pt05==None or preTest.pt05=="je ne sais pas répondre":
-                resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
+            if postTest.pt05==reponses[4]:
+                resultatPostTest=resultatPostTest+10
+            elif postTest.pt05==None or postTest.pt05=="je ne sais pas répondre":
+                resultatPostTest=resultatPostTest+0 #pas utile mais c'est pour bien représenter le protocol
             else:
-                resultatPreTest=resultatPreTest-10
+                resultatPostTest=resultatPostTest-10
 
 
-            if preTest.pt06==reponses[5]:
-                resultatPreTest=resultatPreTest+10
-            elif preTest.pt06==None or preTest.pt06=="je ne sais pas répondre":
-                resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
+            if postTest.pt06==reponses[5]:
+                resultatPostTest=resultatPostTest+10
+            elif postTest.pt06==None or postTest.pt06=="je ne sais pas répondre":
+                resultatPostTest=resultatPostTest+0 #pas utile mais c'est pour bien représenter le protocol
             else:
-                resultatPreTest=resultatPreTest-10
+                resultatPostTest=resultatPostTest-10
 
 
-            if preTest.pt07==reponses[6]:
-                resultatPreTest=resultatPreTest+10
-            elif preTest.pt07==None or preTest.pt07=="je ne sais pas répondre":
-                resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
+            if postTest.pt07==reponses[6]:
+                resultatPostTest=resultatPostTest+10
+            elif postTest.pt07==None or postTest.pt07=="je ne sais pas répondre":
+                resultatPostTest=resultatPostTest+0 #pas utile mais c'est pour bien représenter le protocol
             else:
-                resultatPreTest=resultatPreTest-10
+                resultatPostTest=resultatPostTest-10
 
 
-            if preTest.pt08==reponses[7]:
-                resultatPreTest=resultatPreTest+10
-            elif preTest.pt08==None or preTest.pt08=="je ne sais pas répondre":
-                resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
+            if postTest.pt08==reponses[7]:
+                resultatPostTest=resultatPostTest+10
+            elif postTest.pt08==None or postTest.pt08=="je ne sais pas répondre":
+                resultatPostTest=resultatPostTest+0 #pas utile mais c'est pour bien représenter le protocol
             else:
-                resultatPreTest=resultatPreTest-10
+                resultatPostTest=resultatPostTest-10
         
-            if preTest.pt09==reponses[8]:
-                resultatPreTest=resultatPreTest+10
-            elif preTest.pt09==None or preTest.pt09=="je ne sais pas répondre":
-                resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
+            if postTest.pt09==reponses[8]:
+                resultatPostTest=resultatPostTest+10
+            elif postTest.pt09==None or postTest.pt09=="je ne sais pas répondre":
+                resultatPostTest=resultatPostTest+0 #pas utile mais c'est pour bien représenter le protocol
             else:
-                resultatPreTest=resultatPreTest-10
+                resultatPostTest=resultatPostTest-10
 
-            if preTest.pt10==reponses[9]:
-                resultatPreTest=resultatPreTest+10
-            elif preTest.pt10==None or preTest.pt10=="je ne sais pas répondre":
-                resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
+            if postTest.pt10==reponses[9]:
+                resultatPostTest=resultatPostTest+10
+            elif postTest.pt10==None or postTest.pt10=="je ne sais pas répondre":
+                resultatPostTest=resultatPostTest+0 #pas utile mais c'est pour bien représenter le protocol
             else:
-                resultatPreTest=resultatPreTest-10
+                resultatPostTest=resultatPostTest-10
 
 
         #transformation en %age
         print("resultat total motivation :",resultatMotivation)
         print("resultat total UX :",resultatUX)
         print("resultat total pre :",resultatPreTest)
-        print("resultat total pre :",resultatPostTest)
+        print("resultat total post :",resultatPostTest)
 
+        resultats={
+            "motivation":resultatMotivation,
+            "ux":resultatUX,
+            "pre":resultatPreTest,
+            "post":resultatPostTest
+        }
         #on doit renvoyer un dictionnaire (voir methode appellante)
 
         #A MODIFIER!!!!!! c'est juste pour me permettre de voir ce que ce ca calcule à ce stade avec des print
-        return 0
+        return resultats
 
 
 def verificationComplet(questionnaireMotivation, questionnaireUX,participant):
