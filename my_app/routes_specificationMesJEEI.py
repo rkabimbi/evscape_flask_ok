@@ -227,35 +227,35 @@ def calculResultats(jeei):
             #PreTest
             preTest=QuestionnairePreTest.query.filter_by(id=evaluation.fk_QuestionnairePreTestId).first()
 
-            if preTest.pt01==reponses[0]:
+            if preTest.pt01==reponses[0].solutionCorrecte:
                 resultatPreTest=resultatPreTest+10
             elif preTest.pt01==None or preTest.pt01=="je ne sais pas répondre":
                 resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
             else:
                 resultatPreTest=resultatPreTest-10
             
-            if preTest.pt02==reponses[1]:
+            if preTest.pt02==reponses[1].solutionCorrecte:
                 resultatPreTest=resultatPreTest+10
             elif preTest.pt02==None or preTest.pt02=="je ne sais pas répondre":
                 resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
             else:
                 resultatPreTest=resultatPreTest-10
 
-            if preTest.pt03==reponses[2]:
+            if preTest.pt03==reponses[2].solutionCorrecte:
                 resultatPreTest=resultatPreTest+10
             elif preTest.pt03==None or preTest.pt03=="je ne sais pas répondre":
                 resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
             else:
                 resultatPreTest=resultatPreTest-10            
 
-            if preTest.pt04==reponses[3]:
+            if preTest.pt04==reponses[3].solutionCorrecte:
                 resultatPreTest=resultatPreTest+10
             elif preTest.pt04==None or preTest.pt04=="je ne sais pas répondre":
                 resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
             else:
                 resultatPreTest=resultatPreTest-10
 
-            if preTest.pt05==reponses[4]:
+            if preTest.pt05==reponses[4].solutionCorrecte:
                 resultatPreTest=resultatPreTest+10
             elif preTest.pt05==None or preTest.pt05=="je ne sais pas répondre":
                 resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
@@ -263,7 +263,7 @@ def calculResultats(jeei):
                 resultatPreTest=resultatPreTest-10
 
 
-            if preTest.pt06==reponses[5]:
+            if preTest.pt06==reponses[5].solutionCorrecte:
                 resultatPreTest=resultatPreTest+10
             elif preTest.pt06==None or preTest.pt06=="je ne sais pas répondre":
                 resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
@@ -271,7 +271,7 @@ def calculResultats(jeei):
                 resultatPreTest=resultatPreTest-10
 
 
-            if preTest.pt07==reponses[6]:
+            if preTest.pt07==reponses[6].solutionCorrecte:
                 resultatPreTest=resultatPreTest+10
             elif preTest.pt07==None or preTest.pt07=="je ne sais pas répondre":
                 resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
@@ -279,21 +279,21 @@ def calculResultats(jeei):
                 resultatPreTest=resultatPreTest-10
 
 
-            if preTest.pt08==reponses[7]:
+            if preTest.pt08==reponses[7].solutionCorrecte:
                 resultatPreTest=resultatPreTest+10
             elif preTest.pt08==None or preTest.pt08=="je ne sais pas répondre":
                 resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
             else:
                 resultatPreTest=resultatPreTest-10
         
-            if preTest.pt09==reponses[8]:
+            if preTest.pt09==reponses[8].solutionCorrecte:
                 resultatPreTest=resultatPreTest+10
             elif preTest.pt09==None or preTest.pt09=="je ne sais pas répondre":
                 resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
             else:
                 resultatPreTest=resultatPreTest-10
 
-            if preTest.pt10==reponses[9]:
+            if preTest.pt10==reponses[9].solutionCorrecte:
                 resultatPreTest=resultatPreTest+10
             elif preTest.pt10==None or preTest.pt10=="je ne sais pas répondre":
                 resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
@@ -305,38 +305,45 @@ def calculResultats(jeei):
 
             #PostTest
             postTest=QuestionnairePostTest.query.filter_by(id=evaluation.fk_QuestionnairePostTestId).first()
-
-            if postTest.pt01==reponses[0]:
+            print("controle du postTest")
+            print(postTest.pt01)
+            print(reponses[0])
+            if postTest.pt01==reponses[0].solutionCorrecte:
+                print("Q1 ok")
                 resultatPostTest=resultatPostTest+10
             elif postTest.pt01==None or postTest.pt01=="je ne sais pas répondre":
                 resultatPostTest=resultatPostTest+0 #pas utile mais c'est pour bien représenter le protocol
             else:
                 resultatPostTest=resultatPostTest-10
             
-            if postTest.pt02==reponses[1]:
+            if postTest.pt02==reponses[1].solutionCorrecte:
+                print("Q2 ok")
                 resultatPostTest=resultatPostTest+10
             elif postTest.pt02==None or postTest.pt02=="je ne sais pas répondre":
                 resultatPostTest=resultatPostTest+0 #pas utile mais c'est pour bien représenter le protocol
             else:
                 resultatPostTest=resultatPostTest-10
 
-            #REPRENDRE APD D'ICI pour modifier mes trucs en mode postTest. Apres faire un test pour voir si ca renvoi des trucs "cohérents"...si j'ai l'impression que oui implementer l'export xls pour faire des verification
 
-            if postTest.pt03==reponses[2]:
+
+            if postTest.pt03==reponses[2].solutionCorrecte:
+                print("Q3 ok")
                 resultatPostTest=resultatPostTest+10
             elif postTest.pt03==None or postTest.pt03=="je ne sais pas répondre":
                 resultatPostTest=resultatPostTest+0 #pas utile mais c'est pour bien représenter le protocol
             else:
                 resultatPostTest=resultatPostTest-10            
 
-            if postTest.pt04==reponses[3]:
+            if postTest.pt04==reponses[3].solutionCorrecte:
+                print("Q4 ok")
                 resultatPostTest=resultatPostTest+10
             elif postTest.pt04==None or postTest.pt04=="je ne sais pas répondre":
                 resultatPostTest=resultatPostTest+0 #pas utile mais c'est pour bien représenter le protocol
             else:
                 resultatPostTest=resultatPostTest-10
 
-            if postTest.pt05==reponses[4]:
+            if postTest.pt05==reponses[4].solutionCorrecte:
+                print("Q5 ok")
                 resultatPostTest=resultatPostTest+10
             elif postTest.pt05==None or postTest.pt05=="je ne sais pas répondre":
                 resultatPostTest=resultatPostTest+0 #pas utile mais c'est pour bien représenter le protocol
@@ -344,7 +351,8 @@ def calculResultats(jeei):
                 resultatPostTest=resultatPostTest-10
 
 
-            if postTest.pt06==reponses[5]:
+            if postTest.pt06==reponses[5].solutionCorrecte:
+                print("Q6 ok")
                 resultatPostTest=resultatPostTest+10
             elif postTest.pt06==None or postTest.pt06=="je ne sais pas répondre":
                 resultatPostTest=resultatPostTest+0 #pas utile mais c'est pour bien représenter le protocol
@@ -352,7 +360,8 @@ def calculResultats(jeei):
                 resultatPostTest=resultatPostTest-10
 
 
-            if postTest.pt07==reponses[6]:
+            if postTest.pt07==reponses[6].solutionCorrecte:
+                print("Q7 ok")
                 resultatPostTest=resultatPostTest+10
             elif postTest.pt07==None or postTest.pt07=="je ne sais pas répondre":
                 resultatPostTest=resultatPostTest+0 #pas utile mais c'est pour bien représenter le protocol
@@ -360,21 +369,24 @@ def calculResultats(jeei):
                 resultatPostTest=resultatPostTest-10
 
 
-            if postTest.pt08==reponses[7]:
+            if postTest.pt08==reponses[7].solutionCorrecte:
+                print("Q8 ok")
                 resultatPostTest=resultatPostTest+10
             elif postTest.pt08==None or postTest.pt08=="je ne sais pas répondre":
                 resultatPostTest=resultatPostTest+0 #pas utile mais c'est pour bien représenter le protocol
             else:
                 resultatPostTest=resultatPostTest-10
         
-            if postTest.pt09==reponses[8]:
+            if postTest.pt09==reponses[8].solutionCorrecte:
+                print("Q9 ok")
                 resultatPostTest=resultatPostTest+10
             elif postTest.pt09==None or postTest.pt09=="je ne sais pas répondre":
                 resultatPostTest=resultatPostTest+0 #pas utile mais c'est pour bien représenter le protocol
             else:
                 resultatPostTest=resultatPostTest-10
 
-            if postTest.pt10==reponses[9]:
+            if postTest.pt10==reponses[9].solutionCorrecte:
+                print("Q10 ok")
                 resultatPostTest=resultatPostTest+10
             elif postTest.pt10==None or postTest.pt10=="je ne sais pas répondre":
                 resultatPostTest=resultatPostTest+0 #pas utile mais c'est pour bien représenter le protocol
