@@ -184,7 +184,8 @@ def calculResultats(jeei):
 
 
 
-
+        nbrMembresGroupeExp=0
+        nbrMembresGroupeTem=0
         for evaluation in evaluationsRetenues:
             resultatMotivation=0
             resultatUX=0
@@ -305,11 +306,10 @@ def calculResultats(jeei):
 
             #PostTest
             postTest=QuestionnairePostTest.query.filter_by(id=evaluation.fk_QuestionnairePostTestId).first()
-            print("controle du postTest")
+     
             print(postTest.pt01)
             print(reponses[0])
             if postTest.pt01==reponses[0].solutionCorrecte:
-                print("Q1 ok")
                 resultatPostTest=resultatPostTest+10
             elif postTest.pt01==None or postTest.pt01=="je ne sais pas répondre":
                 resultatPostTest=resultatPostTest+0 #pas utile mais c'est pour bien représenter le protocol
@@ -317,7 +317,6 @@ def calculResultats(jeei):
                 resultatPostTest=resultatPostTest-10
             
             if postTest.pt02==reponses[1].solutionCorrecte:
-                print("Q2 ok")
                 resultatPostTest=resultatPostTest+10
             elif postTest.pt02==None or postTest.pt02=="je ne sais pas répondre":
                 resultatPostTest=resultatPostTest+0 #pas utile mais c'est pour bien représenter le protocol
@@ -327,7 +326,6 @@ def calculResultats(jeei):
 
 
             if postTest.pt03==reponses[2].solutionCorrecte:
-                print("Q3 ok")
                 resultatPostTest=resultatPostTest+10
             elif postTest.pt03==None or postTest.pt03=="je ne sais pas répondre":
                 resultatPostTest=resultatPostTest+0 #pas utile mais c'est pour bien représenter le protocol
@@ -335,7 +333,6 @@ def calculResultats(jeei):
                 resultatPostTest=resultatPostTest-10            
 
             if postTest.pt04==reponses[3].solutionCorrecte:
-                print("Q4 ok")
                 resultatPostTest=resultatPostTest+10
             elif postTest.pt04==None or postTest.pt04=="je ne sais pas répondre":
                 resultatPostTest=resultatPostTest+0 #pas utile mais c'est pour bien représenter le protocol
@@ -343,7 +340,6 @@ def calculResultats(jeei):
                 resultatPostTest=resultatPostTest-10
 
             if postTest.pt05==reponses[4].solutionCorrecte:
-                print("Q5 ok")
                 resultatPostTest=resultatPostTest+10
             elif postTest.pt05==None or postTest.pt05=="je ne sais pas répondre":
                 resultatPostTest=resultatPostTest+0 #pas utile mais c'est pour bien représenter le protocol
@@ -352,7 +348,6 @@ def calculResultats(jeei):
 
 
             if postTest.pt06==reponses[5].solutionCorrecte:
-                print("Q6 ok")
                 resultatPostTest=resultatPostTest+10
             elif postTest.pt06==None or postTest.pt06=="je ne sais pas répondre":
                 resultatPostTest=resultatPostTest+0 #pas utile mais c'est pour bien représenter le protocol
@@ -361,7 +356,6 @@ def calculResultats(jeei):
 
 
             if postTest.pt07==reponses[6].solutionCorrecte:
-                print("Q7 ok")
                 resultatPostTest=resultatPostTest+10
             elif postTest.pt07==None or postTest.pt07=="je ne sais pas répondre":
                 resultatPostTest=resultatPostTest+0 #pas utile mais c'est pour bien représenter le protocol
@@ -370,7 +364,6 @@ def calculResultats(jeei):
 
 
             if postTest.pt08==reponses[7].solutionCorrecte:
-                print("Q8 ok")
                 resultatPostTest=resultatPostTest+10
             elif postTest.pt08==None or postTest.pt08=="je ne sais pas répondre":
                 resultatPostTest=resultatPostTest+0 #pas utile mais c'est pour bien représenter le protocol
@@ -378,7 +371,6 @@ def calculResultats(jeei):
                 resultatPostTest=resultatPostTest-10
         
             if postTest.pt09==reponses[8].solutionCorrecte:
-                print("Q9 ok")
                 resultatPostTest=resultatPostTest+10
             elif postTest.pt09==None or postTest.pt09=="je ne sais pas répondre":
                 resultatPostTest=resultatPostTest+0 #pas utile mais c'est pour bien représenter le protocol
@@ -386,7 +378,6 @@ def calculResultats(jeei):
                 resultatPostTest=resultatPostTest-10
 
             if postTest.pt10==reponses[9].solutionCorrecte:
-                print("Q10 ok")
                 resultatPostTest=resultatPostTest+10
             elif postTest.pt10==None or postTest.pt10=="je ne sais pas répondre":
                 resultatPostTest=resultatPostTest+0 #pas utile mais c'est pour bien représenter le protocol
@@ -394,19 +385,31 @@ def calculResultats(jeei):
                 resultatPostTest=resultatPostTest-10
             if resultatPostTest<0:
                 resultatPostTest=0
-
+            
             #on check à quel groupe le participant appartient pour en fonction incrementer ce qu'il faut
             participant = Participant.query.filter_by(id=evaluation.fk_ParticipantId).first()
             if participant.groupeExperimental:
+                print("--------RESULTATS MEMBRE EXP---------")
+                print(resultatMotivation)
+                print(resultatUX)
+                print(resultatPreTest)
+                print(resultatPostTest)
                 resultatsGroupeExperimental["motivation"]=resultatsGroupeExperimental["motivation"]+resultatMotivation
                 resultatsGroupeExperimental["ux"]=resultatsGroupeExperimental["ux"]+resultatUX
                 resultatsGroupeExperimental["pre"]=resultatsGroupeExperimental["pre"]+resultatPreTest
                 resultatsGroupeExperimental["post"]=resultatsGroupeExperimental["post"]+resultatPostTest
+                nbrMembresGroupeExp=nbrMembresGroupeExp+1
             else:
+                print("--------RESULTATS MEMBRE TEM---------")
+                print(resultatMotivation)
+                print(resultatUX)
+                print(resultatPreTest)
+                print(resultatPostTest)
                 resultatsGroupeTemoin["motivation"]=resultatsGroupeTemoin["motivation"]+resultatMotivation
                 resultatsGroupeTemoin["ux"]=resultatsGroupeTemoin["ux"]+resultatUX
                 resultatsGroupeTemoin["pre"]=resultatsGroupeTemoin["pre"]+resultatPreTest
                 resultatsGroupeTemoin["post"]=resultatsGroupeTemoin["post"]+resultatPostTest
+                nbrMembresGroupeTem=nbrMembresGroupeTem+1
 
 
         #Resultats finaux absolus
@@ -416,10 +419,15 @@ def calculResultats(jeei):
 
         #Resultats finaux relatifs et moyens
 
-        #nbrEvalRetenues=len(evaluationsRetenues)
+        resultatsGroupeExperimental["motivation"]=resultatsGroupeExperimental["motivation"]/(nbrMembresGroupeExp*3*4)
+        resultatsGroupeExperimental["ux"]=resultatsGroupeExperimental["ux"]/(nbrMembresGroupeExp*25*4)
+        resultatsGroupeExperimental["pre"]=resultatsGroupeExperimental["pre"]/(nbrMembresGroupeExp*10*10)
+        resultatsGroupeExperimental["post"]=resultatsGroupeExperimental["post"]/(nbrMembresGroupeExp*10*10)
 
-        #resultatMotivationMoyen=resultatMotivation/nbrEvalRetenues
-
+        resultatsGroupeTemoin["motivation"]=resultatsGroupeTemoin["motivation"]/(nbrMembresGroupeTem*3*4)
+        resultatsGroupeTemoin["ux"]=resultatsGroupeTemoin["ux"]/(nbrMembresGroupeTem*25*4)
+        resultatsGroupeTemoin["pre"]=resultatsGroupeTemoin["pre"]/(nbrMembresGroupeTem*10*10)
+        resultatsGroupeTemoin["post"]=resultatsGroupeTemoin["post"]/(nbrMembresGroupeTem*10*10)
 
 
         resultats=[resultatsGroupeTemoin,resultatsGroupeExperimental]
