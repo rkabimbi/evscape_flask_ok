@@ -455,6 +455,7 @@ def function_lancementDBFictive():
     participant=Participant.query.order_by(Participant.id.desc()).first()
 
     evaluationA=Evaluation(3,expGreenHouse.id,participant.id)
+    evaluationA.questionnaireDemographique=True
 
 
     qMot=QuestionnaireMotivation()

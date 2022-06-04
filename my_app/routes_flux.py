@@ -121,8 +121,8 @@ def fonction_calculResultats():
 
         participant=Participant.query.filter_by(id=evaluation.fk_ParticipantId).first()
         print("Evolution relative de l'evaluation du participant id:(",participant.id,") - nom :",participant.nom)
-        print((totalPostTest-totalPreTest)/10)
-        evolutionApprentissageGlobalRelativeExp=evolutionApprentissageGlobalRelativeExp+(totalPostTest-totalPreTest)/10
+        print((totalPostTest-totalPreTest)/totalPreTest)
+        evolutionApprentissageGlobalRelativeExp=evolutionApprentissageGlobalRelativeExp+(totalPostTest-totalPreTest)/totalPreTest
         ligneExel=ligneExel+1
         fonction_exportExcel(worksheetExp,evaluation,ligneExel)
  
@@ -138,8 +138,8 @@ def fonction_calculResultats():
 
         participant=Participant.query.filter_by(id=evaluation.fk_ParticipantId).first()
         print("Evolution relative de l'evaluation du participant id: (",participant.id,") - nom :",participant.nom)
-        print((totalPostTest-totalPreTest)/10)
-        evolutionApprentissageGlobalRelativeTem=evolutionApprentissageGlobalRelativeTem+(totalPostTest-totalPreTest)/10
+        print((totalPostTest-totalPreTest)/totalPreTest)
+        evolutionApprentissageGlobalRelativeTem=evolutionApprentissageGlobalRelativeTem+(totalPostTest-totalPreTest)/totalPreTest
         ligneExel=ligneExel+1
         fonction_exportExcel(worksheetTem,evaluation,ligneExel)
     
@@ -255,7 +255,7 @@ def fonction_CalculScorePreTest(evaluation):
     else:
         resultatPreTest=resultatPreTest-10
     
-    if resultatPreTest<0:
+    if resultatPreTest<=0:
         resultatPreTest=10
 
     print("Resultat pre test = ", resultatPreTest)
@@ -348,7 +348,7 @@ def fonction_CalculScorePostTest(evaluation):
     else:
         resultatPostTest=resultatPostTest-10
     
-    if resultatPostTest<0:
+    if resultatPostTest<=0:
         resultatPostTest=10
 
     print("Resultat post test = ", resultatPostTest)
