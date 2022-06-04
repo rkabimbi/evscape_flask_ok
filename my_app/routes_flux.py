@@ -66,7 +66,8 @@ def fonction_calculResultats():
         "INDQ11A":0,
         "INDQ11B":0,
         "nbrParticipantsExp":0,
-        "nbrParticipantsTem":0
+        "nbrParticipantsTem":0,
+        "INDQ14":0
 
     }
     
@@ -150,7 +151,51 @@ def fonction_calculResultats():
     workbook.close()
     resultats["INDQ11A"]=evolutionApprentissageGlobalRelativeTem/nbrTotalEvalTem
     resultats["INDQ11B"]=evolutionApprentissageGlobalRelativeExp/nbrTotalEvalExp
-    
+
+    ################################
+    #calcul de la correlation INDQ14
+    ################################
+
+    #calul de la moyenne generale tous groupe confondeur (Ebar) car c'est la base pour la suite
+    eBar=0
+    eBarExp=0
+    eBarTem=0
+    pTem=resultats["nbrParticipantsTem"]
+    pExp=resultats["nbrParticipantsExp"]
+    denominateur=0
+  
+    for evaluation in evalExp:
+        resPreTest=fonction_CalculScorePreTest(evaluation)
+        resPostTest=fonction_CalculScorePostTest(evaluation)
+        eBarExp=eBarExp+((resPostTest-resPreTest)/resPreTest) /(pExp) #increment de la moyenne propre au groupe Exp
+        eBar= eBar+((resPostTest-resPreTest)/resPreTest) /(pTem+pExp)  #increment de la moyenne general
+
+        
+    for evaluation in evalTem:
+        resPreTest=fonction_CalculScorePreTest(evaluation)
+        resPostTest=fonction_CalculScorePostTest(evaluation)
+        eBarTem=eBarTem+((resPostTest-resPreTest)/resPreTest) /(pTem) #increment de la moyenne propre au groupe Tem
+        eBar= eBar+((resPostTest-resPreTest)/resPreTest) /(pTem+pExp)    #increment de la moyenne general 
+
+    print("eBar :",eBar)
+    print("eBarExp :",eBarExp)
+    print("eBarTem :",eBarTem)
+    #calul du denom (je peux pas le faire avant car je dois connaitre la moyenne general or je la connais qu'à l'issure de ces deux premieres boucles)
+    denominateur=0
+    for evaluation in evalExp:
+        resPreTest=fonction_CalculScorePreTest(evaluation)
+        resPostTest=fonction_CalculScorePostTest(evaluation)
+        denominateur=denominateur +((((resPostTest-resPreTest)/resPreTest)- eBar)*(((resPostTest-resPreTest)/resPreTest)- eBar))
+    for evaluation in evalTem:
+        resPreTest=fonction_CalculScorePreTest(evaluation)
+        resPostTest=fonction_CalculScorePostTest(evaluation)
+        denominateur=denominateur +((((resPostTest-resPreTest)/resPreTest)- eBar)*(((resPostTest-resPreTest)/resPreTest)- eBar))
+    numerateur=0
+
+    numerateur=numerateur+pExp*(eBarExp-eBar)*(eBarExp-eBar)
+    numerateur=numerateur+pTem*(eBarTem-eBar)*(eBarTem-eBar)
+
+    resultats["INDQ14"]=numerateur/denominateur
 
 
     return resultats
