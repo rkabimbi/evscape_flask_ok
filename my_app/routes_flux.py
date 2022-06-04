@@ -64,7 +64,9 @@ def fonction_flux():
 def fonction_calculResultats():
     resultats={
         "INDQ11A":0,
-        "INDQ11B":0
+        "INDQ11B":0,
+        "nbrParticipantsExp":0,
+        "nbrParticipantsTem":0
 
     }
     
@@ -98,6 +100,8 @@ def fonction_calculResultats():
     print(evalTem)
     nbrTotalEvalExp=len(evalExp)
     nbrTotalEvalTem=len(evalTem)
+    resultats["nbrParticipantsExp"]=nbrTotalEvalExp
+    resultats["nbrParticipantsTem"]=nbrTotalEvalTem
   
 
     #pour chaque évaluation du groupeExp
