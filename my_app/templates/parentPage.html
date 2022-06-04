@@ -64,14 +64,15 @@
             </div>
         </div>
 
-      
-        <footer class="footer text-white-50 bg-dark">
+        <div style="margin-top: 25px;"> 
+        <footer class="footer text-white-50 bg-dark" >
             {% if currentUser.is_authenticated%}
            
                 <p class="text-white-50 bg-dark" style="padding-top: 10px;">Utilisateur connecté  :   <strong>  <font color="gold"> {{currentUser.firstname}} {{currentUser.lastname}}</font></strong> </p>
        
             {%endif%}
         </footer >
+        </div>
 
         <script src="/static/js/JQuery.js"></script> <!-- lien vers fichiers du javascript -->
         <script src="/static/js/bootstrap.min.js"></script>

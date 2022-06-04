@@ -42,11 +42,7 @@ class Evaluation(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethodes r
     fk_QuestionnairePreTestId = db.Column(db.Integer, db.ForeignKey('QuestionnairePreTest.id'),nullable=True)
     fk_QuestionnairePostTestId = db.Column(db.Integer, db.ForeignKey('QuestionnairePostTest.id'),nullable=True)
 
-    
-
-
-  
-    
+   
     
     def __init__(self,fk_JeeiId,fk_ExperimentationId,fk_ParticipantId):
         self.fk_JeeiId=fk_JeeiId
@@ -54,14 +50,11 @@ class Evaluation(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethodes r
         self.fk_ExperimentationId=fk_ExperimentationId
         self.fk_ParticipantId=fk_ParticipantId
     
-
-       
-
-      
+ 
     
     
     def __repr__(self):#toString
-        return "( id = %s, dateCreation=%s, JeeiID = %s , ExperimentationId=%s, ParticipantId=%s)\n" % ( self.id, self.dateCreation,self.fk_JeeiId,self.fk_ExperimentationId,self.fk_ParticipantId)
+        return "( id = %s, dateCreation=%s, questionnaireDemo=%s, questionnaireMot=%s,preTest=%s,posttes1=%s, questionnaireUx=%s,posttest2=%s, JeeiID = %s , ExperimentationId=%s, ParticipantId=%s,motivation=%s, ux=%s,pre=%s;post=%s)\n" % ( self.id, self.dateCreation,self.questionnaireDemographique,self.questionnaireMotivation,self.preTest, self.postTest1,self.questionnaireUX,self.postTest2,self.fk_JeeiId,self.fk_ExperimentationId,self.fk_ParticipantId,self.fk_QuestionnaireMotivationId,self.fk_QuestionnaireUXId,self.fk_QuestionnairePreTestId,self.fk_QuestionnairePostTestId)
 
 
 

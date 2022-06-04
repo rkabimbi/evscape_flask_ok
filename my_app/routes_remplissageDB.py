@@ -198,9 +198,9 @@ def function_lancementDBFictive():
     db.session.add(experimentation)#sauve dans la DB
     db.session.commit()
 
-    experimentation = Experimentation(fk_JeeiId=3,fk_UserId=2,idInterne=1)
-    db.session.add(experimentation)#sauve dans la DB
-    db.session.commit()
+    #experimentation = Experimentation(fk_JeeiId=3,fk_UserId=2,idInterne=1)
+    #db.session.add(experimentation)#sauve dans la DB
+    #db.session.commit()
 
     experimentation = Experimentation(fk_JeeiId=3,fk_UserId=1,idInterne=2)
     db.session.add(experimentation)#sauve dans la DB
@@ -410,6 +410,125 @@ def function_lancementDBFictive():
     ###########################################################################
     #        REMPLISSAGE DB spécifique pour tester les calculs!!!! #######
     #####################################################################
+    # 
+    # #remplir une exp pour GreenHouse avec une eval
+    # 
+     
+    expGreenHouse=Experimentation.query.filter_by(fk_JeeiId=3).first()
+    
+    participant=Participant()
+    participant.age=5
+    participant.sexe=Sexe.MASCULIN
+    participant.email="Cloclo@kabi.be"
+    participant.expJEEI=ExperienceJeei.RAREMENT
+    participant.etudes=PublicCible.PRIMAIRE
+    participant.localisation=Localisation.EUROPE
+    participant.experience=Experience.NEANT
+    participant.consentement=True
+    participant.groupeExperimental=True
+    participant.nom="Francois"
+    participant.prenom="Claude"
+    participant.urlPerso="djkbsjdhskdkjsdiuklsdjf"
+    participant.fk_ExperimentationId=expGreenHouse.id
+    db.session.add(participant)#sauve dans la DB
+    db.session.commit()
+    print("ok")
+    expGreenHouse.etape1=True
+    expGreenHouse.etape2=True
+    expGreenHouse.etape3=True
+    expGreenHouse.etape4=True
+    expGreenHouse.etape5=True
+    expGreenHouse.etape6=True
+    expGreenHouse.etape7=False
+    expGreenHouse.etape8=False
+    expGreenHouse.etape9=False
+    expGreenHouse.etape10=False
+    expGreenHouse.etape11=True
+    expGreenHouse.etape12=True
+    expGreenHouse.fk_JeeId=3
+    expGreenHouse.fk_UserId=1
+    db.session.add(expGreenHouse)#sauve dans la DB
+    db.session.commit()
+    print("ok2")
+
+    expGreenHouse=Experimentation.query.order_by(Experimentation.id.desc()).first()
+    participant=Participant.query.order_by(Participant.id.desc()).first()
+
+    evaluationA=Evaluation(3,expGreenHouse.id,participant.id)
+
+
+    qMot=QuestionnaireMotivation()
+    qMot.m01=2
+    qMot.m02=2
+    qMot.m03=4
+    db.session.add(qMot)#sauve dans la DB
+    db.session.commit()
+    evaluationA.questionnaireMotivation=True
+    evaluationA.fk_QuestionnaireMotivationId=QuestionnaireMotivation.query.order_by(QuestionnaireMotivation.id.desc()).first().id
+
+    print("ok3")
+    
+    qUX=QuestionnaireUX()
+    qUX.u01=2
+    qUX.u02=2
+    qUX.u03=4
+    qUX.u04=2
+    qUX.u05=2
+    qUX.u06=4
+    qUX.u07=2
+    qUX.u08=2
+    qUX.u09=4
+    qUX.u10=2
+    qUX.u11=2
+    qUX.u12=4
+    qUX.u13=2
+    qUX.u14=2
+    qUX.u15=4
+    qUX.u16=2
+    qUX.u17=2
+    qUX.u18=4
+    qUX.u19=2
+    qUX.u20=2
+    qUX.u21=4
+    qUX.u22=2
+    qUX.u23=2
+    qUX.u24=4
+    qUX.u25=4
+    db.session.add(qUX)#sauve dans la DB
+    db.session.commit()
+    evaluationA.questionnaireUX=True
+    evaluationA.fk_QuestionnaireUXId=QuestionnaireUX.query.order_by(QuestionnaireUX.id.desc()).first().id
+    print("ok4")
+
+    qPre=QuestionnairePreTest()
+    qPost=QuestionnairePostTest()
+    db.session.add(qPre)#sauve dans la DB
+    db.session.commit()
+    db.session.add(qPost)#sauve dans la DB
+    db.session.commit()
+    qPre=QuestionnairePreTest.query.order_by(QuestionnairePreTest.id.desc()).first()
+    qPost=QuestionnairePostTest.query.order_by(QuestionnairePostTest.id.desc()).first()
+    print(qPre)
+    print(qPost)
+    evaluationA.fk_QuestionnairePreTestId=qPre.id
+    evaluationA.fk_QuestionnairePostTestId=qPost.id
+    print(evaluationA)
+    
+    
+    
+
+    db.session.add(evaluationA)#sauve dans la DB
+    db.session.commit()
+    print("ok5")
+   
+
+
+    
+
+
+
+
+    ########REMPLISSAGE FULL POUR DESKAPE
 
     experimentation=Experimentation.query.filter_by(id=3).first()
     experimentation.etape1=True

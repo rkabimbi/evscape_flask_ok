@@ -97,7 +97,7 @@ def fonction_specificationMesJEEI():
 
         #on ne calcul des resultats que si il y a des experimentations validées (sinon ca fait des divisions par zero)
         if calculResultats:
-            resultats=calculResultats(monJEEIAEnvoyer)
+            resultats=fonction_calculResultats(monJEEIAEnvoyer)
             print(resultats)
         else:
             print("pas d'experimentations à ce stade!!!!")
@@ -140,7 +140,7 @@ def fonction_specificationMesJEEI():
     print(specification)
     return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEIAEnvoyer,specificationJEEIRecupere=specification,theme=Theme,publicCible=PublicCible,questions=questions,membres=membres,experimentations=experimentations,users=users)
 
-def calculResultats(jeei):
+def fonction_calculResultats(jeei):
     #on va gerer les resultats
         #on recupere  les reponses des questionnaires apprentissage)
         specification=Specification.query.filter_by(id=jeei.fk_SpecificationId).first()
@@ -237,35 +237,35 @@ def calculResultats(jeei):
 
             if preTest.pt01==reponses[0].solutionCorrecte:
                 resultatPreTest=resultatPreTest+10
-            elif preTest.pt01==None or preTest.pt01=="je ne sais pas répondre":
+            elif preTest.pt01==None or preTest.pt01=="abstention":
                 resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
             else:
                 resultatPreTest=resultatPreTest-10
             
             if preTest.pt02==reponses[1].solutionCorrecte:
                 resultatPreTest=resultatPreTest+10
-            elif preTest.pt02==None or preTest.pt02=="je ne sais pas répondre":
+            elif preTest.pt02==None or preTest.pt02=="abstention":
                 resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
             else:
                 resultatPreTest=resultatPreTest-10
 
             if preTest.pt03==reponses[2].solutionCorrecte:
                 resultatPreTest=resultatPreTest+10
-            elif preTest.pt03==None or preTest.pt03=="je ne sais pas répondre":
+            elif preTest.pt03==None or preTest.pt03=="abstention":
                 resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
             else:
                 resultatPreTest=resultatPreTest-10            
 
             if preTest.pt04==reponses[3].solutionCorrecte:
                 resultatPreTest=resultatPreTest+10
-            elif preTest.pt04==None or preTest.pt04=="je ne sais pas répondre":
+            elif preTest.pt04==None or preTest.pt04=="abstention":
                 resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
             else:
                 resultatPreTest=resultatPreTest-10
 
             if preTest.pt05==reponses[4].solutionCorrecte:
                 resultatPreTest=resultatPreTest+10
-            elif preTest.pt05==None or preTest.pt05=="je ne sais pas répondre":
+            elif preTest.pt05==None or preTest.pt05=="abstention":
                 resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
             else:
                 resultatPreTest=resultatPreTest-10
@@ -273,7 +273,7 @@ def calculResultats(jeei):
 
             if preTest.pt06==reponses[5].solutionCorrecte:
                 resultatPreTest=resultatPreTest+10
-            elif preTest.pt06==None or preTest.pt06=="je ne sais pas répondre":
+            elif preTest.pt06==None or preTest.pt06=="abstention":
                 resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
             else:
                 resultatPreTest=resultatPreTest-10
@@ -281,7 +281,7 @@ def calculResultats(jeei):
 
             if preTest.pt07==reponses[6].solutionCorrecte:
                 resultatPreTest=resultatPreTest+10
-            elif preTest.pt07==None or preTest.pt07=="je ne sais pas répondre":
+            elif preTest.pt07==None or preTest.pt07=="abstention":
                 resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
             else:
                 resultatPreTest=resultatPreTest-10
@@ -289,21 +289,21 @@ def calculResultats(jeei):
 
             if preTest.pt08==reponses[7].solutionCorrecte:
                 resultatPreTest=resultatPreTest+10
-            elif preTest.pt08==None or preTest.pt08=="je ne sais pas répondre":
+            elif preTest.pt08==None or preTest.pt08=="abstention":
                 resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
             else:
                 resultatPreTest=resultatPreTest-10
         
             if preTest.pt09==reponses[8].solutionCorrecte:
                 resultatPreTest=resultatPreTest+10
-            elif preTest.pt09==None or preTest.pt09=="je ne sais pas répondre":
+            elif preTest.pt09==None or preTest.pt09=="abstention":
                 resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
             else:
                 resultatPreTest=resultatPreTest-10
 
             if preTest.pt10==reponses[9].solutionCorrecte:
                 resultatPreTest=resultatPreTest+10
-            elif preTest.pt10==None or preTest.pt10=="je ne sais pas répondre":
+            elif preTest.pt10==None or preTest.pt10=="abstention":
                 resultatPreTest=resultatPreTest+0 #pas utile mais c'est pour bien représenter le protocol
             else:
                 resultatPreTest=resultatPreTest-10
@@ -318,14 +318,14 @@ def calculResultats(jeei):
             print(reponses[0])
             if postTest.pt01==reponses[0].solutionCorrecte:
                 resultatPostTest=resultatPostTest+10
-            elif postTest.pt01==None or postTest.pt01=="je ne sais pas répondre":
+            elif postTest.pt01==None or postTest.pt01=="abstention":
                 resultatPostTest=resultatPostTest+0 #pas utile mais c'est pour bien représenter le protocol
             else:
                 resultatPostTest=resultatPostTest-10
             
             if postTest.pt02==reponses[1].solutionCorrecte:
                 resultatPostTest=resultatPostTest+10
-            elif postTest.pt02==None or postTest.pt02=="je ne sais pas répondre":
+            elif postTest.pt02==None or postTest.pt02=="abstention":
                 resultatPostTest=resultatPostTest+0 #pas utile mais c'est pour bien représenter le protocol
             else:
                 resultatPostTest=resultatPostTest-10
@@ -334,21 +334,21 @@ def calculResultats(jeei):
 
             if postTest.pt03==reponses[2].solutionCorrecte:
                 resultatPostTest=resultatPostTest+10
-            elif postTest.pt03==None or postTest.pt03=="je ne sais pas répondre":
+            elif postTest.pt03==None or postTest.pt03=="abstention":
                 resultatPostTest=resultatPostTest+0 #pas utile mais c'est pour bien représenter le protocol
             else:
                 resultatPostTest=resultatPostTest-10            
 
             if postTest.pt04==reponses[3].solutionCorrecte:
                 resultatPostTest=resultatPostTest+10
-            elif postTest.pt04==None or postTest.pt04=="je ne sais pas répondre":
+            elif postTest.pt04==None or postTest.pt04=="abstention":
                 resultatPostTest=resultatPostTest+0 #pas utile mais c'est pour bien représenter le protocol
             else:
                 resultatPostTest=resultatPostTest-10
 
             if postTest.pt05==reponses[4].solutionCorrecte:
                 resultatPostTest=resultatPostTest+10
-            elif postTest.pt05==None or postTest.pt05=="je ne sais pas répondre":
+            elif postTest.pt05==None or postTest.pt05=="abstention":
                 resultatPostTest=resultatPostTest+0 #pas utile mais c'est pour bien représenter le protocol
             else:
                 resultatPostTest=resultatPostTest-10
@@ -356,7 +356,7 @@ def calculResultats(jeei):
 
             if postTest.pt06==reponses[5].solutionCorrecte:
                 resultatPostTest=resultatPostTest+10
-            elif postTest.pt06==None or postTest.pt06=="je ne sais pas répondre":
+            elif postTest.pt06==None or postTest.pt06=="abstention":
                 resultatPostTest=resultatPostTest+0 #pas utile mais c'est pour bien représenter le protocol
             else:
                 resultatPostTest=resultatPostTest-10
@@ -364,7 +364,7 @@ def calculResultats(jeei):
 
             if postTest.pt07==reponses[6].solutionCorrecte:
                 resultatPostTest=resultatPostTest+10
-            elif postTest.pt07==None or postTest.pt07=="je ne sais pas répondre":
+            elif postTest.pt07==None or postTest.pt07=="abstention":
                 resultatPostTest=resultatPostTest+0 #pas utile mais c'est pour bien représenter le protocol
             else:
                 resultatPostTest=resultatPostTest-10
@@ -372,21 +372,21 @@ def calculResultats(jeei):
 
             if postTest.pt08==reponses[7].solutionCorrecte:
                 resultatPostTest=resultatPostTest+10
-            elif postTest.pt08==None or postTest.pt08=="je ne sais pas répondre":
+            elif postTest.pt08==None or postTest.pt08=="abstention":
                 resultatPostTest=resultatPostTest+0 #pas utile mais c'est pour bien représenter le protocol
             else:
                 resultatPostTest=resultatPostTest-10
         
             if postTest.pt09==reponses[8].solutionCorrecte:
                 resultatPostTest=resultatPostTest+10
-            elif postTest.pt09==None or postTest.pt09=="je ne sais pas répondre":
+            elif postTest.pt09==None or postTest.pt09=="abstention":
                 resultatPostTest=resultatPostTest+0 #pas utile mais c'est pour bien représenter le protocol
             else:
                 resultatPostTest=resultatPostTest-10
 
             if postTest.pt10==reponses[9].solutionCorrecte:
                 resultatPostTest=resultatPostTest+10
-            elif postTest.pt10==None or postTest.pt10=="je ne sais pas répondre":
+            elif postTest.pt10==None or postTest.pt10=="abstention":
                 resultatPostTest=resultatPostTest+0 #pas utile mais c'est pour bien représenter le protocol
             else:
                 resultatPostTest=resultatPostTest-10
@@ -425,16 +425,16 @@ def calculResultats(jeei):
 
 
         #Resultats finaux relatifs et moyens
-
-        resultatsGroupeExperimental["motivation"]=resultatsGroupeExperimental["motivation"]/(nbrMembresGroupeExp*3*4)
-        resultatsGroupeExperimental["ux"]=resultatsGroupeExperimental["ux"]/(nbrMembresGroupeExp*25*4)
-        resultatsGroupeExperimental["pre"]=resultatsGroupeExperimental["pre"]/(nbrMembresGroupeExp*10*10)
-        resultatsGroupeExperimental["post"]=resultatsGroupeExperimental["post"]/(nbrMembresGroupeExp*10*10)
-
-        resultatsGroupeTemoin["motivation"]=resultatsGroupeTemoin["motivation"]/(nbrMembresGroupeTem*3*4)
-        resultatsGroupeTemoin["ux"]=resultatsGroupeTemoin["ux"]/(nbrMembresGroupeTem*25*4)
-        resultatsGroupeTemoin["pre"]=resultatsGroupeTemoin["pre"]/(nbrMembresGroupeTem*10*10)
-        resultatsGroupeTemoin["post"]=resultatsGroupeTemoin["post"]/(nbrMembresGroupeTem*10*10)
+        if nbrMembresGroupeExp>0:
+            resultatsGroupeExperimental["motivation"]=resultatsGroupeExperimental["motivation"]/(nbrMembresGroupeExp*3*4)
+            resultatsGroupeExperimental["ux"]=resultatsGroupeExperimental["ux"]/(nbrMembresGroupeExp*25*4)
+            resultatsGroupeExperimental["pre"]=resultatsGroupeExperimental["pre"]/(nbrMembresGroupeExp*10*10)
+            resultatsGroupeExperimental["post"]=resultatsGroupeExperimental["post"]/(nbrMembresGroupeExp*10*10)
+        if nbrMembresGroupeTem>0:
+            resultatsGroupeTemoin["motivation"]=resultatsGroupeTemoin["motivation"]/(nbrMembresGroupeTem*3*4)
+            resultatsGroupeTemoin["ux"]=resultatsGroupeTemoin["ux"]/(nbrMembresGroupeTem*25*4)
+            resultatsGroupeTemoin["pre"]=resultatsGroupeTemoin["pre"]/(nbrMembresGroupeTem*10*10)
+            resultatsGroupeTemoin["post"]=resultatsGroupeTemoin["post"]/(nbrMembresGroupeTem*10*10)
 
 
         resultats=[resultatsGroupeTemoin,resultatsGroupeExperimental]
