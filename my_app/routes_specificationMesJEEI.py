@@ -89,11 +89,18 @@ def fonction_specificationMesJEEI():
         print(membres)
 
         experimentations = Experimentation.query.filter_by(fk_JeeiId=monJEEIAEnvoyer.id).all()
+        calculResultats=False
+        for experimentation in experimentations:
+            #on va checker si au moins une experimentation est arrivée à l'etape 12
+            if experimentation.etape12:
+                calculResultats=True
 
-
-        
-        resultats=calculResultats(monJEEIAEnvoyer)
-        print(resultats)
+        #on ne calcul des resultats que si il y a des experimentations validées (sinon ca fait des divisions par zero)
+        if calculResultats:
+            resultats=calculResultats(monJEEIAEnvoyer)
+            print(resultats)
+        else:
+            print("pas d'experimentations à ce stade!!!!")
 
         
       

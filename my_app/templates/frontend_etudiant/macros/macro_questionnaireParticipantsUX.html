@@ -41,3 +41,85 @@
 {% endmacro %}
 
 
+{% macro afficheUnElementLikertScoringCentral (element,idElement) %}
+
+
+      <label class="statement">{{element}}</label>
+      <ul class='likert'>
+
+
+        <li>
+          <input type="radio" name="likert{{idElement}}" value="0">
+          <label>Fortement en désaccord</label>
+        </li>
+        <li>
+          <input type="radio" name="likert{{idElement}}" value="2">
+          <label>En désaccord</label>
+        </li>
+        <li>
+          <input type="radio" name="likert{{idElement}}" value="4">
+          <label>Neutre</label>
+        </li>
+        <li>
+          <input type="radio" name="likert{{idElement}}" value="2">
+          <label>D'accord</label>
+        </li>
+
+        <li>
+          <input type="radio" name="likert{{idElement}}" value="0">
+          <label>Fortement en accord</label>
+        </li>
+
+
+       
+    
+      </ul>
+
+
+
+
+{% endmacro %}
+
+
+
+{% macro afficheUnElementLikertInverse (element,idElement) %}
+
+
+      <label class="statement">{{element}}</label>
+      <ul class='likert'>
+
+
+        <li>
+          <input type="radio" name="likert{{idElement}}" value="4">
+          <label>Fortement en désaccord</label>
+        </li>
+        <li>
+          <input type="radio" name="likert{{idElement}}" value="3">
+          <label>En désaccord</label>
+        </li>
+        <li>
+          <input type="radio" name="likert{{idElement}}" value="2">
+          <label>Neutre</label>
+        </li>
+        <li>
+          <input type="radio" name="likert{{idElement}}" value="1">
+          <label>D'accord</label>
+        </li>
+
+        <li>
+          <input type="radio" name="likert{{idElement}}" value="0">
+          <label>Fortement en accord</label>
+        </li>
+
+
+       
+    
+      </ul>
+
+
+
+
+{% endmacro %}
+
+
+

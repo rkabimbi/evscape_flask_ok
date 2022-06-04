@@ -468,7 +468,7 @@ def function_lancementDBFictive():
           questionnaireMotivation=QuestionnaireMotivation.query.filter_by(id=evaluation.fk_QuestionnaireMotivationId).first()
           questionnaireMotivation.m01=randint(0,4)
           questionnaireMotivation.m02=randint(0,4)
-          questionnaireMotivation.m03=randint(0,4)
+          questionnaireMotivation.m03=random.choice([0,2,4])
           db.session.add(questionnaireMotivation)#sauve dans la DB
           db.session.commit()
 
