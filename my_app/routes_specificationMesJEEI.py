@@ -179,14 +179,16 @@ def fonction_calculResultats(jeei):
             "motivation":0,
             "ux":0,
             "pre":0,
-            "post":0
+            "post":0,
+            "nbrParticipants":0
         }
 
         resultatsGroupeTemoin={
             "motivation":0,
             "ux":0,
             "pre":0,
-            "post":0
+            "post":0,
+            "nbrParticipants":0
         }
 
 
@@ -309,7 +311,7 @@ def fonction_calculResultats(jeei):
                 resultatPreTest=resultatPreTest-10
             
             if resultatPreTest<0:
-                resultatPreTest=0
+                resultatPreTest=10
 
             #PostTest
             postTest=QuestionnairePostTest.query.filter_by(id=evaluation.fk_QuestionnairePostTestId).first()
@@ -391,7 +393,7 @@ def fonction_calculResultats(jeei):
             else:
                 resultatPostTest=resultatPostTest-10
             if resultatPostTest<0:
-                resultatPostTest=0
+                resultatPostTest=10
             
             #on check à quel groupe le participant appartient pour en fonction incrementer ce qu'il faut
             participant = Participant.query.filter_by(id=evaluation.fk_ParticipantId).first()
@@ -406,6 +408,7 @@ def fonction_calculResultats(jeei):
                 resultatsGroupeExperimental["pre"]=resultatsGroupeExperimental["pre"]+resultatPreTest
                 resultatsGroupeExperimental["post"]=resultatsGroupeExperimental["post"]+resultatPostTest
                 nbrMembresGroupeExp=nbrMembresGroupeExp+1
+                
             else:
                 print("--------RESULTATS MEMBRE TEM---------")
                 print(resultatMotivation)
@@ -430,11 +433,13 @@ def fonction_calculResultats(jeei):
             resultatsGroupeExperimental["ux"]=resultatsGroupeExperimental["ux"]/(nbrMembresGroupeExp*25*4)
             resultatsGroupeExperimental["pre"]=resultatsGroupeExperimental["pre"]/(nbrMembresGroupeExp*10*10)
             resultatsGroupeExperimental["post"]=resultatsGroupeExperimental["post"]/(nbrMembresGroupeExp*10*10)
+            resultatsGroupeExperimental["nbrParticipants"]=nbrMembresGroupeExp
         if nbrMembresGroupeTem>0:
             resultatsGroupeTemoin["motivation"]=resultatsGroupeTemoin["motivation"]/(nbrMembresGroupeTem*3*4)
             resultatsGroupeTemoin["ux"]=resultatsGroupeTemoin["ux"]/(nbrMembresGroupeTem*25*4)
             resultatsGroupeTemoin["pre"]=resultatsGroupeTemoin["pre"]/(nbrMembresGroupeTem*10*10)
             resultatsGroupeTemoin["post"]=resultatsGroupeTemoin["post"]/(nbrMembresGroupeTem*10*10)
+            resultatsGroupeTemoin["nbrParticipants"]=nbrMembresGroupeTem
 
 
         resultats=[resultatsGroupeTemoin,resultatsGroupeExperimental]
