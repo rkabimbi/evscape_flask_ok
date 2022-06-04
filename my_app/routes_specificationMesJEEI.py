@@ -169,7 +169,8 @@ def fonction_calculResultats(jeei):
                 questionnaireUX=QuestionnaireUX.query.filter_by(id=evaluation.fk_QuestionnaireUXId).first()
                 participant = Participant.query.filter_by(id=evaluation.fk_ParticipantId).first()
                 complet=verificationComplet(questionnaireMotivation,questionnaireUX,participant)
-                if complet:
+                complet2=fonction_verificationCompletComplement2(evaluation)
+                if complet and complet2 :
                     #alors on ajoute l'evaluation courrante aux evaluation retenue
                     evaluationsRetenues.append(evaluation)
 
@@ -180,7 +181,8 @@ def fonction_calculResultats(jeei):
             "ux":0,
             "pre":0,
             "post":0,
-            "nbrParticipants":0
+            "nbrParticipants":0,
+            "evolutionApprentissageMoyenne":0
         }
 
         resultatsGroupeTemoin={
@@ -188,7 +190,8 @@ def fonction_calculResultats(jeei):
             "ux":0,
             "pre":0,
             "post":0,
-            "nbrParticipants":0
+            "nbrParticipants":0,
+            "evolutionApprentissageMoyenne":0
         }
 
 
@@ -310,7 +313,7 @@ def fonction_calculResultats(jeei):
             else:
                 resultatPreTest=resultatPreTest-10
             
-            if resultatPreTest<0:
+            if resultatPreTest<=0:
                 resultatPreTest=10
 
             #PostTest
@@ -392,7 +395,7 @@ def fonction_calculResultats(jeei):
                 resultatPostTest=resultatPostTest+0 #pas utile mais c'est pour bien représenter le protocol
             else:
                 resultatPostTest=resultatPostTest-10
-            if resultatPostTest<0:
+            if resultatPostTest<=0:
                 resultatPostTest=10
             
             #on check à quel groupe le participant appartient pour en fonction incrementer ce qu'il faut
@@ -408,6 +411,7 @@ def fonction_calculResultats(jeei):
                 resultatsGroupeExperimental["pre"]=resultatsGroupeExperimental["pre"]+resultatPreTest
                 resultatsGroupeExperimental["post"]=resultatsGroupeExperimental["post"]+resultatPostTest
                 nbrMembresGroupeExp=nbrMembresGroupeExp+1
+                resultatsGroupeExperimental["evolutionApprentissageMoyenne"]=resultatsGroupeExperimental["evolutionApprentissageMoyenne"]+((resultatPostTest-resultatPreTest)/resultatPreTest)
                 
             else:
                 print("--------RESULTATS MEMBRE TEM---------")
@@ -420,11 +424,17 @@ def fonction_calculResultats(jeei):
                 resultatsGroupeTemoin["pre"]=resultatsGroupeTemoin["pre"]+resultatPreTest
                 resultatsGroupeTemoin["post"]=resultatsGroupeTemoin["post"]+resultatPostTest
                 nbrMembresGroupeTem=nbrMembresGroupeTem+1
+                resultatsGroupeTemoin["evolutionApprentissageMoyenne"]=resultatsGroupeTemoin["evolutionApprentissageMoyenne"]+((resultatPostTest-resultatPreTest)/resultatPreTest)
 
 
         #Resultats finaux absolus
         print("resultat groupe temoin :",resultatsGroupeTemoin)
         print("resultat groupe exp:",resultatsGroupeExperimental)
+
+        resultatsGroupeExperimental["evolutionApprentissageMoyenne"]= resultatsGroupeExperimental["evolutionApprentissageMoyenne"]/nbrMembresGroupeExp
+
+        resultatsGroupeTemoin["evolutionApprentissageMoyenne"]=resultatsGroupeTemoin["evolutionApprentissageMoyenne"]/nbrMembresGroupeTem
+
 
 
         #Resultats finaux relatifs et moyens
@@ -444,6 +454,8 @@ def fonction_calculResultats(jeei):
 
         resultats=[resultatsGroupeTemoin,resultatsGroupeExperimental]
         #on doit renvoyer un dictionnaire (voir methode appellante)
+        print("resultats absolus")
+        print(resultats)
 
         #A MODIFIER!!!!!! c'est juste pour me permettre de voir ce que ce ca calcule à ce stade avec des print
         return resultats
@@ -772,3 +784,22 @@ def fonction_validerJEEI():
     db.session.commit()
 
     return "ok"
+
+
+
+def fonction_verificationCompletComplement2(evaluation):
+    if not evaluation.questionnaireDemographique:
+        return False
+    if not evaluation.questionnaireMotivation:
+        return False
+    print(evaluation)
+    print("eval pretest")
+    print(evaluation.preTest)
+    if not evaluation.preTest:
+        return False
+    if not evaluation.postTest1:
+        return False
+    if not evaluation.questionnaireUX:
+        return False
+    else :
+        return True
