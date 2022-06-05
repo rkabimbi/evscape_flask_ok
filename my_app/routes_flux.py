@@ -59,8 +59,8 @@ ligneExel=0
 def fonction_flux():
     resultats=fonction_calculResultats()
     print(resultats)
-    sys.exit()
-    return render_template("flux.html",currentUser=current_user)
+    #sys.exit()
+    return render_template("flux.html",currentUser=current_user,resultats=resultats)
 
 def fonction_calculResultats():
     resultats={
@@ -247,7 +247,12 @@ def fonction_coefficientCorrelation(evalExp,pExp):
     
     denominateur=sqrt(partieGauche)*sqrt(partieDroite)
 
-    resultat=abs(numerateur/denominateur)
+    #si le denominateur est à zero c'est que tous sont à 0 en terme d'evolution ou qu'ils ont tous le meme age
+    #il n'y a donc pas de correlation qu'on peut etablir
+    if denominateur==0:
+        resultat=0
+    else:
+        resultat=abs(numerateur/denominateur)
 
     return resultat
 

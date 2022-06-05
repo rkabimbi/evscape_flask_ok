@@ -23,7 +23,13 @@
 
 <div class="row fluxKpi">
     <div class="col-sm-4 fluxKpiItemTemoin ">
-        <h1 class="chiffreCle"> + 0,12</h1>
+        <h1 class="chiffreCle"> 
+          {%if resultats["INDQ11A"]>=0%}
+          + {{(resultats["INDQ11A"]*100)|round(2)}}%
+          {%else%}
+           {{(resultats["INDQ11A"]*100)|round(2)}}%
+          {%endif%}
+        </h1>
         <div class="card-body">
           <h5 class="card-title titrechiffreCleTemoin"> INDQ1.1A</h5>
           <p class="card-text textChiffreCleTemoin">Evolution relative d'apprentissage moyenne (groupe temoin)tous jeux d'évasion éducatifs confondus.</p>
@@ -31,7 +37,15 @@
     </div>
     <div class="col-sm-4 fluxKpiItemExperimental  ">
      
-            <h1 class="chiffreCle"> + 0,37</h1>
+            <h1 class="chiffreCle"> 
+              
+              {%if resultats["INDQ11B"]>=0%}
+              + {{(resultats["INDQ11B"]*100)|round(2)}}%
+              {%else%}
+               {{(resultats["INDQ11B"]*100)|round(2)}}%
+              {%endif%} 
+             
+            </h1>
             <div class="card-body">
               <h5 class="card-title titrechiffreCle"> INDQ1.1B</h5>
               <p class="card-text textChiffreCle">Evolution relative d'apprentissage moyenne (groupe experimental) toutes séances de travaux paratiques classiques confondues.</p>
@@ -58,9 +72,16 @@
     <tbody>
       <tr>
         <th scope="row">1</th>
+        <td>Nombre Participants total</td>
+        <td style="text-align:center">{{resultats["nbrParticipantsTem"]}}</td>
+        <td style="text-align:center">{{resultats["nbrParticipantsExp"]}}</td>
+        
+      </tr>
+      <tr>
+        <th scope="row">1</th>
         <td>INDQ1.1</td>
-        <td style="text-align:center">+0,37</td>
-        <td style="text-align:center">+0,12</td>
+        <td style="text-align:center">{{(resultats["INDQ11A"]*100)|round(2)}}%</td>
+        <td style="text-align:center">{{(resultats["INDQ11B"]*100)|round(2)}}%</td>
         
       </tr>
       <tr>
@@ -76,7 +97,13 @@
         <td colspan="2" style="text-align:center">44</td>
 
       </tr>
+      <tr>
+        <th scope="row">3</th>
+        <td>INDQ1.4</td>
+        <td colspan="2" style="text-align:center">{{(resultats["INDQ14"])|round(2)}}</td>
 
+      </tr>
+<!-- 
       <tr>
         <th scope="row">4</th>
         <td>INDQ2.1A</td>
@@ -105,6 +132,14 @@
         <th scope="row">7</th>
         <td>INDQ2.1D</td>
         <td style="text-align:center">0,16</td>
+        <td style="text-align:center">N/A </td>
+     
+      </tr>
+-->
+      <tr>
+        <th scope="row">7</th>
+        <td>INDQ2.3DA</td>
+        <td style="text-align:center">{{(resultats["INDQ23DA"])|round(2)}}</td>
         <td style="text-align:center">N/A </td>
      
       </tr>
