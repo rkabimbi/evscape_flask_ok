@@ -20,7 +20,7 @@ class FormRegister( FlaskForm ):
     email = StringField('Email:', validators=[Email(message="Le format d'email n'est pas correct"), InputRequired(), Length(min=3, max=30,message="Veuillez renseigner un email d'une taille entre %(min)d à %(max)d caractères")])
     #dateTime = DateField("Birthday", default=date.today(), validators=[DataRequired(message="Entrez une date de naissance")])
     firstname = StringField('Prénom:', validators=[InputRequired(), Length(min=2, max=30,message='Votre prénom doit avoir une longueur de  %(min)d à %(max)d caractères')])
-    lastname = StringField('Nom de famille:', validators=[InputRequired(), Length(min=2, max=30,message='Votre nom doit avoir une longueur de  %(min)d à %(max)d caractères')])
+    lastname = StringField('Nom:', validators=[InputRequired(), Length(min=2, max=30,message='Votre nom doit avoir une longueur de  %(min)d à %(max)d caractères')])
     password = PasswordField('Mot de passe:', validators=[Length(min=3, max=30,message='Votre mdp doit avoir une longueur de  %(min)d à %(max)d caractères')])
     passwordConfirmation = PasswordField('Confirmation Mot de passe:', validators=[Length(min=3, max=30), EqualTo('password',message='Veuillez verifier votre password car visiblement différent de celui tapé précédemment') ])
     #admin=BooleanField('Admin',default=1)

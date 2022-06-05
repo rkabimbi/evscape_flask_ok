@@ -111,35 +111,61 @@
     
         
     
-        <div class="boxInscriptionForm"> 
+        <div class="boxInscriptionForm" style="padding: 25px;"> 
     
             <h2>Créer un compte</h2>
             <form action="/inscription" method="POST"> 
                 <div class="form-group"> <!-- formulaire-->
                     
                     {{ formulaireInscription.csrf_token }}<!-- sécurité-->
+                
+                    <div class="row" style="margin-top:10px" >
+                        <div class="col-sm-6">{{ formulaireInscription.username.label }}
+                            <div> {{ formulaireInscription.username(size=30, class='formulaire-control') }}</div>  
+                        </div>
                         
-                    <div class="formulaire-row">{{ formulaireInscription.username.label }} {{ formulaireInscription.username(size=20, class='formulaire-control') }}</div>
+                        <div class="col-sm-6">{{ formulaireInscription.titre.label }}
+                            <div> {{ formulaireInscription.titre(size=30, class='formulaire-control') }}</div>
+                        </div>
+                    </div>
                     
-                    <div class="formulaire-row">{{ formulaireInscription.firstname.label }} {{ formulaireInscription.firstname(size=30, class='formulaire-control') }}</div>
-                    
-                    <div class="formulaire-row">{{ formulaireInscription.lastname.label }} {{ formulaireInscription.lastname(size=30, class='formulaire-control') }}</div>
+                    <div class="row" style="margin-top:10px">
+                        <div class="col-sm-6">{{ formulaireInscription.lastname.label }} 
+                            <div>{{ formulaireInscription.lastname(size=30, class='formulaire-control') }}</div>
+                        </div>
+                        <div class="col-sm-6">{{ formulaireInscription.firstname.label }} 
+                            <div> {{ formulaireInscription.firstname(size=30, class='formulaire-control') }}</div>
+                        </div>
 
-                    <div class="formulaire-row">{{ formulaireInscription.titre.label }} {{ formulaireInscription.titre(size=30, class='formulaire-control') }}</div>
+                    </div>
 
-                    <div class="formulaire-row">{{ formulaireInscription.universite.label }} {{ formulaireInscription.universite(size=30, class='formulaire-control') }}</div>
-    
-                    <div class="formulaire-row">{{ formulaireInscription.email.label }} {{ formulaireInscription.email(size=60, class='formulaire-control') }}</div>
-    
-                   
-    
-                    <div class="formulaire-row">{{ formulaireInscription.password.label }} {{ formulaireInscription.password(size=60, class='formulaire-control') }}</div>
-    
-                    <div class="formulaire-row">{{ formulaireInscription.passwordConfirmation.label }} {{ formulaireInscription.passwordConfirmation(size=60, class='formulaire-control') }}</div>
+                    <div class="row" style="margin-top:10px" >
+                        <div class="col-sm-6"> {{ formulaireInscription.universite.label }} 
+                            <div> {{ formulaireInscription.universite(size=30, class='formulaire-control') }}</div>
+                        </div>
+
+                        <div class="col-sm-6"> {{ formulaireInscription.email.label }}
+                            <div> {{ formulaireInscription.email(size=30, class='formulaire-control') }} </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="row" style="margin-top:10px">
+                        <div class="col-sm-6"> {{ formulaireInscription.password.label }}
+                            <div> {{ formulaireInscription.password(size=30, class='formulaire-control') }}</div>
+                        </div>
+
+                        <div class="col-sm-6"> {{ formulaireInscription.passwordConfirmation.label }}
+                            <div> {{ formulaireInscription.passwordConfirmation(size=30, class='formulaire-control') }} </div>
+                        </div>
+
+                    </div>
+
     
                    
                 </div>
-                <div class="form-row">{{ formulaireInscription.submit (class='btn btn-warning')}}</div><!-- pour afficher le bouton-->
+                <div class="form-row" style="margin-top:10px">{{ formulaireInscription.submit (class='btn btn-warning')}}</div><!-- pour afficher le bouton-->
             
             
             </form>

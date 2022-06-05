@@ -206,3 +206,22 @@ input[type="text"]:disabled{
 .textChiffreCleTemoin{
     color: white;
 }
+
+
+.carteListeExperimentationPt{
+    margin: 10px;
+    border-radius: 15px;
+    height: 150px;
+    border: 5px solid #ffffff;
+    border-radius: 12px;
+    transition: transform .2s;/*temps transition de mon hoover*/
+    cursor: pointer;  /*afficher doigt*/  
+    padding: 5px;
+    background: white;
+    box-shadow: 1px 1px 8px rgb(171, 171, 171);
+    
+
+    
+
+   
+}

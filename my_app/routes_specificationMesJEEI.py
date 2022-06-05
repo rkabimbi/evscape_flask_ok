@@ -85,6 +85,14 @@ def fonction_specificationMesJEEI():
             "evolutionApprentissageMoyenne":0
     }
     resultats=[resultatsTem,resultatsExp]
+
+    infosExperimentations={
+        "date":[],
+        "id":[],
+        "complete":[],
+        "prof":[],
+        "nbrParticipants":[]
+    }
     
     if idJEEIAmodifier: #si un id est renseigné (ca veut dire qu'on a cliqué uncarte et donc on doit aller chercher le JEEI en question)
         #chercher dans DB
@@ -108,13 +116,24 @@ def fonction_specificationMesJEEI():
             #on va checker si au moins une experimentation est arrivée à l'etape 12
             if experimentation.etape12:
                 calculResultats=True
+            #on va completer un dict avec tte les informations dont on a besoin pour mettre dans les carte d'experimentation
+            infosExperimentations["complete"].append(calculResultats)
+            infosExperimentations["date"].append(experimentation.dateEvenement)
+        
+            infosExperimentations["id"].append(experimentation.id)
+            prof=User.query.filter_by(id=experimentation.fk_UserId).first()
+            infosExperimentations["prof"].append(prof.lastname+", "+prof.firstname)
+            participants=Participant.query.filter_by(fk_ExperimentationId=experimentation.id).all()
+            tailleEchantillon=len(participants)
+            infosExperimentations["nbrParticipants"].append(tailleEchantillon)
 
+    
         #on ne calcul des resultats que si il y a des experimentations validées (sinon ca fait des divisions par zero)
         if calculResultats:
             resultats=fonction_calculResultats(monJEEIAEnvoyer)
             print(resultats)
         else:
-            print("pas d'experimentations à ce stade!!!!")
+            print("pas d'experimentations évaluées à ce stade!!!!")
 
         
       
@@ -152,7 +171,7 @@ def fonction_specificationMesJEEI():
         
     print(monJEEIAEnvoyer)
     print(specification)
-    return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEIAEnvoyer,specificationJEEIRecupere=specification,theme=Theme,publicCible=PublicCible,questions=questions,membres=membres,experimentations=experimentations,users=users,resultats=resultats)
+    return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEIAEnvoyer,specificationJEEIRecupere=specification,theme=Theme,publicCible=PublicCible,questions=questions,membres=membres,experimentations=experimentations,users=users,resultats=resultats,infosExperimentations=infosExperimentations)
 
 def fonction_calculResultats(jeei):
     #on va gerer les resultats

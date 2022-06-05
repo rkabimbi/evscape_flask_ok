@@ -17,7 +17,7 @@ class Experimentation(UserMixin, db.Model):#userMixiin c'est pr traiter lesmetho
     __tablename__ = 'Experimentation' #pour renomr la table 
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
     idInterne = db.Column(db.Integer,nullable=True)
-    #dateEvenement= db.Column(db.Date, nullable=True)
+    dateEvenement= db.Column(db.Date, nullable=True)
     etape1 =db.Column(db.Boolean,default=False, nullable=False)
     etape2 =db.Column(db.Boolean,default=False, nullable=False)
     etape3 =db.Column(db.Boolean,default=False, nullable=False)
@@ -44,6 +44,7 @@ class Experimentation(UserMixin, db.Model):#userMixiin c'est pr traiter lesmetho
         self.fk_JeeiId=fk_JeeiId
         self.fk_UserId=fk_UserId
         self.idInterne=idInterne
+        self.dateEvenement=datetime.today()
 
        
 

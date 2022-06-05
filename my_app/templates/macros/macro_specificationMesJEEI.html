@@ -452,7 +452,7 @@
 
 {% endmacro %}
 
-{% macro afficheContenuListeExperimentations(monJEEI,experimentations,users) %}
+{% macro afficheContenuListeExperimentations(monJEEI,experimentations,users,infosExperimentations) %}
 
 <div class="row">
   <div class="btnGroupMesJEEIExperimentation ">
@@ -469,9 +469,11 @@
 <div class="row scrollercarteListeExperimentation"> 
 
   {%if experimentations%}<!-- pour ne pas que ca foire quand c'est null-->
-  {%for experimentation in experimentations%}
 
-    {{afficherCarteExperimentation(users[experimentation.fk_UserId],experimentation, monJeei)}}
+  {%for experimentation in experimentations%}
+  
+    {{afficherCarteExperimentation(users[experimentation.fk_UserId],experimentation, monJeei,infosExperimentations,(loop.index-1))}}
+
 
   {%endfor%}
   {%endif%}
@@ -489,28 +491,31 @@
 
 
 
-{%macro afficherCarteExperimentation(user,experimentation, jeei)%}
+{%macro afficherCarteExperimentation(user,experimentation, jeei,infosExperimentations,increment)%}
 
-<div class="col-sm-10 carteListeExperimentation"  >
+<div class="col-sm-10 carteListeExperimentationPt"  >
+  <h4 style="color:grey"> Expérimentation #{{infosExperimentations["id"][increment]}}</h4>
   <div class="row">
+
     <div class="col-sm-5">
           <ul class="column list-group list-group-flush">
             <li class="list-group-item">
               
-              <B> Date</B> : TBD 
+              <B> Date</B> : {{infosExperimentations["date"][increment]}}
 
 
             </li>
-            <li class="list-group-item">
-              <B> id</B> :{{experimentation.id}}
-            </li>
-            <li class="list-group-item">
-              <B> Statut</B> : complete ou non?
-            </li>
 
             <li class="list-group-item">
-              <B> Contact </B>: {{user.lastname}}, {{user.firstname}}
+              <B> Statut</B> : 
+              {%if infosExperimentations["complete"][increment] %}
+              Complète 
+              {%else%}
+              En-cours 
+              {%endif%}
             </li>
+
+
  
           </ul>
 
@@ -518,15 +523,19 @@
       
       <div class="col-sm-5">
         <ul class="column list-group list-group-flush">
-     
+ <!--    
           <li class="list-group-item">
             <B> Lieu </B>: Lieu
           </li>
-
+--> 
           <li class="list-group-item">
-            <B> Participants </B>: nbrParticipants
+            <B> Participants </B>: {{infosExperimentations["nbrParticipants"][increment]}}
           </li>
 
+          <li class="list-group-item">
+            <B> Contact </B>: {{infosExperimentations["prof"][increment]}}
+          </li>
+<!--
           <li class="list-group-item">
             <B> Apprentissage </B>: score 1
           </li>
@@ -535,7 +544,7 @@
             <B> Perception </B>: score 2
           </li>
 
-          
+ -->         
         </ul>
 
 
