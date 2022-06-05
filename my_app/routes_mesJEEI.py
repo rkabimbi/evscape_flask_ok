@@ -73,7 +73,7 @@ def fonction_mesJEEI():
 
 
 def fonction_conversionSQLDICT(mesJEEI,specifications):
-    res ={"noms":[],"auteurs":[],"auteursID":[],"nbrExperimentations":[],"img":[],"themes":[],"id":[],"statuts":[],"descriptifs":[],"scores":[]}
+    res ={"noms":[],"auteurs":[],"auteursID":[],"nbrExperimentations":[],"img":[],"themes":[],"id":[],"statuts":[],"descriptifs":[],"scores":[],"estValide":[]}
 
     for JEEI in mesJEEI:
         res["noms"].append(JEEI.nom)
@@ -122,6 +122,13 @@ def fonction_conversionSQLDICT(mesJEEI,specifications):
             res["scores"].append(evolutionApprentissageMoyenne)
         except ZeroDivisionError:
             res["scores"].append(0)
+        
+        if JEEI.estValide:#je dois procéder de la sorte pcq javascript me pose un probleme avec mes booleens
+            res["estValide"].append(1)
+        else:
+            res["estValide"].append(0)
+        
+       
        
   
     return res

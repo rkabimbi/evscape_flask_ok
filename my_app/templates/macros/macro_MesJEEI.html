@@ -4,45 +4,67 @@
 
 {% macro afficherCarteMesJEEI(indexJEEIDB,listeMesJEEI,indexCarteAffichage) %}
 
-  <div id={{"carteMesJEEI"+indexCarteAffichage}} class="cardMesJEEI" id="macroTest" onclick="redirectionVers('{{indexCarteAffichage}}')"><!-- le Onclick c'est pour rendre ma carte cliquable-->
-      
-      <div id={{"imgMesJEEI"+indexCarteAffichage}} style="height: 10rem;" > 
-        <img   src={{listeMesJEEI.img[indexJEEIDB]}} class="card-img-top imgCardMesJEEI"  alt="..." >
-      </div>
-      
-      <div class="card-body">
-        <h5 id={{"nomMesJEEI"+indexCarteAffichage}} class="card-title"><B> {{listeMesJEEI.noms[indexJEEIDB]}}</B></h5>
-        <p id={{"descriptifMesJEEI"+indexCarteAffichage}} class="card-text">{{listeMesJEEI.descriptifs[indexJEEIDB]}}</p>
-      </div>
-      <ul class="list-group list-group-flush">
-        <li id={{"concepteurMesJEEI"+indexCarteAffichage}} class="list-group-item"><B> Concepteur</B> :  {{listeMesJEEI.auteurs[indexJEEIDB]}}</li>
-        <li id={{"themeMesJEEI"+indexCarteAffichage}} class="list-group-item"><B> Thème</B> :  {{listeMesJEEI.themes[indexJEEIDB]}}</li>
-        <li id={{"statutMesJEEI"+indexCarteAffichage}} class="list-group-item"><B> Evolution apprentissage (moyenne)</B> : 
-          
-          {%if listeMesJEEI.scores[indexJEEIDB]>0%}
-          +{{(listeMesJEEI.scores[indexJEEIDB]*100)|round(2)}}% 
-          {%else%}
-          {{(listeMesJEEI.scores[indexJEEIDB]*100)|round(2)}}% 
-          {%endif%}
-        
-        </li>
-        <li id={{"nbrExperimentationsMesJEEI"+indexCarteAffichage}} class="list-group-item"><B> Nbr expérimentations</B> : {{listeMesJEEI.nbrExperimentations[indexJEEIDB]}}</li>
-      </ul>
-      
-      <div class="card-body boutonsCarte">
-
+  <div id={{"carteMesJEEI"+indexCarteAffichage}} class="cardMesJEEI" id="macroTest" >
+    <div onclick="redirectionVers('{{indexCarteAffichage}}')"> <!-- le Onclick c'est pour rendre ma carte cliquable-->
+            <div id={{"imgMesJEEI"+indexCarteAffichage}} style="height: 10rem;" > 
+              <img   src={{listeMesJEEI.img[indexJEEIDB]}} class="card-img-top imgCardMesJEEI"  alt="..." >
+            </div>
+            
+            <div class="card-body">
+              <h5 id={{"nomMesJEEI"+indexCarteAffichage}} class="card-title"><B> {{listeMesJEEI.noms[indexJEEIDB]}}</B></h5>
+              <p id={{"descriptifMesJEEI"+indexCarteAffichage}} class="card-text">{{listeMesJEEI.descriptifs[indexJEEIDB]}}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li id={{"concepteurMesJEEI"+indexCarteAffichage}} class="list-group-item"><B> Concepteur</B> :  {{listeMesJEEI.auteurs[indexJEEIDB]}}</li>
+              <li id={{"themeMesJEEI"+indexCarteAffichage}} class="list-group-item"><B> Thème</B> :  {{listeMesJEEI.themes[indexJEEIDB]}}</li>
+              <li id={{"statutMesJEEI"+indexCarteAffichage}} class="list-group-item"><B> Evolution apprentissage (moyenne)</B> : 
+                
+                {%if listeMesJEEI.scores[indexJEEIDB]>0%}
+                +{{(listeMesJEEI.scores[indexJEEIDB]*100)|round(2)}}% 
+                {%else%}
+                {{(listeMesJEEI.scores[indexJEEIDB]*100)|round(2)}}% 
+                {%endif%}
+              
+              </li>
+              <li id={{"nbrExperimentationsMesJEEI"+indexCarteAffichage}} class="list-group-item"><B> Nbr expérimentations</B> : {{listeMesJEEI.nbrExperimentations[indexJEEIDB]}}</li>
+            </ul>
+    </div>
+    <div class="card-body boutonsCarte">
+      <!-- 
+        {{listeMesJEEI.estValide[indexJEEIDB]}}
           <div id={{"btnExperimentationMesJeei"+indexCarteAffichage}}> 
-            <a  class="btn btn-outline-warning" href="http://127.0.0.1:5000/uneExperimentation?idJEEI={{listeMesJEEI.id[indexJEEIDB]}}" role="button">Expérimenter</a>
+            <button  class="btn btn-outline-warning" onclick='window.location.href = "http://127.0.0.1:5000/uneExperimentation?idJEEI={{listeMesJEEI.id[indexJEEIDB]}}";'  
+            {%if listeMesJEEI.estValide[indexJEEIDB]%}
+            {%else%}
+            disabled 
+            {%endif%}
+            
+            >Expérimenter</button>
           </div>
-        
+        -->
+
+        <div id={{"btnExperimentationMesJeei"+indexCarteAffichage}}> 
+          <a   href="http://127.0.0.1:5000/uneExperimentation?idJEEI={{listeMesJEEI.id[indexJEEIDB]}}" role="button" 
+          {%if listeMesJEEI.estValide[indexJEEIDB]==1%}
+            class="btn btn-outline-warning"
+            {%else%}
+            class="btn btn-outline-warning disabled"
+            {%endif%}
+          
+          
+          
+          >Expérimenter</a>
+        </div>
+
           <div id={{"btnDataMesJeei"+indexCarteAffichage}}> 
-          <a class="btn btn-outline-secondary " href="http://127.0.0.1:5000/DataJEEI?idJEEI={{listeMesJEEI.id[indexJEEIDB]}}" role="button" >Data</a>
+          <a class="btn btn-outline-secondary " href="http://127.0.0.1:5000/specificationMesJEEI?idJEEI={{listeMesJEEI.id[indexJEEIDB]}}" role="button" >Data</a> <!-- je passe une date en plus qui permet de jouer le rôle d'ancre-->
           </div>
           <div id={{"btnEffacerMesJeei"+indexCarteAffichage}}>
-          <a class="btn btn-outline-danger " href="http://127.0.0.1:5000/SupprimerMonJEEI?idJEEI={{listeMesJEEI.id[indexJEEIDB]}}" role="button" >Supprimer</a>
+          <a class="btn btn-outline-danger disabled " href="http://127.0.0.1:5000/SupprimerMonJEEI?idJEEI={{listeMesJEEI.id[indexJEEIDB]}}" role="button" >Supprimer</a>
           </div>
           
-      </div>
+          
+    </div>
   </div> 
 
 {% endmacro %}

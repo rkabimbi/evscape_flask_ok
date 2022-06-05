@@ -49,14 +49,15 @@ from my_app.models.questionnaireMotivation import QuestionnaireMotivation
 from my_app.models.questionnairePostTest import QuestionnairePostTest
 from my_app.models.questionnairePreTest import QuestionnairePreTest
 from my_app.models.questionnaireUX import QuestionnaireUX
-
+import sys
 
 
 @app.route("/specificationMesJEEI", methods=['GET', 'POST'])
 @login_required
 def fonction_specificationMesJEEI():
     print("specificationMesJEEI")
-    
+
+
     #recuperation ID qui est communiqué depuis le HTML
     print("id recuperé de HTML :", request.args.get("idJEEI") )
     idJEEIAmodifier = request.args.get("idJEEI")

@@ -28,9 +28,22 @@ function fonction_affichageMesJEEI(numPager, listeMesJEEI,nbrPagesTotal,nbrJEEI)
         document.getElementById("statutMesJEEI"+i).innerHTML="<B> Evolution apprentissage (moyenne)</B> :"+listeMesJEEI.scores[(indexDBSol+i)]
         document.getElementById("descriptifMesJEEI"+i).innerHTML=listeMesJEEI.descriptifs[(indexDBSol+i)]
         document.getElementById("nbrExperimentationsMesJEEI"+i).innerHTML="<B> Nbr expérimentations</B> :"+listeMesJEEI.nbrExperimentations[(indexDBSol+i)]
-        document.getElementById("btnExperimentationMesJeei"+i).innerHTML="<a class='btn btn-outline-warning' href='http://127.0.0.1:5000/uneExperimentation?idJEEI="+listeMesJEEI.id[(indexDBSol+i)]+"' role='button'>Expérimenter</a>"
-        document.getElementById("btnDataMesJeei"+i).innerHTML="<a class='btn btn-outline-secondary ' href='http://127.0.0.1:5000/DataJEEI?idJEEI="+listeMesJEEI.id[(indexDBSol+i)]+"' role='button' >Data</a>"
-        document.getElementById("btnEffacerMesJeei"+i).innerHTML="<a class='btn btn-outline-danger ' href='http://127.0.0.1:5000/SupprimerMonJEEI?idJEEI="+listeMesJEEI.id[(indexDBSol+i)]+"' role='button' >Supprimer</a>"
+
+        //pour gerer le disabled si jms il est pas validé
+        if(listeMesJEEI.estValide[(indexDBSol+i)]==1)
+        {
+            document.getElementById("btnExperimentationMesJeei"+i).innerHTML="<a  href='http://127.0.0.1:5000/uneExperimentation?idJEEI="+listeMesJEEI.id[(indexDBSol+i)]+"' role='button' class='btn btn-outline-warning'>Expérimenter</a>"
+        }
+        else
+        {
+            document.getElementById("btnExperimentationMesJeei"+i).innerHTML="<a  href='http://127.0.0.1:5000/uneExperimentation?idJEEI="+listeMesJEEI.id[(indexDBSol+i)]+"' role='button' class='btn btn-outline-warning disabled' >Expérimenter</a>"
+        }
+
+
+
+
+        document.getElementById("btnDataMesJeei"+i).innerHTML="<a class='btn btn-outline-secondary  ' href='http://127.0.0.1:5000/specificationMesJEEI?idJEEI="+listeMesJEEI.id[(indexDBSol+i)]+"' role='button' >Data</a>"
+        document.getElementById("btnEffacerMesJeei"+i).innerHTML="<a class='btn btn-outline-danger ' href='http://127.0.0.1:5000/SupprimerMonJEEI?idJEEI="+listeMesJEEI.id[(indexDBSol+i)]+"' role='button' disabeld >Supprimer</a>"
     }
     
     //regler le probleme de la dernière page qui peut contenir moins de 4 elements (suite)
