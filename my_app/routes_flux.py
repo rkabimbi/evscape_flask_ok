@@ -2,6 +2,7 @@
 #mes imports
 ##########################################################
 
+from cmath import sqrt
 from sqlalchemy import false
 from my_app import app
 from flask import Flask, redirect
@@ -67,7 +68,8 @@ def fonction_calculResultats():
         "INDQ11B":0,
         "nbrParticipantsExp":0,
         "nbrParticipantsTem":0,
-        "INDQ14":0
+        "INDQ14":0,
+        "INDQ23DA":0
 
     }
     
@@ -153,7 +155,7 @@ def fonction_calculResultats():
     resultats["INDQ11B"]=evolutionApprentissageGlobalRelativeExp/nbrTotalEvalExp
 
     ################################
-    #calcul de la correlation INDQ14
+    #calcul du rapport de correlation INDQ14
     ################################
 
     #calul de la moyenne generale tous groupe confondeur (Ebar) car c'est la base pour la suite
@@ -198,7 +200,59 @@ def fonction_calculResultats():
     resultats["INDQ14"]=numerateur/denominateur
 
 
+    ################################
+    #calcul du coefficient de  correlation INDQ23DA (ne se base que sur les data du groupe exp)
+    ################################
+
+    resultats["INDQ23DA"]=fonction_coefficientCorrelation(evalExp, pExp)
+
+
     return resultats
+
+
+def fonction_coefficientCorrelation(evalExp,pExp):
+    print("fonction_coefficientCorrelation")
+    eBar=0 #moyenne evolution apprentissage
+    dBar=0 #age moyen
+    dAP=0 #age participant
+
+    denominateur=0
+    numerateur=0
+    partieGauche=0
+    partieDroite=0
+  
+    for evaluation in evalExp:
+        #calcul moyenne resultats
+        resPreTest=fonction_CalculScorePreTest(evaluation)
+        resPostTest=fonction_CalculScorePostTest(evaluation)
+        eBar= eBar+((resPostTest-resPreTest)/resPreTest) /(pExp)  #increment de la moyenne general
+
+        #calcul age moyen
+        participant=Participant.query.filter_by(id=evaluation.fk_ParticipantId).first()
+        dBar=dBar+participant.age/pExp
+
+    for evaluation in evalExp:
+        #calcul du numerateur
+        resPreTest=fonction_CalculScorePreTest(evaluation)
+        resPostTest=fonction_CalculScorePostTest(evaluation)
+        eP=(resPostTest-resPreTest)/resPreTest#evolution d'apprentissage pour participant P
+        participant=Participant.query.filter_by(id=evaluation.fk_ParticipantId).first()
+        age=participant.age
+        numerateur=numerateur+(eP-eBar)*(age-dBar)
+
+        #calcul du denom
+        partieGauche=partieGauche+(eP-eBar)*(eP-eBar)
+        partieDroite=partieDroite+(age-dBar)*(age-dBar)
+
+    
+    denominateur=sqrt(partieGauche)*sqrt(partieDroite)
+
+    resultat=abs(numerateur/denominateur)
+
+    return resultat
+
+
+
 
 
 #fonction qui offre une verification complémentaire à la précédente (dès cas qui ne devraient pas arriver mais bon)
@@ -218,6 +272,8 @@ def fonction_verificationCompletComplement(evaluation):
         return False
     else :
         return True
+
+
 
 
 def fonction_CalculScorePreTest(evaluation):
