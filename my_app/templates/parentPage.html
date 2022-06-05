@@ -13,7 +13,7 @@
         <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top ">
             <ul class="nav"><!-- ul : liste non ordonnée-->
                 <a class="navbar-brand" style="color: gold;" href="/">EvscApp</a><!-- Un bouton "Logo"-->
-                <li class="nav-item"><a class="nav-link active " href="/aPropos">A propos</a></li>
+                <li class="nav-item"><a class="nav-link active " href="/aPropos">Documentation</a></li>
                 {% if currentUser.is_authenticated%}<!-- Si utilisateur connecté alors il voit le menu suivant-->
                     <li class="nav-item"><a class="nav-link active" href="/flux">Indicateurs Clés</a></li>
                     <li class="nav-item"><a class="nav-link active" href="/mesJEEI"> Jeux d'Evasion</a></li>
@@ -66,11 +66,16 @@
 
         <div style="margin-top: 25px;"> 
         <footer class="footer text-white-50 bg-dark" >
+            <div > 
             {% if currentUser.is_authenticated%}
            
                 <p class="text-white-50 bg-dark" style="padding-top: 10px;">Utilisateur connecté  :   <strong>  <font color="gold"> {{currentUser.firstname}} {{currentUser.lastname}}</font></strong> </p>
        
             {%endif%}
+            </div>
+            <div > 
+                <a href="www.unamur.be/info" style="color: rgb(72, 247, 72);"> Unamur </a>- 2022
+            </div>
         </footer >
         </div>
 
