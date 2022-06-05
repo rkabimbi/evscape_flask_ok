@@ -22,7 +22,7 @@
     Plus que l'application EvscApp nous souhaitons que vous évaluiez la méthode Evscape.</p>
 <div class="wrap">
 
-    <form action="/sauvegardeQuestionnaireUX">
+    <form action="/sauvegardeUEQ">
 
     <div class="scroller">
         {{macro_ueq.afficheUnElementLikert("Agaçant","Agréable","u01")}}
@@ -53,7 +53,13 @@
         {{macro_ueq.afficheUnElementLikert("Conservateur","Innovant","u26")}}
     </div>
 
-        
+    <label class="col-sm-2 form-label" for="commentaireUEQ" style="margin-top:25px">Commentaires complémentaires </label>
+    <div class=" col-sm-8 form-outline">
+        <textarea style="color:rgb(79, 79, 79)" class="form-control" id="commentaireUEQ" maxlength='300'rows="6" 
+          style="color:grey" > 
+       
+        </textarea> 
+    </div>
 
        
 

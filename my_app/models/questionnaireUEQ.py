@@ -6,7 +6,7 @@ from werkzeug.security import generate_password_hash, check_password_hash #pour 
 from datetime import datetime#pour la date d'annif
 from my_app import login_manager # A NE PAS OUBLIER
 
-from sqlalchemy import Table, Column, Integer, ForeignKey
+from sqlalchemy import Table, Column, Integer, ForeignKey,Text
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 import enum
@@ -49,6 +49,8 @@ class QuestionnaireUEQ(UserMixin, db.Model):#userMixiin c'est pr traiter lesmeth
     u24 = db.Column(db.Integer, nullable=True)
     u25 = db.Column(db.Integer, nullable=True)
     u26 = db.Column(db.Integer, nullable=True)
+    commentaire=db.Column(db.Text(300), nullable=True)
+    date=db.Column(db.Date, nullable=True)
 
     fk_UserId = db.Column(db.Integer, db.ForeignKey('User.id'),nullable=False)
 
@@ -59,8 +61,10 @@ class QuestionnaireUEQ(UserMixin, db.Model):#userMixiin c'est pr traiter lesmeth
     #score=db.Column(db.Integer,default=0)
     #r_enigme=db.relationship('Enigmes', backref=db.backref('auteur', lazy=True))#on dit que la relation c'est avec la classe Enigmes 
 
-    def __init__(self):
+    def __init__(self,userId):
         print("constructeur vide questionnaire UEQ")
+        self.fk_UserId=userId
+        self.date=datetime.today() 
         
         
  
