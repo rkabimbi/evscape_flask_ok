@@ -38,6 +38,8 @@ from datetime import date
 
 from my_app.models.jeei_package.jeei import Jeei
 from my_app.models.jeei_package.specification import Specification, Statut, Theme, PublicCible
+from my_app.models.evaluation import Evaluation
+from my_app.models.participant import Participant
 
 
 
@@ -57,6 +59,12 @@ def fonction_mesExperimentations():
         jeeiExperimente = Jeei.query.filter_by(id=experimentation.fk_JeeiId).first()
         specificationJeeiExperimente = Specification.query.filter_by(id=jeeiExperimente.fk_SpecificationId).first()
 
+        compteurParticipantConsentant=0
+        participants=Participant.query.filter_by(fk_ExperimentationId=experimentation.id).all()
+        for participant in participants:
+            if participant.consentement:
+                compteurParticipantConsentant=compteurParticipantConsentant+1
+
         experimentationDict={
             #tous les id ici me permettront de passer aux routes l'id afin qu'ils puissent savoir de quoi
             #il s'agit et rebalancer de l'info
@@ -67,9 +75,9 @@ def fonction_mesExperimentations():
             "publicCible":specificationJeeiExperimente.publicCible,
             "theme":specificationJeeiExperimente.theme,
             "chapitre":specificationJeeiExperimente.chapitre,
-            "participants":"TBD",
-            "Apprentissage":"TBD",
-            "PerceptionGlobale":"TBD",
+            "participants":compteurParticipantConsentant,
+            "dateEvenement":experimentation.dateEvenement,
+            "statut": experimentation.etape12
         }
 
         experimentationsTabDeDict.append(experimentationDict) 

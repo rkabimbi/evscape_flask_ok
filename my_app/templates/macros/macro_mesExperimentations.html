@@ -9,20 +9,15 @@
           <ul class="column list-group list-group-flush">
             <li class="list-group-item">
               
-              <B> Date</B> : TBD 
+              <B> Date</B> : {{experimentation.dateEvenement}}
 
 
             </li>
             <li class="list-group-item">
               <B> Public</B> :{{experimentation.publicCible.value}}
             </li>
-            <li class="list-group-item">
-              <B> Theme</B> : {{experimentation.theme.value}}
-            </li>
-            <li class="list-group-item">
-                <B> Chapitre</B> : {{experimentation.chapitre}}
-              </li>
-
+            
+            
  
           </ul>
 
@@ -33,17 +28,21 @@
      
          
 
+
+
+          <li class="list-group-item">
+            <B> Statut</B> : 
+              {% if experimentation.statut %}
+              Complète 
+              {%else%}
+              En-cours 
+              {%endif%}
+              
+          </li>
           <li class="list-group-item">
             <B> Participants </B>: {{experimentation.participants}}
           </li>
 
-          <li class="list-group-item">
-            <B> Apprentissage </B>: {{experimentation.Apprentissage}}
-          </li>
-
-          <li class="list-group-item">
-            <B> Perception </B>: {{experimentation.PerceptionGlobale}}
-          </li>
 
           
         </ul>
