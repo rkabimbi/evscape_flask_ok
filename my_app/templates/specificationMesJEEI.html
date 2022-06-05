@@ -41,7 +41,8 @@
       <li>
         {# si la personne est pas l'auteur du JEEI elle voit pas le bouton valider#}
         {% if currentUser.id == monJEEIRecupere.auteurID %} 
-        <button type="button" class="btn btn-success" onclick='fonction_validerJEEI({{monJEEIRecupere.id}})' 
+        <span id="btnValiderJeeibtn"> 
+        <button type="button"  class="btn btn-success" onclick='fonction_validerJEEI({{monJEEIRecupere.id}})' 
         
         {% if monJEEIRecupere.estValide %}
             disabled
@@ -57,6 +58,7 @@
       
       
       </li>
+      </span>
       
   </ul>
   

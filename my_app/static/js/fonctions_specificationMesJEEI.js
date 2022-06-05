@@ -457,6 +457,9 @@ function fonction_validerJEEI(idJeei,question)
     document.getElementById('idBtnChargezSpec').disabled = true;
     document.getElementById('btnExpDansSpec').disabled = false;
 
+    document.getElementById('btnValiderJeeibtn').disabled = true;
+    document.getElementById('btnValiderJeeibtn').innerHTML= "<button  id='btnValiderJeeibtn' class='btn btn-danger'> Validé   </button>"
+
   
     var xhttp = new XMLHttpRequest( );
     let url = new URL('http://127.0.0.1:5000/validerJEEI?idJeei='+ idJeei);  
