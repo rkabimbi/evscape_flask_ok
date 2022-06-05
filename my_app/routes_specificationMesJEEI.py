@@ -66,11 +66,24 @@ def fonction_specificationMesJEEI():
     #pas necessairement celles de l'utilisateur courrant
     users=User.query.all()
 
-    resultats={
-        "Apprentissage":[],
-        "UX":[],
-        "Motivation":[]
+    #je fais ca pour obtenir le meme format de reponse quand on passe a une nouvelle ou deja cree ecaluation
+    resultatsTem={
+            "motivation":0,
+            "ux":0,
+            "pre":0,
+            "post":0,
+            "nbrParticipants":0,
+            "evolutionApprentissageMoyenne":0
     }
+    resultatsExp={
+            "motivation":0,
+            "ux":0,
+            "pre":0,
+            "post":0,
+            "nbrParticipants":0,
+            "evolutionApprentissageMoyenne":0
+    }
+    resultats=[resultatsTem,resultatsExp]
     
     if idJEEIAmodifier: #si un id est renseigné (ca veut dire qu'on a cliqué uncarte et donc on doit aller chercher le JEEI en question)
         #chercher dans DB
@@ -138,7 +151,7 @@ def fonction_specificationMesJEEI():
         
     print(monJEEIAEnvoyer)
     print(specification)
-    return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEIAEnvoyer,specificationJEEIRecupere=specification,theme=Theme,publicCible=PublicCible,questions=questions,membres=membres,experimentations=experimentations,users=users)
+    return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEIAEnvoyer,specificationJEEIRecupere=specification,theme=Theme,publicCible=PublicCible,questions=questions,membres=membres,experimentations=experimentations,users=users,resultats=resultats)
 
 def fonction_calculResultats(jeei):
     #on va gerer les resultats

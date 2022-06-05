@@ -393,9 +393,60 @@
 {% endmacro %}
 
 
-{% macro afficheContenuResultats() %}
+{% macro afficheContenuResultats(resultats) %}
+<div class="row" style="margin:15px;font-weight: bold;color: grey;">
 
-FAIRE JUSTE UN TABLEAUX CLASSIQU ET j'Y MET TTE LES DATAS (dans un premier temps en tt cas)
+  Données relatives à toutes les expérimentations réalisées pour ce jeu d'évasion ({{resultats[1]["nbrParticipants"]}}  participants):
+
+  </div>
+
+  <div class="row">
+            <div class="col-sm-3 scoringJaune ">
+              <h1 class="chiffreCle"> 
+                {%if resultats[1]["evolutionApprentissageMoyenne"]>=0%}
+                + {{(resultats[1]["evolutionApprentissageMoyenne"]*100)|round(2)}}%
+                {%else%}
+                {{(resultats[1]["evolutionApprentissageMoyenne"]*100)|round(2)}}%
+                {%endif%}
+              </h1>
+              <div class="card-body">
+                <h5 class="card-title titrechiffreCleTemoin"> Evolution relative d'apprentissage moyenne</h5>
+                <p class="card-text textChiffreCleTemoin">Evolution relative d'apprentissage moyenne pour le groupe expérimental.</p>
+              </div>
+          </div>
+
+         
+          <div class="col-sm-3 scoringGris ">
+            <h1 class="chiffreCle"> 
+        
+              {{(resultats[1]["motivation"]*100)|round(2)}}%
+          
+
+            </h1>
+            <div class="card-body">
+              <h5 class="card-title titrechiffreCleTemoin"> Motivation moyenne</h5>
+              <p class="card-text textChiffreCleTemoin">Motivation moyenne témoignée par les étudiants à l'idée d'apprendre via le jeu d'évasion.</p>
+            </div>
+        </div>
+
+
+        <div class="col-sm-3 scoringGris ">
+          <h1 class="chiffreCle"> 
+      
+            {{(resultats[1]["ux"]*100)|round(2)}}%
+        
+
+          </h1>
+          <div class="card-body">
+            <h5 class="card-title titrechiffreCleTemoin"> Expérience utilisateur moyenne</h5>
+            <p class="card-text textChiffreCleTemoin">Appréciation moyenne témoignée par les étudiants à l'issue de l'activité.</p>
+          </div>
+      </div>
+
+      
+
+
+  </div>
 
 
 
