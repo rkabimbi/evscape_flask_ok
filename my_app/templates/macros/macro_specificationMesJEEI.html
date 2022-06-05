@@ -403,7 +403,7 @@
   <div class="row">
             <div class="col-sm-3 scoringJaune ">
               <h1 class="chiffreCle"> 
-                {%if resultats[1]["evolutionApprentissageMoyenne"]>=0%}
+                {%if resultats[1]["evolutionApprentissageMoyenne"]>0%}
                 + {{(resultats[1]["evolutionApprentissageMoyenne"]*100)|round(2)}}%
                 {%else%}
                 {{(resultats[1]["evolutionApprentissageMoyenne"]*100)|round(2)}}%

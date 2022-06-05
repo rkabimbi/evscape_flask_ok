@@ -24,7 +24,7 @@
 <div class="row fluxKpi">
     <div class="col-sm-4 fluxKpiItemTemoin ">
         <h1 class="chiffreCle"> 
-          {%if resultats["INDQ11A"]>=0%}
+          {%if resultats["INDQ11A"]>0%}
           + {{(resultats["INDQ11A"]*100)|round(2)}}%
           {%else%}
            {{(resultats["INDQ11A"]*100)|round(2)}}%
@@ -39,7 +39,7 @@
      
             <h1 class="chiffreCle"> 
               
-              {%if resultats["INDQ11B"]>=0%}
+              {%if resultats["INDQ11B"]>0%}
               + {{(resultats["INDQ11B"]*100)|round(2)}}%
               {%else%}
                {{(resultats["INDQ11B"]*100)|round(2)}}%

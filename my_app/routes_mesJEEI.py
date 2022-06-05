@@ -40,6 +40,7 @@ from my_app.models.jeei_package.jeei import Jeei
 from my_app.models.jeei_package.specification import Specification, Statut, Theme, PublicCible
 from my_app.models.jeei_package.jointureJeeiUser import JointureJeeiUser
 from my_app.models.experimentation import Experimentation
+from my_app.routes_specificationMesJEEI import fonction_calculResultats
 
 
 
@@ -101,8 +102,26 @@ def fonction_conversionSQLDICT(mesJEEI,specifications):
         for experimentation in experimentations:
             if experimentation.fk_JeeiId==JEEI.id:
                 total=total+1
-        res["nbrExperimentations"].append(total)
-        res["scores"].append(0)
+        res["nbrExperimentations"].append(total)#validées ou non
+        #si il y a des experimentations completes
+        """ 
+        experimentationOk=False
+        for experimentation in experimentations:
+            if experimentation.fk_JeeiId==JEEI.id:
+                if experimentation.etape12:#si on est arrivé à étape 12 (au moins une fois)
+                    experimentationOk=True
+        if experimentationOk:
+            res["scores"].append(fonction_calculResultats(JEEI))
+        else:
+            res["scores"].append(0)
+        """
+        try:
+            #je renvoi pas tt le return de la fonction car jinja ne sait pas gerer le tableau de tableau
+            resultatsTemp=fonction_calculResultats(JEEI)
+            evolutionApprentissageMoyenne=resultatsTemp[1]["evolutionApprentissageMoyenne"]
+            res["scores"].append(evolutionApprentissageMoyenne)
+        except ZeroDivisionError:
+            res["scores"].append(0)
        
   
     return res
