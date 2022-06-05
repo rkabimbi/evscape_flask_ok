@@ -2,6 +2,7 @@
 #mes imports
 ##########################################################
 
+from decimal import DivisionByZero
 from turtle import pos
 from my_app import app
 from flask import Flask, redirect
@@ -444,9 +445,15 @@ def fonction_calculResultats(jeei):
         print("resultat groupe temoin :",resultatsGroupeTemoin)
         print("resultat groupe exp:",resultatsGroupeExperimental)
 
-        resultatsGroupeExperimental["evolutionApprentissageMoyenne"]= resultatsGroupeExperimental["evolutionApprentissageMoyenne"]/nbrMembresGroupeExp
+        try:
+            resultatsGroupeExperimental["evolutionApprentissageMoyenne"]= resultatsGroupeExperimental["evolutionApprentissageMoyenne"]/nbrMembresGroupeExp
+        except ZeroDivisionError:
+            resultatsGroupeExperimental["evolutionApprentissageMoyenne"]= 0
 
-        resultatsGroupeTemoin["evolutionApprentissageMoyenne"]=resultatsGroupeTemoin["evolutionApprentissageMoyenne"]/nbrMembresGroupeTem
+        try:
+            resultatsGroupeTemoin["evolutionApprentissageMoyenne"]=resultatsGroupeTemoin["evolutionApprentissageMoyenne"]/nbrMembresGroupeTem
+        except ZeroDivisionError:
+            resultatsGroupeTemoin["evolutionApprentissageMoyenne"]=0
 
 
 

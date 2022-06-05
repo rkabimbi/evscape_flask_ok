@@ -25,7 +25,7 @@ function retourDebloquerFormulaireDemographique(responseText)
     console.log(responseText)
     //var fichJsonParse=JSON.parse(responseText);//parsing du fichier JSON envoyé par jsonify
     
-
+    document.getElementById("etapeExperimentation3").innerHTML='<h5 class="card-title" style="color: grey; font-weight: bold;" id="etapeExperimentation2">Etape 3 <span class="badge badge-success" style="margin-left:15px">emails envoyés</span>'
 
 }
 
@@ -77,6 +77,7 @@ function retourDebloquerFormulairePreTest(responseText)
     console.log(responseText)
     //var fichJsonParse=JSON.parse(responseText);//parsing du fichier JSON envoyé par jsonify
     
+    document.getElementById("etapeExperimentation7").innerHTML='<h5 class="card-title" style="color: grey; font-weight: bold;" id="etapeExperimentation2">Etape 7 <span class="badge badge-success" style="margin-left:15px">emails envoyés</span>'
 
 
 }
@@ -131,7 +132,7 @@ function retourDebloquerFormulairePostTest(responseText)
     console.log("retourDebloquerFormulairePostTest")
     console.log(responseText)
     //var fichJsonParse=JSON.parse(responseText);//parsing du fichier JSON envoyé par jsonify
-    
+    document.getElementById("etapeExperimentation10").innerHTML='<h5 class="card-title" style="color: grey; font-weight: bold;" id="etapeExperimentation2">Etape 10 <span class="badge badge-success" style="margin-left:15px">emails envoyés</span>'
 
 
 }
@@ -201,7 +202,7 @@ function retourDebloquerFormulaireMotivation(responseText)
     console.log("retourDebloquerFormulaireMotivation")
     console.log(responseText)
     //var fichJsonParse=JSON.parse(responseText);//parsing du fichier JSON envoyé par jsonify
-    
+    document.getElementById("etapeExperimentation6").innerHTML='<h5 class="card-title" style="color: grey; font-weight: bold;" id="etapeExperimentation2">Etape 6 <span class="badge badge-success" style="margin-left:15px">emails envoyés</span>'
 
 
 }
@@ -234,7 +235,7 @@ function retourDebloquerFormulaireUX(responseText)
     console.log("retourDebloquerFormulaireUX")
     console.log(responseText)
     //var fichJsonParse=JSON.parse(responseText);//parsing du fichier JSON envoyé par jsonify
-    
+    document.getElementById("etapeExperimentation11").innerHTML='<h5 class="card-title" style="color: grey; font-weight: bold;" id="etapeExperimentation2">Etape 11 <span class="badge badge-success" style="margin-left:15px">emails envoyés</span>'
 
 
 }
