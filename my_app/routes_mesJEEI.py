@@ -39,6 +39,7 @@ from datetime import date
 from my_app.models.jeei_package.jeei import Jeei
 from my_app.models.jeei_package.specification import Specification, Statut, Theme, PublicCible
 from my_app.models.jeei_package.jointureJeeiUser import JointureJeeiUser
+from my_app.models.experimentation import Experimentation
 
 
 
@@ -51,19 +52,6 @@ def fonction_mesJEEI():
     #Extraction des données (on gagne en manipulation et rapidité en chargeant tt d'abord)
     mesJEEI=Jeei.query.all()
     specifications= Specification.query.all()
-    #users= User.query.all()
-
-
-    #Step1 - Rechercher dans DB que tous les JEEI propres à l'utilisateurs connectés. Quand on dit PROPRES càd ceux qu'il a crée ou ceux
-    # pour lesquels il a fait une experimentation!!! ATTENTION DONC
-
-    #...
-
-    #Step2 - Convertir ce que la DB renvoi en dictionnaire
-
-    #...
-    #ATTENTION lors de la conversion important de garder les noms utilisés ci-dessous en en-tête sinon ca va bugger
-
     
     mesJEEI=fonction_conversionSQLDICT(mesJEEI,specifications)
   
@@ -73,6 +61,7 @@ def fonction_mesJEEI():
         print(mesJEEI)
         nbrJEEI=len(mesJEEI['noms'])
         nbrPagesTotal=math.ceil(nbrJEEI/4)#necessaire pour definir la taille de pager
+
         return render_template("mesJEEI.html",currentUser=current_user,listeMesJEEI=mesJEEI,nbrPagesTotal=nbrPagesTotal,pagination=1,nbrJEEI=nbrJEEI)
     else:
         #on renvoi vers la création de JEEI
@@ -92,7 +81,7 @@ def fonction_conversionSQLDICT(mesJEEI,specifications):
         createur=createur.lastname+", "+createur.firstname
         res["auteurs"].append(createur)
         res["auteursID"].append(JEEI.auteurID)
-        res["nbrExperimentations"].append(10) # en attendant d'avoir les tables qu'il faut
+        
         if specifications[JEEI.fk_SpecificationId-1].theme!=None:#si y a pas de value selectionnée par l'utilisateur et qu'on a donc un JEEI sans thème alors ici quand il va faire la fonction .value ca va bugguer
             res["themes"].append(specifications[JEEI.fk_SpecificationId-1].theme.value)#-1 car la liste commence à zero et .value c'est pour recuperer le string de l'enum
              
@@ -105,6 +94,14 @@ def fonction_conversionSQLDICT(mesJEEI,specifications):
             res["statuts"].append(specifications[JEEI.fk_SpecificationId-1].statut.value)#-1 car la liste commence à zero
         else:#obligé de faire ce else sinon quand il charge les cartes il lui manque des données pour les boucles dans le HTML
             res["statuts"].append(None)
+
+        #gestion du nbr d'experimentation par JEEI
+        experimentations=Experimentation.query.all()
+        total =0
+        for experimentation in experimentations:
+            if experimentation.fk_JeeiId==JEEI.id:
+                total=total+1
+        res["nbrExperimentations"].append(total)
        
   
     return res
