@@ -1,0 +1,84 @@
+<head>
+    <link href="/static/css/questionnaireUEQ.css" rel="stylesheet"><!-- idem-->
+    {% import "macros/macro_ueq.html" as macro_ueq %}<!-- import de macro. Comme ça c'est dispo pour toutes les pages filles -->
+</head>
+
+<!-- herite de main (de tout sauf les blocks (donc le menu)) -->
+{% extends "parentPage.html" %}
+
+<!-- Tout ce dont on a pas herité de main -->
+
+
+
+{% block body %}
+<body onload="changerImageFond()"> </body>
+<!-- <h2 class="likert-header" style="color: grey;">Questionnaire d'expérience utilisateur - {{nomJEEI}} </h2>-->
+
+
+<h2 class="likert-header" style="color: grey;">Questionnaire UEQ (Evscape)   </h2>
+
+{%if evaluateur%}
+<p style="margin-top:25px"> Nous vous remercions de prendre le temps de nous fournir un feedback.
+    Plus que l'application EvscApp nous souhaitons que vous évaluiez la méthode Evscape.</p>
+<div class="wrap">
+
+    <form action="/sauvegardeQuestionnaireUX">
+
+    <div class="scroller">
+        {{macro_ueq.afficheUnElementLikert("Agaçant","Agréable","u01")}}
+        {{macro_ueq.afficheUnElementLikert("Incompréhensible","Compréhensible","u02")}}
+        {{macro_ueq.afficheUnElementLikert("Moderne","Sans fantaisie","u03")}}
+        {{macro_ueq.afficheUnElementLikert("Appropriation simple","Appropriation compliquée","u04")}}
+        {{macro_ueq.afficheUnElementLikert("Apporte de la valeur","Peu de valeur ajoutée","u05")}}
+        {{macro_ueq.afficheUnElementLikert("Ennuyeux","Captivant","u06")}}
+        {{macro_ueq.afficheUnElementLikert("Inintérréssant","Intéressant","u07")}}
+        {{macro_ueq.afficheUnElementLikert("Imprévisible","Prévisible","u08")}}
+        {{macro_ueq.afficheUnElementLikert("Rapide","Lent","u09")}}
+        {{macro_ueq.afficheUnElementLikert("Original","Conventionnel","u10")}}
+        {{macro_ueq.afficheUnElementLikert("Rigide","Facilitant","u11")}}
+        {{macro_ueq.afficheUnElementLikert("Bien","Médiocre","u12")}}
+        {{macro_ueq.afficheUnElementLikert("Compliqué","Simple","u13")}}
+        {{macro_ueq.afficheUnElementLikert("Repoussant","Attractif","u14")}}
+        {{macro_ueq.afficheUnElementLikert("Habituel","Avant-gardiste","u15")}}
+        {{macro_ueq.afficheUnElementLikert("Désagréable","Agréable","u16")}}
+        {{macro_ueq.afficheUnElementLikert("Sécurisant","Insécurisant","u17")}}
+        {{macro_ueq.afficheUnElementLikert("Stimulant","Soporifique","u18")}}
+        {{macro_ueq.afficheUnElementLikert("Réponds aux attentes","Ne réponds pas aux attentes","u19")}}
+        {{macro_ueq.afficheUnElementLikert("Inefficace","Efficace","u20")}}
+        {{macro_ueq.afficheUnElementLikert("Clair","Déroutant","u21")}}
+        {{macro_ueq.afficheUnElementLikert("Non pragmatique","Pragmatique","u22")}}
+        {{macro_ueq.afficheUnElementLikert("Sobre","Surchargé","u23")}}
+        {{macro_ueq.afficheUnElementLikert("Attrayant","Rébarbatif","u24")}}
+        {{macro_ueq.afficheUnElementLikert("Sympathique","Inamical","u25")}}
+        {{macro_ueq.afficheUnElementLikert("Conservateur","Innovant","u26")}}
+    </div>
+
+        
+
+       
+
+
+
+        <div class="buttons">
+            <button type="submit" style="margin-bottom: 50px;" class="btn btn-warning">Envoyer</button>
+        </div>
+    </form>
+</div>
+
+{%else%}
+<div>
+
+    <div class="jumbotron text-center " style="background-color:rgb(104, 104, 104)">
+      <h1 class="display-3" style="color:white">ATTENTION!</h1>
+      <p class="lead"  style="color:white"><strong>Vous ne pouvez pas donner votre avis car vous n'avez pas encore effectué d'experimentation complète.</strong> </p>
+      <hr>
+  </div>
+
+{%endif%}
+
+</div>
+<script src="{{ url_for('static',filename='js/fonctions_questionnaireParticipantsUX.js')}}"></script>
+<script src="{{ url_for('static',filename='js/fonctions_flux.js')}}"></script> <!-- Laisser ca partout - besoin pour mon hack de fond-->
+</div>
+
+{% endblock %}

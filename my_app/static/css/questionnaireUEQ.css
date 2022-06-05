@@ -1,0 +1,95 @@
+h1.likert-header {
+  padding-left:4.25%;
+  margin:20px 0 0;
+}
+form .statement {
+  display:block;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 30px 0 0 4.25%;
+  margin-bottom:20px;
+}
+
+form .likert {
+  list-style:none;
+  width:100%;
+  margin:0;
+  padding:0 0 35px;
+  display:block;
+  border-bottom:2px solid #efefef;
+}
+
+form .likert:last-of-type {border-bottom:0;}
+form .likert:before {
+  content: '';
+  position:relative;
+  top:11px;
+  left:.5%;
+  display:block;
+  background-color:#efefef;
+  
+ 
+}
+form .likert li {
+  display:inline-block;
+  width:5%;
+  text-align:center;
+  vertical-align: top;
+}
+form .likert li input[type=radio] {
+  display:block;
+  position:relative;
+  top:0;
+  left:50%;
+  margin-left:-6px;
+
+  
+}
+form .likert li label {width:100%;}
+form .buttons {
+  margin:30px 0;
+  padding:0 4.25%;
+  text-align:right
+} 
+/*
+form .buttons button {
+  padding: 5px 10px;
+  background-color: #67ab49;
+  border: 0;
+  border-radius: 3px;
+}
+*/
+form .buttons .clear {background-color: #e9e9e9;}
+form .buttons .submit {background-color: #67ab49;} 
+form .buttons .clear:hover {background-color: #ccc;}
+form .buttons .submit:hover {background-color: #14892c;} 
+
+
+
+.boxQuestionnaireDemographique{
+  margin-top: 25px;
+}
+
+.questionPreTest{
+  margin-top: 25px;
+
+  border:solid grey;
+  border-radius: 15px;
+  padding: 15px;
+}
+
+.questionposeePreTest{
+  font-weight: bold;
+  font-size: large;
+  font-style: italic;
+  color: grey;
+}
+
+.scroller {
+ 
+  height: 500px;
+  overflow-y: scroll;
+  scrollbar-color: rebeccapurple green;
+  margin-top: 25px;
+  
+}

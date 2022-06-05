@@ -1,0 +1,138 @@
+
+
+
+{% macro afficheUnElementLikert (elementG,elementD,idElement) %}
+
+
+   
+      <ul class='likert'>
+        <li style="width:25%;"> 
+        {{elementG}}
+      </li>
+        <li>
+          <input type="radio" name="likert{{idElement}}" value="1">
+          <label>1</label>
+        </li>
+        <li>
+          <input type="radio" name="likert{{idElement}}" value="2">
+          <label>2</label>
+        </li>
+        <li>
+          <input type="radio" name="likert{{idElement}}" value="3">
+          <label>3</label>
+        </li>
+        <li>
+          <input type="radio" name="likert{{idElement}}" value="4">
+          <label>4</label>
+        </li>
+
+        <li>
+          <input type="radio" name="likert{{idElement}}" value="5">
+          <label>5</label>
+        </li>
+
+        <li>
+          <input type="radio" name="likert{{idElement}}" value="6">
+          <label>6</label>
+        </li>
+
+        <li>
+          <input type="radio" name="likert{{idElement}}" value="7">
+          <label>7</label>
+        </li>
+        <li style="width:25%;"> 
+        {{elementD}}
+      </li>
+
+       
+    
+      </ul>
+
+
+
+
+{% endmacro %}
+
+
+{% macro afficheUnElementLikertScoringCentral (element,idElement) %}
+
+
+      <label class="statement">{{element}}</label>
+      <ul class='likert'>
+
+
+        <li>
+          <input type="radio" name="likert{{idElement}}" value="0">
+          <label>Fortement en désaccord</label>
+        </li>
+        <li>
+          <input type="radio" name="likert{{idElement}}" value="2">
+          <label>En désaccord</label>
+        </li>
+        <li>
+          <input type="radio" name="likert{{idElement}}" value="4">
+          <label>Neutre</label>
+        </li>
+        <li>
+          <input type="radio" name="likert{{idElement}}" value="2">
+          <label>D'accord</label>
+        </li>
+
+        <li>
+          <input type="radio" name="likert{{idElement}}" value="0">
+          <label>Fortement en accord</label>
+        </li>
+
+
+       
+    
+      </ul>
+
+
+
+
+{% endmacro %}
+
+
+
+{% macro afficheUnElementLikertInverse (element,idElement) %}
+
+
+      <label class="statement">{{element}}</label>
+      <ul class='likert'>
+
+
+        <li>
+          <input type="radio" name="likert{{idElement}}" value="4">
+          <label>Fortement en désaccord</label>
+        </li>
+        <li>
+          <input type="radio" name="likert{{idElement}}" value="3">
+          <label>En désaccord</label>
+        </li>
+        <li>
+          <input type="radio" name="likert{{idElement}}" value="2">
+          <label>Neutre</label>
+        </li>
+        <li>
+          <input type="radio" name="likert{{idElement}}" value="1">
+          <label>D'accord</label>
+        </li>
+
+        <li>
+          <input type="radio" name="likert{{idElement}}" value="0">
+          <label>Fortement en accord</label>
+        </li>
+
+
+       
+    
+      </ul>
+
+
+
+
+{% endmacro %}
+
+
+

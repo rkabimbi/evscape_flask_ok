@@ -43,3 +43,4 @@ from my_app import routes_mesExperimentations
 from my_app import routes_uneExperimentation
 from my_app import routes_listeParticipants
 from my_app import routes_questionnairesParticipants
+from my_app import routes_avis

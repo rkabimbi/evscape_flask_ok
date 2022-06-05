@@ -53,6 +53,7 @@ from my_app.models.jeei_package.questionApprentissage import QuestionApprentissa
 from my_app.models.jeei_package.jointureJeeiUser import JointureJeeiUser
 from my_app.models.participant import Participant, Sexe, ExperienceJeei, Localisation, Experience
 from my_app.models.evaluation import Evaluation
+from my_app.models.questionnaireUEQ import QuestionnaireUEQ
 
 """
 Pour rappel le fonction de flask c'est qu'à chaque changement il reparcours tt le fichier je pense. Notament pour le login.
