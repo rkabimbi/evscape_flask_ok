@@ -395,7 +395,7 @@
 
 {% macro afficheContenuResultats(resultats) %}
 <div class="row" style="margin:15px;font-weight: bold;color: grey;">
-
+{%if resultats%}
   Données relatives à toutes les expérimentations réalisées pour ce jeu d'évasion ({{resultats[1]["nbrParticipants"]}}  participants):
 
   </div>
@@ -448,7 +448,7 @@
 
   </div>
 
-
+{%endif%}
 
 {% endmacro %}
 
