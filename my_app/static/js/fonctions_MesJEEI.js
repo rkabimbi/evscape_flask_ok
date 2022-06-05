@@ -25,9 +25,12 @@ function fonction_affichageMesJEEI(numPager, listeMesJEEI,nbrPagesTotal,nbrJEEI)
         document.getElementById("nomMesJEEI"+i).innerHTML=listeMesJEEI.noms[(indexDBSol+i)]
         document.getElementById("imgMesJEEI"+i).innerHTML='<img   src='+listeMesJEEI.img[(indexDBSol+i)]+' class="card-img-top imgCardMesJEEI"  alt="...">'
         document.getElementById("themeMesJEEI"+i).innerHTML="<B> Thème</B> : "+listeMesJEEI.themes[(indexDBSol+i)]
-        document.getElementById("statutMesJEEI"+i).innerHTML="<B> Score Global</B> :"+listeMesJEEI.statuts[(indexDBSol+i)]
+        document.getElementById("statutMesJEEI"+i).innerHTML="<B> Evolution apprentissage (moyenne)</B> :"+listeMesJEEI.scores[(indexDBSol+i)]
         document.getElementById("descriptifMesJEEI"+i).innerHTML=listeMesJEEI.descriptifs[(indexDBSol+i)]
-        document.getElementById("nbrExperimentationsMesJEEI"+i).innerHTML="<B> Nbr Experimentations</B> :"+listeMesJEEI.nbrExperimentations[(indexDBSol+i)]
+        document.getElementById("nbrExperimentationsMesJEEI"+i).innerHTML="<B> Nbr expérimentations</B> :"+listeMesJEEI.nbrExperimentations[(indexDBSol+i)]
+        document.getElementById("btnExperimentationMesJeei"+i).innerHTML="<a class='btn btn-outline-warning' href='http://127.0.0.1:5000/uneExperimentation?idJEEI="+listeMesJEEI.id[(indexDBSol+i)]+"' role='button'>Expérimenter</a>"
+        document.getElementById("btnDataMesJeei"+i).innerHTML="<a class='btn btn-outline-secondary ' href='http://127.0.0.1:5000/DataJEEI?idJEEI="+listeMesJEEI.id[(indexDBSol+i)]+"' role='button' >Data</a>"
+        document.getElementById("btnEffacerMesJeei"+i).innerHTML="<a class='btn btn-outline-danger ' href='http://127.0.0.1:5000/SupprimerMonJEEI?idJEEI="+listeMesJEEI.id[(indexDBSol+i)]+"' role='button' >Supprimer</a>"
     }
     
     //regler le probleme de la dernière page qui peut contenir moins de 4 elements (suite)
@@ -67,5 +70,7 @@ function redirectionVers(numCarte)
 
 
 }
+
+
 
 

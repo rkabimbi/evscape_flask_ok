@@ -70,3 +70,8 @@
 .pagination{
     padding: 25px;
 }
+
+.disabled {
+    pointer-events: none;
+    cursor: default;
+  }

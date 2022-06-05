@@ -72,7 +72,7 @@ def fonction_mesJEEI():
 
 
 def fonction_conversionSQLDICT(mesJEEI,specifications):
-    res ={"noms":[],"auteurs":[],"auteursID":[],"nbrExperimentations":[],"img":[],"themes":[],"id":[],"statuts":[],"descriptifs":[]}
+    res ={"noms":[],"auteurs":[],"auteursID":[],"nbrExperimentations":[],"img":[],"themes":[],"id":[],"statuts":[],"descriptifs":[],"scores":[]}
 
     for JEEI in mesJEEI:
         res["noms"].append(JEEI.nom)
@@ -102,6 +102,7 @@ def fonction_conversionSQLDICT(mesJEEI,specifications):
             if experimentation.fk_JeeiId==JEEI.id:
                 total=total+1
         res["nbrExperimentations"].append(total)
+        res["scores"].append(0)
        
   
     return res

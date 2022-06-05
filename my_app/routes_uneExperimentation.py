@@ -65,6 +65,7 @@ def fonction_uneExperimentation():
     print("fonction_uneExperimentation")
     idJEEIaEnvoyer = request.args.get("idJEEI")
     JEEIAEnvoyer = Jeei.query.filter_by(id=idJEEIaEnvoyer).first()
+    
     specificationAEnvoyer = specification=Specification.query.filter_by(id=JEEIAEnvoyer.fk_SpecificationId).first()
 
 
