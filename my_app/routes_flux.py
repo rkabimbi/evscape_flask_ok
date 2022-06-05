@@ -151,8 +151,14 @@ def fonction_calculResultats():
         fonction_exportExcel(worksheetTem,evaluation,ligneExel)
     
     workbook.close()
-    resultats["INDQ11A"]=evolutionApprentissageGlobalRelativeTem/nbrTotalEvalTem
-    resultats["INDQ11B"]=evolutionApprentissageGlobalRelativeExp/nbrTotalEvalExp
+    try:
+        resultats["INDQ11A"]=evolutionApprentissageGlobalRelativeTem/nbrTotalEvalTem
+    except ZeroDivisionError:
+        resultats["INDQ11A"]=0
+    try:
+        resultats["INDQ11B"]=evolutionApprentissageGlobalRelativeExp/nbrTotalEvalExp
+    except ZeroDivisionError:
+        resultats["INDQ11B"]=0
 
     ################################
     #calcul du rapport de correlation INDQ14
@@ -197,7 +203,10 @@ def fonction_calculResultats():
     numerateur=numerateur+pExp*(eBarExp-eBar)*(eBarExp-eBar)
     numerateur=numerateur+pTem*(eBarTem-eBar)*(eBarTem-eBar)
 
-    resultats["INDQ14"]=numerateur/denominateur
+    try:
+        resultats["INDQ14"]=numerateur/denominateur
+    except ZeroDivisionError:
+        resultats["INDQ14"]=0
 
 
     ################################

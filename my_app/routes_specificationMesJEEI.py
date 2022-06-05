@@ -482,82 +482,94 @@ def fonction_calculResultats(jeei):
 
 
 def verificationComplet(questionnaireMotivation, questionnaireUX,participant):
-    if questionnaireMotivation.m01==None:
-        return False
-    if questionnaireMotivation.m02==None:
-        return False
-    if questionnaireMotivation.m03==None:
-        return False
-    if questionnaireUX.u01==None:
-        return False
-    if questionnaireUX.u02==None:
-        return False
-    if questionnaireUX.u03==None:
-        return False
-    if questionnaireUX.u04==None:
-        return False
-    if questionnaireUX.u05==None:
-        return False
-    if questionnaireUX.u06==None:
-        return False
-    if questionnaireUX.u07==None:
-        return False
-    if questionnaireUX.u08==None:
-        return False
-    if questionnaireUX.u09==None:
-        return False
-
-    if questionnaireUX.u10==None:
-        return False
-    if questionnaireUX.u11==None:
-        return False
-    if questionnaireUX.u12==None:
-        return False
-
-    if questionnaireUX.u13==None:
-        return False
-    if questionnaireUX.u14==None:
-        return False
-    if questionnaireUX.u15==None:
-        return False
-
-    if questionnaireUX.u16==None:
-        return False
-    if questionnaireUX.u17==None:
-        return False
-    if questionnaireUX.u18==None:
-        return False
-
-    if questionnaireUX.u19==None:
-        return False
-    if questionnaireUX.u20==None:
-        return False
-    if questionnaireUX.u21==None:
-        return False
-
-    if questionnaireUX.u22==None:
-        return False
-    if questionnaireUX.u23==None:
-        return False
-    if questionnaireUX.u24==None:
-        return False
-    if questionnaireUX.u25==None:
-        return False
-    if participant.sexe==None:
-        return False
-    if participant.expJEEI==None:
-        return False
-    if participant.etudes==None:
-        return False
-    if participant.localisation==None:
-        return False
-    if participant.experience==None:
-        return False
-    if not participant.consentement:
+    if not questionnaireMotivation:#dans le cas où y a un formulaire de motivation
         return False
     else:
-        print("evaluation valide entrant en ligne de compte pour le score individuel")
-        return True
+        if questionnaireMotivation.m01==None:
+            return False
+        if questionnaireMotivation.m02==None:
+            return False
+        if questionnaireMotivation.m03==None:
+            return False
+
+    if not questionnaireUX:
+        return False
+    else:
+        if questionnaireUX.u01==None:
+            return False
+        if questionnaireUX.u02==None:
+            return False
+        if questionnaireUX.u03==None:
+            return False
+        if questionnaireUX.u04==None:
+            return False
+        if questionnaireUX.u05==None:
+            return False
+        if questionnaireUX.u06==None:
+            return False
+        if questionnaireUX.u07==None:
+            return False
+        if questionnaireUX.u08==None:
+            return False
+        if questionnaireUX.u09==None:
+            return False
+
+        if questionnaireUX.u10==None:
+            return False
+        if questionnaireUX.u11==None:
+            return False
+        if questionnaireUX.u12==None:
+            return False
+
+        if questionnaireUX.u13==None:
+            return False
+        if questionnaireUX.u14==None:
+            return False
+        if questionnaireUX.u15==None:
+            return False
+
+        if questionnaireUX.u16==None:
+            return False
+        if questionnaireUX.u17==None:
+            return False
+        if questionnaireUX.u18==None:
+            return False
+
+        if questionnaireUX.u19==None:
+            return False
+        if questionnaireUX.u20==None:
+            return False
+        if questionnaireUX.u21==None:
+            return False
+
+        if questionnaireUX.u22==None:
+            return False
+        if questionnaireUX.u23==None:
+            return False
+        if questionnaireUX.u24==None:
+            return False
+        if questionnaireUX.u25==None:
+            return False
+
+    if not participant:
+        return False
+    else:
+        if participant.sexe==None:
+            return False
+        if participant.expJEEI==None:
+            return False
+        if participant.etudes==None:
+            return False
+        if participant.localisation==None:
+            return False
+        if participant.experience==None:
+            return False
+        if not participant.consentement:
+            return False
+
+    
+    print("evaluation valide entrant en ligne de compte pour le score individuel")
+    return True
 
 @app.route("/sauvegardeTableJeei", methods=['GET', 'POST'])
 @login_required

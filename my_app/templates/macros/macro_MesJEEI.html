@@ -20,9 +20,9 @@
         <li id={{"statutMesJEEI"+indexCarteAffichage}} class="list-group-item"><B> Evolution apprentissage (moyenne)</B> : 
           
           {%if listeMesJEEI.scores[indexJEEIDB]>0%}
-          +{{listeMesJEEI.scores[indexJEEIDB]|round(2)}} 
+          +{{(listeMesJEEI.scores[indexJEEIDB]*100)|round(2)}}% 
           {%else%}
-          {{listeMesJEEI.scores[indexJEEIDB]|round(2)}} 
+          {{(listeMesJEEI.scores[indexJEEIDB]*100)|round(2)}}% 
           {%endif%}
         
         </li>
