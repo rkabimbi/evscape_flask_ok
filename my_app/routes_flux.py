@@ -72,7 +72,10 @@ def fonction_calculResultats():
         "INDQ14":0,
         "INDQ23DA":0,
         "INDQ13A":0,
-        "INDQ13B":0
+        "INDQ13B":0,
+        "INDQ12A":0,
+        "INDQ12B":0
+
 
     }
     
@@ -221,8 +224,29 @@ def fonction_calculResultats():
     resultats["INDQ13B"]=fonction_ecartType(evalExp,pExp)
     resultats["INDQ13A"]=fonction_ecartType(evalTem,pTem)
 
+    resultats["INDQ12B"]=fonction_mediane(evalExp,pExp)
+    resultats["INDQ12A"]=fonction_mediane(evalTem,pTem)
+
 
     return resultats
+
+def fonction_mediane(evalEch,pEch):
+    #creation d'un tableau des valeurs d'evolution
+    tabEvol=[]
+    for evaluation in evalEch:
+        resPreTest=fonction_CalculScorePreTest(evaluation)
+        resPostTest=fonction_CalculScorePostTest(evaluation)
+        ev =(resPostTest-resPreTest)/resPreTest
+        tabEvol.append(ev)
+    
+    res=statistics.median(tabEvol)
+    return res
+
+
+
+
+
+
 
 #pour formule INDQ13A, INDQ13B
 def fonction_ecartType(evalEch,pEch):
