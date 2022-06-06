@@ -741,4 +741,4 @@ def function_lancementDBFictive():
 
 
 #lancement de la fonction
-function_lancementDBFictive()
+#function_lancementDBFictive()

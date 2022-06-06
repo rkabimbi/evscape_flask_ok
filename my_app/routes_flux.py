@@ -39,6 +39,7 @@ from my_app.routes_specificationMesJEEI import verificationComplet
 from my_app.models.questionnaireUX import QuestionnaireUX
 import sys
 import xlsxwriter
+import statistics
 
 
 
@@ -69,13 +70,15 @@ def fonction_calculResultats():
         "nbrParticipantsExp":0,
         "nbrParticipantsTem":0,
         "INDQ14":0,
-        "INDQ23DA":0
+        "INDQ23DA":0,
+        "INDQ13A":0,
+        "INDQ13B":0
 
     }
     
     #je recupere tte les evaluations et les classes selon que ce soit experimental ou pas
     evaluations=Evaluation.query.all()
-    evalExp=[]
+    evalExp=[]#ensemble des eval relative au groupe Experimental
     evalTem=[]
     for evaluation in evaluations:
         print("evaluation num : ",evaluation.id, " cocnerne participant ",evaluation.fk_ParticipantId)
@@ -215,8 +218,50 @@ def fonction_calculResultats():
 
     resultats["INDQ23DA"]=fonction_coefficientCorrelation(evalExp, pExp)
 
+    resultats["INDQ13B"]=fonction_ecartType(evalExp,pExp)
+    resultats["INDQ13A"]=fonction_ecartType(evalTem,pTem)
+
 
     return resultats
+
+#pour formule INDQ13A, INDQ13B
+def fonction_ecartType(evalEch,pEch):
+    evBar= 0#evolution moyenne du groupe concerné
+    
+    #calcul de la moyenne des evolution pour le groupe concerné 
+    for evaluation in evalEch:
+        resPreTest=fonction_CalculScorePreTest(evaluation)
+        resPostTest=fonction_CalculScorePostTest(evaluation)
+        evTemp=(resPostTest-resPreTest)/resPreTest/pEch
+        evBar=evBar+evTemp
+
+    #calcul de la paranthese
+    parenthese=0
+    for evaluation in evalEch:
+        resPreTest=fonction_CalculScorePreTest(evaluation)
+        resPostTest=fonction_CalculScorePostTest(evaluation)
+
+        evTemp=(resPostTest-resPreTest)/resPreTest
+
+        parenthese=parenthese+(evTemp-evBar)*(evTemp-evBar)
+      
+
+    res=parenthese/pEch
+
+    res=sqrt(res)
+    res=round(res.real,2)+round(res.imag,2)#vu que je calcul racine carré...risque de nbr complexe c'est pr ca que je suis obligé de faire ca
+
+
+ 
+
+    return res
+
+    
+        
+
+
+
+
 
 
 def fonction_coefficientCorrelation(evalExp,pExp):

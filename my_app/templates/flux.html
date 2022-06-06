@@ -1,6 +1,6 @@
 <head>
     <link href="/static/css/flux.css" rel="stylesheet"><!-- idem-->
-    {% import "macros/macroUn.html" as macroUn %}<!-- import de macro. Comme ça c'est dispo pour toutes les pages filles -->
+    {% import "macros/macro_flux.html" as macro_flux %}<!-- import de macro. Comme ça c'est dispo pour toutes les pages filles -->
 </head>
 
 <!-- herite de main (de tout sauf les blocks (donc le menu)) -->
@@ -72,34 +72,57 @@
     <tbody>
       <tr>
         <th scope="row">1</th>
-        <td>Evaluations complètes </td>
+        <td>Nbr d'évaluations complètes 
+          (<a  class="link" style="color:rgba(239, 179, 14, 0.979)" href=# data-toggle="modal" data-target="#modalNbrEval">
+            explicatif
+          </a>)
+
+
+        </td>
         <td style="text-align:center">{{resultats["nbrParticipantsTem"]}}</td>
         <td style="text-align:center">{{resultats["nbrParticipantsExp"]}}</td>
         
       </tr>
       <tr>
         <th scope="row">1</th>
-        <td>INDQ1.1</td>
+        <td>INDQ1.1
+          (<a  class="link" style="color:rgba(239, 179, 14, 0.979)" href=# data-toggle="modal" data-target="#modalINDQ11">
+            explicatif
+          </a>)
+        </td>
         <td style="text-align:center">{{(resultats["INDQ11A"]*100)|round(2)}}%</td>
         <td style="text-align:center">{{(resultats["INDQ11B"]*100)|round(2)}}%</td>
         
       </tr>
       <tr>
         <th scope="row">2</th>
-        <td>INDQ1.2</td>
+        <td>INDQ1.2
+          (<a  class="link" style="color:rgba(239, 179, 14, 0.979)" href=# data-toggle="modal" data-target="#modalINDQ12">
+            explicatif
+          </a>)
+        </td>
         <td style="text-align:center">0,06</td>
         <td style="text-align:center">0,14 </td>
      
       </tr>
       <tr>
         <th scope="row">3</th>
-        <td>INDQ1.3</td>
-        <td colspan="2" style="text-align:center">44</td>
+        <td>INDQ1.3
+          (<a  class="link" style="color:rgba(239, 179, 14, 0.979)" href=# data-toggle="modal" data-target="#modalINDQ13">
+            explicatif
+          </a>)
+        </td>
+        <td style="text-align:center">{{(resultats["INDQ13A"])|round(2)}}</td>
+        <td style="text-align:center">{{(resultats["INDQ13B"])|round(2)}} </td>
 
       </tr>
       <tr>
         <th scope="row">3</th>
-        <td>INDQ1.4</td>
+        <td>INDQ1.4
+          (<a  class="link" style="color:rgba(239, 179, 14, 0.979)" href=# data-toggle="modal" data-target="#modalINDQ14">
+            explicatif
+          </a>)
+        </td>
         <td colspan="2" style="text-align:center">{{(resultats["INDQ14"])|round(2)}}</td>
 
       </tr>
@@ -137,10 +160,17 @@
       </tr>
 -->
       <tr>
+
         <th scope="row">7</th>
-        <td>INDQ2.3DA</td>
-        <td style="text-align:center">{{(resultats["INDQ23DA"])|round(2)}}</td>
-        <td style="text-align:center">N/A </td>
+        <td>INDQ2.3DA
+          (<a  class="link" style="color:rgba(239, 179, 14, 0.979)" href=# data-toggle="modal" data-target="#modalINDQ23">
+            explicatif
+          </a>)
+        </td>
+        <td colspan="2" style="text-align:center">{{(resultats["INDQ23DA"])|round(2)}}</td>
+
+
+
      
       </tr>
 
@@ -153,6 +183,137 @@
 
 
 
+
+
+<!-- Modal explicatif du nbr-->
+<div class="modal fade" id="modalNbrEval" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Explicatif indicateur</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Nombre d'évaluations formellement complètes et correctes
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Modal explicatif du nbr-->
+<div class="modal fade" id="modalINDQ11" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Explicatif indicateur (INDQ1.1)</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Évolution moyenne de résultats entre le pré-test et post-test réalisés pour le groupe témoin (A) 
+        et le groupe expérimental (B)
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal explicatif du indq12-->
+<div class="modal fade" id="modalINDQ12" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Explicatif indicateur (INDQ12) </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        la médiane de la série d’évolutions relatives individuelles d’apprentissage des membres du groupe témoin (A) et du groupe experimentale (B)
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal explicatif du nbr-->
+<div class="modal fade" id="modalINDQ13" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Explicatif indicateur (INDQ13)</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Écart-type de l’évolution des résultats entre le pré-test et post-test pour le groupe témoin (A)
+        et le groupe expérimental (B)
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal explicatif du nbr-->
+<div class="modal fade" id="modalINDQ14" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Explicatif indicateur (INDQ14)</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Rapport de corrélation linéaire évolution d’apprentissage relative au groupe experimental
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal explicatif du nbr-->
+<div class="modal fade" id="modalINDQ23" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Explicatif indicateur (INDQ23) </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Coefficient de corrélation linéaire entre échantillon de valeurs relatives à l’évolution d’apprentissage et l’âge des participants pour le groupe expérimental (exclusivement)
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
 
     </div>
     <script src="{{ url_for('static',filename='js/fonctions_flux.js')}}"></script>
