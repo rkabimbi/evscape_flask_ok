@@ -66,7 +66,7 @@ class Specification(UserMixin, db.Model):#userMixiin c'est pr traiter lesmethode
     theme =db.Column(db.Enum(Theme),nullable=True, default=Theme.TBD)
     chapitre = db.Column(db.String(120),nullable=True,default='')
     statut =db.Column(db.Enum(Statut),nullable=True, default=Statut.ENCOURS)
-    documentation = db.Column(db.String(120), nullable=True, default=' ')#adresse locale vers la doc
+    documentation = db.Column(db.String(120), nullable=True)#adresse locale vers la doc
     rel_Jeei = relationship("Jeei", backref='Specification', uselist=False)#backref = la manière dont c'est appelé dans l'autre table
 
     rel_QuestionApprentissage = relationship("QuestionApprentissage", backref='Specification', uselist=False)

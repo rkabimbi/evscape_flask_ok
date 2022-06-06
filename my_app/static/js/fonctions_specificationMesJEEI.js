@@ -286,7 +286,8 @@ function reponseBackEnd(responseText, champs)
         
     
         affichageValidationSauvegarde='<h3>  <span style="color:white"class="badge bg-success ">V</span></h3>' 
-        document.getElementById("affichageValidationSauvegarde"+champs).innerHTML=affichageValidationSauvegarde
+        document.getElementById("affichageValidationSauvegarde"+champs).innerHTML=affichageValidationSauvegarde;
+        window.setTimeout("document.getElementById('affichageValidationSauvegarde'+champs).style.visibility='hidden';", 2000)
         
     }
 

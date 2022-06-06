@@ -46,6 +46,7 @@ from my_app.routes_specificationMesJEEI import fonction_calculResultats
 
 
 
+
 @app.route("/mesJEEI", methods=['GET', 'POST'])
 @login_required
 def fonction_mesJEEI():

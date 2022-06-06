@@ -57,7 +57,7 @@
         </div>
       </div>
  
-    <div class="row mb-3">
+    <div class="row mb-3" >
         <label class="col-sm-2 form-label" for="descriptifMonJEEI" >Descriptif </label>
         <div class=" col-sm-8 form-outline">
             <textarea style="color:rgb(79, 79, 79)" class="form-control" id="idDescriptifMonJEEI" maxlength='140'rows="4" 
@@ -240,8 +240,8 @@
           {% if monJEEI.estValide or currentUser.id is not sameas monJEEI.auteurID %}
             disabled
           {% endif %}> 
-      {%if specification.documentation is defined %}
-        <button type="button" class="btn btn-warning">Consultez</button>
+      {%if specification.documentation  %}
+        <button type="button" class="btn btn-warning" onclick="window.open('/static/img/doc{{monJEEI.id}}.pdf','_blank')" >Consultez</button>
       {%endif%}
  
     </form>
