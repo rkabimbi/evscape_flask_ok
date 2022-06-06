@@ -90,8 +90,21 @@
             explicatif
           </a>)
         </td>
-        <td style="text-align:center">{{(resultats["INDQ11A"]*100)|round(2)}}%</td>
-        <td style="text-align:center">{{(resultats["INDQ11B"]*100)|round(2)}}%</td>
+        <td style="text-align:center">
+          {%if resultats["INDQ11A"]*100>=0%}
+          +{{(resultats["INDQ11A"]*100)|round(2)}}%
+          {%else%}
+          {{(resultats["INDQ11A"]*100)|round(2)}}%
+          {%endif%}
+        
+        </td>
+        <td style="text-align:center">
+          {%if resultats["INDQ11B"]*100>=0%}
+          +{{(resultats["INDQ11B"]*100)|round(2)}}%
+        
+          {%else%}
+          {{(resultats["INDQ11B"]*100)|round(2)}}%
+          {%endif%}</td>
         
       </tr>
       <tr>
