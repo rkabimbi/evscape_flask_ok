@@ -55,6 +55,10 @@ import sys
 @app.route("/specificationMesJEEI", methods=['GET', 'POST'])
 @login_required
 def fonction_specificationMesJEEI():
+    
+    
+    
+    
     print("specificationMesJEEI")
 
 
@@ -665,11 +669,13 @@ def upload_file( ):
     questions= QuestionApprentissage.query.filter_by(fk_SpecificationId=specification.id).all()
     if 'file' not in request.files:#si pas de fichier
             #flash('Pas de fichier', 'danger')#flash c'est qqch que flask sait intepreter et donc on peut faire des messages d'erreur
-            return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEI,theme=Theme,public=PublicCible,questions=questions,specificationJEEIRecupere=specification)
+            return redirect('/specificationMesJEEI?idJEEI='+idJEEI)
+            #return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEI,theme=Theme,public=PublicCible,questions=questions,specificationJEEIRecupere=specification)
     file = request.files['file'] #si on est ici c'est qu'il y a un fichier
     if file.filename == '':#si non du fichier est vide
             #flash('Pas de fichier selectionné', 'danger')
-            return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEI,theme=Theme,public=PublicCible,questions=questions,specificationJEEIRecupere=specification)
+            return redirect('/specificationMesJEEI?idJEEI='+idJEEI)
+            #return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEI,theme=Theme,public=PublicCible,questions=questions,specificationJEEIRecupere=specification)
 
     
     if file and allowed_file(file.filename):#si on a un fichier et que le format est permis
@@ -681,9 +687,9 @@ def upload_file( ):
         nomPhoto="img"+str(monJEEI.id)+".jpeg"
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], nomPhoto))#on sauve le fichier
 
-        print(redirect(request.base_url))
-
-        return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEI,theme=Theme,public=PublicCible,questions=questions,specificationJEEIRecupere=specification)
+        #print(redirect(request.base_url))
+        return redirect('/specificationMesJEEI?idJEEI='+idJEEI)
+        #return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEI,theme=Theme,public=PublicCible,questions=questions,specificationJEEIRecupere=specification)
 
 @app.route('/uploadFilePdf', methods=['GET', 'POST'])#Get et post est important pour tester avec quelle méthode on est arrivé 
 #(pour eviter que des gens tapent l'url à la main. S'ils le font on est en mode GET et alors on prévoit dans la méthode qu'on tient pas compte du truc (on recharge la page))
@@ -702,12 +708,14 @@ def upload_filePdf( ):
     if 'file' not in request.files:#si pas de fichier
             #flash('Pas de fichier', 'danger')#flash c'est qqch que flask sait intepreter et donc on peut faire des messages d'erreur
             print("erreur - pas de fichier")
-            return render_template("specificationMesJEEI.html",currentUser=current_user,theme=Theme,public=PublicCible,monJEEIRecupere=monJEEI,questions=questions,specificationJEEIRecupere=specificationMonJEEI)
+            return redirect('/specificationMesJEEI?idJEEI='+idJEEI)
+            #return render_template("specificationMesJEEI.html",currentUser=current_user,theme=Theme,public=PublicCible,monJEEIRecupere=monJEEI,questions=questions,specificationJEEIRecupere=specificationMonJEEI)
     file = request.files['file'] #si on est ici c'est qu'il y a un fichier
     if file.filename == '':#si non du fichier est vide
             #flash('Pas de fichier selectionné', 'danger')
             print("erreur - pas de fichier selectionné")
-            return render_template("specificationMesJEEI.html",currentUser=current_user,theme=Theme,public=PublicCible,monJEEIRecupere=monJEEI,questions=questions,specificationJEEIRecupere=specificationMonJEEI)
+            return redirect('/specificationMesJEEI?idJEEI='+idJEEI)
+            #return render_template("specificationMesJEEI.html",currentUser=current_user,theme=Theme,public=PublicCible,monJEEIRecupere=monJEEI,questions=questions,specificationJEEIRecupere=specificationMonJEEI)
 
 
     if file and allowed_file(file.filename):#si on a un fichier et que le format est permis
@@ -720,9 +728,10 @@ def upload_filePdf( ):
         nomFichier="doc"+str(monJEEI.id)+".pdf"
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], nomFichier))#on sauve le fichier
 
-        print(redirect(request.base_url))
+        #print(redirect(request.base_url))
+        return redirect('/specificationMesJEEI?idJEEI='+idJEEI)
 
-    return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEI,specificationJEEIRecupere=specificationMonJEEI,theme=Theme,public=PublicCible,questions=questions)
+    #return render_template("specificationMesJEEI.html",currentUser=current_user,monJEEIRecupere=monJEEI,specificationJEEIRecupere=specificationMonJEEI,theme=Theme,public=PublicCible,questions=questions)
 
 
 

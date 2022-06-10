@@ -1,6 +1,7 @@
 
 function sauverFormulaireDemographique(idParticipant, idExperimentation)
 {
+    
     console.log("sauverFormulaireDemographique")
     age= document.getElementById("idQuestionnaireDemographiqueAgeParticipant").value
     sexe = document.getElementById("idQuestionnaireDemographiqueSexeParticipant").value

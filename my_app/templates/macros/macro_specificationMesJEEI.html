@@ -163,6 +163,7 @@
     <label for="publicCibleMonJEEI" class="col-sm-2 col-form-label" >Public</label>
     <div class="col-sm-2">
       
+
       <select class="form-select form-select-lg mb-3 " aria-label=".form-select-lg example" id="idPublicCibleMonJEEI" onchange='fonction_sauvegardeTableJeei("idPublicCibleMonJEEI",{{monJEEI.id}})' selected="{{specification.publicCible.name}}" style="color:grey"
       {# if  est pour le cas où le jeei est valide alors on disabled#}
           {% if monJEEI.estValide or currentUser.id is not sameas monJEEI.auteurID %}
@@ -170,7 +171,7 @@
           {% endif %}>
         <!-- si specification.publicCibleName (ce qui vient dela DB) == publicName (nom du champs) alors tu dis que c'est le "selected"-->
         {% for public in publicCible %}
-          <option  style="color:grey" value="{{ public.name }}" {% if public.name==specification.publicCible.name %} selected="selected"{% endif %} >{{ public.name }}</option> 
+          <option  style="color:grey" value="{{ public.name }}" {% if public.name==specification.publicCible.name %} selected="selected"{% endif %} >{{ public.value }}</option> 
         {% endfor %}
       </select>
 
@@ -178,9 +179,10 @@
     <div class="col-sm-2 " id='affichageValidationSauvegardepublicCible'>
         
     </div>
-
+  </div>
+  <div class="row mb-3">
     <label for="themeMonJEEI" class="col-sm-2 col-form-label" >Thème</label>
-    <div class="col-sm-2">
+    <div class="col-sm-4">
       <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="idThemeMonJEEI" onchange='fonction_sauvegardeTableJeei("idThemeMonJEEI",{{monJEEI.id}})' selected="{{specification.theme.name}}" 
       {# if  est pour le cas où le jeei est valide alors on disabled#}
           {% if monJEEI.estValide or currentUser.id is not sameas monJEEI.auteurID %}
@@ -188,7 +190,7 @@
           {% endif %}>
         <!-- si specification.publicCibleName (ce qui vient dela DB) == publicName (nom du champs) alors tu dis que c'est le "selected"-->
         {% for tm in theme %}
-          <option style="color:grey" value="{{ tm.name }}" {% if tm.name==specification.theme.name %} selected="selected"{% endif %} >{{ tm.name }}</option> 
+          <option style="color:grey" value="{{ tm.name }}" {% if tm.name==specification.theme.name %} selected="selected"{% endif %} >{{ tm.value }}</option> 
         {% endfor %}
       </select>
       
