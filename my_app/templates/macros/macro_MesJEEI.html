@@ -18,13 +18,13 @@
               <li id={{"concepteurMesJEEI"+indexCarteAffichage}} class="list-group-item"><B> Concepteur</B> :  {{listeMesJEEI.auteurs[indexJEEIDB]}}</li>
               <li id={{"themeMesJEEI"+indexCarteAffichage}} class="list-group-item"><B> Thème</B> :  {{listeMesJEEI.themes[indexJEEIDB]}}</li>
               <li id={{"statutMesJEEI"+indexCarteAffichage}} class="list-group-item"><B> Evolution apprentissage (moyenne)</B> : 
-                
+               
                 {%if listeMesJEEI.scores[indexJEEIDB]>0%}
                 +{{(listeMesJEEI.scores[indexJEEIDB]*100)|round(2)}}% 
                 {%else%}
                 {{(listeMesJEEI.scores[indexJEEIDB]*100)|round(2)}}% 
                 {%endif%}
-              
+             
               </li>
               <li id={{"nbrExperimentationsMesJEEI"+indexCarteAffichage}} class="list-group-item"><B> Nbr expérimentations</B> : {{listeMesJEEI.nbrExperimentations[indexJEEIDB]}}</li>
             </ul>
